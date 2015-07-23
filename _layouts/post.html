@@ -6,14 +6,25 @@ layout: default
  <head>
   <meta charset=utf-8 />
   <title> {% if page.title %} {{ page.title }} | {% endif %} Kabads - musings, mutterings and murmerings </title>
-  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
  </head>
  <body>
-<div id="main">
-
+<div class="container">
+  <div class="row">
+    <div class="span8">
 <h2 class="content">{{page.title}}</h2>
 <p> {{page.content}} </p>
-<p> <a href="{{page.previous.url}}">Previous post</a></p><p><a href="{{page.next.url}}">Next post</a></p>
-</div>
+    </div><!--.row-->
+    <div class="row">
+      <div class="span4">
+	<a href="{{page.previous.url}}">Previous post</a>
+      </div><!--span-->
+      <div class="span4"></div>
+      <div class="span4">
+	<a href="{{page.next.url}}">Next post</a>
+	</div><!--.span-->
+    </div> <!--row-->
+    <div class="row"> </div> <!-- a blank row to separate things more nicely -->
+</div> <!-- .container -->
 </body>
 </html>
