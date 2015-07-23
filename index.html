@@ -1,0 +1,12 @@
+---
+layout: default
+---
+<section role="banner">
+  <img src="img/banner.jpg" />
+</section>
+
+<section class="content">
+  <p>Kabads - stuff that I find interesting</p>
+</section>
+
+{% for post in site.posts %} <a href="{{post.url}}">{{post.title}}</a><br /> {% endfor %}
