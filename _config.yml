@@ -1,0 +1,4 @@
+site-url: kabads.monkeez.org
+paginate: 10
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+markdown: redcarpet
