@@ -11,4 +11,6 @@ He proudly displayed the 500 years in a metre of soil, which had different layer
 
 We then saw the recent small-finds box, with glass beads and iron age pins for decoration. The sad news is that this dig is closing in 4 weeks and being filled in (they have reached layers before there was any settlement there). If you’re local, get down while it’s all on public display.
 
-via <a href="http://ift.tt/1c4nCfM">IFTTT</a></p>
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/kabads/sets/72157645815964962" title="Professor Fulford Silchester 2014"><img src="https://farm6.staticflickr.com/5565/14706615111_fed5999200_z.jpg" width="640" height="480" alt="Professor Fulford Silchester 2014"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+
+</p>
