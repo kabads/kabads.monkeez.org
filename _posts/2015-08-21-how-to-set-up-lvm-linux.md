@@ -56,6 +56,8 @@ will show you the logical volume filesystem that has been created (although it d
 	$ sudo mkfs.ext3 /dev/mylvm/myfilesystem
 
 Now this filesystem can be mounted like any other filesystem and written to:
+
+
 	$ sudo mkdir /mnt/lvmdrive
 	$ sudo mount /dev/mylvm/myfilesystem /mnt/lvmdrive
 
