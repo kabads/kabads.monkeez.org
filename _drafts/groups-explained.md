@@ -1,5 +1,5 @@
 ---
-layout: posts
+layout: post
 title: Linux group explained
 ---
 Users on a linux system belong to at least one group. Groups allow a systems administrator to create parts of the filesystem where a group of users can share files. They also allow a group of users to access particular commands or resources on the system, that other users might not be able to access.
@@ -8,13 +8,13 @@ Groups are defined in the **/etc/group** file, which is only root writeable.
 
 To create a group, the **groupadd** command is used.
 
-    $ groupadd editor
+    $ groupadd editors
 
-will add a group called '''editor'''. This will automatically set gid (a numerical value for the group's ID). 
+will add a group called '''editors'''. This will automatically set gid (a numerical value for the group's ID). 
 
 You may then add a user to this group with the **usermod** commmand.
 
-	$ usermod -G editor username
+	$ usermod -G editors username
 
 Obviously, you can choose a name other than 'editor' which better describes the group.
 
@@ -34,4 +34,4 @@ Then add that directory to the group that you created:
 
 This will add the directory to the group.
 
-Any user who is a member of the group editor
+Any user who is a member of the group editor will be able to access the directory that is shared. This may or may not include read/write access, depending on the directory and file permissions across the shared directory. 
