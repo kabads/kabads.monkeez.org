@@ -9,3 +9,5 @@ title: How and why you should be using 2 factor authentication
 2. using a different object produce a code and enter that in when signing in.
 
 Understanding this is important, because if you do not have the object to hand, you will not be able to sign in, regardless of having your username and password. If you like to sign in regularly without your phone close by, or your USB key, then you will find this service very inconvenient. 
+
+[Yubikey](http://yubico.com) is a form of physical 2 factor authentication which is secure and portable. It is a small USB key that when inserted acts as a keyboard, sending one time passwords to an application. That application hands off the password to a Yubico server who then authenticates whether it was geniune or not. 
