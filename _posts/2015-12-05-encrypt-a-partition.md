@@ -15,7 +15,7 @@ Most systems use the [Linux Unified Key Setup](https://en.wikipedia.org/wiki/Lin
 
 Firstly you should have a partition drive that is unmounted and unformatted (no filesystem). The filesystem will be added once encryption has been setup. 
 
-You must also have the cryptsetup tool install. On Ubuntu, this is achieved with:
+You must also have the __cryptsetup__ tool install. On Ubuntu, this is achieved with:
 
     $ sudo aptitude install cryptsetup
 
@@ -25,7 +25,7 @@ To set up the drive for LUKS, enter this command:
 
     $ sudo cryptsetup luksFormat /dev/drive
 
-This drive can be a Logical Volume Management drive, or some other disk.
+This drive can be a [Logical Volume Management drive](/sysadmin/2015/08/21/how-to-set-up-lvm-linux.html), or some other disk.
 
 After this, you will need to enter "YES" (without quotes) to confirm that you want to encrypt the drive. Note that the response is all uppercase.
 
@@ -35,7 +35,7 @@ You will need to open the drive with:
 
     $ cryptsetup --verbose luksOpen /dev/drive/ SECRET_NAME
 
-Replace SECRET_DRIVE with a name of your choice - this will be referred to later.
+Replace SECRET_NAME with a name of your choice - this will be referred to later.
 
 Formatting the drive is done as usual
 
