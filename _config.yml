@@ -7,3 +7,4 @@ markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 markdown: redcarpet
 gems:
  - jekyll-sitemap
+ - jekyll-paginate
