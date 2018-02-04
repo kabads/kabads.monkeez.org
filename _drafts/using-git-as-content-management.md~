@@ -1,5 +1,0 @@
----
-layout: post
-title: Using Git as a content management system
----
-[Git](https://git-scm.com/) is an open sourced source control software system. It allows coders to manage large projects remotely and on their own machine. Each contributor will hold their own version of the code on their machine and can manipulate that however they wish. Eventually, they can push back their contributions to a remote repository. 

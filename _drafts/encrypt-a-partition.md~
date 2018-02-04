@@ -1,6 +1,0 @@
----
-layout: post
-title: Encrypt a partition on Linux
-category: sysadmin
----
-An encrypted partition can add a layer of security to your system. When mounted, it will ask for the passphrase which, if unavailable, will not allow proper mounting. 

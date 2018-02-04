@@ -1,0 +1,940 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>memorymonitoringtuning</title>
+<!-- 2015-06-15 Mon 20:28 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">memorymonitoringtuning</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Memory: Monitoring Usage and Tuning</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Objectives</a></li>
+<li><a href="#sec-1-2">1.2. Memory tuning considerations</a></li>
+<li><a href="#sec-1-3">1.3. Memory Monitoring Tools</a></li>
+<li><a href="#sec-1-4">1.4. /proc/sys/vm</a></li>
+<li><a href="#sec-1-5">1.5. vmstat</a></li>
+<li><a href="#sec-1-6">1.6. /proc/meminfo</a></li>
+<li><a href="#sec-1-7">1.7. OOM Killer</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Memory: Monitoring Usage and Tuning</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Over time systems have become more demanding of memory resources at the same time <b>RAM</b> prices have decreased and performance improved. Yet it is often the case that bottlenecks in overall system performance and throughput are memory-related; the CPUs and the I/O subsystem can be waiting for data to be retrieved from or written to memory. There are many tools for monitoring, debugging and tuning a system's behaviour with regard to its memory. 
+</p>
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Objectives</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>List the primary (inter-related) considerations and tasks involved in memory tuning
+</li>
+<li>Know how to use entries in /proc/sys/vm, and decipher /proc/meminfo
+</li>
+<li>Use <b>vmstat</b> to display information about memory, paging, I/O, processor activity, and processes' memory consumption
+</li>
+<li>Understand how the <b>OOM-killer</b> decides when to take action and selects which processes should be exterminated to open up some memory. 
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Memory tuning considerations</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Tuning the memory sub-system can be a complex process. First of all one has to take note that memory usage and I/O throughput are intrinsically related, as in most cases most memory is being used to cache the contents of files on disk. 
+Thus changing memory parameters can have a large effect on I/O performance, and changing I/O parameters can have an equally large coverse effect on the virtual memory subsystem. 
+When tweaking parameters in /proc/sys/vm, the usual best practice is to adjust one thing at a time and look for effects. The primary (inter-related) tasks are:
+</p>
+<ul class="org-ul">
+<li>Controlling flushing parameters; i.e. how many pages are allowed to be <b>dirty</b> and how often they are flushed out to disk.
+</li>
+<li>Controlling <b>swap</b> behaviour; i.e. how much pages that reflect file contents are allowed to remain in memory as opposed to those that need to be swapped out as they have no other backing store.
+</li>
+<li>Controlling how much memory <b>overcommission</b> is allowed, since many programs never need the full amount of memory they request, particularly because of <b>copy on write</b> (COW) techniques. 
+</li>
+</ul>
+<p>
+Memory tuning can often be subtle, and what works in one system situation or load may be far from optimal in other circumstances. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Memory Monitoring Tools</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Here is a list of some important basic tools for monitoring and tuning memory in linux. 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Utility</th>
+<th scope="col" class="left">Purpose</th>
+<th scope="col" class="left">Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">free</td>
+<td class="left">Brief summary of memory usage</td>
+<td class="left">procps</td>
+</tr>
+
+<tr>
+<td class="left">vmstat</td>
+<td class="left">Detailed virtual memory statistics and block I/O, dynamically updated</td>
+<td class="left">procps</td>
+</tr>
+
+<tr>
+<td class="left">pmap</td>
+<td class="left">Process memory map</td>
+<td class="left">procps</td>
+</tr>
+
+<tr>
+<td class="left">pp</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> /proc/sys/vm</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+The /proc/sys/vm directory contains many tunable knobs to control the <b>Virtual Memory</b> system. Exactly what appears in this directory will depend somewhat on kernel version. Almost all of the entries are writable (by root). 
+Remember these values can be changed either by directly writing to the entry, or using the <b>sysctl</b> utility. Furthermore, by modifying /etc/sysctl.conf, values can be set at boot time. 
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Entry</th>
+<th scope="col" class="left">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">admin<sub>reserve</sub><sub>kbytes</sub></td>
+<td class="left">Amount of free memory reserved for privileged users.</td>
+</tr>
+
+<tr>
+<td class="left">block<sub>dump</sub></td>
+<td class="left">Enables block I/O debugging.</td>
+</tr>
+
+<tr>
+<td class="left">compact<sub>memory</sub></td>
+<td class="left">Turns on or off memory compaction (essentially defragmentation) when configured into the kernel.</td>
+</tr>
+
+<tr>
+<td class="left">dirty<sub>background</sub><sub>bytes</sub></td>
+<td class="left">Dirty memory threshold that triggers writing uncommitted pages to disk.</td>
+</tr>
+
+<tr>
+<td class="left">dirty<sub>background</sub><sub>ratio</sub></td>
+<td class="left">Percentage of total pages at which kernel will start writing dirty data out to disk</td>
+</tr>
+
+<tr>
+<td class="left">dirty<sub>bytes</sub></td>
+<td class="left">The amount of dirty memory a process needs to initiate writing on its own.</td>
+</tr>
+
+<tr>
+<td class="left">dirty<sub>expire</sub><sub>centisecs</sub></td>
+<td class="left">When dirty data is old enough to be written out in hundredths of a second).</td>
+</tr>
+
+<tr>
+<td class="left">dirty<sub>ratio</sub></td>
+<td class="left">Percentage of pages at which a process writing will start writing out dirty data on its own.</td>
+</tr>
+
+<tr>
+<td class="left">dirty<sub>writeback</sub><sub>centisecs</sub></td>
+<td class="left">Interval in which periodic writeback daemons wake up to flush. If set to zero, there is no automatic periodic writeback.</td>
+</tr>
+
+<tr>
+<td class="left">drop<sub>caches</sub></td>
+<td class="left">Echo 1 to free page cache, 2 to free dentry and inode caches, 3 to free all. Note only clean cached pages are dropped; do sync first to flush dirty pages.</td>
+</tr>
+
+<tr>
+<td class="left">extfrag<sub>threshold</sub></td>
+<td class="left">Controls when the kernel should compact memory.</td>
+</tr>
+
+<tr>
+<td class="left">hugepages<sub>treat</sub><sub>as</sub><sub>movable</sub></td>
+<td class="left">Used to toggle how huge pages are treated.</td>
+</tr>
+
+<tr>
+<td class="left">hugetlb<sub>shm</sub><sub>group</sub></td>
+<td class="left">Sets a group ID that can be used for System V huge pages.</td>
+</tr>
+
+<tr>
+<td class="left">laptop<sub>mode</sub></td>
+<td class="left">Can control a number of features to save power on laptops.</td>
+</tr>
+
+<tr>
+<td class="left">legacy<sub>va</sub><sub>layout</sub></td>
+<td class="left">Use old layout (2.4 kernel) for how memory mappings are displayed.</td>
+</tr>
+
+<tr>
+<td class="left">lowmen<sub>reserve</sub><sub>ratio</sub></td>
+<td class="left">Controls how much low memory is reserved for pages that can only be there; i.e., pages which can go in high memory instead will do so. Only important on 32-bit systems with high memory.</td>
+</tr>
+
+<tr>
+<td class="left">max<sub>map</sub><sub>count</sub></td>
+<td class="left">Maximum number of memory mapped areas a process may have. The default is 64 K.</td>
+</tr>
+
+<tr>
+<td class="left">min<sub>free</sub><sub>kbytes</sub></td>
+<td class="left">Minimum free memory that must be reserved in each zone.</td>
+</tr>
+
+<tr>
+<td class="left">mmap<sub>min</sub><sub>addr</sub></td>
+<td class="left">How much address space a user process cannot memory map. Used for security purposes, to avoid bugs where accidental kernel null dereferences can overwrite the first pages used in an application.</td>
+</tr>
+
+<tr>
+<td class="left">nr<sub>hugepages</sub></td>
+<td class="left">Minimum size of hugepage pool.</td>
+</tr>
+
+<tr>
+<td class="left">nr<sub>pdflush</sub><sub>hugepages</sub></td>
+<td class="left">Maximum size of the hugepage pool = nr<sub>hugepages</sub> *nr<sub>overcommit</sub><sub>hugepages</sub></td>
+</tr>
+
+<tr>
+<td class="left">nr<sub>pdflush</sub><sub>threads</sub></td>
+<td class="left">Current number of pdflush threads; not writeable.</td>
+</tr>
+
+<tr>
+<td class="left">oom<sub>dump</sub><sub>tasks</sub></td>
+<td class="left">If enabled, dump information produced when oom-killer cuts in.</td>
+</tr>
+
+<tr>
+<td class="left">oom<sub>kill</sub><sub>allocating</sub><sub>task</sub></td>
+<td class="left">If set, the oom-killer kills the task that triggered the out of memory situation, rather than trying to select the best one.</td>
+</tr>
+
+<tr>
+<td class="left">overcommit<sub>kbytes</sub></td>
+<td class="left">One can set either overcommit<sub>ratio</sub> or this entry, but not both.</td>
+</tr>
+
+<tr>
+<td class="left">overcommit<sub>memory</sub></td>
+<td class="left">If 0, kernel estimates how much free memory is left when allocations are made. If 1, permits all allocations until memory actually does run out. If 2, prevents any overcommission.</td>
+</tr>
+
+<tr>
+<td class="left">overcommit<sub>ratio</sub></td>
+<td class="left">If overcommit<sub>memory</sub> = 2 memory commission can reach swap plus this percentage of RAM.</td>
+</tr>
+
+<tr>
+<td class="left">page-cluster</td>
+<td class="left">Number of pages that can be written to swap at once, as a power of two. Default is 3 (which means 8 pages).</td>
+</tr>
+
+<tr>
+<td class="left">panic<sub>on</sub><sub>oom</sub></td>
+<td class="left">Enable system to crash on an out of memory situation.</td>
+</tr>
+
+<tr>
+<td class="left">percpu<sub>pagelist</sub><sub>fraction</sub></td>
+<td class="left">Fraction of pages allocated for each cpu in each zone for hot-pluggable CPU machines.</td>
+</tr>
+
+<tr>
+<td class="left">scan<sub>unevictable</sub><sub>pages</sub></td>
+<td class="left">If written to, system will scan and try to move pages to try and make them reclaimable.</td>
+</tr>
+
+<tr>
+<td class="left">stat<sub>interval</sub></td>
+<td class="left">How often vm statistics are updated (default 1 second) by vmstat.</td>
+</tr>
+
+<tr>
+<td class="left">swappiness</td>
+<td class="left">How aggressively should the kernel swap.</td>
+</tr>
+
+<tr>
+<td class="left">user<sub>reserve</sub><sub>kbytes</sub></td>
+<td class="left">If overcommit<sub>memory</sub> is set to 2 this sets how low the user can draw memory resources.</td>
+</tr>
+
+<tr>
+<td class="left">vfs<sub>cache</sub><sub>pressure</sub></td>
+<td class="left">How aggressively the kernel should reclaim memory used for inode and dentry cache. Default is 100; if 0 this memory is never reclaimed due to memory pressure.</td>
+</tr>
+</tbody>
+</table>
+<p>
+You can find full documentation for the /proc/sys/vm directory in the kernel source (or kernel documentation package on your distribution), usually under Documentation/sysctl/vm.txt
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> vmstat</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+<b>vmstat</b> is a multipurpose tool that displays information about memory, paging, I/O, processor activity and processes. It has many options. The general form of the command is:
+$ vmstat [options] [delay] [count]
+If <b>delay</b> is given in seconds, the report is repeated at that interval count times; if <b>count</b> is not given <b>vmstat</b> will keep reporting statistics forever until it is killed by a signal, such as <b>ctl-c</b>. 
+If no other arguments are given, <b>vmstat</b> displays:
+$ vmstat 2 4 
+</p>
+
+<p>
+where the first line shows averages since the last reboot, while succeeding lines show activity during the specified interval. 
+The fields show are: 
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Field</th>
+<th scope="col" class="left">Subfield</th>
+<th scope="col" class="left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Processes</td>
+<td class="left">r</td>
+<td class="left">Number of processes waiting to be scheduled in.</td>
+</tr>
+
+<tr>
+<td class="left">Processes</td>
+<td class="left">b</td>
+<td class="left">Number of processes in uninterruptible sleep</td>
+</tr>
+
+<tr>
+<td class="left">memory</td>
+<td class="left">swpd</td>
+<td class="left">Virtual memory used (KB)</td>
+</tr>
+
+<tr>
+<td class="left">memory</td>
+<td class="left">free</td>
+<td class="left">Free (idle) memory (KB)</td>
+</tr>
+
+<tr>
+<td class="left">memory</td>
+<td class="left">buff</td>
+<td class="left">Buffer memory (KB)</td>
+</tr>
+
+<tr>
+<td class="left">memory</td>
+<td class="left">cache</td>
+<td class="left">Cached memory (KB)</td>
+</tr>
+
+<tr>
+<td class="left">swap</td>
+<td class="left">si</td>
+<td class="left">Memory swapped in (KB)</td>
+</tr>
+
+<tr>
+<td class="left">swap</td>
+<td class="left">so</td>
+<td class="left">Memory swapped out (KB)</td>
+</tr>
+
+<tr>
+<td class="left">I/O</td>
+<td class="left">bi</td>
+<td class="left">Blocks written to devices (blocks/sec)</td>
+</tr>
+
+<tr>
+<td class="left">I/O</td>
+<td class="left">bo</td>
+<td class="left">Blocks read from devices (blocks/sec)</td>
+</tr>
+
+<tr>
+<td class="left">system</td>
+<td class="left">in</td>
+<td class="left">Interrupts/second</td>
+</tr>
+
+<tr>
+<td class="left">system</td>
+<td class="left">cs</td>
+<td class="left">Context switches/second</td>
+</tr>
+
+<tr>
+<td class="left">CPU</td>
+<td class="left">us</td>
+<td class="left">CPU time running user code (percentage)</td>
+</tr>
+
+<tr>
+<td class="left">CPU</td>
+<td class="left">sy</td>
+<td class="left">CPU time running kernel (system) code (percentage)</td>
+</tr>
+
+<tr>
+<td class="left">CPU</td>
+<td class="left">id</td>
+<td class="left">CPU time idle (percentage)</td>
+</tr>
+
+<tr>
+<td class="left">CPU</td>
+<td class="left">wa</td>
+<td class="left">Time waiting for I/O (percentage)</td>
+</tr>
+
+<tr>
+<td class="left">CPU</td>
+<td class="left">st</td>
+<td class="left">Time "stolen" from virtual machine (percentage)</td>
+</tr>
+</tbody>
+</table>
+<p>
+If the option -S m is given, memory statistics will be in MB instead of KB. 
+With the -a option, <b>vmstat</b> displays information about <b>active</b> and <b>inactive</b> memory. 
+$ vmstat -a 2 4 
+where <b>active</b> memory pages are those which have been recently used; they may be <b>clean</b> (disk contents are up to date) or <b>dirty</b> (need to e flushed to disk eventually). By contrast <b>inactive</b> memory pages have not been recently used and are more likely to be clean and are released sooner under memory pressure. 
+Memory can move back and forth between active and inactive lists as they get newly referenced, or go a long time between uses. 
+To get a table of memory statistics and certain event counters use the <b>-s</b> option: 
+$ vmstat -s 
+To get a table of disk statistics use the <b>-d</b> option:
+$ vmstat -d 
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Field</th>
+<th scope="col" class="left">Subfield</th>
+<th scope="col" class="left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">reads</td>
+<td class="left">total</td>
+<td class="left">Total reads completed successfully</td>
+</tr>
+
+<tr>
+<td class="left">reads</td>
+<td class="left">merged</td>
+<td class="left">Grouped reads (resulting in one I/O)</td>
+</tr>
+
+<tr>
+<td class="left">reads</td>
+<td class="left">ms</td>
+<td class="left">Milliseconds spent reading</td>
+</tr>
+
+<tr>
+<td class="left">writes</td>
+<td class="left">total</td>
+<td class="left">Total writes completed successfully</td>
+</tr>
+
+<tr>
+<td class="left">writes</td>
+<td class="left">merged Grouped writes (resulting in one I/O)</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">writes</td>
+<td class="left">ms</td>
+<td class="left">Milliseconds spent writing</td>
+</tr>
+
+<tr>
+<td class="left">I/O</td>
+<td class="left">cur</td>
+<td class="left">I/O in progress</td>
+</tr>
+
+<tr>
+<td class="left">I/O</td>
+<td class="left">sec</td>
+<td class="left">seconds spent for I/O</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> /proc/meminfo</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+As noted earlier, a relatively lengthy summary of memory statistics resides in /proc/meminfo:
+$ cat /proc/meminfo
+It is worthwhile to go through this listing and understanding entries:
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Entry</th>
+<th scope="col" class="left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">MemTotal</td>
+<td class="left">Total usable RAM (physical minus some kernel reserved memory)</td>
+</tr>
+
+<tr>
+<td class="left">MemFree</td>
+<td class="left">Free memory in both low and high zones</td>
+</tr>
+
+<tr>
+<td class="left">Buffers</td>
+<td class="left">Memory used for temporary block I/O storage</td>
+</tr>
+
+<tr>
+<td class="left">Cached</td>
+<td class="left">Page cache memory, mostly for file I/O</td>
+</tr>
+
+<tr>
+<td class="left">SwapCached</td>
+<td class="left">Memory that was swapped back in but is still in the swap file</td>
+</tr>
+
+<tr>
+<td class="left">Active</td>
+<td class="left">Recently used memory, not to be claimed first</td>
+</tr>
+
+<tr>
+<td class="left">Inactive</td>
+<td class="left">Memory not recently used, more eligible for reclamation</td>
+</tr>
+
+<tr>
+<td class="left">Active(anon)</td>
+<td class="left">Active memory for anonymous pages</td>
+</tr>
+
+<tr>
+<td class="left">Inactive(anon)</td>
+<td class="left">Inactive memory for anonymous pages</td>
+</tr>
+
+<tr>
+<td class="left">Active(file)</td>
+<td class="left">Active memory for file-backed pages</td>
+</tr>
+
+<tr>
+<td class="left">Inactive(file)</td>
+<td class="left">Inactive memory for file-backed pages</td>
+</tr>
+
+<tr>
+<td class="left">Unevictable</td>
+<td class="left">Pages which can not be swapped out of memory or released</td>
+</tr>
+
+<tr>
+<td class="left">Mlocked</td>
+<td class="left">Pages which are locked in memory</td>
+</tr>
+
+<tr>
+<td class="left">SwapTotal</td>
+<td class="left">Total swap space available</td>
+</tr>
+
+<tr>
+<td class="left">SwapFree</td>
+<td class="left">Swap space not being used</td>
+</tr>
+
+<tr>
+<td class="left">Dirty</td>
+<td class="left">Memory which needs to be written back to disk</td>
+</tr>
+
+<tr>
+<td class="left">Writeback</td>
+<td class="left">Memory actively being written back to disk</td>
+</tr>
+
+<tr>
+<td class="left">AnonPages</td>
+<td class="left">Non-file back pages in cache</td>
+</tr>
+
+<tr>
+<td class="left">Mapped</td>
+<td class="left">Memory mapped pages, such as libraries</td>
+</tr>
+
+<tr>
+<td class="left">Shmem</td>
+<td class="left">Pages used for shared memory</td>
+</tr>
+
+<tr>
+<td class="left">Slab</td>
+<td class="left">Memory used in slabs</td>
+</tr>
+
+<tr>
+<td class="left">SReclaimable</td>
+<td class="left">Cached memory in slabs that can be reclaimed</td>
+</tr>
+
+<tr>
+<td class="left">SUnreclaim</td>
+<td class="left">Memory in slabs that can't be reclaimed</td>
+</tr>
+
+<tr>
+<td class="left">KernelStack</td>
+<td class="left">Memory used in kernel stack</td>
+</tr>
+
+<tr>
+<td class="left">PageTables</td>
+<td class="left">Memory being used by page table structures</td>
+</tr>
+
+<tr>
+<td class="left">Bounce</td>
+<td class="left">Memory used for block device bounce buffers</td>
+</tr>
+
+<tr>
+<td class="left">WritebackTmp</td>
+<td class="left">Memory used by FUSE filesystems for writeback buffers</td>
+</tr>
+
+<tr>
+<td class="left">CommitLimit</td>
+<td class="left">Total memory available to be used, including overcommission</td>
+</tr>
+
+<tr>
+<td class="left">Committed<sub>AS</sub></td>
+<td class="left">Total memory presently allocated, whether or not it is used</td>
+</tr>
+
+<tr>
+<td class="left">VmallocTotal</td>
+<td class="left">Total memory available in kernel for vmalloc allocations</td>
+</tr>
+
+<tr>
+<td class="left">VmallocUsed</td>
+<td class="left">Memory actually used by vmalloc allocations</td>
+</tr>
+
+<tr>
+<td class="left">VmallocChunk</td>
+<td class="left">Largest possible contiguous vmalloc area</td>
+</tr>
+
+<tr>
+<td class="left">HugePages<sub>Total</sub></td>
+<td class="left">Total size of the huge page pool</td>
+</tr>
+
+<tr>
+<td class="left">HugePages<sub>Free</sub></td>
+<td class="left">Huge pages that are not yet allocated</td>
+</tr>
+
+<tr>
+<td class="left">HugePages<sub>Rsvd</sub></td>
+<td class="left">Huge pages that have been reserved, but not yet used</td>
+</tr>
+
+<tr>
+<td class="left">HugePages<sub>Surp</sub></td>
+<td class="left">Huge pages that are surplus, used for overcommission</td>
+</tr>
+
+<tr>
+<td class="left">Hugepagesize</td>
+<td class="left">Size of a huge page</td>
+</tr>
+</tbody>
+</table>
+<p>
+Note that the exact entries you may see will depend on the exact kernel version you are running. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> OOM Killer</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+The simplest way to deal with memory pressure would be to permit memory allocations to succeed as long as free memory is available and then fail when all memory is exhausted. 
+The second simplest way is to use <b>swap</b> space on disk to push some of the resident memory out of core; in this case the total available memory (at least in theory) is the actual <b>RAM</b> plus the size of the swap space. The hard part of this is to figure out which pages of memory to swap out when pressure demands. In this approach, once the swap space itself is filled requests for new memroy must fail. 
+Linux, however, goes one better; it permits the system to overcommit memory, so that it can grant memory requests that exceed the size of <b>RAM</b> plus swap. While this might seem foolhardy, many (if not most) processes do not use all requested memory. 
+An example would be a program that allocates a 1MB buffer, and then uses only a few pages of the memory. Another example is that every time a child process is forked, it receives a copy of the entire memory space of the parent. Because Linux uses the <b>COW</b> (copy on write) technique, unless one of the processes modify memory, no actual copy need be made. However, the kernel has to assume that the copy might need to be done. 
+Thus the kernel permits overcommission of memory, but only for pages dedicated to user processes; pages used within the kernel are not swappable and are always allocated at request time. 
+One can modify, and even turn off this overcommission by setting the value of /proc/sys/vm/overcommit<sub>memory</sub>:
+</p>
+<ul class="org-ul">
+<li>0: (default) Permit overcommission, but refuse obvious overcommits, and give root users somewhat more memory allocation than normal users.
+</li>
+<li>1: All memory requests are allowed to overcommit.
+</li>
+<li>2: Turn off overcommission. Memory must requests will fail when the total memory commit reaches the size of the swap space plus a configurable percentage (50 by default) of <b>RAM</b>. This factor is modified by changing /proc/sys/vm/overcommit<sub>ratio</sub>. 
+</li>
+</ul>
+<p>
+If available memory is exhausted, Linux invokes the <b>OOM</b>-killer (Out of Memory) to decide which process(es) should be exterminated to open up some memory. 
+There is no precise science for this; the algorithm must be heuristic and can not satisfy everyone. In the minds of many developers the purpose of the <b>OOM</b>-killer is to permit a graceful shutdown, rather than be a part of normal operations. 
+An amusing take on this was given by Andrew Brouwer (<a href="http://lwn.net/Articles/104185">http://lwn.net/Articles/104185</a>):
+"An aircraft company discovered that it was cheaper to fly its planes
+with less fuel on board. The planes would be lighter and use less fuel
+and money was saved. On rare occasions however the amount of fuel was
+insufficient, and the plane would crash. This problem was solved by
+the engineers of the company by the development of a special OOF
+(out-of-fuel) mechanism. In emergency cases a passenger was selected
+and thrown out of the plane. (When necessary, the procedure was
+repeated.)  A large body of theory was developed and many publications
+were devoted to the problem of properly selecting the victim to be
+ejected.  Should the victim be chosen at random? Or should one choose
+the heaviest person? Or the oldest? Should passengers pay in order not
+to be ejected, so that the victim would be the poorest on board? And
+if for example the heaviest person was chosen, should there be a
+special exception in case that was the pilot? Should first class
+passengers be exempted?  Now that the OOF mechanism existed, it would
+be activated every now and then, and eject passengers even when there
+was no fuel shortage. The engineers are still studying precisely how
+this malfunction is caused."
+In order to make decisions about who gets sacrificed to keep the system alive, a value called the <b>badness</b> is computed (which can be read from /proc/[pid]/oom<sub>score</sub>) for each process on the system and the order of the killing is determined by this value. 
+Two entries in teh same directory can be used to promote or demote the likelihood of extermination. The value of <b>oom<sub>adj</sub></b> is the number of bits the points should be adjusted by. Normal users can only increase the badness; a decrease (a nrgative value for <b>oom<sub>adj</sub></b>) can only be specified by a superuser. The value of <b>oom<sub>adj</sub><sub>score</sub></b> directly adjusts the point value. Note that the use of <b>oom<sub>adj</sub></b> is deprecated.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2015-06-15 Mon 20:28</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

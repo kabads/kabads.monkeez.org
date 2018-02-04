@@ -1,6 +1,0 @@
----
-layout: post
-category: sysadmin
-title: Using PAM on Linux
----
-[PAM](https://en.wikipedia.org/wiki/Pluggable_authentication_module)(pluggable authentication module) is a tool which other software packages can use to check authentication on a system. 

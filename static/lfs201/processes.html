@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>processes</title>
+<!-- 2015-04-13 Mon 16:00 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">processes</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Processes</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Objectives</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. Describe a process and the resources associated with it.</a></li>
+<li><a href="#sec-1-1-2">1.1.2. Distinguish between processes, programs and threads.</a></li>
+<li><a href="#sec-1-1-3">1.1.3. Understand process attributes, permissions and states.</a></li>
+<li><a href="#sec-1-1-4">1.1.4. Know the difference between running in user and kernel modes.</a></li>
+<li><a href="#sec-1-1-5">1.1.5. Describe <b>daemon</b> processes.</a></li>
+<li><a href="#sec-1-1-6">1.1.6. Understand how new processes are forked (created).</a></li>
+<li><a href="#sec-1-1-7">1.1.7. Use <b>nice</b> and <b>renice</b> to set and modify priorities.</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. The init process</a></li>
+<li><a href="#sec-1-3">1.3. Processes</a></li>
+<li><a href="#sec-1-4">1.4. Process Attributes</a>
+<ul>
+<li><a href="#sec-1-4-1">1.4.1. The program being executed</a></li>
+<li><a href="#sec-1-4-2">1.4.2. Context (state)</a></li>
+<li><a href="#sec-1-4-3">1.4.3. Permissions</a></li>
+<li><a href="#sec-1-4-4">1.4.4. Associate resources</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-5">1.5. Controlling processes with <b>ulimit</b></a>
+<ul>
+<li><a href="#sec-1-5-1">1.5.1. To <b>restrict</b> capabilities so an individual user and/or process can not exhaust system resources, such as memory, <b>cpu</b> time or the maximum number of processes on the system.</a></li>
+<li><a href="#sec-1-5-2">1.5.2. To <b>expand</b> capabilities so a process does not run in to resources limits; for example, a server handling many clients may find the default of 1024 open files makes its work impossible to perform.</a></li>
+<li><a href="#sec-1-5-3">1.5.3. <b>Hard</b>: The maximum value, set only by the root user, that a user can raise the resource limit to.</a></li>
+<li><a href="#sec-1-5-4">1.5.4. <b>Soft</b>: The current limiting value, which a user can modify but can not exceed the hard limit.</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-6">1.6. Process Permissions and <b>setuid</b></a></li>
+<li><a href="#sec-1-7">1.7. More on Process States</a>
+<ul>
+<li><a href="#sec-1-7-1">1.7.1. <b>Running</b>: The process is either currently executing on a CPU or CPU core or sitting in the <b>run queue</b>, eagerly awaiting a new time slice. It will resume running when the scheduler decides it is now deserving to occupy the CPU, or when another CPU becomes idle and the scheduler migrates the process to that CPU.</a></li>
+<li><a href="#sec-1-7-2">1.7.2. <b>Sleeping</b> (i.e. <b>Waitin</b>): The process is waiting on a request (usually I/O) that it has made and cannot proceed further until the request is completed. When the request is completed, the kernel will wake up the process and put it back on the run queue and it will b given a timeslice on a CPU when the scheduler decides to do so.</a></li>
+<li><a href="#sec-1-7-3">1.7.3. <b>Stopped</b>: The process has been suspended. This state is commonly experienced when a programmer wants to examine the executing program's memory, CPU registers, flags or other attributes. Once this is donethe process may be resumed. This is generally done when the process is being run under a debugger or the user hits <b>Ctrl-Z</b>.</a></li>
+<li><a href="#sec-1-7-4">1.7.4. <b>Zombie</b>: The process enters this statewhen it terminates, and no other process (usually the parent) has inquired about its exist state; i.e., reaped it. Such a process is also called a <b>defunct</b> process. A zombie process  has released all of its resources except its exit state and its entry in the process table. If the parent of any process dies, the process is <b>adopted</b> by <b>init</b> (PID=1) or <b>kthread</b> (PID=2).</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-8">1.8. Execution Modes</a></li>
+<li><a href="#sec-1-9">1.9. User Mode</a></li>
+<li><a href="#sec-1-10">1.10. Kernel Mode</a></li>
+<li><a href="#sec-1-11">1.11. Daemons</a></li>
+<li><a href="#sec-1-12">1.12. Daemons can be quite efficient because they only operate when needed</a></li>
+<li><a href="#sec-1-13">1.13. Many daemons are started at boot time</a></li>
+<li><a href="#sec-1-14">1.14. Daemon names often (but not always) end with <b>d</b></a></li>
+<li><a href="#sec-1-15">1.15. Some examples include <b>httpd</b> and <b>udevd</b></a></li>
+<li><a href="#sec-1-16">1.16. Daemons may respond to exeternal events (<b>udevd</b>) or elapsed time (*crond)</a></li>
+<li><a href="#sec-1-17">1.17. Daemons generally have no controlling terminal and no standard input/output devices</a></li>
+<li><a href="#sec-1-18">1.18. Daemons sometimes provide better security control</a></li>
+<li><a href="#sec-1-19">1.19. Kernel-Created Processes</a>
+<ul>
+<li><a href="#sec-1-19-1">1.19.1. Internel kernel processes: These take care of maintenance work, such as making sure buffers get flushed out to disk, that the load on different CPUs is balanced evenly, that device drivers handle work that has been queued up for them to do, etc. These processes often run as long as the system is running, sleeping except when they have something to do.</a></li>
+<li><a href="#sec-1-19-2">1.19.2. External user processes: These are processes which run in user space like normal applications but which the kernel started. There are very few of these and they are usually short-lived.</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-20">1.20. Process Creating and Forking</a></li>
+<li><a href="#sec-1-21">1.21. Creating Processes in a Command Shell</a>
+<ul>
+<li><a href="#sec-1-21-1">1.21.1. A new process is created (forked from the user's login shell)</a></li>
+<li><a href="#sec-1-21-2">1.21.2. A wait system call puts the parent shell process to sleep</a></li>
+<li><a href="#sec-1-21-3">1.21.3. The command is loaded onto the child process's space via the <b>exec</b> system call. In other words, the code for the command replaces the <b>bash</b> program in the child process' memory space</a></li>
+<li><a href="#sec-1-21-4">1.21.4. The command completes executing, and the child process dies via the exit system call</a></li>
+<li><a href="#sec-1-21-5">1.21.5. The parent shell is re-awakened by the death of the child process and proceeds to issue a new shell prompt. The parent shell then waits for the next command request from the user, at which time the cycle will be released.</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-22">1.22. Using <b>nice</b> to Set Priorities</a></li>
+<li><a href="#sec-1-23">1.23. Modifying the Nice Value</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Processes</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+A <b>process</b> is the embodiment of a running application which may or may not consiste of multiple <b>threads</b>.  Processes have both attributes and well-delineated permissions. They must be in one of a number of enumerated states, the most common of which are running or sleeping. It is important to know when a process is running in <b>user mode</b> with limited privilege, or in <b>kernel mode</b> with enhanced privileges, including more direct access to hardware. There are a number of different ways to create <b>child</b> processes and to set and modify their priorities. 
+</p>
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Objectives</h3>
+<div class="outline-text-3" id="text-1-1">
+</div><div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Describe a process and the resources associated with it.</h4>
+</div>
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Distinguish between processes, programs and threads.</h4>
+</div>
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Understand process attributes, permissions and states.</h4>
+</div>
+<div id="outline-container-sec-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> Know the difference between running in user and kernel modes.</h4>
+</div>
+<div id="outline-container-sec-1-1-5" class="outline-4">
+<h4 id="sec-1-1-5"><span class="section-number-4">1.1.5</span> Describe <b>daemon</b> processes.</h4>
+</div>
+<div id="outline-container-sec-1-1-6" class="outline-4">
+<h4 id="sec-1-1-6"><span class="section-number-4">1.1.6</span> Understand how new processes are forked (created).</h4>
+</div>
+<div id="outline-container-sec-1-1-7" class="outline-4">
+<h4 id="sec-1-1-7"><span class="section-number-4">1.1.7</span> Use <b>nice</b> and <b>renice</b> to set and modify priorities.</h4>
+<div class="outline-text-4" id="text-1-1-7">
+<p>
+A program is an executing program and associated resources, including environment, open files, signal handlers etc. The same program may be executing more than once simultaneously and thus be responsible for multiple processes. 
+At the same time, two or more tasks, or threads of execution, can share various resources, such as their entire memory spaces (or just particular memory areas), open files etc. When there is an <b>everything shared</b> circumstance, one speaks of a <b>multi-threaded</b> process. 
+In other operating systems, there may be a big distinction between full <b>heavy weight</b> processes and <b>light weight</b> ones; strictly speaking the heavy weight process may include a number of light weight processes, or just one of them. 
+In linux the situation is quite different. Each thread of execution is considered individually, the difference between heavy and light having to do only with sharing of resources and somewhat faster context switching between threads of executions. 
+Unlike some other operating systems, linux has always done an exceptionally fast job of creating, destroying and switching between processes. Thus the model adopted for multi-threaded applications resembles multiple processes; each thread is scheduled individually and normally as if it were a stand alone process. This is done instead of involving more levels of complication such as having a separate method of scheduling among the threads of a process as well as having a scheduling method between different processes. 
+At the same time linux respects <b>POSIX</b> and other standards for multi-threaded processes; e.g. each thread returns the same process ID (called the thread group ID internally) while returning a distinct thread ID (called the process ID internally). This can lead to confusion for developers but should be invisible to administrators. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> The init process</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+The first <b>user process</b> on the system is init which has a process ID =1. It is started as soon as the kernel is initialized and has mounted the root filesystem. 
+<b>init</b> will run until the system is shutdown; it will be the last user process to be terminated at that point. It serves as the ancestral parent of all other user processes, both directly and indirectly. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Processes</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+A process is an instance of a program in execution. It may be in a number of different states, such as running or sleeping. Every process has a <b>pid</b> (Proess ID), a <b>ppid</b> (Parent Process ID), and a <b>gpid</b> (Process Group ID). In addition every process has program code, data, variables, file descriptors and an environment. 
+<b>init</b> is usually the first process run on a system, and thus becomes the ancestor of all subsequent processes running on the system, except for those initiated directly from the kernel (which show up with [] around their name in a <b>ps</b> listing). 
+If the parent process dies before the child, the <b>ppid</b> of the child is set to 1; i.e. the process is adopted by <b>init</b>. (Note: in recent linux systems using <b>systemd</b>, the <b>ppid</b> will be set to 2 which corresponds to an internal kernel thread known as <b>kthread</b>, which has taken over from <b>init</b> the role of adopted of orphaned children.)
+A child proecss which terminates (either normally or abnormally) before its parent, which has not waited for it and examined its exit code is known as a <b>zombie</b> (or defunct) process. Zombies have released almost all resources and remain only to convey their exit status. One function of the <b>init</b> process is to check on its adopted children and let those who have terminated die gracefully. Hence it is sometimes known as the <b>zombie killer</b>, or more grimly, the <b>child reaper</b>. 
+Processes are controlled by <b>scheduling</b> which is completely preemptive. Only the kernel has the right to preempt a process; they can't do it to each other. 
+For historical reasons, the largest <b>PID</b> has been limited to a 16-bit number, or 32768. It is possible to alter this value by changing /proc/sys/kernel/pid<sub>max</sub>, since it may be inadequate for larger servers. As processes are created eventually they will reach <b>pid<sub>max</sub></b>, at which point they will start again at <b>PID=300</b>. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Process Attributes</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+All processes have certain attributes:
+</p>
+</div>
+<div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> The program being executed</h4>
+</div>
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> Context (state)</h4>
+</div>
+<div id="outline-container-sec-1-4-3" class="outline-4">
+<h4 id="sec-1-4-3"><span class="section-number-4">1.4.3</span> Permissions</h4>
+</div>
+<div id="outline-container-sec-1-4-4" class="outline-4">
+<h4 id="sec-1-4-4"><span class="section-number-4">1.4.4</span> Associate resources</h4>
+<div class="outline-text-4" id="text-1-4-4">
+<p>
+Every process is executing some program. At any given moment ,the process may take a snapshot of itself by trapping the stsate of its CPU registers, where it is executing in the program, what is in th process' memory, and other information. This is the <b>context</b> of the process. 
+Since processes can be scheduled in and out when sharing CPU time with others (or have to be put to sleep while waiting for some condition to be fulfilled, such as the user to make a request or data to arrive), being able to store the entire context when swapping out the process and being able to restore it upon execution resumption is critical to the kernel's ability to do <b>context switching</b>.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Controlling processes with <b>ulimit</b></h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+<b>ulimit</b> is a built in <b>bash</b> command that displays or resets a number of resource limits associated with processes running under a shell. Running it with the <b>-a</b> argument gives:
+$ ulimit -a 
+A system administrator may need to change some of these values in either direction: 
+</p>
+</div>
+<div id="outline-container-sec-1-5-1" class="outline-4">
+<h4 id="sec-1-5-1"><span class="section-number-4">1.5.1</span> To <b>restrict</b> capabilities so an individual user and/or process can not exhaust system resources, such as memory, <b>cpu</b> time or the maximum number of processes on the system.</h4>
+</div>
+<div id="outline-container-sec-1-5-2" class="outline-4">
+<h4 id="sec-1-5-2"><span class="section-number-4">1.5.2</span> To <b>expand</b> capabilities so a process does not run in to resources limits; for example, a server handling many clients may find the default of 1024 open files makes its work impossible to perform.</h4>
+<div class="outline-text-4" id="text-1-5-2">
+<p>
+There are two kinds of limit:
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-5-3" class="outline-4">
+<h4 id="sec-1-5-3"><span class="section-number-4">1.5.3</span> <b>Hard</b>: The maximum value, set only by the root user, that a user can raise the resource limit to.</h4>
+</div>
+<div id="outline-container-sec-1-5-4" class="outline-4">
+<h4 id="sec-1-5-4"><span class="section-number-4">1.5.4</span> <b>Soft</b>: The current limiting value, which a user can modify but can not exceed the hard limit.</h4>
+<div class="outline-text-4" id="text-1-5-4">
+<p>
+One can set any particular limit by doing: 
+$ ulimit [options] [limit]
+as in
+$ ulimit -n 1600
+which would increase the maximum number of file descriptors to 1600. 
+Note that changes only affect the current shell. To make changes that are effective for all logged-in users, one needs to modify /etc/security/limits.conf, a very nicely self-documented file, and then reboot. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Process Permissions and <b>setuid</b></h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+Every process has permissions based on which specific user invoked it. In addition, it may also have permissions based on who owns its program file. 
+As we talked about in the local security section, programs which are marked with an <b>s</b> execute bit have a different <b>effective user id</b> than their <b>real user id</b>. These are referred to as <b>setuid</b> programs. They run with the user id of the user who <b>owns</b> the program; non-*setuid* programs run with the permissions of the user who <b>runs</b> them. <b>setuid</b> programs owned by root can be a well-known security problem. 
+The <b>passwd</b> program is an example of a <b>setuid</b> program. Any user can run it. When a user executes this program, the program must run with root permission in order to be able to update the write-restricted /etc/passwd and /etc/shadow files where the user passwords are maintained. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> More on Process States</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+Processes can be in one of several possible states, the main ones being: 
+</p>
+</div>
+<div id="outline-container-sec-1-7-1" class="outline-4">
+<h4 id="sec-1-7-1"><span class="section-number-4">1.7.1</span> <b>Running</b>: The process is either currently executing on a CPU or CPU core or sitting in the <b>run queue</b>, eagerly awaiting a new time slice. It will resume running when the scheduler decides it is now deserving to occupy the CPU, or when another CPU becomes idle and the scheduler migrates the process to that CPU.</h4>
+</div>
+<div id="outline-container-sec-1-7-2" class="outline-4">
+<h4 id="sec-1-7-2"><span class="section-number-4">1.7.2</span> <b>Sleeping</b> (i.e. <b>Waitin</b>): The process is waiting on a request (usually I/O) that it has made and cannot proceed further until the request is completed. When the request is completed, the kernel will wake up the process and put it back on the run queue and it will b given a timeslice on a CPU when the scheduler decides to do so.</h4>
+</div>
+<div id="outline-container-sec-1-7-3" class="outline-4">
+<h4 id="sec-1-7-3"><span class="section-number-4">1.7.3</span> <b>Stopped</b>: The process has been suspended. This state is commonly experienced when a programmer wants to examine the executing program's memory, CPU registers, flags or other attributes. Once this is donethe process may be resumed. This is generally done when the process is being run under a debugger or the user hits <b>Ctrl-Z</b>.</h4>
+</div>
+<div id="outline-container-sec-1-7-4" class="outline-4">
+<h4 id="sec-1-7-4"><span class="section-number-4">1.7.4</span> <b>Zombie</b>: The process enters this statewhen it terminates, and no other process (usually the parent) has inquired about its exist state; i.e., reaped it. Such a process is also called a <b>defunct</b> process. A zombie process  has released all of its resources except its exit state and its entry in the process table. If the parent of any process dies, the process is <b>adopted</b> by <b>init</b> (PID=1) or <b>kthread</b> (PID=2).</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8"><span class="section-number-3">1.8</span> Execution Modes</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+At any given time a process (or any particular thread of a multi-threaded process) may be executing in either <b>user mode</b> or <b>system mode</b>, which is usually called <b>kernel mode</b> by kernel developers. 
+What instructions can be executed depends on the mode and is enforced at the hardware, not software, level. 
+The mode is not a state of the system; it is a state of the processor as in a multi-core or multi-CPU system each unit can be in its own individual state. 
+In <b>Intel</b> parlance, user mode is also termed <b>Ring 3</b> and system mode is termed <b>Ring 0</b>.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-9" class="outline-3">
+<h3 id="sec-1-9"><span class="section-number-3">1.9</span> User Mode</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+Except when executing a <b>system call</b> (described in the next session) processes execute in <b>user mode</b>, where they have lesser privileges than in kernel mode. 
+When a process is started it is isolated in its own user space to protect it from other processes. This promotes security and creates greater stability. This is sometimes called <b>process resource isolation</b>. 
+Each process executing in user mode has its own memory space, parts of which may be shared with other processes; except for the shared memory segments, a user process is not able to read or write into or from the memory space of any other processes. 
+Even a process run by the root user or as a <b>setuid</b> program runs in user mode except when jumping in to a system call, and has only limited ability to access hardware. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-10" class="outline-3">
+<h3 id="sec-1-10"><span class="section-number-3">1.10</span> Kernel Mode</h3>
+<div class="outline-text-3" id="text-1-10">
+<p>
+In kernel (system) mode the CPU has full access to all hardware on the system, including peripherals, memory, disks, etc. If an application needs access to these resources it must issue a <b>system call</b>, which causes a <b>context switch</b> from user mode to kernel mode. This procedure must be followed when reading and writing from files, creating a new process, etc.
+Application code never runs in kernel mode, only the system call itself which is kernel code. When the system call is complete, a return value is produced and the process returns to user mode when the inverse context switch.
+There are other times when the system is in kernel mode that have nothing to do with processes, such as when handling hardware interrupts or running the scheduling routines and other management tasks for the system.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-11" class="outline-3">
+<h3 id="sec-1-11"><span class="section-number-3">1.11</span> Daemons</h3>
+<div class="outline-text-3" id="text-1-11">
+<p>
+A <b>daemon</b> process is a background process whose sole purpose is to provide some specific service to users of the system:
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-12" class="outline-3">
+<h3 id="sec-1-12"><span class="section-number-3">1.12</span> Daemons can be quite efficient because they only operate when needed</h3>
+</div>
+<div id="outline-container-sec-1-13" class="outline-3">
+<h3 id="sec-1-13"><span class="section-number-3">1.13</span> Many daemons are started at boot time</h3>
+</div>
+<div id="outline-container-sec-1-14" class="outline-3">
+<h3 id="sec-1-14"><span class="section-number-3">1.14</span> Daemon names often (but not always) end with <b>d</b></h3>
+</div>
+<div id="outline-container-sec-1-15" class="outline-3">
+<h3 id="sec-1-15"><span class="section-number-3">1.15</span> Some examples include <b>httpd</b> and <b>udevd</b></h3>
+</div>
+<div id="outline-container-sec-1-16" class="outline-3">
+<h3 id="sec-1-16"><span class="section-number-3">1.16</span> Daemons may respond to exeternal events (<b>udevd</b>) or elapsed time (*crond)</h3>
+</div>
+<div id="outline-container-sec-1-17" class="outline-3">
+<h3 id="sec-1-17"><span class="section-number-3">1.17</span> Daemons generally have no controlling terminal and no standard input/output devices</h3>
+</div>
+<div id="outline-container-sec-1-18" class="outline-3">
+<h3 id="sec-1-18"><span class="section-number-3">1.18</span> Daemons sometimes provide better security control</h3>
+<div class="outline-text-3" id="text-1-18">
+<p>
+When using <b>SysVinit</b>, scripts in the <i>etc/init.d</i> directory9 start various system daemons. These scripts invoke commands as arguments to a shell function named <b>daemon</b>, defined in the /etc/init.d/functions file. 
+To see an example of how this is done look at the script for the <b>httpd</b> service in the /etc/init.d directory. 
+Systems using <b>systemd</b> use similar methods for daemons. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-19" class="outline-3">
+<h3 id="sec-1-19"><span class="section-number-3">1.19</span> Kernel-Created Processes</h3>
+<div class="outline-text-3" id="text-1-19">
+<p>
+Not all processes are created, or <b>forked</b> from user parents. The linux kernel directly creates two kinds of processes on its own initiative. These are:
+</p>
+</div>
+<div id="outline-container-sec-1-19-1" class="outline-4">
+<h4 id="sec-1-19-1"><span class="section-number-4">1.19.1</span> Internel kernel processes: These take care of maintenance work, such as making sure buffers get flushed out to disk, that the load on different CPUs is balanced evenly, that device drivers handle work that has been queued up for them to do, etc. These processes often run as long as the system is running, sleeping except when they have something to do.</h4>
+</div>
+<div id="outline-container-sec-1-19-2" class="outline-4">
+<h4 id="sec-1-19-2"><span class="section-number-4">1.19.2</span> External user processes: These are processes which run in user space like normal applications but which the kernel started. There are very few of these and they are usually short-lived.</h4>
+<div class="outline-text-4" id="text-1-19-2">
+<p>
+It is easy to see which processes are of this nature; wen you run a command such as:
+$ ps -elf
+to list all processes on the system while showing the parent process IDs, they will all have <b>PPID=2</b>, which refers to <b>kthread</b>, the internal kernel thread whose job is to create such processes, and their names will be encapsulated in square brackets, such as <b>[ksoftirqd/0]</b>.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-20" class="outline-3">
+<h3 id="sec-1-20"><span class="section-number-3">1.20</span> Process Creating and Forking</h3>
+<div class="outline-text-3" id="text-1-20">
+<p>
+An average linux system is always creating new processes. This is often called <b>forking</b>; the original parent process keeps running while the new child process starts.
+When most computers had only single processors they were usually configured so the parent would initially pause while the child started to run; there is a <b>UNIX</b> expression: "Children come first." However, with modern multi-CPU systems both will tend to run simultaneously on different CPUs. 
+Often rather than just a fork, one follows it with an <b>exec</b>, where the parent process terminates and the child process inherits the process ID of the parent. The term <b>fork and exec</b> is used so often people think of it sometmes as one word. 
+Older <b>UNIX</b> systems often used a program called <b>spawn</b> which is similar in many ways to fork and exec, but differs in details. It is not part of the <b>POSIX</b> standard and is not a normal part of linux.
+To see how new processes may start, consider a web server that handles many clients. It may launch a new process every time a new connection is made with a client. On the other hand, it may simply start only a new <b>thread</b> as part of the same process; in linux there really isn't much difference on a technical level between creating a full process or just a new thread as each mechanism takes about the same time and uses roughly the same amount of resources.
+As another example, the <b>sshd</b> daemon is started when the <b>init</b> process executes the <b>sshd</b> init script, which then is responsible for launching the <b>sshd daemon</b>. This daemon process listens for <b>ssh</b> requests from remote users. 
+When a request is received, <b>ssh</b> creates a new copy of itself to service the request. Each remote user gets their own copy of the <b>sshd</b> daemon running to service their remote login. The <b>sshd</b> process will start the login program to validate the remote user. If the authentication succeeds, the login process will fork off a shell (say <b>bash</b>) to interpret the user commands, and so on. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-21" class="outline-3">
+<h3 id="sec-1-21"><span class="section-number-3">1.21</span> Creating Processes in a Command Shell</h3>
+<div class="outline-text-3" id="text-1-21">
+<p>
+What happens when a user executes a command in a command shell interpreter, such as <b>bash</b>?
+</p>
+</div>
+<div id="outline-container-sec-1-21-1" class="outline-4">
+<h4 id="sec-1-21-1"><span class="section-number-4">1.21.1</span> A new process is created (forked from the user's login shell)</h4>
+</div>
+<div id="outline-container-sec-1-21-2" class="outline-4">
+<h4 id="sec-1-21-2"><span class="section-number-4">1.21.2</span> A wait system call puts the parent shell process to sleep</h4>
+</div>
+<div id="outline-container-sec-1-21-3" class="outline-4">
+<h4 id="sec-1-21-3"><span class="section-number-4">1.21.3</span> The command is loaded onto the child process's space via the <b>exec</b> system call. In other words, the code for the command replaces the <b>bash</b> program in the child process' memory space</h4>
+</div>
+<div id="outline-container-sec-1-21-4" class="outline-4">
+<h4 id="sec-1-21-4"><span class="section-number-4">1.21.4</span> The command completes executing, and the child process dies via the exit system call</h4>
+</div>
+<div id="outline-container-sec-1-21-5" class="outline-4">
+<h4 id="sec-1-21-5"><span class="section-number-4">1.21.5</span> The parent shell is re-awakened by the death of the child process and proceeds to issue a new shell prompt. The parent shell then waits for the next command request from the user, at which time the cycle will be released.</h4>
+<div class="outline-text-4" id="text-1-21-5">
+<p>
+If a command is issued for <b>background</b> processing (by adding the ampersand &amp; at the end of a command line) the parent shell skips the wait request and is free to issue a new shell prompt immediately allowing the background process to execute in parallel. Otherwise, the <b>foreground</b> requests, the shell waits until the child process has completed or is stopped via a signal.
+Some shell commands (such as <b>echo</b> and <b>kill</b>) are built in to the shell itself and do not involve loading of program files. For these commands, no <b>fork</b> or <b>exec</b> are issued for the execution. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-22" class="outline-3">
+<h3 id="sec-1-22"><span class="section-number-3">1.22</span> Using <b>nice</b> to Set Priorities</h3>
+<div class="outline-text-3" id="text-1-22">
+<p>
+Process priority can be controlled through the <b>nice</b> and <b>renice</b> commands. Since the early days of <b>UNIX</b> the idea has been that a nice process lowers its priority to yield to others. Thus, the higher the <b>niceness</b> is, the lower the priority. 
+The niceness value can range from -20 (the highest priority) to +19 (the lowest priority). The normal way to run <b>nice</b> is as in:
+$ nice -n 5 command [args]
+which would increase the niceness by 5. This is equivalent to doing:
+$ nice -5 command [args]
+If you do not give a nice value the default is to increase the niceness by 10. If you give no arguments at all, you report your current niceness. For example:
+$ nice
+0 
+$ nice cat &amp; 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-23" class="outline-3">
+<h3 id="sec-1-23"><span class="section-number-3">1.23</span> Modifying the Nice Value</h3>
+<div class="outline-text-3" id="text-1-23">
+<p>
+ By default only a superuser can decrease the niceness; i.e. increase the priority. However, it is possible to give normal users the ability to decrease their niceness within a predetermined range, by editing /etc/security/limits.conf
+To change the niceness of an already running process it is easy to use the <b>renice</b> command as in:
+$ renice +3 13848
+which will increase niceness by 3 of the process with <b>pid=13848</b>. More than one process can be done at the same time and there are some other options, so see <b>man renice</b>. 
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2015-04-13 Mon 16:00</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>file-system</title>
+<!-- 2015-02-19 Thu 11:02 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">file-system</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. File system</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Objectvies</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. Explain why linux requires the organization of one big filesystem tree, and what the considerations are for how it is done.</a></li>
+<li><a href="#sec-1-1-2">1.1.2. Know the role played by the Filesystem Hierarchy Standard</a></li>
+<li><a href="#sec-1-1-3">1.1.3. Describe what must be available at boot in the root directory, and what can be available only once the system has started</a></li>
+<li><a href="#sec-1-1-4">1.1.4. Explain each of the main subdirectories trees in terms of purpose and contents</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. shareable vs non-shareable</a>
+<ul>
+<li><a href="#sec-1-2-1">1.2.1. shareable data is that which can be shared between different hosts. Non-shareable data is that which is specific to a particular host. Home directories might be shareable - but lock files would not.</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-3">1.3. variable vs static</a>
+<ul>
+<li><a href="#sec-1-3-1">1.3.1. static data include binaries, documentation, and anything that does not change without system administrator assistance. Variable data is anything that may change without a system administrator's help.</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-4">1.4. Filesystem Hierachy Standard administered by the Free Standards Group and now the Linux Foundation</a>
+<ul>
+<li><a href="#sec-1-4-1">1.4.1. Specifies the main directories that need to be present, and describes their purposes. </a></li>
+<li><a href="#sec-1-4-2">1.4.2. Typical layout</a></li>
+<li><a href="#sec-1-4-3">1.4.3. /</a></li>
+<li><a href="#sec-1-4-4">1.4.4. /bin - all single user commands</a></li>
+<li><a href="#sec-1-4-5">1.4.5. /boot - all the files for booting the system</a></li>
+<li><a href="#sec-1-4-6">1.4.6. /dev</a></li>
+<li><a href="#sec-1-4-7">1.4.7. /etc - use machine-local config files and some startup scripts</a></li>
+<li><a href="#sec-1-4-8">1.4.8. /home - user directories</a></li>
+<li><a href="#sec-1-4-9">1.4.9. /lib - libraries needed to execute binaries in /bin and /sbin for booting the system</a></li>
+<li><a href="#sec-1-4-10">1.4.10. /media is typically used to mount filesystems or removable media - cds usbs dvds</a></li>
+<li><a href="#sec-1-4-11">1.4.11. /mnt - for networked file systems</a></li>
+<li><a href="#sec-1-4-12">1.4.12. /opt - software packages that wish to keep all of their files in one isolated place rather than scatter them all over the filesystrem.</a></li>
+<li><a href="#sec-1-4-13">1.4.13. /proc - pseudo-filesystem (held in memory and not on disk) - empty on a non-running system</a></li>
+<li><a href="#sec-1-4-14">1.4.14. /sys - sysfs pseudo-filesystem - in memory - empty on non-running system</a></li>
+<li><a href="#sec-1-4-15">1.4.15. /root ("slash-root") is the home directory for the root user- superuser privilege is required.</a></li>
+<li><a href="#sec-1-4-16">1.4.16. /sbin contains binaries for booting, restoring, recovering and/or repairing in addition to those binaries in /bin.</a></li>
+<li><a href="#sec-1-4-17">1.4.17. /tmp stores temporary files and can be accessed by any user or application. They do not last for a long time.</a></li>
+<li><a href="#sec-1-4-18">1.4.18. /usr can be thought of as a secondary hierarchy. It holds files which are not needed for system booting.</a></li>
+<li><a href="#sec-1-4-19">1.4.19. /var variable data files that change frequently during system operation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> File system</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Objectvies</h3>
+<div class="outline-text-3" id="text-1-1">
+</div><div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Explain why linux requires the organization of one big filesystem tree, and what the considerations are for how it is done.</h4>
+</div>
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Know the role played by the Filesystem Hierarchy Standard</h4>
+</div>
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Describe what must be available at boot in the root directory, and what can be available only once the system has started</h4>
+</div>
+<div id="outline-container-sec-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> Explain each of the main subdirectories trees in terms of purpose and contents</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> shareable vs non-shareable</h3>
+<div class="outline-text-3" id="text-1-2">
+</div><div id="outline-container-sec-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> shareable data is that which can be shared between different hosts. Non-shareable data is that which is specific to a particular host. Home directories might be shareable - but lock files would not.</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> variable vs static</h3>
+<div class="outline-text-3" id="text-1-3">
+</div><div id="outline-container-sec-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> static data include binaries, documentation, and anything that does not change without system administrator assistance. Variable data is anything that may change without a system administrator's help.</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Filesystem Hierachy Standard administered by the Free Standards Group and now the Linux Foundation</h3>
+<div class="outline-text-3" id="text-1-4">
+</div><div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> Specifies the main directories that need to be present, and describes their purposes. <a href="http://www.pathname.com/hfs">http://www.pathname.com/hfs</a></h4>
+</div>
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> Typical layout</h4>
+<div class="outline-text-4" id="text-1-4-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Location</th>
+<th scope="col" class="left">FHS?</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">/bin</td>
+<td class="left">Yes</td>
+<td class="left">Essential executable programs that must be available in single user mode.</td>
+</tr>
+
+<tr>
+<td class="left">/boot</td>
+<td class="left">Yes</td>
+<td class="left">Files needed to boot the system, such as the kernel, initrd or initramfs images, and boot configuration files and bootloader programs.</td>
+</tr>
+
+<tr>
+<td class="left">/dev</td>
+<td class="left">Yes</td>
+<td class="left">Device Nodes, used to interact with hardware and software devices.</td>
+</tr>
+
+<tr>
+<td class="left">/etc</td>
+<td class="left">Yes</td>
+<td class="left">System wide configuration files.</td>
+</tr>
+
+<tr>
+<td class="left">/home</td>
+<td class="left">Yes</td>
+<td class="left">User home directories including personal settings, files, etc.</td>
+</tr>
+
+<tr>
+<td class="left">/lib</td>
+<td class="left">Yes</td>
+<td class="left">Libraries required by executable binaries in /bin and /sbin.</td>
+</tr>
+
+<tr>
+<td class="left">/lib64</td>
+<td class="left">No</td>
+<td class="left">64-bit libraries required by executable binaries in /bin and /sbin, for systems which can run both 32-bit and 64-bit programs.</td>
+</tr>
+
+<tr>
+<td class="left">/media</td>
+<td class="left">Yes</td>
+<td class="left">Mount points for removable media such as CDs, DVDs, USB sticks etc.</td>
+</tr>
+
+<tr>
+<td class="left">/mnt</td>
+<td class="left">Yes</td>
+<td class="left">Temporarily mounted filesystems.</td>
+</tr>
+
+<tr>
+<td class="left">/opt</td>
+<td class="left">Yes</td>
+<td class="left">Optional application software packages.</td>
+</tr>
+
+<tr>
+<td class="left">/proc</td>
+<td class="left">Yes</td>
+<td class="left">Virtual pseudo-filesystem giving information about the system and processes running on it. Can be used to alter system parameters.</td>
+</tr>
+
+<tr>
+<td class="left">/sys</td>
+<td class="left">No</td>
+<td class="left">Virtual pseudo-filesystem giving information about the system and processes running on it. Can be used to alter system parameters. Similar to a device tree and is part of the Unified Device Model.</td>
+</tr>
+
+<tr>
+<td class="left">/root</td>
+<td class="left">Yes</td>
+<td class="left">Home directory for the root user.</td>
+</tr>
+
+<tr>
+<td class="left">/sbin</td>
+<td class="left">Yes</td>
+<td class="left">Essential system binaries.</td>
+</tr>
+
+<tr>
+<td class="left">/srv</td>
+<td class="left">Yes</td>
+<td class="left">Site-specific data served up by the system. Seldom used.</td>
+</tr>
+
+<tr>
+<td class="left">/tmp</td>
+<td class="left">Yes</td>
+<td class="left">Temporary files; on many distributions lost across a reboot and may be a ramdisk in memory.</td>
+</tr>
+
+<tr>
+<td class="left">/usr</td>
+<td class="left">Yes</td>
+<td class="left">Multi-user applications, utilities and data; theoretically read-only.</td>
+</tr>
+
+<tr>
+<td class="left">/var</td>
+<td class="left">Yes</td>
+<td class="left">Variable data that changes during system operation.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4-3" class="outline-4">
+<h4 id="sec-1-4-3"><span class="section-number-4">1.4.3</span> /</h4>
+<div class="outline-text-4" id="text-1-4-3">
+</div><ol class="org-ol"><li><a id="sec-1-4-3-1" name="sec-1-4-3-1"></a>boot the system<br  /></li>
+<li><a id="sec-1-4-3-2" name="sec-1-4-3-2"></a>Restore the system from system backups on external media or NAS etc.<br  /></li>
+<li><a id="sec-1-4-3-3" name="sec-1-4-3-3"></a>Recover and/or repair the system; an experienced maintainer must have the tools to diagnose and reconstruct a damaged system<br  /></li>
+<li><a id="sec-1-4-3-4" name="sec-1-4-3-4"></a>According to FHS no application or package should create new subdirectories of the root directory<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-4-4" class="outline-4">
+<h4 id="sec-1-4-4"><span class="section-number-4">1.4.4</span> /bin - all single user commands</h4>
+<div class="outline-text-4" id="text-1-4-4">
+</div><ol class="org-ol"><li><a id="sec-1-4-4-1" name="sec-1-4-4-1"></a>contains executable programs and scripts needed by both sysadmins and unprivileged users, which are required when no other filesystems have yet been mounted, for example, when booting in to single user or recovery mode<br  /></li>
+<li><a id="sec-1-4-4-2" name="sec-1-4-4-2"></a>may also contain executables which are used indirectly by scripts<br  /></li>
+<li><a id="sec-1-4-4-3" name="sec-1-4-4-3"></a>may not include any subdirectories<br  /></li>
+<li><a id="sec-1-4-4-4" name="sec-1-4-4-4"></a>command binaries deemed non-essential enough for /bin go in /usr/bin - programs for non-root users are placed in this category<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-4-5" class="outline-4">
+<h4 id="sec-1-4-5"><span class="section-number-4">1.4.5</span> /boot - all the files for booting the system</h4>
+<div class="outline-text-4" id="text-1-4-5">
+</div><ol class="org-ol"><li><a id="sec-1-4-5-1" name="sec-1-4-5-1"></a>vmlinuz -kernel compressed<br  /></li>
+<li><a id="sec-1-4-5-2" name="sec-1-4-5-2"></a>initramfs - initial ram filesystem - mounted before the real root filesystem becomes available.<br  /><ol class="org-ol"><li><a id="sec-1-4-5-2-1" name="sec-1-4-5-2-1"></a>sometimes initramfs is called initrd (initial ram disk) which was the older method, but the name survives.<br  /></li></ol>
+</li>
+<li><a id="sec-1-4-5-3" name="sec-1-4-5-3"></a>/boot/config is here for compiling the kernel- just here for bookeeping and reference for debugging<br  /></li>
+<li><a id="sec-1-4-5-4" name="sec-1-4-5-4"></a>System.map - the kernel symbol table, which is useful for debugging. It gives the hexadecimal addresses of all kernel symbols<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-4-6" class="outline-4">
+<h4 id="sec-1-4-6"><span class="section-number-4">1.4.6</span> /dev</h4>
+<div class="outline-text-4" id="text-1-4-6">
+</div><ol class="org-ol"><li><a id="sec-1-4-6-1" name="sec-1-4-6-1"></a>special device files (or device nodes) which represent devices built in to the connected system.<br  /></li>
+<li><a id="sec-1-4-6-2" name="sec-1-4-6-2"></a>such devices represent character (byte-stream) and block I/O devices<br  /></li>
+<li><a id="sec-1-4-6-3" name="sec-1-4-6-3"></a>network devices do not have a device node in linux but instead refer to eth1 or wlan0<br  /></li>
+<li><a id="sec-1-4-6-4" name="sec-1-4-6-4"></a>all latest linux vesions use udev system which creates a node in /dev only as needed when devices are found at boot or when plugged in.<br  /></li>
+<li><a id="sec-1-4-6-5" name="sec-1-4-6-5"></a>an unmounted filesystem would have <i>dev</i> as empty - things are populated as udev requires<br  /></li>
+<li><a id="sec-1-4-6-6" name="sec-1-4-6-6"></a>embedded linux systems may have fixed device nodes instead of /dev and not use udev but mdev<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-4-7" class="outline-4">
+<h4 id="sec-1-4-7"><span class="section-number-4">1.4.7</span> /etc - use machine-local config files and some startup scripts</h4>
+<div class="outline-text-4" id="text-1-4-7">
+</div><ol class="org-ol"><li><a id="sec-1-4-7-1" name="sec-1-4-7-1"></a>no executables allowed<br  /></li>
+<li><a id="sec-1-4-7-2" name="sec-1-4-7-2"></a>distros add configuration files and directories to /etc<br  /></li>
+<li><a id="sec-1-4-7-3" name="sec-1-4-7-3"></a>RHEL adds /etc/sysconfig where system config files live<br  /></li>
+<li><a id="sec-1-4-7-4" name="sec-1-4-7-4"></a>/etc/skel which contains skeleton files used to populate new newly created home directories and /skel/etc/init.d which contains startup and shutdown scripts when using System V initialization<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-4-8" class="outline-4">
+<h4 id="sec-1-4-8"><span class="section-number-4">1.4.8</span> /home - user directories</h4>
+<div class="outline-text-4" id="text-1-4-8">
+</div><ol class="org-ol"><li><a id="sec-1-4-8-1" name="sec-1-4-8-1"></a>All personal configuration, data and executable programs are placed in this directory<br  /></li>
+<li><a id="sec-1-4-8-2" name="sec-1-4-8-2"></a>/home may also contain subdirectories for various groups - e.g. /home/students<br  /></li>
+<li><a id="sec-1-4-8-3" name="sec-1-4-8-3"></a>users can substitute the environmental variable $HOME for their root directory<br  /></li>
+<li><a id="sec-1-4-8-4" name="sec-1-4-8-4"></a>one exception is /root is the home for the root user<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-4-9" class="outline-4">
+<h4 id="sec-1-4-9"><span class="section-number-4">1.4.9</span> /lib - libraries needed to execute binaries in /bin and /sbin for booting the system</h4>
+<div class="outline-text-4" id="text-1-4-9">
+</div><ol class="org-ol"><li><a id="sec-1-4-9-1" name="sec-1-4-9-1"></a>kernel modules are held under /lib/modules/&lt;kernel-version&gt;<br  /></li>
+<li><a id="sec-1-4-9-2" name="sec-1-4-9-2"></a>PAM (pluggable authentication modules) are stored in /lib/security<br  /></li>
+<li><a id="sec-1-4-9-3" name="sec-1-4-9-3"></a>systems which support both 32-bit and 64-bit binaries must keep both kinds of libraries on the systtem.<br  /><ol class="org-ol"><li><a id="sec-1-4-9-3-1" name="sec-1-4-9-3-1"></a>/lib64 and /lib can co-exist<br  /></li></ol>
+</li></ol>
+</div>
+<div id="outline-container-sec-1-4-10" class="outline-4">
+<h4 id="sec-1-4-10"><span class="section-number-4">1.4.10</span> /media is typically used to mount filesystems or removable media - cds usbs dvds</h4>
+<div class="outline-text-4" id="text-1-4-10">
+</div><ol class="org-ol"><li><a id="sec-1-4-10-1" name="sec-1-4-10-1"></a>udev can dynamically create directories under /media and then mount the removable filesystem there with names for udev rules (speficied in config files).<br  /></li>
+<li><a id="sec-1-4-10-2" name="sec-1-4-10-2"></a>udev will also remove directories under /media as things are umounted.<br  /></li>
+<li><a id="sec-1-4-10-3" name="sec-1-4-10-3"></a>if the media has more than one partition, then more than one entry will appear on /media<br  /></li>
+<li><a id="sec-1-4-10-4" name="sec-1-4-10-4"></a>on newer distributions - SUSE/RHEL 7, media will pop up under /run/media/username<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-4-11" class="outline-4">
+<h4 id="sec-1-4-11"><span class="section-number-4">1.4.11</span> /mnt - for networked file systems</h4>
+<div class="outline-text-4" id="text-1-4-11">
+</div><ol class="org-ol"><li><a id="sec-1-4-11-1" name="sec-1-4-11-1"></a>NFS<br  /></li>
+<li><a id="sec-1-4-11-2" name="sec-1-4-11-2"></a>Samba<br  /></li>
+<li><a id="sec-1-4-11-3" name="sec-1-4-11-3"></a>CIFS<br  /></li>
+<li><a id="sec-1-4-11-4" name="sec-1-4-11-4"></a>AFS<br  /></li>
+<li><a id="sec-1-4-11-5" name="sec-1-4-11-5"></a>Historically, /mnt was used to hold these types of files - but not now in modern systems<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-4-12" class="outline-4">
+<h4 id="sec-1-4-12"><span class="section-number-4">1.4.12</span> /opt - software packages that wish to keep all of their files in one isolated place rather than scatter them all over the filesystrem.</h4>
+<div class="outline-text-4" id="text-1-4-12">
+</div><ol class="org-ol"><li><a id="sec-1-4-12-1" name="sec-1-4-12-1"></a>/opt/dolphy<sub>app</sub> would be the directory where all the files exist for dolphy<sub>app</sub><br  /></li>
+<li><a id="sec-1-4-12-2" name="sec-1-4-12-2"></a>this makes it relatively easy to install an app<br  /></li>
+<li><a id="sec-1-4-12-3" name="sec-1-4-12-3"></a>However, if you are using a package management, it is easy to install and uninstall with a clear sense of file manifests and locations, wihtout exhibiting such anti-social behaviour.<br  /></li>
+<li><a id="sec-1-4-12-4" name="sec-1-4-12-4"></a>/opt is used by proprietary vendors or those who like to avoid distribution complexities<br  /></li>
+<li><a id="sec-1-4-12-5" name="sec-1-4-12-5"></a>Directories /opt/bin /opt/doc /opt/include /opt/info, /opt/lib and /opt/man are reserved for the local sysadmin use. Packages may provide files which are linked or copied to these directories, but the packages must also be able to function without the programs being in these special directories.<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-4-13" class="outline-4">
+<h4 id="sec-1-4-13"><span class="section-number-4">1.4.13</span> /proc - pseudo-filesystem (held in memory and not on disk) - empty on a non-running system</h4>
+<div class="outline-text-4" id="text-1-4-13">
+</div><ol class="org-ol"><li><a id="sec-1-4-13-1" name="sec-1-4-13-1"></a>Kernel exposes some important data structures through /proc entries. Each active process on the system has its own subdirectory that gives detailed information about the process, its resources and its history.<br  /></li>
+<li><a id="sec-1-4-13-2" name="sec-1-4-13-2"></a>Entries in /proc are termed virtual files - they are listed as zero bytes in size, but they can contain a lot of information.<br  /></li>
+<li><a id="sec-1-4-13-3" name="sec-1-4-13-3"></a>Most of the time and dates settings are held in virtual files and are being constantly updated. They are obtained when the file is requested.<br  /></li>
+<li><a id="sec-1-4-13-4" name="sec-1-4-13-4"></a>Important pseudo-files are /proc/interrupts, /proc/meminfo, /proc/mounts and /proc/partitions provide information which is up-to-date about the system hardware.<br  /></li>
+<li><a id="sec-1-4-13-5" name="sec-1-4-13-5"></a>files containing information on a similar topic are grouped in to virtual directories.<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-4-14" class="outline-4">
+<h4 id="sec-1-4-14"><span class="section-number-4">1.4.14</span> /sys - sysfs pseudo-filesystem - in memory - empty on non-running system</h4>
+<div class="outline-text-4" id="text-1-4-14">
+</div><ol class="org-ol"><li><a id="sec-1-4-14-1" name="sec-1-4-14-1"></a>it is younger than /proc and adheres to stricter standards about what kind of entries can exist here.<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-4-15" class="outline-4">
+<h4 id="sec-1-4-15"><span class="section-number-4">1.4.15</span> /root ("slash-root") is the home directory for the root user- superuser privilege is required.</h4>
+</div>
+<div id="outline-container-sec-1-4-16" class="outline-4">
+<h4 id="sec-1-4-16"><span class="section-number-4">1.4.16</span> /sbin contains binaries for booting, restoring, recovering and/or repairing in addition to those binaries in /bin.</h4>
+<div class="outline-text-4" id="text-1-4-16">
+</div><ol class="org-ol"><li><a id="sec-1-4-16-1" name="sec-1-4-16-1"></a>These binaries must be able to mount other filesystems on <i>usr</i> and /home and other locations if needed.<br  /></li>
+<li><a id="sec-1-4-16-2" name="sec-1-4-16-2"></a>Some distributions are abandoning the idea of having /sbin and /usr/sbin and having symlinks to preserve a two directory view.<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-4-17" class="outline-4">
+<h4 id="sec-1-4-17"><span class="section-number-4">1.4.17</span> /tmp stores temporary files and can be accessed by any user or application. They do not last for a long time.</h4>
+<div class="outline-text-4" id="text-1-4-17">
+</div><ol class="org-ol"><li><a id="sec-1-4-17-1" name="sec-1-4-17-1"></a>Some distributions have a cron job that will delete files older than 10 days old. RHEL 6.<br  /></li>
+<li><a id="sec-1-4-17-2" name="sec-1-4-17-2"></a>Some distributions remove contents of /tmp for every boot. Ubuntu<br  /></li>
+<li><a id="sec-1-4-17-3" name="sec-1-4-17-3"></a>Some distributions utilize a virtual filesystem using the /tmp directory only as a mount point for ram disk using tmpfs filesystem. Fedora.<br  /><ol class="org-ol"><li><a id="sec-1-4-17-3-1" name="sec-1-4-17-3-1"></a>In this case, one must avoid large files in /tmp as it will actually occupy memory instead of the disk and it is easy to harm or crash the system through memory exhaustion.<br  /></li>
+<li><a id="sec-1-4-17-3-2" name="sec-1-4-17-3-2"></a>This can be cancelled using systemd by doing the following: systemctl mask tmp.mount followed by a reboot.<br  /></li></ol>
+</li></ol>
+</div>
+<div id="outline-container-sec-1-4-18" class="outline-4">
+<h4 id="sec-1-4-18"><span class="section-number-4">1.4.18</span> /usr can be thought of as a secondary hierarchy. It holds files which are not needed for system booting.</h4>
+<div class="outline-text-4" id="text-1-4-18">
+</div><ol class="org-ol"><li><a id="sec-1-4-18-1" name="sec-1-4-18-1"></a>Software packages should not create subdirectories under /usr<br  /></li>
+<li><a id="sec-1-4-18-2" name="sec-1-4-18-2"></a>Some symbolic links may exist to other locations for compatiability purposes.<br  /></li>
+<li><a id="sec-1-4-18-3" name="sec-1-4-18-3"></a>This is typically read-only data containing binaries which are not needed in single user mode.<br  /></li>
+<li><a id="sec-1-4-18-4" name="sec-1-4-18-4"></a><i>usr/local</i> directory where local binaries and such may be stored<br  /></li>
+<li><a id="sec-1-4-18-5" name="sec-1-4-18-5"></a>/usr/share/man - man pages can be stored here.<br  /><div class="outline-text-5" id="text-1-4-18-5">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Directory</th>
+<th scope="col" class="left">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">/usr/bin</td>
+<td class="left">Non-essential binaries and scripts, not needed for single user mode. Generally, this means user applications not needed to start the system.</td>
+</tr>
+
+<tr>
+<td class="left">/usr/include</td>
+<td class="left">Header files used to compile applications.</td>
+</tr>
+
+<tr>
+<td class="left">/usr/lib</td>
+<td class="left">Libraries for programs in /usr/bin and /user/sbin.</td>
+</tr>
+
+<tr>
+<td class="left">/usr/lib64</td>
+<td class="left">64-bit libraries for 64-bit programs in /usr/bin and /usr/sbin.</td>
+</tr>
+
+<tr>
+<td class="left">/usr/sbin</td>
+<td class="left">Non-essential system binaries, such as system daemons.</td>
+</tr>
+
+<tr>
+<td class="left">/usr/share</td>
+<td class="left">Shared data used by applications, generally architecture-independent.</td>
+</tr>
+
+<tr>
+<td class="left">/usr/src</td>
+<td class="left">Source code, usually for the Linux kernel.</td>
+</tr>
+
+<tr>
+<td class="left">/usr/X11R6</td>
+<td class="left">X Window files; generally obsolete. Not present in many modern Linux distributions.</td>
+</tr>
+
+<tr>
+<td class="left">/usr/local</td>
+<td class="left">Local data and programs specific to the host. Subdirectories include bin, sbin, lib, share, include, etc.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li></ol>
+</div>
+<div id="outline-container-sec-1-4-19" class="outline-4">
+<h4 id="sec-1-4-19"><span class="section-number-4">1.4.19</span> /var variable data files that change frequently during system operation</h4>
+<div class="outline-text-4" id="text-1-4-19">
+</div><ol class="org-ol"><li><a id="sec-1-4-19-1" name="sec-1-4-19-1"></a>Log files<br  /></li>
+<li><a id="sec-1-4-19-2" name="sec-1-4-19-2"></a>Spool files<br  /></li>
+<li><a id="sec-1-4-19-3" name="sec-1-4-19-3"></a>Administrative data files<br  /></li>
+<li><a id="sec-1-4-19-4" name="sec-1-4-19-4"></a>Transient and temporary files, such as cache contents<br  /></li>
+<li><a id="sec-1-4-19-5" name="sec-1-4-19-5"></a>Cannot be mounted as read-only filesystem<br  /></li>
+<li><a id="sec-1-4-19-6" name="sec-1-4-19-6"></a>If it fills up it should not lock up the system<br  /></li>
+<li><a id="sec-1-4-19-7" name="sec-1-4-19-7"></a>/var/log is where most of the log files are rooted<br  /></li>
+<li><a id="sec-1-4-19-8" name="sec-1-4-19-8"></a>/var/spool is where processes such as mail, printing and cron jobs are stored while waiting action<br  /></li>
+<li><a id="sec-1-4-19-9" name="sec-1-4-19-9"></a>/var/ftp used for server base<br  /></li>
+<li><a id="sec-1-4-19-10" name="sec-1-4-19-10"></a>/var/lib persistent data modified by programs as they run<br  /></li>
+<li><a id="sec-1-4-19-11" name="sec-1-4-19-11"></a>/var/lock lock files used to control simultaneous access to resources<br  /></li>
+<li><a id="sec-1-4-19-12" name="sec-1-4-19-12"></a>/var/mail user mailboxes<br  /></li>
+<li><a id="sec-1-4-19-13" name="sec-1-4-19-13"></a>/var/run information about the running system since last boot<br  /></li>
+<li><a id="sec-1-4-19-14" name="sec-1-4-19-14"></a>/var/tmp temporary files to be preserved across system reboot, sometimes linking to /tmp<br  /></li>
+<li><a id="sec-1-4-19-15" name="sec-1-4-19-15"></a>/var/www root for website hierarchies<br  /></li></ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2015-02-19 Thu 11:02</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

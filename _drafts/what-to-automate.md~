@@ -1,9 +1,0 @@
----
-layout: post
-title: Should updates be automated?
-category: sysadmin
----
-
-Server automation seems like a good idea, right? Sometimes, yes, and sometimes, no.
-
-Many processes on a server need to be kept running despite the fact that they might be being used whilst other work needs to go on. 

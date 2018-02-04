@@ -1,0 +1,17 @@
+---
+categories:
+- reading
+date: 2016-08-24T00:00:00Z
+title: How to Download Newspapers With Calibre and deliver to your Kindle
+url: /2016/08/24/downloading-newspapers-using-calibre/
+---
+
+So, I have read a few pages which outline how to do this, but none seem to sum all of it. I've set up my Raspberry to download a newspaper and then deliver it daily to my Kindle. I paid for a subscription (in fact, I pay for more than one subscription) so I feel entitled to do this, as I'm supporting the journalists financially.
+
+Firstly, you will need to install [Calibre](https://calibre-ebook.com). My RaspberryPi doesn't have an X server running and this made it trickier, as I don't want a lot of bloat on this machine (it's not hugely powerful). Calibre does pull in a load of libraries, but they will only use up space, not resources. Then you will need the newspaper .recipe file. This was the trickiest part. I didn't know how other people were getting these recipes on their machine and they didn't seem to mention. I know that when you run Calibre through the gui you can easily choose one of the recipes. However, I didn't have that luxury. To get around this, I visited the [github repository for Calibre]( and found the .recipe file I was looking for and posted that on to the RaspberryPi.
+
+Then I ran the command:
+
+    ebook-convert ./PATH-TO-CALIBRE-RECIPES/newspaper.recipe newspaper.epub --output-profile=kindle
+
+Once this is run, it will look at the recipe script and start downloading the file. 

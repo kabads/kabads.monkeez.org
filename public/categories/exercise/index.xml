@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Exercise on Kabads - musings, mutterings and murmerings</title>
+    <link>http://kabads.monkeez.org/categories/exercise/</link>
+    <description>Recent content in Exercise on Kabads - musings, mutterings and murmerings</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 02 Jul 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://kabads.monkeez.org/categories/exercise/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>TADS walk Swindon to Goring</title>
+      <link>http://kabads.monkeez.org/2017/07/02/swindon-to-goring-walk/</link>
+      <pubDate>Sun, 02 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://kabads.monkeez.org/2017/07/02/swindon-to-goring-walk/</guid>
+      <description>TADS - Teresa, Adam, Dave and Shep walking. We have been walking for about 2 years now, all around the South East. This was our longest walk by far in two days. Swindon to Goring.
+The walk started out with us meeting at Swindon having lunch. There seemed to be quite a lot going on in the town with Canadian flags and guys at the train station with Ice Hockey sticks.</description>
+    </item>
+    
+  </channel>
+</rss>
