@@ -1,0 +1,20 @@
+---
+categories:
+- tech
+date: 2017-06-10T00:00:00Z
+title: How to install LineageOS on Wileyfox Swift
+url: /2017/06/10/how-to-install-lineageos-wileyfox-swift/
+---
+
+With the demise of Cyanogenmod and CyanogenOS people who like to keep a cheaper phone up to date will have to familiarise themselves with [LineageOS](http://lineageos.org). This is the fork of the latest version where CyanogenMod left off. As the company shutdown, users are left with no updates. LineageOS will resolve this for you. 
+
+It had been a while (8 months) since installing a new custom ROM, so I wasn't so familiar with the TWRP recovery boot process. I had a couple of problems installing this - it seems that the latest image doesn't work and neither does 3.0.1 - so had to go for 3.0.0.
+
+    adb flash recovery twrp-3.0.0.img 
+
+
+This booted and allowed me to update the files. From there it was very simple.
+
+    adb push lineageos.zip /sdcard/
+
+and then run power off and reboot in to recovery mode. Once in 

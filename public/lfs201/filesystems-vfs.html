@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>filesystems-vfs</title>
+<!-- 2015-03-21 Sat 16:44 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">filesystems-vfs</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Linux filesystems and the VFS</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Objectives</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. Explain the basic filesystem organisation</a></li>
+<li><a href="#sec-1-1-2">1.1.2. Understand the role of VFS</a></li>
+<li><a href="#sec-1-1-3">1.1.3. Know what filesystems are available and which ones can be used on your actual system</a></li>
+<li><a href="#sec-1-1-4">1.1.4. Grasp why journalling filesystems represent significant advances</a></li>
+<li><a href="#sec-1-1-5">1.1.5. Discuss the use of special filesystems in linux</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. Filesystem basics</a></li>
+<li><a href="#sec-1-3">1.3. Filesystem Tree Organisation</a></li>
+<li><a href="#sec-1-4">1.4. Virtual File System (VFS)</a>
+<ul>
+<li><a href="#sec-1-4-1">1.4.1. ext3 was an extension of the earlier non-journalling ext2 filesystem</a></li>
+<li><a href="#sec-1-4-2">1.4.2. ext4 is a vastly enhanced outgrowth of ext3 - features include exents, 48-bit block numbers, and up to 16 TB size. Most linux distributions have used ext4 as the default filesystem for quite a few years.</a></li>
+<li><a href="#sec-1-4-3">1.4.3. reiserfs - was the first journalling implementation used in linux, but lost its leadership and further development was abandoned.</a></li>
+<li><a href="#sec-1-4-4">1.4.4. JFS was orginially a product of IBM and was ported from IBM's AIX os.</a></li>
+<li><a href="#sec-1-4-5">1.4.5. XFS was originally a product of SGI and was ported from SGI's IRIX os - RHEL 7 has adopted XFS as its default filesystem.</a></li>
+<li><a href="#sec-1-4-6">1.4.6. btrfs is the newest of the journalling filesystems and is still under rapid development.</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-5">1.5. Current Filesystem Types</a></li>
+<li><a href="#sec-1-6">1.6. Special Filesystems</a></li>
+<li><a href="#sec-1-7">1.7. tmpfs</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Linux filesystems and the VFS</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Linux systems are capable of using many different filesystems
+This is accomplished through the Virtual File System abstraction layer which stands between the software and the on-disk filesystem. Advanced journalling filesystems have become standard in enterprise distributions. 
+</p>
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Objectives</h3>
+<div class="outline-text-3" id="text-1-1">
+</div><div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Explain the basic filesystem organisation</h4>
+</div>
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Understand the role of VFS</h4>
+</div>
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Know what filesystems are available and which ones can be used on your actual system</h4>
+</div>
+<div id="outline-container-sec-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> Grasp why journalling filesystems represent significant advances</h4>
+</div>
+<div id="outline-container-sec-1-1-5" class="outline-4">
+<h4 id="sec-1-1-5"><span class="section-number-4">1.1.5</span> Discuss the use of special filesystems in linux</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Filesystem basics</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Applications read and write files rather than dealing with physical locations on the actual hardware on which files are stored. 
+Files and their names are an abstraction camouflaging he physical I/O layer. Directly writing to disk in a raw fashion (ignoring the filesystem layer) is very dangerous and is only done by low level operating system software, never by a user application. 
+Local filesystems generally reside within a disk partition which can be a physical partition on a disk, or a logical partition controlled by a Logical Volume Manager (LVM). Filesystems can also be networked and their true physical embodiment completely hidden to the local system across a network.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Filesystem Tree Organisation</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+All linux systems use an inverted tree hierarchy branching off the root (/) directory. This can be in one filesystem on one partition, usually there are multiple partitions (or network filesystems), joined together at mount points. These can also include removable media such as USB drives, optical drives etc. 
+In addition certain virtual pseudo filesystems (useful abstractions which exist only in memory) will be mounted within the tree, these include /proc, /sys and /dev and perhaps /tmp and /run as well. 
+Each of the elements mounted within the filesystem may have its own filesystem vareity. But to the applications and operating system, it all all appears in one unified tree structure. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Virtual File System (VFS)</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Linux implements a Virtual Filesystem System. When an application needs to read or write a file, it interacts with the VFS abstraction layer, which then translates all I/O system calls (reading, writing) in to specific code relevant to the particular actual filesystem. 
+Therefore, applications don't need to worry about the actual filesystem or physical media or hardware on which it resides. Furthermore, Network filesystems can be handled transparently (such as NFS). 
+This allows Linux us to use more filesystems than any other operating system. This democratic attribute has been a large factor of its success. 
+Most filesystems have both read and write access, while a few have only read access or experimental write. Some filesystem types, especially non-Unix based ones, may require more manipulation in order to be represented by the VFS. 
+Variants such as vfat do not have distinct read/write/execute permissions for the owner/group/world fields; the VFS has to make an assumption about how to specify distinct permissions for the three types of user, and such behaviour can be influenced by mounting operations. There are non-kernel filesystem implementations, such as read/write ntfs-3g which are reliable but have weaker performance than in-kernel filesystems. 
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Name</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">ext2</td>
+<td class="left">Native Linux filesystem</td>
+</tr>
+
+<tr>
+<td class="left">minix</td>
+<td class="left">Predecessor to ext2</td>
+</tr>
+
+<tr>
+<td class="left">proc</td>
+<td class="left">Used for <i>proc</i></td>
+</tr>
+
+<tr>
+<td class="left">msdos</td>
+<td class="left">MSDOS</td>
+</tr>
+
+<tr>
+<td class="left">umsdos</td>
+<td class="left">Extensions to MSDOS</td>
+</tr>
+
+<tr>
+<td class="left">vfat</td>
+<td class="left">Windows VFAT (includes FAT32, FAT, etc.)</td>
+</tr>
+
+<tr>
+<td class="left">ntfs</td>
+<td class="left">Windows NT NTFS (read-only)</td>
+</tr>
+
+<tr>
+<td class="left">\sysv</td>
+<td class="left">SystemV/Xenit/Coherent FS</td>
+</tr>
+
+<tr>
+<td class="left">hpfs</td>
+<td class="left">OS/2 HPFS</td>
+</tr>
+
+<tr>
+<td class="left">ufs</td>
+<td class="left">Sun</td>
+</tr>
+
+<tr>
+<td class="left">udf</td>
+<td class="left">CD R/W, DVD</td>
+</tr>
+
+<tr>
+<td class="left">hfs</td>
+<td class="left">Apple MacIntosh Filesystem (HFS)</td>
+</tr>
+
+<tr>
+<td class="left">hfs+</td>
+<td class="left">Apple MacIntosh Extended HFS</td>
+</tr>
+
+<tr>
+<td class="left">befs</td>
+<td class="left">BeOS filesystem</td>
+</tr>
+
+<tr>
+<td class="left">jffs, jffs2</td>
+<td class="left">Journalling Flash Filesystem</td>
+</tr>
+
+<tr>
+<td class="left">iso9660</td>
+<td class="left">cdrom etc., including Joliet extensions</td>
+</tr>
+
+<tr>
+<td class="left">cramfs</td>
+<td class="left">Compressed read-only filesystem</td>
+</tr>
+
+<tr>
+<td class="left">romfs</td>
+<td class="left">Small read-only filesystem</td>
+</tr>
+
+<tr>
+<td class="left">tmpfs</td>
+<td class="left">Ram disk that is swappable</td>
+</tr>
+
+<tr>
+<td class="left">ramfs</td>
+<td class="left">Ram disk, for example of a filesystem</td>
+</tr>
+
+<tr>
+<td class="left">gfs2</td>
+<td class="left">Clustering filesystem from Red Hat</td>
+</tr>
+
+<tr>
+<td class="left">nfs</td>
+<td class="left">Network Filesystem (through version 4)</td>
+</tr>
+
+<tr>
+<td class="left">smb</td>
+<td class="left">Samba networking</td>
+</tr>
+
+<tr>
+<td class="left">ncp</td>
+<td class="left">Novell Netware FS using NCP Protocol</td>
+</tr>
+
+<tr>
+<td class="left">coda</td>
+<td class="left">Experimental distributed filesystem</td>
+</tr>
+
+<tr>
+<td class="left">afs</td>
+<td class="left">Andrew distributed filesystem, from Carnegie Mellon</td>
+</tr>
+
+<tr>
+<td class="left">ocfs2</td>
+<td class="left">Extent-based, disk cluster filesystem from Oracle</td>
+</tr>
+</tbody>
+</table>
+<p>
+A number of newer high performance filesystems include full journalling capability. 
+Journalling filesystems recover from system crashes or ungraceful shutdowns with little or no corruption, and they do so very rapidly. While this comes at a the price of having some more operations to do, additional enhancements can more than offset the price. 
+In a journalling filesystem operations are grouped in to transactions. A transaction must be completed without error, atomically; otherwise the filesystem is not changed. A log file is maintained of transactions. When an error occurs usually only the last transaction needs to be examined. 
+The following journalling filesystems are freely available under Linux: 
+</p>
+</div>
+<div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> ext3 was an extension of the earlier non-journalling ext2 filesystem</h4>
+</div>
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> ext4 is a vastly enhanced outgrowth of ext3 - features include exents, 48-bit block numbers, and up to 16 TB size. Most linux distributions have used ext4 as the default filesystem for quite a few years.</h4>
+</div>
+<div id="outline-container-sec-1-4-3" class="outline-4">
+<h4 id="sec-1-4-3"><span class="section-number-4">1.4.3</span> reiserfs - was the first journalling implementation used in linux, but lost its leadership and further development was abandoned.</h4>
+</div>
+<div id="outline-container-sec-1-4-4" class="outline-4">
+<h4 id="sec-1-4-4"><span class="section-number-4">1.4.4</span> JFS was orginially a product of IBM and was ported from IBM's AIX os.</h4>
+</div>
+<div id="outline-container-sec-1-4-5" class="outline-4">
+<h4 id="sec-1-4-5"><span class="section-number-4">1.4.5</span> XFS was originally a product of SGI and was ported from SGI's IRIX os - RHEL 7 has adopted XFS as its default filesystem.</h4>
+</div>
+<div id="outline-container-sec-1-4-6" class="outline-4">
+<h4 id="sec-1-4-6"><span class="section-number-4">1.4.6</span> btrfs is the newest of the journalling filesystems and is still under rapid development.</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Current Filesystem Types</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+You can see a list of the filesystem types currently registered and understood by the current running linux kernel by doing:
+$ cat /proc/filesystems
+Note that additional filesystem types may have their code loaded only when the system tries to access a partition that uses them. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Special Filesystems</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+Linux widely employs the use of special filesystems for certain tasks. These are particularly useful for accessing various kernel data structures and tuning kernel behaviour, or for implementing particular functions. 
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Filesystem</th>
+<th scope="col" class="left">Mount Point</th>
+<th scope="col" class="left">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">rootfs</td>
+<td class="left">None</td>
+<td class="left">During kernel load, provides an empty root directory.</td>
+</tr>
+
+<tr>
+<td class="left">hugetlbfs</td>
+<td class="left">Anywhere</td>
+<td class="left">Provides extended page access (2 or 4 MB on X86).</td>
+</tr>
+
+<tr>
+<td class="left">bdev</td>
+<td class="left">None</td>
+<td class="left">Used for block devices.</td>
+</tr>
+
+<tr>
+<td class="left">proc</td>
+<td class="left">/proc</td>
+<td class="left">Pseudo filesystem access to many kernel structures and  subsystems.</td>
+</tr>
+
+<tr>
+<td class="left">sockfs</td>
+<td class="left">None</td>
+<td class="left">Used by BSD Sockets.</td>
+</tr>
+
+<tr>
+<td class="left">tmpfs</td>
+<td class="left">Anywhere</td>
+<td class="left">RAM disk with swapping, re-sizing.</td>
+</tr>
+
+<tr>
+<td class="left">shm</td>
+<td class="left">None</td>
+<td class="left">Used by System V IPC Shared Memory.</td>
+</tr>
+
+<tr>
+<td class="left">pipefs</td>
+<td class="left">None</td>
+<td class="left">Used for pipes.</td>
+</tr>
+
+<tr>
+<td class="left">binfmt<sub>misc</sub></td>
+<td class="left">Anywhere</td>
+<td class="left">Used by various executable formats.</td>
+</tr>
+
+<tr>
+<td class="left">devpts</td>
+<td class="left">/dev/pts</td>
+<td class="left">Used by Unix98 pseudo-terminals.</td>
+</tr>
+
+<tr>
+<td class="left">usbfs</td>
+<td class="left">/proc/bus/usb</td>
+<td class="left">Used by USB sub-system for dynamical devices.</td>
+</tr>
+
+<tr>
+<td class="left">sysfs</td>
+<td class="left">/sys (or elsewhere)</td>
+<td class="left">Used as a device tree.</td>
+</tr>
+
+<tr>
+<td class="left">debugfs</td>
+<td class="left">/sys/kernel/debug (or elsewhere)</td>
+<td class="left">Used for simple debugging file access.</td>
+</tr>
+</tbody>
+</table>
+<p>
+Note that some of these filesystems don't have a mount point - applications don't use them, just the kernel. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> tmpfs</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+This functions as a ramdisk - residing purely in memory. It can still let applications do I/O on it. The filesystem can adjust size (hence memory) dynamically; starting at 0 and then expanding as necessary up to the maximum size it was mounted with. If RAM gets exhausted, tmpfs can utilize swap space. tmpfs does not require having a normal filesystem placed in it, such as ext3 or vfat; it has its own method for dealing with files and I/O that are aware that it is really just space in memory. It is optimized for speed. You do not need to use mkfs to use it - just have to mount it and use it. 
+$ sudo mkdir /mnt/tmpfs 
+$ sudo mount -t tmpfs none /mnt/tmpfs 
+$ df -h /mnt/tmpfs 
+You can change the alloted size as a mount option as in:
+$ sudo mount -t tmpfs -o size=1G none /mnt/tmpfs
+$ sudo umount /mnt/tmpfs 
+Virtually all modern linux distributions mount an instance of tmpfs at /dev/shm:
+$ df -h /dev/shm 
+Many applications use this such as when they are using POSIX shared memory as an inter-process communication mechanism. Any user can create, read and write files in /dev/shm, so it is a good place to create temporary files in memory. 
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2015-03-21 Sat 16:44</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

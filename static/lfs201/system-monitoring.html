@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>system-monitoring</title>
+<!-- 2015-05-10 Sun 20:05 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">system-monitoring</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. System Monitoring</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Objectives</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. Recognize and use available system monitoring tools</a></li>
+<li><a href="#sec-1-1-2">1.1.2. Use the /proc and /sys pseudo-filesystems</a></li>
+<li><a href="#sec-1-1-3">1.1.3. Use <b>sar</b> to gather system activity and performance data and create reports that are readable by humans</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. Available Monitoring Tools</a></li>
+<li><a href="#sec-1-3">1.3. Process management utilities</a></li>
+<li><a href="#sec-1-4">1.4. Memory management utilities</a></li>
+<li><a href="#sec-1-5">1.5. I/O Monitoring tools</a></li>
+<li><a href="#sec-1-6">1.6. Network monitoring tools</a></li>
+<li><a href="#sec-1-7">1.7. The /proc and /sys Pseudo-filesystems</a></li>
+<li><a href="#sec-1-8">1.8. /proc Basics</a></li>
+<li><a href="#sec-1-9">1.9. A survey of /proc</a>
+<ul>
+<li><a href="#sec-1-9-1">1.9.1. abi/</a></li>
+<li><a href="#sec-1-9-2">1.9.2. debug/</a></li>
+<li><a href="#sec-1-9-3">1.9.3. dev/</a></li>
+<li><a href="#sec-1-9-4">1.9.4. fs/</a></li>
+<li><a href="#sec-1-9-5">1.9.5. kernel/</a></li>
+<li><a href="#sec-1-9-6">1.9.6. net/</a></li>
+<li><a href="#sec-1-9-7">1.9.7. vm/</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-10">1.10. /sys Basics</a></li>
+<li><a href="#sec-1-11">1.11. A Survey of /sys</a></li>
+<li><a href="#sec-1-12">1.12. sar</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> System Monitoring</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Linux has a wide variety of system monitoring tools available, including <b>top</b>, <b>ps</b> and <b>sar</b>. Most of these utilities use heavy access to the pseudo-filesystem mounted at /proc and /sys. While there is no shortage of (distribution-dependent) graphical interfaces, we concentrate on the command line methods. 
+</p>
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Objectives</h3>
+<div class="outline-text-3" id="text-1-1">
+</div><div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Recognize and use available system monitoring tools</h4>
+</div>
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Use the /proc and /sys pseudo-filesystems</h4>
+</div>
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Use <b>sar</b> to gather system activity and performance data and create reports that are readable by humans</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Available Monitoring Tools</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Linux distributions come with many standard performance and profiling tools already installed. Many of them are familiar from other UNIX-like operating systems while some were developed especially for linux. 
+Most of these tools make use of the mounted pseudo-filesystems, especially /proc and secondary /sys, both of which we have already discussed when examining filesystems and kernel configuration. We will look at them both. 
+While there are also a number of graphical system monitors that hide many of the details, we will consider only the command line tools in this course. 
+Before considering some of the main utilities in some detail, here is a summary, broken down by type; note some of the utilities have overlapping domains of coverage.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Process management utilities</h3>
+<div class="outline-text-3" id="text-1-3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Utility</th>
+<th scope="col" class="left">Purpose</th>
+<th scope="col" class="left">Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">top</td>
+<td class="left">Process activity, dynamically updated</td>
+<td class="left">procps</td>
+</tr>
+
+<tr>
+<td class="left">uptime</td>
+<td class="left">How long the system is running and the average load</td>
+<td class="left">procps</td>
+</tr>
+
+<tr>
+<td class="left">ps</td>
+<td class="left">Detailed information about processes</td>
+<td class="left">procps</td>
+</tr>
+
+<tr>
+<td class="left">pstree</td>
+<td class="left">A tree of processes and their connections</td>
+<td class="left">psmisc (or pstree)</td>
+</tr>
+
+<tr>
+<td class="left">mpstat</td>
+<td class="left">Multiple processor usage</td>
+<td class="left">sysstat</td>
+</tr>
+
+<tr>
+<td class="left">iostat</td>
+<td class="left">CPU utilization and I/O statistics</td>
+<td class="left">sysstat</td>
+</tr>
+
+<tr>
+<td class="left">sar</td>
+<td class="left">Display and collect information about system activity</td>
+<td class="left">sysstat</td>
+</tr>
+
+<tr>
+<td class="left">numastat</td>
+<td class="left">Information about NUMA (Non-Uniform Memory Architecture)</td>
+<td class="left">numactl</td>
+</tr>
+
+<tr>
+<td class="left">strace</td>
+<td class="left">Information about all system calls a process makes</td>
+<td class="left">strace</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Memory management utilities</h3>
+<div class="outline-text-3" id="text-1-4">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Utility</th>
+<th scope="col" class="left">Purpose</th>
+<th scope="col" class="left">package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">free</td>
+<td class="left">Brief summary of memory usage</td>
+<td class="left">procps</td>
+</tr>
+
+<tr>
+<td class="left">vmstat</td>
+<td class="left">Detailed virtual memory statistics and block I/O, dynamically updated</td>
+<td class="left">procps</td>
+</tr>
+
+<tr>
+<td class="left">pmap</td>
+<td class="left">Process memory map</td>
+<td class="left">procps</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> I/O Monitoring tools</h3>
+<div class="outline-text-3" id="text-1-5">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Utility</th>
+<th scope="col" class="left">Purpose</th>
+<th scope="col" class="left">Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">iostat</td>
+<td class="left">CPU utilization and I/O statistics</td>
+<td class="left">sysstat</td>
+</tr>
+
+<tr>
+<td class="left">sar</td>
+<td class="left">Display and collect information about system activity</td>
+<td class="left">sysstat</td>
+</tr>
+
+<tr>
+<td class="left">vmstat</td>
+<td class="left">Detailed virtual memory statistics and block I/O, dynamically updated</td>
+<td class="left">procps</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Network monitoring tools</h3>
+<div class="outline-text-3" id="text-1-6">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Utility</th>
+<th scope="col" class="left">Purpose</th>
+<th scope="col" class="left">Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">netstat</td>
+<td class="left">Detailed networking statistics</td>
+<td class="left">netstat</td>
+</tr>
+
+<tr>
+<td class="left">iptraf</td>
+<td class="left">Gather information on network interfaces</td>
+<td class="left">iptraf</td>
+</tr>
+
+<tr>
+<td class="left">tcpdump</td>
+<td class="left">Detailed analysis of network packets and traffic</td>
+<td class="left">tcpdump</td>
+</tr>
+
+<tr>
+<td class="left">wireshark</td>
+<td class="left">Detailed network traffic analysis</td>
+<td class="left">wireshark</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> The /proc and /sys Pseudo-filesystems</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+The /proc and /sys pseudo-filesystems contain a lot of information about the system. Furthermore, many of the entries in these directory trees are writable and can be used to change system behaviour; in most cases this requires a <b>root</b> user. 
+These are pseudo-filesystems because they exist totally in memory; if you look at the disk partition when the system is not running there will be only an empty directory which is used as a mount point. 
+Furthermore, the information displayed is gathered only when it is looked at; there is no constant or periodic polling to update entries. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8"><span class="section-number-3">1.8</span> /proc Basics</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+The /proc pseudo-filesystem has a long history; it has roots in other UNIX operating system variants and was originally developed to display information about processes on the system, each of which has its own subdirectory in /proc with all important process characteristics available. 
+Over time it grew to contain a lot of information about system properties, such as interrupts, memory, networking, etc. in a somewhat anarchistic way. It is still extensively used and we will often refer to it. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-9" class="outline-3">
+<h3 id="sec-1-9"><span class="section-number-3">1.9</span> A survey of /proc</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+Let's take a look at what resides in the /proc pseudo-filesystem:
+$ ls -F /proc
+Most of the tubable system parameters can be found in the subdirectory tree rooted at /proc/sys:
+$ ls -F /proc/sys
+Each of these subdirectories contains information as well as knobs that can be tuned (with care):
+</p>
+</div>
+<div id="outline-container-sec-1-9-1" class="outline-4">
+<h4 id="sec-1-9-1"><span class="section-number-4">1.9.1</span> abi/</h4>
+<div class="outline-text-4" id="text-1-9-1">
+<p>
+contains files with application binary information; rarely used. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-9-2" class="outline-4">
+<h4 id="sec-1-9-2"><span class="section-number-4">1.9.2</span> debug/</h4>
+<div class="outline-text-4" id="text-1-9-2">
+<p>
+Debugging parameters; for now just some control of exception reporting. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-9-3" class="outline-4">
+<h4 id="sec-1-9-3"><span class="section-number-4">1.9.3</span> dev/</h4>
+<div class="outline-text-4" id="text-1-9-3">
+<p>
+Device parameters including subdirectories for <b>cdrom</b>, <b>scsi</b>, <b>raid</b> and <b>parport</b>. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-9-4" class="outline-4">
+<h4 id="sec-1-9-4"><span class="section-number-4">1.9.4</span> fs/</h4>
+<div class="outline-text-4" id="text-1-9-4">
+<p>
+Filesystem parameters, including quota, file handles used and maximums, inode and directory information etc. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-9-5" class="outline-4">
+<h4 id="sec-1-9-5"><span class="section-number-4">1.9.5</span> kernel/</h4>
+<div class="outline-text-4" id="text-1-9-5">
+<p>
+Kernel parameters. There are many important entries here. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-9-6" class="outline-4">
+<h4 id="sec-1-9-6"><span class="section-number-4">1.9.6</span> net/</h4>
+<div class="outline-text-4" id="text-1-9-6">
+<p>
+Network parameters. There are subdirectories for <b>ipv4</b>, <b>netfilter</b>, etc. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-9-7" class="outline-4">
+<h4 id="sec-1-9-7"><span class="section-number-4">1.9.7</span> vm/</h4>
+<div class="outline-text-4" id="text-1-9-7">
+<p>
+Virtual memory parameters. There are many important entries here. 
+Viewing and changing the parameters can be done with simple commands. For example, the maximum number of threads allowed on the system can be seen by looking at: 
+$ ls -l /proc/sys/kernel/threads-max
+$ cat /proc/sys/kernel/threads-max 
+129498
+We then modify the value and verify the change was effected; 
+$ sudo bash -c 'echo 100000 &gt; /proc/sys/kernel/threads-max'
+$ cat /proc/sys/kernel/threads-max 
+100000
+Remember from our discussion of <b>sysctl</b> the same effect is accomplished by:
+$ sudo sysctl kernel.threads-max=10000
+Viewing the value can be done as a normal user while changing it requires superuser privelege. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-10" class="outline-3">
+<h3 id="sec-1-10"><span class="section-number-3">1.10</span> /sys Basics</h3>
+<div class="outline-text-3" id="text-1-10">
+<p>
+The /sys pseudo-filesystem is an integral part of what is termed the <b>Unified Device Model</b>. Conceptually it is based on a <b>device tree</b> and one can walk through it and see the buses, devices, etc. It also now contains information which may or may not be strictly relatd to devices, such as kernel modules. 
+It has more tightly defined structure than does /proc. Most entries contain only one line of text, although there are exceptions, unlike its antecedent which has many multi-line entries whose exact contents have been known to change between kernel versions. Thus the interface is hopefully more stable. 
+There are system properties which have display entries in both /proc and /sys; for compatibility widely used system utilities, the older forms are only gradually being whittled down. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-11" class="outline-3">
+<h3 id="sec-1-11"><span class="section-number-3">1.11</span> A Survey of /sys</h3>
+<div class="outline-text-3" id="text-1-11">
+<p>
+Support for the <b>sysfs</b> virtual filesystem is built in to all modern kernels, and it should be mounted under /sys. However, the unified device model does not require mounting <b>sysfs</b> in order to function. 
+Let's take a look at what can be found using the 3.18 kernel; we warn you the exact layout of this filesystem has a tendency to mutate. Doing a top level directory command yields:
+$ ls -F <i>sys
+block</i> bus/ class/ dev/ devices/ firmware/ fs/ kernel/ module/ power/
+which displays the basic device hierarchy. The device model <b>sysfs</b> implementation also includes information not strictly related to hardware. 
+Network devices can be examined with: 
+$ ls -lF /sys/class/net
+total 0
+lrwxrwxrwx 1 root root 0 May 10 06:53 enp4s0 -&gt; ../../devices/pci0000:00/0000:00:1c.3/0000:04:00.0/net/enp4s0/
+lrwxrwxrwx 1 root root 0 May 10 06:52 lo -&gt; ../../devices/virtual/net/lo/
+lrwxrwxrwx 1 root root 0 May 10 07:31 tun0 -&gt; ../../devices/virtual/net/tun0/
+lrwxrwxrwx 1 root root 0 May 10 06:53 wlp3s0 -&gt; ../../devices/pci0000:00/0000:00:1c.2/0000:03:00.0/net/wlp3s0/
+and looking at ethernet card gives:
+</p>
+
+<p>
+$ ls -l <i>sys/class/net/eth0</i>
+total 0
+-r&#x2013;r&#x2013;r&#x2013; 1 root root 4096 Apr 30 13:43 addr<sub>assign</sub><sub>type</sub>
+-r&#x2013;r&#x2013;r&#x2013; 1 root root 4096 Apr 30 11:38 address
+-r&#x2013;r&#x2013;r&#x2013; 1 root root 4096 Apr 30 11:38 addr<sub>len</sub>
+-r&#x2013;r&#x2013;r&#x2013; 1 root root 4096 Apr 30 13:43 broadcast
+-r&#x2013;r&#x2013;r&#x2013; 1 root root 4096 Apr 30 13:43 carrier
+lrwxrwxrwx 1 root root    0 Apr 30 11:38 device -&gt; ../../../0000:02:00.0
+-r&#x2013;r&#x2013;r&#x2013; 1 root root 4096 Apr 30 13:43 dev<sub>id</sub>
+-r&#x2013;r&#x2013;r&#x2013; 1 root root 4096 Apr 30 13:43 dormant
+-r&#x2013;r&#x2013;r&#x2013; 1 root root 4096 Apr 30 13:43 duplex
+-rw-r&#x2013;r&#x2013; 1 root root 4096 Apr 30 11:38 flags
+-rw-r&#x2013;r&#x2013; 1 root root 4096 Apr 30 13:43 ifalias
+-r&#x2013;r&#x2013;r&#x2013; 1 root root 4096 Apr 30 11:38 ifindex
+-r&#x2013;r&#x2013;r&#x2013; 1 root root 4096 Apr 30 13:43 iflink
+-r&#x2013;r&#x2013;r&#x2013; 1 root root 4096 Apr 30 13:43 link<sub>mode</sub>
+-rw-r&#x2013;r&#x2013; 1 root root 4096 Apr 30 13:43 mtu
+-rw-r&#x2013;r&#x2013; 1 root root 4096 Apr 30 13:43 netdev<sub>group</sub>
+-r&#x2013;r&#x2013;r&#x2013; 1 root root 4096 Apr 30 13:43 operstate
+drwxr-xr-x 2 root root    0 Apr 30 13:43 power
+drwxr-xr-x 4 root root    0 Apr 30 11:38 queues
+-r&#x2013;r&#x2013;r&#x2013; 1 root root 4096 Apr 30 13:43 speed
+drwxr-xr-x 2 root root    0 Apr 30 13:43 statistics
+lrwxrwxrwx 1 root root    0 Apr 30 11:38 subsystem -&gt; ../../../../../../class/net
+-rw-r&#x2013;r&#x2013; 1 root root 4096 Apr 30 13:43 tx<sub>queue</sub><sub>len</sub>
+-r&#x2013;r&#x2013;r&#x2013; 1 root root 4096 Apr 30 11:38 type
+-rw-r&#x2013;r&#x2013; 1 root root 4096 Apr 30 11:38 uevent
+$ cat /sys/class/net/eth0/mtu 
+1500
+The intention with <b>sysfs</b> is to have one text value per line, although this is not to be expected to be rigorously enforced. 
+The underlying device and driver for the first network interface can be traced through the <b>device</b> and (the to be seen shortly) <b>driver</b> symbolic links. Looking at the directory corresponding to the first ethernet card we see:
+$ ls -l <i>sys/class/net/eth0/device</i>
+total 0
+-rw-r&#x2013;r&#x2013; 1 root root   4096 Apr 30 13:47 broken<sub>parity</sub><sub>status</sub>
+-r&#x2013;r&#x2013;r&#x2013; 1 root root   4096 Apr 30 06:38 class
+-rw-r&#x2013;r&#x2013; 1 root root   4096 Apr 30 11:38 config
+-r&#x2013;r&#x2013;r&#x2013; 1 root root   4096 Apr 30 13:47 consistent<sub>dma</sub><sub>mask</sub><sub>bits</sub>
+-r&#x2013;r&#x2013;r&#x2013; 1 root root   4096 Apr 30 11:38 device
+-r&#x2013;r&#x2013;r&#x2013; 1 root root   4096 Apr 30 13:47 dma<sub>mask</sub><sub>bits</sub>
+lrwxrwxrwx 1 root root      0 Apr 30 11:38 driver -&gt; ../../../../bus/pci/drivers/sky2/
+-rw-&#x2014;&#x2014; 1 root root   4096 Apr 30 13:47 enable
+-r&#x2013;r&#x2013;r&#x2013; 1 root root   4096 Apr 30 11:38 irq
+-r&#x2013;r&#x2013;r&#x2013; 1 root root   4096 Apr 30 13:47 local<sub>cpulist</sub>
+-r&#x2013;r&#x2013;r&#x2013; 1 root root   4096 Apr 30 11:38 local<sub>cpus</sub>
+-r&#x2013;r&#x2013;r&#x2013; 1 root root   4096 Apr 30 13:47 modalias
+-rw-r&#x2013;r&#x2013; 1 root root   4096 Apr 30 13:47 msi<sub>bus</sub>
+drwxr-xr-x 3 root root      0 Apr 30 13:47 msi<sub>irqs</sub>/
+drwxr-xr-x 3 root root      0 Apr 30 11:38 net/
+drwxr-xr-x 2 root root      0 Apr 30 13:47 power/
+&#x2013;w&#x2013;w-&#x2014; 1 root root   4096 Apr 30 13:47 remove
+&#x2013;w&#x2013;w-&#x2014; 1 root root   4096 Apr 30 13:47 rescan
+&#x2013;w-&#x2014;&#x2014; 1 root root   4096 Apr 30 13:47 reset
+-r&#x2013;r&#x2013;r&#x2013; 1 root root   4096 Apr 30 13:45 resource
+-rw-&#x2014;&#x2014; 1 root root  16384 Apr 30 13:47 resource0
+-rw-&#x2014;&#x2014; 1 root root    256 Apr 30 13:47 resource2
+-rw-&#x2014;&#x2014; 1 root root 131072 Apr 30 13:47 rom
+lrwxrwxrwx 1 root root      0 Apr 30 11:38 subsystem -&gt; ../../../../bus/pci/
+-r&#x2013;r&#x2013;r&#x2013; 1 root root   4096 Apr 30 11:38 subsystem<sub>device</sub>
+-r&#x2013;r&#x2013;r&#x2013; 1 root root   4096 Apr 30 11:38 subsystem<sub>vendor</sub>
+-rw-r&#x2013;r&#x2013; 1 root root   4096 Apr 30 06:38 uevent
+-r&#x2013;r&#x2013;r&#x2013; 1 root root   4096 Apr 30 11:38 vendor
+-rw-&#x2014;&#x2014; 1 root root  32768 Apr 30 13:47 vpd
+To see the full spectrum of information that is available with <b>sysfs</b> you'll just have to examine it. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-12" class="outline-3">
+<h3 id="sec-1-12"><span class="section-number-3">1.12</span> sar</h3>
+<div class="outline-text-3" id="text-1-12">
+<p>
+<b>sar</b> stands for System Activity Reporter. It is an all-purpose tool for gathering system activity and performance data and creating reports that are readable by humans. 
+On Linux systems the backend to <b>sar</b> is <b>sadc</b> (system activity data collector) which actually accumulates the statistics. It stores information in the /var/log/sa directory, with a daily frequency by default, but which can be adjusted. Data collection can be started from the command line, and regular periodic collection is usually started as a <b>cron</b> job stored in /etc/cron.d/sysstat. 
+<b>sar</b> then reads in this data (either from the default locations or by use of a fil specified with the <b>-f</b> option) and then produces a report. 
+<b>sar</b> is invoked via:
+$ sar [ options ] [ interval ] [ count ]
+where the report is repeated after interval seconds of a total of count times (which defaults to 1). With no options: 
+$ sar 3 3
+Linux 3.15.9 (q7) 09/26/2014 <span class="underline">x86<sub>64</sub></span> (4 CPU)
+</p>
+
+<p>
+12:27:32 PM CPU %user %nice %system %iowait %steal %idle
+12:27:35 PM all  1.34  0.00    0.33    0.67   0.00 97.66
+12:27:38 PM all  7.08  0.00    2.98    0.34   0.00 89.60
+12:27:41 PM all 10.60  0.00    1.09    0.08   0.00 88.23
+Average:    all  6.32  0.00    1.46    0.37   0.00 91.85
+gives a report on CPU usage. 
+Here is a list of major <b>sar</b> options, or modes, each one of which has it's own sub-options. 
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Option</th>
+<th scope="col" class="left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">-A</td>
+<td class="left">Almost all information</td>
+</tr>
+
+<tr>
+<td class="left">-b</td>
+<td class="left">I/O and transfer rate statistics (similiar to <b>iostat</b>)</td>
+</tr>
+
+<tr>
+<td class="left">-B</td>
+<td class="left">Paging statistics including page faults</td>
+</tr>
+
+<tr>
+<td class="left">-n</td>
+<td class="left">Process creativity activity</td>
+</tr>
+
+<tr>
+<td class="left">-x</td>
+<td class="left">Block device activity (similar to <b>iostat -x</b>)</td>
+</tr>
+
+<tr>
+<td class="left">-n</td>
+<td class="left">Network statistics</td>
+</tr>
+
+<tr>
+<td class="left">-P</td>
+<td class="left">Per CPU statistics (as in <b>sar -P ALL 3</b>)</td>
+</tr>
+
+<tr>
+<td class="left">-q</td>
+<td class="left">Queue lengths (run queue, processes and threads)</td>
+</tr>
+
+<tr>
+<td class="left">-r</td>
+<td class="left">Swap and memory utilization statistics</td>
+</tr>
+
+<tr>
+<td class="left">-R</td>
+<td class="left">Memory statistics</td>
+</tr>
+
+<tr>
+<td class="left">-u</td>
+<td class="left">CPU utilization (default)</td>
+</tr>
+
+<tr>
+<td class="left">-v</td>
+<td class="left">Statistics about inodes and files and file handles</td>
+</tr>
+
+<tr>
+<td class="left">-w</td>
+<td class="left">Context switching statistics</td>
+</tr>
+
+<tr>
+<td class="left">-W</td>
+<td class="left">Swapping statistics, pages in and out per second</td>
+</tr>
+
+<tr>
+<td class="left">-f</td>
+<td class="left">Extract information from specified file, created by the -o option</td>
+</tr>
+
+<tr>
+<td class="left">-o</td>
+<td class="left">Save readings in the file specified, to be read late with the -f option</td>
+</tr>
+</tbody>
+</table>
+<p>
+For example, getting paging statistics:
+$ sar -B 3 3
+and getting I/O and transfer rate statistics:
+$ sar -b 3 3 
+The <b>ksar</b> program is a java based utility for generating nice graphs of <b>sar</b> data. It can be downloaded from <a href="http://sourceforge.net/projects/ksar">http://sourceforge.net/projects/ksar</a>. 
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2015-05-10 Sun 20:05</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

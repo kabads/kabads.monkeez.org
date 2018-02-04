@@ -1,0 +1,4 @@
+baseURL = "http://kabads.monkeez.org/"
+languageCode = "en-us"
+title = "Kabads - musings, mutterings and murmerings"
+theme = "hugo_theme_robust"

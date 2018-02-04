@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>devices_udev</title>
+<!-- 2015-03-08 Sun 21:01 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">devices_udev</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Devices and udev</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Intelligent appartus for discovering hardware and peripheral devices both during system boot and later when they are connected to the system</a></li>
+<li><a href="#sec-1-2">1.2. Device nodes are created automatically and then used by applications and operating system subsystems to communicate with and transfer data to and from devices</a></li>
+<li><a href="#sec-1-3">1.3. System administrators can control how udev operates and craft special udev rules to assure desired behaviour results</a></li>
+<li><a href="#sec-1-4">1.4. Learning objectives</a>
+<ul>
+<li><a href="#sec-1-4-1">1.4.1. explain the role of device nodes and how they use major and minor numbers</a></li>
+<li><a href="#sec-1-4-2">1.4.2. understand the need for the udev method and list its key components</a></li>
+<li><a href="#sec-1-4-3">1.4.3. describe how the udev device manager functions</a></li>
+<li><a href="#sec-1-4-4">1.4.4. identify udev rule files and learn how to create custom rules</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-5">1.5. Device nodes</a>
+<ul>
+<li><a href="#sec-1-5-1">1.5.1. Character and block devices have filesystem entries associated with them; network devices in Linux do not</a></li>
+<li><a href="#sec-1-5-2">1.5.2. These device nodes can be used by programs to communicate with devices, using normal I/O system calls such as open(), close(), read() and write().</a></li>
+<li><a href="#sec-1-5-3">1.5.3. On the other hand, network devices work by transmitting and receiving prackets, which must be constructed by breaking up streams of data, or reassembled in to streams when recweived.</a></li>
+<li><a href="#sec-1-5-4">1.5.4. a device driver may manage multiple device nodes, which are normally placed in the /dev directory</a></li>
+<li><a href="#sec-1-5-5">1.5.5. device nodes can be created with sudo mknod [-m mode] /dev/name &lt;type&gt; &lt;major&gt; &lt;minor&gt;</a></li>
+<li><a href="#sec-1-5-6">1.5.6. e.g. mknod -m 666 /dev/mycdrv c 254 1</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-6">1.6. Major and minor numbers</a>
+<ul>
+<li><a href="#sec-1-6-1">1.6.1. the major and minor numbers identify the driver associated with the device, with the driver uniquely reserving a group of numbers.</a></li>
+<li><a href="#sec-1-6-2">1.6.2. In most cases (but not all) device nodes of the same type (block or character) with the same major number use the same driver</a></li>
+<li><a href="#sec-1-6-3">1.6.3. If you list some device nodes as in ls -l /dev/sda* the major and minor numbers appear in the same place that the file size would when looking at a normal file, in the example as 8, 1 etc. Normal users will probably never use this, but sometimes sysadmins need to unpick these if the system gets confused about devices, or has some hardware at run time.</a></li>
+<li><a href="#sec-1-6-4">1.6.4. The minor number is used by the device driver to differentiate between the different devices it may control, or how they are used. This might be different instances of the same kind of device (e.g. sound cards or hdd partition) or different modes of operation for a given device (such as a different density floppy drive media).</a></li>
+<li><a href="#sec-1-6-5">1.6.5. Device numbers have meaning in user-space as well. Two system calls mknod() and stat() return information about major and minor numbers.</a></li>
+<li><a href="#sec-1-6-6">1.6.6. Problems with kernel 2.4</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-7">1.7. udev method creates device nodes on the fly as they are needed.</a>
+<ul>
+<li><a href="#sec-1-7-1">1.7.1. u in udev stands for user indicating that most of the work of creating, removing, and modifying devices nodes is done in user-space</a></li>
+<li><a href="#sec-1-7-2">1.7.2. udev handles the dynamical generation of device nodes and it replaced devfs and hotplug.</a></li>
+<li><a href="#sec-1-7-3">1.7.3. One nice feature is persistent device naming - names need not depend on the order of device connection or plugging in. Such behaviour is controlled by udev rules</a></li>
+<li><a href="#sec-1-7-4">1.7.4. udev rules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Devices and udev</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Intelligent appartus for discovering hardware and peripheral devices both during system boot and later when they are connected to the system</h3>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Device nodes are created automatically and then used by applications and operating system subsystems to communicate with and transfer data to and from devices</h3>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> System administrators can control how udev operates and craft special udev rules to assure desired behaviour results</h3>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Learning objectives</h3>
+<div class="outline-text-3" id="text-1-4">
+</div><div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> explain the role of device nodes and how they use major and minor numbers</h4>
+</div>
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> understand the need for the udev method and list its key components</h4>
+</div>
+<div id="outline-container-sec-1-4-3" class="outline-4">
+<h4 id="sec-1-4-3"><span class="section-number-4">1.4.3</span> describe how the udev device manager functions</h4>
+</div>
+<div id="outline-container-sec-1-4-4" class="outline-4">
+<h4 id="sec-1-4-4"><span class="section-number-4">1.4.4</span> identify udev rule files and learn how to create custom rules</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Device nodes</h3>
+<div class="outline-text-3" id="text-1-5">
+</div><div id="outline-container-sec-1-5-1" class="outline-4">
+<h4 id="sec-1-5-1"><span class="section-number-4">1.5.1</span> Character and block devices have filesystem entries associated with them; network devices in Linux do not</h4>
+</div>
+<div id="outline-container-sec-1-5-2" class="outline-4">
+<h4 id="sec-1-5-2"><span class="section-number-4">1.5.2</span> These device nodes can be used by programs to communicate with devices, using normal I/O system calls such as open(), close(), read() and write().</h4>
+</div>
+<div id="outline-container-sec-1-5-3" class="outline-4">
+<h4 id="sec-1-5-3"><span class="section-number-4">1.5.3</span> On the other hand, network devices work by transmitting and receiving prackets, which must be constructed by breaking up streams of data, or reassembled in to streams when recweived.</h4>
+</div>
+<div id="outline-container-sec-1-5-4" class="outline-4">
+<h4 id="sec-1-5-4"><span class="section-number-4">1.5.4</span> a device driver may manage multiple device nodes, which are normally placed in the /dev directory</h4>
+</div>
+<div id="outline-container-sec-1-5-5" class="outline-4">
+<h4 id="sec-1-5-5"><span class="section-number-4">1.5.5</span> device nodes can be created with sudo mknod [-m mode] /dev/name &lt;type&gt; &lt;major&gt; &lt;minor&gt;</h4>
+</div>
+<div id="outline-container-sec-1-5-6" class="outline-4">
+<h4 id="sec-1-5-6"><span class="section-number-4">1.5.6</span> e.g. mknod -m 666 /dev/mycdrv c 254 1</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Major and minor numbers</h3>
+<div class="outline-text-3" id="text-1-6">
+</div><div id="outline-container-sec-1-6-1" class="outline-4">
+<h4 id="sec-1-6-1"><span class="section-number-4">1.6.1</span> the major and minor numbers identify the driver associated with the device, with the driver uniquely reserving a group of numbers.</h4>
+</div>
+<div id="outline-container-sec-1-6-2" class="outline-4">
+<h4 id="sec-1-6-2"><span class="section-number-4">1.6.2</span> In most cases (but not all) device nodes of the same type (block or character) with the same major number use the same driver</h4>
+</div>
+<div id="outline-container-sec-1-6-3" class="outline-4">
+<h4 id="sec-1-6-3"><span class="section-number-4">1.6.3</span> If you list some device nodes as in ls -l /dev/sda* the major and minor numbers appear in the same place that the file size would when looking at a normal file, in the example as 8, 1 etc. Normal users will probably never use this, but sometimes sysadmins need to unpick these if the system gets confused about devices, or has some hardware at run time.</h4>
+</div>
+<div id="outline-container-sec-1-6-4" class="outline-4">
+<h4 id="sec-1-6-4"><span class="section-number-4">1.6.4</span> The minor number is used by the device driver to differentiate between the different devices it may control, or how they are used. This might be different instances of the same kind of device (e.g. sound cards or hdd partition) or different modes of operation for a given device (such as a different density floppy drive media).</h4>
+</div>
+<div id="outline-container-sec-1-6-5" class="outline-4">
+<h4 id="sec-1-6-5"><span class="section-number-4">1.6.5</span> Device numbers have meaning in user-space as well. Two system calls mknod() and stat() return information about major and minor numbers.</h4>
+</div>
+<div id="outline-container-sec-1-6-6" class="outline-4">
+<h4 id="sec-1-6-6"><span class="section-number-4">1.6.6</span> Problems with kernel 2.4</h4>
+<div class="outline-text-4" id="text-1-6-6">
+</div><ol class="org-ol"><li><a id="sec-1-6-6-1" name="sec-1-6-6-1"></a>Lots of device nodes were created with kernel 2.4 just in case - this proved to be a problem - trimming this was a manual job which was error-prone<br  /></li>
+<li><a id="sec-1-6-6-2" name="sec-1-6-6-2"></a>having huge directories filled with these slowed access times to device nodes<br  /></li>
+<li><a id="sec-1-6-6-3" name="sec-1-6-6-3"></a>running out of major and minor numbers required a more modern and dynamic approach - numbers cannot be got rid of as the POSIX standard requires them.<br  /></li></ol>
+</div>
+</div>
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> udev method creates device nodes on the fly as they are needed.</h3>
+<div class="outline-text-3" id="text-1-7">
+</div><div id="outline-container-sec-1-7-1" class="outline-4">
+<h4 id="sec-1-7-1"><span class="section-number-4">1.7.1</span> u in udev stands for user indicating that most of the work of creating, removing, and modifying devices nodes is done in user-space</h4>
+</div>
+<div id="outline-container-sec-1-7-2" class="outline-4">
+<h4 id="sec-1-7-2"><span class="section-number-4">1.7.2</span> udev handles the dynamical generation of device nodes and it replaced devfs and hotplug.</h4>
+</div>
+<div id="outline-container-sec-1-7-3" class="outline-4">
+<h4 id="sec-1-7-3"><span class="section-number-4">1.7.3</span> One nice feature is persistent device naming - names need not depend on the order of device connection or plugging in. Such behaviour is controlled by udev rules</h4>
+</div>
+<div id="outline-container-sec-1-7-4" class="outline-4">
+<h4 id="sec-1-7-4"><span class="section-number-4">1.7.4</span> udev rules</h4>
+<div class="outline-text-4" id="text-1-7-4">
+</div><ol class="org-ol"><li><a id="sec-1-7-4-1" name="sec-1-7-4-1"></a>runs as a daemon - either udevd or systemd-udevd monitoring a netlink socket<br  /></li>
+<li><a id="sec-1-7-4-2" name="sec-1-7-4-2"></a>when a new device is plugged in the uevent kernel facility sends a message through the socket, which udev receives and takes appropriate action to create or remove device nodes of the right names and properties according to the rules.<br  /></li>
+<li><a id="sec-1-7-4-3" name="sec-1-7-4-3"></a>the three components of udev are:<br  /><ol class="org-ol"><li><a id="sec-1-7-4-3-1" name="sec-1-7-4-3-1"></a>libudev library which allows access to information about the devices<br  /></li>
+<li><a id="sec-1-7-4-3-2" name="sec-1-7-4-3-2"></a>the udevd daemon which manages the <i>dev</i> directory<br  /></li>
+<li><a id="sec-1-7-4-3-3" name="sec-1-7-4-3-3"></a>the udevadm utility for control and diagnostics<br  /></li></ol>
+</li>
+<li><a id="sec-1-7-4-4" name="sec-1-7-4-4"></a>As devices are added or removed, working with the hotplug subsystem, udev:<br  /><ol class="org-ol"><li><a id="sec-1-7-4-4-1" name="sec-1-7-4-4-1"></a>acts upon a notification of events to create and remove device nodes<br  /></li>
+<li><a id="sec-1-7-4-4-2" name="sec-1-7-4-4-2"></a>The info necessary to create them with right names, major and minor numbers, permissions, etc are gathered by examination of information already registered in the sysfs pseudo-filesystem (mounted at /sys) and a set of config files.<br  /></li>
+<li><a id="sec-1-7-4-4-3" name="sec-1-7-4-4-3"></a>The main config file is /etc/udev/udev.conf - it contains:<br  /><ol class="org-ol"><li><a id="sec-1-7-4-4-3-1" name="sec-1-7-4-4-3-1"></a>where to place device nodes<br  /></li>
+<li><a id="sec-1-7-4-4-3-2" name="sec-1-7-4-4-3-2"></a>default permissions and ownership<br  /></li></ol>
+</li>
+<li><a id="sec-1-7-4-4-4" name="sec-1-7-4-4-4"></a>By default, rules are located in /etc/udev/rules.d directory<br  /></li>
+<li><a id="sec-1-7-4-4-5" name="sec-1-7-4-4-5"></a>By reading the man page for udev one can get a lot of specific information about how to set up rules for common situations<br  /></li>
+<li><a id="sec-1-7-4-4-6" name="sec-1-7-4-4-6"></a>When udev receives a message from the kernel about a device being added or removed, it parses the rule-setting files in /etc/rules.d/*.rules<br  /></li>
+<li><a id="sec-1-7-4-4-7" name="sec-1-7-4-4-7"></a>It then takes appropriate actions, including:<br  /><ol class="org-ol"><li><a id="sec-1-7-4-4-7-1" name="sec-1-7-4-4-7-1"></a>device node naming<br  /></li>
+<li><a id="sec-1-7-4-4-7-2" name="sec-1-7-4-4-7-2"></a>device node and symbolic links creation<br  /></li>
+<li><a id="sec-1-7-4-4-7-3" name="sec-1-7-4-4-7-3"></a>setting file permissions and ownership for the device node<br  /></li>
+<li><a id="sec-1-7-4-4-7-4" name="sec-1-7-4-4-7-4"></a>taking other actions to initialize and make the device available<br  /></li></ol>
+</li>
+<li><a id="sec-1-7-4-4-8" name="sec-1-7-4-4-8"></a>udev rules files are located under /etc/udev/rules.d/&lt;rulename&gt;.rules with names like:<br  /><ol class="org-ol"><li><a id="sec-1-7-4-4-8-1" name="sec-1-7-4-4-8-1"></a>30-usb.rules<br  /></li>
+<li><a id="sec-1-7-4-4-8-2" name="sec-1-7-4-4-8-2"></a>90-mycustom.rules<br  /></li></ol>
+</li>
+<li><a id="sec-1-7-4-4-9" name="sec-1-7-4-4-9"></a>udev reads the rule files ending with a suffix of .rules<br  /></li>
+<li><a id="sec-1-7-4-4-10" name="sec-1-7-4-4-10"></a>If it finds more than one, it reads them both one by one, lexicographically i.e. in ascending alphabetical order.<br  /></li>
+<li><a id="sec-1-7-4-4-11" name="sec-1-7-4-4-11"></a>The standard rule file name is generally a two digit number followed by a descriptive name (for the rules), followed by the .rules suffix<br  /></li>
+<li><a id="sec-1-7-4-4-12" name="sec-1-7-4-4-12"></a>The format for a udev fule is simple:<br  /><ol class="org-ol"><li><a id="sec-1-7-4-4-12-1" name="sec-1-7-4-4-12-1"></a>&lt;match&gt;&lt;op&gt;value [, &#x2026;] &lt;assignment&gt;&lt;op&gt;value[, &#x2026;]<br  /></li>
+<li><a id="sec-1-7-4-4-12-2" name="sec-1-7-4-4-12-2"></a>There are two separated parts defined on a single line<br  /><ol class="org-ol"><li><a id="sec-1-7-4-4-12-2-1" name="sec-1-7-4-4-12-2-1"></a>The first part consists of one or more match pairs denoted by ==. These try to match a device's attributes and/or characteristics to some value<br  /></li>
+<li><a id="sec-1-7-4-4-12-2-2" name="sec-1-7-4-4-12-2-2"></a>The second part consists of one or more assignment key-vaule pairs that assign a value to a name, such as a file name, group assignment, even file permissions etc.<br  /></li></ol>
+</li>
+<li><a id="sec-1-7-4-4-12-3" name="sec-1-7-4-4-12-3"></a>If no matching rule is found, it uses the default device node name and other attributes<br  /></li></ol>
+</li>
+<li><a id="sec-1-7-4-4-13" name="sec-1-7-4-4-13"></a>Here's an example of a rules file for a Fitbit device:<br  /><ol class="org-ol"><li><a id="sec-1-7-4-4-13-1" name="sec-1-7-4-4-13-1"></a>cat /etc/udev/conf.d/rules.d/99-fitbit.rules:<br  /></li>
+<li><a id="sec-1-7-4-4-13-2" name="sec-1-7-4-4-13-2"></a>SUBSYSTEM=="usb", ATTR{idVenor}=="2687", ATTR{idProduct}=="fb01", SYMLINK+="fitbit", MODE="0666"<br  /></li>
+<li><a id="sec-1-7-4-4-13-3" name="sec-1-7-4-4-13-3"></a><br  /><div class="outline-text-7" id="text-1-7-4-4-13-3">
+<p>
+CHAPTER 8. DEVICES AND UDEV
+1
+Lab 8.1:
+udev
+</p>
+<ol class="org-ol">
+<li>Create and implement a rule on your system that will create a symlink called
+</li>
+</ol>
+<p>
+myusb
+when a
+USB
+device is plugged
+in.
+</p>
+<ol class="org-ol">
+<li>Plug in a
+</li>
+</ol>
+<p>
+USB
+device to your system. It can be a pendrive, mouse, webcam, etc.
+Note: If you are running a virtual machine under a hypervisor, you will have to make sure the
+USB
+device is seen
+by the guest, which usually is just a mouse click which also disconnects it from the host.
+</p>
+<ol class="org-ol">
+<li>Get a listing of the
+</li>
+</ol>
+<p>
+/dev
+directory and see if your symlink was created.
+</p>
+<ol class="org-ol">
+<li>Remove the
+</li>
+</ol>
+<p>
+USB
+device. (If it is a drive you should always
+umount
+it first for safety.)
+</p>
+<ol class="org-ol">
+<li>See if your symbolic link still exists in
+</li>
+</ol>
+<p>
+/dev
+.
+</p>
+</div>
+</li></ol>
+</li></ol>
+</li></ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2015-03-08 Sun 21:01</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

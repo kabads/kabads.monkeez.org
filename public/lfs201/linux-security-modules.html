@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>linux-security-modules</title>
+<!-- 2015-04-12 Sun 14:07 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">linux-security-modules</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Linux Security Modules</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Objectives</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. Understand how the Linux Security Module framework works and how it is deployed.</a></li>
+<li><a href="#sec-1-1-2">1.1.2. List the various LSM implementations available.</a></li>
+<li><a href="#sec-1-1-3">1.1.3. Delineate the main features of SELinux.</a></li>
+<li><a href="#sec-1-1-4">1.1.4. Explain the different modes and policies available.</a></li>
+<li><a href="#sec-1-1-5">1.1.5. Grasp the importance of contexts and how to get and set them.</a></li>
+<li><a href="#sec-1-1-6">1.1.6. Know how to use the important <b>SELinux</b> utility programs.</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. What are linux security modules?</a></li>
+<li><a href="#sec-1-3">1.3. LSM Chioces</a>
+<ul>
+<li><a href="#sec-1-3-1">1.3.1. <b>SELinux</b>: </a></li>
+<li><a href="#sec-1-3-2">1.3.2. <b>AppArmor</b>: </a></li>
+<li><a href="#sec-1-3-3">1.3.3. <b>Smack</b>: </a></li>
+<li><a href="#sec-1-3-4">1.3.4. <b>TOMOYO</b>: </a></li>
+</ul>
+</li>
+<li><a href="#sec-1-4">1.4. SELinux Overview</a>
+<ul>
+<li><a href="#sec-1-4-1">1.4.1. <b>Contexts</b>: Are labels to files, processes and ports. Examples of contexts are SELinux user, role and type.</a></li>
+<li><a href="#sec-1-4-2">1.4.2. <b>Policies</b>: Describe access control in terms of contexts, files, ports, users, etc.</a></li>
+<li><a href="#sec-1-4-3">1.4.3. <b>Rules</b>: Are a set of <b>rules</b> that describe what system-wide access control decisions should be made by SELinux.</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-5">1.5. SELinux Modes</a>
+<ul>
+<li><a href="#sec-1-5-1">1.5.1. <b>Enforcing</b>: All SELinux code is operative and access is denied accordingto policy. All violations are audited and logged.</a></li>
+<li><a href="#sec-1-5-2">1.5.2. <b>Permissive</b>: Enables SELinux code but only audits and warns about operations that would be denied in enforcing mode.</a></li>
+<li><a href="#sec-1-5-3">1.5.3. <b>Disabled</b>: Completely disables SELinux kernel and application code leaving the system without any of its protections.</a></li>
+<li><a href="#sec-1-5-4">1.5.4. <b>Configuration file</b>: edit the SELinux configuration file (usually /etc/selinux/config) and set <b>SELINUX=disabled</b>. This is the default method ad should be used to permanently disable SELinux.</a></li>
+<li><a href="#sec-1-5-5">1.5.5. <b>Kernel parameter</b>: Adding <b>selinux=0</b> to the Kernel parameter list when rebooting.</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-6">1.6. SELinux Policies</a>
+<ul>
+<li><a href="#sec-1-6-1">1.6.1. <b>targeted</b>: The <b>default</b> policy in which SELinux is more restricted to targeted processes. User processes and <b>init</b> processes are not targeted. SELinux enforces memory restrictions for <b>all</b> processes, which reduces the vulnerability to buffer overflow attacks.</a></li>
+<li><a href="#sec-1-6-2">1.6.2. <b>minimum</b>: A modification of the targeted policy where only selected processes are protected.</a></li>
+<li><a href="#sec-1-6-3">1.6.3. <b>MLS</b>: The Multiple-Level Security policy is much more restrictive; all processes are placed in fine-grained security domains with particular policies.</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-7">1.7. Context Utilities</a>
+<ul>
+<li><a href="#sec-1-7-1">1.7.1. <b>User</b></a></li>
+<li><a href="#sec-1-7-2">1.7.2. <b>Role</b></a></li>
+<li><a href="#sec-1-7-3">1.7.3. <b>Type</b></a></li>
+<li><a href="#sec-1-7-4">1.7.4. <b>Level</b></a></li>
+</ul>
+</li>
+<li><a href="#sec-1-8">1.8. SELinux and Standard Command Line Tools</a></li>
+<li><a href="#sec-1-9">1.9. SELinux Context Inheritance and Preservation</a></li>
+<li><a href="#sec-1-10">1.10. <b>restorecon</b></a></li>
+<li><a href="#sec-1-11">1.11. <b>semanage fcontext</b></a></li>
+<li><a href="#sec-1-12">1.12. Using SELinux Booleans</a></li>
+<li><a href="#sec-1-13">1.13. <b>getsebool</b> and <b>setsebool</b></a></li>
+<li><a href="#sec-1-14">1.14. Troubleshooting tools</a></li>
+<li><a href="#sec-1-15">1.15. Additonal Online resources</a>
+<ul>
+<li><a href="#sec-1-15-1">1.15.1. <b>Red Hat Enterprise Linux 7 SELinux User's and Administrator's Guide</b> </a></li>
+<li><a href="#sec-1-15-2">1.15.2. <b>Red Hat Enterprise Linux 6 Security-Enhanced Linux</b></a></li>
+</ul>
+</li>
+<li><a href="#sec-1-16">1.16. AppArmor</a>
+<ul>
+<li><a href="#sec-1-16-1">1.16.1. Provides Mandatory Access Control (<b>MAC</b>).</a></li>
+<li><a href="#sec-1-16-2">1.16.2. Allows administrators to associate a security profile to a program which restricts its capabilities.</a></li>
+<li><a href="#sec-1-16-3">1.16.3. Is considered easier (by some but not all) to use than SELinux.</a></li>
+<li><a href="#sec-1-16-4">1.16.4. Is considered filesystem-neutral (no security labels required).</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Linux Security Modules</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+A modern computer system must be made <b>secure</b>, but needs vary according to sensitivit of data, number of users with accounts, exposure to outsie networks, legal requirements and other factors. Responsibility for enabling good security controls falls both on application designers and the Linux kernel developers and maintainers. Of course users have to follow good procedures as well, but on a well run system, non-privileged users should have very limited ability to expose the system to security violations. In this section we are concerned with how the Linux kernel enhances security through the use of the <b>Linux Security Modules</b> framework, particularly with the deployment of <b>SELinux</b>. 
+</p>
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Objectives</h3>
+<div class="outline-text-3" id="text-1-1">
+</div><div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Understand how the Linux Security Module framework works and how it is deployed.</h4>
+</div>
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> List the various LSM implementations available.</h4>
+</div>
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Delineate the main features of SELinux.</h4>
+</div>
+<div id="outline-container-sec-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> Explain the different modes and policies available.</h4>
+</div>
+<div id="outline-container-sec-1-1-5" class="outline-4">
+<h4 id="sec-1-1-5"><span class="section-number-4">1.1.5</span> Grasp the importance of contexts and how to get and set them.</h4>
+</div>
+<div id="outline-container-sec-1-1-6" class="outline-4">
+<h4 id="sec-1-1-6"><span class="section-number-4">1.1.6</span> Know how to use the important <b>SELinux</b> utility programs.</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> What are linux security modules?</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+There have been a number of ideas on how to incorporate a <b>computer security module</b> in linux. The idea is to implement <b>mandatory access controls</b> over the variety of requests made to the kernel, but to do so in a way that: 
+</p>
+<ol class="org-ol">
+<li>Minimizes changes to the kernel.
+</li>
+<li>Minimizes overhead on the kernel.
+</li>
+<li>Permits flexibility and choice between different implementations, each of which is presented as a self-contained <b>LSM</b> (Linux Security Module). 
+</li>
+</ol>
+<p>
+The basic idea is to <b>hook system calls</b>; insert code whenever an application requests a transition to kernel (system) mode in order to accomplish work that requires enhanced abilities; this code makes sure permissions are valid, malicious intent is protected against, etc. It does this by invoking security-related functional steps before and/or after a system call is fulfilled by the kernel. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> LSM Chioces</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+For a long time the only enhanced scurity model imlpemented was <b>SELinux</b>. When the project was first floated upstream in 2001 to be included directly in the kernel, there were objections about using only one approach to enhanced security. 
+As a result the <b>LSM</b> approach was adopted when alternative modules to <b>SELinux</b> could be used as they were developed and was incorporated in to the Linux kernel in 2003. 
+The current <b>LSM</b> implementations are: 
+</p>
+</div>
+<div id="outline-container-sec-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> <b>SELinux</b>: <a href="http://selinuxproject.org/page/Main_Page">http://selinuxproject.org/page/Main_Page</a></h4>
+</div>
+<div id="outline-container-sec-1-3-2" class="outline-4">
+<h4 id="sec-1-3-2"><span class="section-number-4">1.3.2</span> <b>AppArmor</b>: <a href="http://apparmor.net">http://apparmor.net</a></h4>
+</div>
+<div id="outline-container-sec-1-3-3" class="outline-4">
+<h4 id="sec-1-3-3"><span class="section-number-4">1.3.3</span> <b>Smack</b>: <a href="http://schaufler-ca.com">http://schaufler-ca.com</a></h4>
+</div>
+<div id="outline-container-sec-1-3-4" class="outline-4">
+<h4 id="sec-1-3-4"><span class="section-number-4">1.3.4</span> <b>TOMOYO</b>: <a href="http://tomoyo.sourceforge.jp">http://tomoyo.sourceforge.jp</a></h4>
+<div class="outline-text-4" id="text-1-3-4">
+<p>
+Only one LSM can be used at a time as they potentially modify the same parts of the linux kernel.
+We will concentrate primarily on SELinux and secondarily AppArmor in order of usage volume.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> SELinux Overview</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+SELinux was originally developed by the United States <b>NSA</b> (National Security Administration) and has been integral to <b>RHEL</b> for a very long time, which was brought it a large usage base. 
+Operationally, SELinux is a set of security rules that are used to determine which processes can access which files, directories, ports, and other items on the system. 
+It works with these three conceptual quantities: 
+</p>
+</div>
+<div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> <b>Contexts</b>: Are labels to files, processes and ports. Examples of contexts are SELinux user, role and type.</h4>
+</div>
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> <b>Policies</b>: Describe access control in terms of contexts, files, ports, users, etc.</h4>
+</div>
+<div id="outline-container-sec-1-4-3" class="outline-4">
+<h4 id="sec-1-4-3"><span class="section-number-4">1.4.3</span> <b>Rules</b>: Are a set of <b>rules</b> that describe what system-wide access control decisions should be made by SELinux.</h4>
+<div class="outline-text-4" id="text-1-4-3">
+<p>
+An SELinux context is a name used by a rule to define how users, processes, files and ports interact with each other. As the default policy is to deny any access, rules are used to describe allowed actions on the system. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> SELinux Modes</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+SELinux can be run under one of the following three modes:
+</p>
+</div>
+<div id="outline-container-sec-1-5-1" class="outline-4">
+<h4 id="sec-1-5-1"><span class="section-number-4">1.5.1</span> <b>Enforcing</b>: All SELinux code is operative and access is denied accordingto policy. All violations are audited and logged.</h4>
+</div>
+<div id="outline-container-sec-1-5-2" class="outline-4">
+<h4 id="sec-1-5-2"><span class="section-number-4">1.5.2</span> <b>Permissive</b>: Enables SELinux code but only audits and warns about operations that would be denied in enforcing mode.</h4>
+</div>
+<div id="outline-container-sec-1-5-3" class="outline-4">
+<h4 id="sec-1-5-3"><span class="section-number-4">1.5.3</span> <b>Disabled</b>: Completely disables SELinux kernel and application code leaving the system without any of its protections.</h4>
+<div class="outline-text-4" id="text-1-5-3">
+<p>
+These modes are selected (and explained) in a file (usually /etc/selinux/config) whose location varies by distribution (it is often either at /etc/sysconfig/selinux or linked from there). The file is well self-documented. The <b>sestatus</b> utility can display the current mode and policy. 
+To examine or set the current mode one can use <b>getenforce</b> and <b>setenforce</b>:
+$ getenforce
+Disabled
+$ sudo setenforce Permissive
+$ getenforce
+Permissive
+<b>setenforce</b> can be used to switch between enfocing and permissive mode on the fly while the system is in operation. However, changing in or out of the disabled mode can not be done this way. While <b>setenforce</b> allows you to switch between <b>Permissive</b> and <b>Enforcing</b> modes, it does not allow disabling SELinux completely. There are at least two different ways to disable SELinux:
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-5-4" class="outline-4">
+<h4 id="sec-1-5-4"><span class="section-number-4">1.5.4</span> <b>Configuration file</b>: edit the SELinux configuration file (usually /etc/selinux/config) and set <b>SELINUX=disabled</b>. This is the default method ad should be used to permanently disable SELinux.</h4>
+</div>
+<div id="outline-container-sec-1-5-5" class="outline-4">
+<h4 id="sec-1-5-5"><span class="section-number-4">1.5.5</span> <b>Kernel parameter</b>: Adding <b>selinux=0</b> to the Kernel parameter list when rebooting.</h4>
+<div class="outline-text-4" id="text-1-5-5">
+<p>
+However, it is important to note that disabling SELinux on systems in which SELinux will be re-enabled is not recommended. It is preferable to use <b>Permissive</b> mode instead of disabling SELinux, so as to avoid relabeling the entire filesystem which can be time consuming. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> SELinux Policies</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+The same configuration file, usually /etc/sysconfig/selinux, also sets the SELinux <b>policy</b>. Multiple policies are allowed, but only one can be active at a time. Changing the policy may require a reboot of the system and a time-consuming re-labeling of filesystem contents. Each policy has files which must be installed under /etc/selinux/[SELINUXTYPE] 
+The most common policies are:
+</p>
+</div>
+<div id="outline-container-sec-1-6-1" class="outline-4">
+<h4 id="sec-1-6-1"><span class="section-number-4">1.6.1</span> <b>targeted</b>: The <b>default</b> policy in which SELinux is more restricted to targeted processes. User processes and <b>init</b> processes are not targeted. SELinux enforces memory restrictions for <b>all</b> processes, which reduces the vulnerability to buffer overflow attacks.</h4>
+</div>
+<div id="outline-container-sec-1-6-2" class="outline-4">
+<h4 id="sec-1-6-2"><span class="section-number-4">1.6.2</span> <b>minimum</b>: A modification of the targeted policy where only selected processes are protected.</h4>
+</div>
+<div id="outline-container-sec-1-6-3" class="outline-4">
+<h4 id="sec-1-6-3"><span class="section-number-4">1.6.3</span> <b>MLS</b>: The Multiple-Level Security policy is much more restrictive; all processes are placed in fine-grained security domains with particular policies.</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Context Utilities</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+As mentioned earlier, contexts are labels applied to files, directories, ports and processes. Those labels are used to describe access rules. There are four SELinux contexts:
+</p>
+</div>
+<div id="outline-container-sec-1-7-1" class="outline-4">
+<h4 id="sec-1-7-1"><span class="section-number-4">1.7.1</span> <b>User</b></h4>
+</div>
+<div id="outline-container-sec-1-7-2" class="outline-4">
+<h4 id="sec-1-7-2"><span class="section-number-4">1.7.2</span> <b>Role</b></h4>
+</div>
+<div id="outline-container-sec-1-7-3" class="outline-4">
+<h4 id="sec-1-7-3"><span class="section-number-4">1.7.3</span> <b>Type</b></h4>
+</div>
+<div id="outline-container-sec-1-7-4" class="outline-4">
+<h4 id="sec-1-7-4"><span class="section-number-4">1.7.4</span> <b>Level</b></h4>
+<div class="outline-text-4" id="text-1-7-4">
+<p>
+However, we will focus on <b>type</b>, which is the most commonly utilized context. The label naming convention determines that type context labels should end with <b>_t</b> as in <b>kernel<sub>t</sub></b>. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8"><span class="section-number-3">1.8</span> SELinux and Standard Command Line Tools</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+Many standard command line commands, such as ls and ps, were extened to support SELinux, and corresponding sections were added to their <b>man</b> pages explaining the details. Often the parameter <b>Z</b> is passed to standard command line tools as in:
+$ ps axZ
+$ ls -| <i>home</i> <i>tmp</i>
+Other tools that were extended to support SELinux include cp, mv, and mkdir. 
+Note that if you have SELinux, no useful information is displayed in the related fields from these utilities. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-9" class="outline-3">
+<h3 id="sec-1-9"><span class="section-number-3">1.9</span> SELinux Context Inheritance and Preservation</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+Newly created files inherit the context from their parent directory, but when moving or copying files, it is the context of the source directory which may be preserved, which can cause problems. 
+Continuing the previous example, we see the context of tmpfile was not changed by moving the file from <i>tmp to /home/peter. 
+$ cd /tmp</i>
+$ touch tmpfile
+$ ls -Z tmpfile
+$ cd 
+$ touch homefile
+$ ls -Z homefile 
+$ mv /tmp/tmfile . 
+$ lz -Z
+The classical example in which moving files creates an SELinux issue is moving files to the DocumentRoot directory of the <b>httpd</b> server. On SELinux-enabled systems, the web server can only access files with the correct context labels. Create a file in /tmp, and then moving it to the DocumentRoot direcoty, will make the file unaccessible to the <b>httpd</b> server until the SELinux context of the file is adjusted. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-10" class="outline-3">
+<h3 id="sec-1-10"><span class="section-number-3">1.10</span> <b>restorecon</b></h3>
+<div class="outline-text-3" id="text-1-10">
+<p>
+<b>restorecon</b> resets file contexts, based on parent directory settings. In the following example, <b>restorecon</b> resets the default label recursively for all files at the home directory. 
+$ ls -Z
+$ restorecon -Rv /home/peter
+$ ls -Z 
+Note that the context for tmpfile has been reset to the default context for files created at the home directory. The type was changed from <b>user<sub>tmp</sub><sub>t</sub></b> to <b>user<sub>home</sub><sub>t</sub></b>. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-11" class="outline-3">
+<h3 id="sec-1-11"><span class="section-number-3">1.11</span> <b>semanage fcontext</b></h3>
+<div class="outline-text-3" id="text-1-11">
+<p>
+Anothe issue is how to configure the default context for a newly created directory. <b>semange fcontext</b> (provided by the <b>policycoreutils-python</b> package) can change and display the default context of files and directories. Note <b>semanage fcontext</b> only changes the default settings; it does not apply them to existing objects. This requires calling <b>restorecon</b> afterwards. For example, 
+$ mkdir /virtualHosts
+$ ls -Z
+$ semanage fcontext -a t- httpd<sub>sys</sub><sub>content</sub><sub>t</sub> / virtualHosts
+$ ls -Z
+$ restorecon -RFv /virtualHosts 
+$ ls -Z
+The context change from <b>default<sub>t</sub></b> to <b>httpd<sub>sys</sub><sub>content</sub><sub>t</sub></b> is thus only applied after the call to <b>restorecon</b>. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-12" class="outline-3">
+<h3 id="sec-1-12"><span class="section-number-3">1.12</span> Using SELinux Booleans</h3>
+<div class="outline-text-3" id="text-1-12">
+<p>
+SELinux policy behaviour can be configured at runtime without rewriting the policy. This is accomplished by configuring <b>SELinux Booleans</b> which are policy parameters that can be enabled and disabled. 
+To list all booleans of the current policy, including the current status and a short description, do: 
+$ sudo semanage boolean -l 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-13" class="outline-3">
+<h3 id="sec-1-13"><span class="section-number-3">1.13</span> <b>getsebool</b> and <b>setsebool</b></h3>
+<div class="outline-text-3" id="text-1-13">
+<p>
+An alternative for displaying the boolean information, that produces simpler output, is <b>getsebool -a</b> which prints only the boolean name and its current status. 
+<b>setsebool</b> is used for changing boolean status. The default behaviour is to apply changes immediately that are not persistent across a reboot. However, the <b>-P</b> parameter can be supplied in order to make the changes persistent. 
+An example of non-persistent change using setsebool:
+$ getsebool ssh<sub>chroot</sub><sub>rw</sub><sub>homedirs</sub>
+ssh<sub>chroot</sub><sub>rw</sub><sub>homedirs</sub> &#x2013;&gt; off
+$ sudo setsebool ssh<sub>chroot</sub><sub>rw</sub><sub>homedirs</sub> on
+$ getsebool ssh<sub>chroot</sub><sub>rw</sub><sub>homedirs</sub>
+ssh<sub>chroot</sub><sub>rw</sub><sub>homedirs</sub> &#x2013;&gt; on
+$ sudo reboot
+&#x2026;
+$ getsebool ssh<sub>chroot</sub><sub>rw</sub><sub>homedirs</sub>
+ssh<sub>chroot</sub><sub>rw</sub><sub>homedirs</sub> &#x2013;&gt; off
+An example of persistent change using setsebool  -P:
+$ getsebool ssh<sub>chroot</sub><sub>rw</sub><sub>homedirs</sub>
+ssh<sub>chroot</sub><sub>rw</sub><sub>homedirs</sub> &#x2013;&gt; off
+$ sudo setsebool -P ssh<sub>chroot</sub><sub>rw</sub><sub>homedirs</sub> on
+$ getsebool ssh<sub>chroot</sub><sub>rw</sub><sub>homedirs</sub>
+ssh<sub>chroot</sub><sub>rw</sub><sub>homedirs</sub> &#x2013;&gt; on
+$ sudo reboot
+&#x2026;
+$ getsebool ssh<sub>chroot</sub><sub>rw</sub><sub>homedirs</sub>
+ssh<sub>chroot</sub><sub>rw</sub><sub>homedirs</sub> &#x2013;&gt; on
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-14" class="outline-3">
+<h3 id="sec-1-14"><span class="section-number-3">1.14</span> Troubleshooting tools</h3>
+<div class="outline-text-3" id="text-1-14">
+<p>
+SELinux comes with a set of tools that collect issues at run time, log these issues and propose solutions to prevent same issues from happening again. These utilities are provided by the <b>setroubleshoot-server</b> package. Here is an example of their use: 
+$ echo 'File created at /root' &gt; rootfile
+$ mv rootfile /var/www/html
+$ wget -o - localhost/rootfile
+&#x2026; error forbidden
+$ tail /var/log/messages 
+apache reporting some issue about not being able to access the file. 
+$ sealert -l d5324532532523-3243243256gfvszds2325-dsfdsfadsa5353252
+Note that on RHEL 7 the suggestion is to run: 
+$ grep httpd /var/log/audit/audit.log | audit2allow -M mypol
+<b>audit2allow</b> is a tool that generates SELinux policy rules from logs of denied operations. A similar tool is <b>audit2why</b> which translates SELinux audit messages into a description of why the access was denied. 
+The next example shows how to solve this issue using the <b>restorecon</b> tool which was described earlier. Feel free to try both approaches for fixing the SELinux issue. 
+$ restorecon -Rv /var/www/html
+$ wget -q -O localhost/rootfile
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-15" class="outline-3">
+<h3 id="sec-1-15"><span class="section-number-3">1.15</span> Additonal Online resources</h3>
+<div class="outline-text-3" id="text-1-15">
+<p>
+This section has covered the basics and most common system administration tasks related to SELinux. There are freely available online resources for SELinux advanced topics, including: 
+</p>
+</div>
+<div id="outline-container-sec-1-15-1" class="outline-4">
+<h4 id="sec-1-15-1"><span class="section-number-4">1.15.1</span> <b>Red Hat Enterprise Linux 7 SELinux User's and Administrator's Guide</b> <a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/SELinux_Users_and_Administrators_Guide/">https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/SELinux_Users_and_Administrators_Guide/</a></h4>
+</div>
+<div id="outline-container-sec-1-15-2" class="outline-4">
+<h4 id="sec-1-15-2"><span class="section-number-4">1.15.2</span> <b>Red Hat Enterprise Linux 6 Security-Enhanced Linux</b></h4>
+<div class="outline-text-4" id="text-1-15-2">
+<p>
+<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security-Enhanced_Linux/">https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security-Enhanced_Linux/</a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-16" class="outline-3">
+<h3 id="sec-1-16"><span class="section-number-3">1.16</span> AppArmor</h3>
+<div class="outline-text-3" id="text-1-16">
+<p>
+<b>AppArmor</b> is an <b>LSM</b> alternative to SELinux. Support for it has been incorporated in the linux kernel since 2006. It has been used by <b>SUSE</b>, <b>Ubuntu</b> and other distributions. 
+<b>AppArmor</b>: 
+</p>
+</div>
+<div id="outline-container-sec-1-16-1" class="outline-4">
+<h4 id="sec-1-16-1"><span class="section-number-4">1.16.1</span> Provides Mandatory Access Control (<b>MAC</b>).</h4>
+</div>
+<div id="outline-container-sec-1-16-2" class="outline-4">
+<h4 id="sec-1-16-2"><span class="section-number-4">1.16.2</span> Allows administrators to associate a security profile to a program which restricts its capabilities.</h4>
+</div>
+<div id="outline-container-sec-1-16-3" class="outline-4">
+<h4 id="sec-1-16-3"><span class="section-number-4">1.16.3</span> Is considered easier (by some but not all) to use than SELinux.</h4>
+</div>
+<div id="outline-container-sec-1-16-4" class="outline-4">
+<h4 id="sec-1-16-4"><span class="section-number-4">1.16.4</span> Is considered filesystem-neutral (no security labels required).</h4>
+<div class="outline-text-4" id="text-1-16-4">
+<p>
+<b>AppArmor</b> supplements the traditional <b>UNIX</b> <b>D*iscretinoary *A*ccess *C*ontrol (*DAC</b>) model by providing <b>M*andatory *A*ccess *C*ontrol (*MAC</b>). 
+In addition to manually specifying profiles, <b>AppArmor</b> includes a learning mode, in which violations of the profile are logged, but not prevented. This log can then be turned in to a profile, based on their program's typical behaviour. 
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2015-04-12 Sun 14:07</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
