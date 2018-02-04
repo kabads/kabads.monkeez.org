@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>packagemanagement</title>
+<!-- 2015-06-14 Sun 18:43 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">packagemanagement</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Package Management</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Objectives</a></li>
+<li><a href="#sec-1-2">1.2. Software Packaging Concepts</a></li>
+<li><a href="#sec-1-3">1.3. Why use packages</a></li>
+<li><a href="#sec-1-4">1.4. Package Types</a></li>
+<li><a href="#sec-1-5">1.5. Available package management systems</a></li>
+<li><a href="#sec-1-6">1.6. Packaging Tool Levels and Varieties</a></li>
+<li><a href="#sec-1-7">1.7. Package Sources</a></li>
+<li><a href="#sec-1-8">1.8. Creating software packages</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Package Management</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+It is necessary to introduce order in to the way software is installed, updated and removed on linux systems. <b>Package Management systems</b> provide a clean way to achieve that goal and can prevent systems from descending into chaos, fossilization or breakage with time. Furthermore, they provide a method to verify that the software on the system has not been corrupted, either maliciously or by accident. An essential function of linux distributors is to develop and maintain the packages and to ensure that dependencies are properly maintained over time. 
+</p>
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Objectives</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>Explain why software package management systems should be used.
+</li>
+<li>Understand the role of both binary and source packages.
+</li>
+<li>List the main available package management systems.
+</li>
+<li>Understand why two levels of utilities are needed; one that deals with just bare packages, and one that deals with dependencies among packages.
+</li>
+<li>Explain how creating your own package enhances the control you have over exactly what goes in software and how it is installed. 
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Software Packaging Concepts</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+<b>Package Management Systems</b> supply the tools that allow system administrators to automate installing, upgrading, configuring and removing software packages in a known, predictable and consistent maner. These systems:
+</p>
+<ul class="org-ul">
+<li>Gather and compress associated software files in to a single package (archive), which may require one or more other packages to be installed first.
+</li>
+<li>Allow for easy software installation or removal.
+</li>
+<li>Can verify file integrity via an internal database.
+</li>
+<li>Can authenticate the origin of the packages.
+</li>
+<li>Facilitate upgrades.
+</li>
+<li>Group packages by logical features.
+</li>
+<li>Manage dependencies between packages.
+</li>
+</ul>
+<p>
+A given package may contain executable files, data files, documentation, installation scripts and configuration files. Also included are <b>metadata</b> attributes such as version numbers, checksums, vendor information, dependencies, descriptions, etc. 
+Upon installation, all that information is stored locally into an internal database which can be conveniently queried for version status and update information. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Why use packages</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Software package management systems are widely seen as one of the biggest advancements linux brought to enterprise IT environments. By keeping track of files and metadata in an automated, predictable and reliable way, system administrators can use package management systems to make their installation processes scale to thousands of systems without requiring manual work on each individual systems. Features include:
+</p>
+<ul class="org-ul">
+<li>Automation: No need for manual installs and upgrades.
+</li>
+<li>Scalability: Install packages on one system, or 10,000 systems.
+</li>
+<li>Repeatability and predictability.
+</li>
+<li>Security and auditing. 
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Package Types</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Packages come in several different types: 
+</p>
+<ul class="org-ul">
+<li><b>Binary</b> packages contain files ready for deployment, including executable files and libraries. These are architecture dependent and must be compiled for each type of machine.
+</li>
+<li><b>Source</b> packages are used to generate binary packages; one should always be able to rebuild a binary package (for example, by using <b>rpmbuild &#x2013;rebuild</b> on <b>RPM</b>-based systems) from the source package. One source package can be used for multiple architectures.
+</li>
+<li><b>Architecture-independent</b> packages contain files and scripts that run under script interpreters, as well as documentation and configuration files.
+</li>
+<li><b>Meta-packages</b> are essentially groups of associated packages that collect everything needed to install a relatively large subsystem, such as a desktop environment, or an office suite etc.
+</li>
+</ul>
+<p>
+Binary packages are the ones that system administrators have to deal with most of the time. 
+On 64-bit systems that can run 32-bit applications, one may have two binary packages installed for a given program, perhaps one with a <b>x86<sub>64</sub></b> or <b>amd64</b> in its name, and the other with <b>i386</b> or <b>i686</b> in its name. 
+Source packages can be helpful in keeping track of changes and source code used to come up with binary packages. They are usually not installed on a system by default but can always be retrieved from the vendor. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Available package management systems</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+There are two very common package management systems:
+</p>
+<ol class="org-ol">
+<li>RPM (Red Hat Package Manager) - This system is used by all Red Hat derived distributions, such as Red Hat Enterprise Linux, CentOS, Scientific Linux, and Centos, as well as by SUSE and its related community openSUSE distribution.
+</li>
+<li>dpkg (Debian Package) - This system is used by all Debian-derived distributions including Debian, Ubuntu and Linux Mint. 
+</li>
+</ol>
+<p>
+There are other package management systems, such as portage/emerge used by Gentoo, pacman used by Arch, and specialized ones used by Embedded Linux systems and Android. 
+Another ancient system is just to supply packages as tarballs without any real management or clean removal strategies; this approach still marks Slackware, one of the oldest linux distributions. 
+But most of the time it is either RPM or dpkg and these are the only ones we will consider in this course. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Packaging Tool Levels and Varieties</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+There are two levels to packaging systems:
+</p>
+<ol class="org-ol">
+<li>Low level utility: This simply installs or removes a single package, or a list of packages each one of which is individually and specifically named. Dependencies are not fully handled, only warned about:
+<ul class="org-ul">
+<li>if another package needs to be installed first installation will fail.
+</li>
+<li>If the package is needed by another package, removal will fail. 
+</li>
+</ul>
+</li>
+</ol>
+<p>
+The rpm and dpkg utilities play this role for the packaging systems that use them. 
+</p>
+<ol class="org-ol">
+<li>High level utility: This solves the dependency problems.
+<ul class="org-ul">
+<li>If another package or group of packages needs to be installed before software can be installed, such needs will be satisfied.
+</li>
+<li>If removing a package interferes with another installed package, the administrator will be given the choice of either aborting, or removing all affected software. 
+</li>
+</ul>
+</li>
+</ol>
+<p>
+The yum and zypper utilities (and more recently PackageKit) take care of the dependency resolution for rpm systems, and apt-get and apt-cache and other utilities take care for dpkg systems.
+In this course we will only discuss the command line interfaces to the packaging management systems; while the graphical front ends used by each linux distribution can be useful, we would like to be less tied to any one interface and have more flexibility. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Package Sources</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+Every distribution has one or more package repositories where sytem utilities go to obtain software and to update with new versions. It is the job of the distribution to make sure all packages in the repositories play well with each other. 
+There are always other, external repositories, which can be added to the standard distribution-supported list. Sometimes these are closely associated with the distribution and only rarely produce significant problems; an example would be the <b>EPEL</b> (Extra Packages for Enterprise Linux) set of version-dependent repositories, which fit well with RHEL since their source is Fedora and the maintainers are close to Red Hat. 
+However, some external repositories are not very well constructed or maintained. For example, when a package is updated in the main repository, dependent packages may not be updated in the external one, which can lead to one form of <b>dependency hell</b>. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8"><span class="section-number-3">1.8</span> Creating software packages</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+Building your own custom software packages makes it easy to distribute and install your own software. Almost every version of linux has some mechanism for doing this. 
+Building your own package allows you to control exactly what goes on in the software and exactly how it is installed. You can create the package so that installing it runs scripts that perform all tasks needed to install the new software and/or remove the old software, such as:
+</p>
+<ul class="org-ul">
+<li>creating needed symbolic links.
+</li>
+<li>Creating directories as needed.
+</li>
+<li>Setting permissions.
+</li>
+<li>Anything that can be scripted. 
+</li>
+</ul>
+<p>
+We will not discuss the mechanics of how to build .rpm or .deb packages as that is a question mostly for developers rather than administrators. 
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2015-06-14 Sun 18:43</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

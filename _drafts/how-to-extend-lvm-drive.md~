@@ -1,0 +1,10 @@
+---
+layout: post
+category: sysadmin
+title: How to extend a LVM drive from an additional hard drive
+---
+
+### Problem
+You have a drive that you want to add more space to. However, you want all the data to remain intact. This would usually involve a lot of copying data and then installing a rescue disk and trying something complicated with gparted.
+
+However, with [LVM](https://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux) (logical volume management), this is easily managed. 

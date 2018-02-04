@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>iomonitoring</title>
+<!-- 2015-05-28 Thu 16:18 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">iomonitoring</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. I/O Monitoring and Tuning</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Objectives</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. Use <b>iostat</b> to monitor system I/O device activity</a></li>
+<li><a href="#sec-1-1-2">1.1.2. Use <b>iotop</b> to display a constantly updated table of current I/O usage</a></li>
+<li><a href="#sec-1-1-3">1.1.3. Use <b>ionice</b> to set both the <b>I/O scheduling class</b> and the <b>priority</b> for a given process</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. Disk bottlenecks</a></li>
+<li><a href="#sec-1-3">1.3. iostat</a></li>
+<li><a href="#sec-1-4">1.4. iostat options</a></li>
+<li><a href="#sec-1-5">1.5. iostat extended options</a></li>
+<li><a href="#sec-1-6">1.6. iotop</a></li>
+<li><a href="#sec-1-7">1.7. Using ionice to set I/O priorities</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> I/O Monitoring and Tuning</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+There is a strong and complicated relationship between I/O and system performance. It is not easy to unravel the competition between processes for I/O storage bandwidth, CPU utilization, memory use and network bottlenecks. 
+Two of the main tools that can help identify and isolate problems are <b>iostat</b> and <b>iotop</b>. The <b>ionice</b> utility can be used to help prioritize the competition between processes as well.
+</p>
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Objectives</h3>
+<div class="outline-text-3" id="text-1-1">
+</div><div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Use <b>iostat</b> to monitor system I/O device activity</h4>
+</div>
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Use <b>iotop</b> to display a constantly updated table of current I/O usage</h4>
+</div>
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Use <b>ionice</b> to set both the <b>I/O scheduling class</b> and the <b>priority</b> for a given process</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Disk bottlenecks</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Disk performance problems can be stronlgy coupled to other factors, such as insufficient memory or inadequate network hardware and tuning. Disentangling can b edifficult. 
+As a rule, a system can be considered as <b>I/O-bound</b> hen the CPU is found sitting idle waiting for I/O to complete, or the network is waiting to clear buffers. 
+However, one can be misled. What appears to be insufficient memory can result from too slow I/O; if memory buffers that are being used for reading and writing fill up it may appear that memory is the problem, when the real problem is that buffers are not filling up or emptying out fast enough. Similarly, network transfers may be waiting for I/O to complete and cause network throughput to suffer. 
+Both real-time monitoring and tracing are necessary tools for locating and mitigating disk bottlenecks. However, rare or non-repeating problems can make this difficult to accomplish. 
+There are many relevant variables and I/O tuning is complex. We will also consider <b>I/O scheduling</b> later. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> iostat</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+<b>iostat</b> is the basic workhorse utility for monitoring I/O device activity on the system. It can generate reports with a lot of information, with the precise content controlled by options. 
+Just typing <b>iostat</b> gives:
+</p>
+
+<p>
+$ iostat
+Linux 3.15.9 (q7)         09/11/2014             <span class="underline">x86<sub>64</sub></span>                 (4 CPU)
+</p>
+
+
+<p>
+avg-cpu:     %user %nice %system %iowait c%stealc %idle
+                            3.07     0.05         1.30         0.66         0.00 94.92
+</p>
+
+
+
+<p>
+Device:                     tps    kB<sub>read</sub>/s    kB<sub>wrtn</sub>/s     kB<sub>read</sub>     kB<sub>wrtn</sub>
+sda          12.10       170.52        61.69     2170494      785198
+dm-0          5.58        46.32        48.74      589608      620384
+dm-2          1.22         4.89         0.00       62208          12
+dm-3          0.01         0.06         0.00         728           0
+dm-5          0.31         1.24         0.00       15780          12
+dm-6          0.05         0.20         0.00        2568          12
+dm-7          0.03         0.11         0.00        1436          12
+dm-8          0.03         0.13         0.00        1636          12
+dm-1          0.00         0.01         0.00         152           0
+dm-4          0.01         0.03         0.00         364           0
+dm-10         0.01         0.03         0.00         364           0
+dm-11         0.33        28.50         0.23      362769        2964
+dm-13         0.03         0.10         0.00        1268          12
+dm-14         0.03         0.10         0.00        1256          12
+dm-15         0.01         0.03         0.00         364           0
+After a brief summary of <b>CPU</b> utilization, I/O statistics are given: <b>tps</b> (I/O transactions per second; logical requests can be <b>merged</b> in to one actual request), blocks read and written per unit time, where the blocks are generally sectors of 512 bytes; and the total blocks read and written. 
+Information is broken out by disk partition (and if <b>LVM</b> is being used also by <b>dm</b> (device mapper) logical partitions). 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> iostat options</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+A somewhat different display is generated by giving the <b>-k</b> option, which shows results in KB instead of blocks:
+$ iostat -k
+Linux 3.15.9 (q7)             09/11/2014          <span class="underline">x86<sub>64</sub></span>             (4 CPU)
+</p>
+
+
+<p>
+avg-cpu: %user %nice %system %iowait %steal  %idle
+          3.07  0.05    1.29    0.66   0.00  94.93
+</p>
+
+
+<p>
+Device:     tps    kB<sub>read</sub>/s    kB<sub>wrtn</sub>/s    kB<sub>read</sub>    kB<sub>wrtn</sub>
+sda       12.07       170.00        61.53    2170494     785574
+dm-0       5.57        46.18        48.61     589608     620632
+dm-2       1.22         4.87         0.00      62208         12
+You can also use <b>-m</b> to get results in MB. 
+Another useful option is <b>-N</b> to show by device name (or <b>-d</b> for a somewhat different format) as in: 
+iostat -N
+</p>
+
+
+<p>
+Linux 3.18.0 (q7)     12/12/2014     <span class="underline">x86<sub>64</sub></span>    (4 CPU)
+</p>
+
+<p>
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           4.13    0.00    7.38    1.91    0.00   86.57
+</p>
+
+<p>
+Device:            tps    kB<sub>read</sub>/s    kB<sub>wrtn</sub>/s    kB<sub>read</sub>    kB<sub>wrtn</sub>
+sda              20.26      3895.58       554.19   95397215   13571286
+VG-local          4.04        18.07        45.38     442484    1111280
+VG-src            0.03         0.15         0.00       3660         32
+VG-dead           0.02         0.07         0.00       1692         12
+VG-audio          0.01         0.05         0.00       1313         12
+VG-iso<sub>images</sub>     0.02         0.07         0.00       1812         12
+VG-virtual       15.37      3718.74       481.88   91066729   11800544
+VG-P              0.00         0.00         0.00         76          0
+VG-pictures       0.28        27.30         0.23     668476       5700
+VG-virtual2       0.01         0.05         0.00       1256         12
+VG-w7back         0.00         0.01         0.00        364          0
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> iostat extended options</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+A much more detailed report can be obtained by using the <b>-x</b> option (for extended):
+$ iostat -xk
+</p>
+
+
+<p>
+Linux 3.15.9 (q7)       09/11/2014        <span class="underline">x86<sub>64</sub></span>        (4 CPU)
+</p>
+
+
+<p>
+avg-cpu: %user %nice %system %iowait %steal %idle
+          3.06  0.05    1.29    0.66   0.00 94.94
+</p>
+
+
+<p>
+Device: rrqm/s wrqm/s  r/s  w/s  rkB/s wkB/s avgrq-sz avgqu-sz await r<sub>await</sub> w<sub>await</sub> svctm %util
+sda       1.04   2.61 7.68 4.33 169.34 61.23    38.39     0.16 12.96   10.53   17.27  1.86  2.24
+dm-0      0.00   0.00 1.15 4.40  45.92 48.38    34.01     0.03  6.23    7.38    5.92  2.42  1.34
+where the fields have the following meanings: 
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Field</th>
+<th scope="col" class="left">Meanings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Device</td>
+<td class="left">Device or partition name</td>
+</tr>
+
+<tr>
+<td class="left">rrqm/s</td>
+<td class="left">Number of read requests merged per second, queued to device</td>
+</tr>
+
+<tr>
+<td class="left">wrqm/s</td>
+<td class="left">Number of write requests merged per second, queued to device</td>
+</tr>
+
+<tr>
+<td class="left">r/s</td>
+<td class="left">Number of read requests per second, issued to the device</td>
+</tr>
+
+<tr>
+<td class="left">w/s</td>
+<td class="left">Number of write requests per second, issued to the device</td>
+</tr>
+
+<tr>
+<td class="left">rkB/s</td>
+<td class="left">KB read from the device per second</td>
+</tr>
+
+<tr>
+<td class="left">wkB/s</td>
+<td class="left">KB written to the device per second</td>
+</tr>
+
+<tr>
+<td class="left">avgrq-sz</td>
+<td class="left">Average request size in 512 byte sectors per second</td>
+</tr>
+
+<tr>
+<td class="left">avgqu-sz</td>
+<td class="left">Average queue length of requests issued to the device</td>
+</tr>
+
+<tr>
+<td class="left">await</td>
+<td class="left">Average time (in msecs) I/O requests between when a request is issued and when it is completed: queued time plus service time</td>
+</tr>
+
+<tr>
+<td class="left">svctm</td>
+<td class="left">Average service time (in msecs) for I/O requests</td>
+</tr>
+
+<tr>
+<td class="left">%util</td>
+<td class="left">Percentage of CPU time during the device serviced requests</td>
+</tr>
+</tbody>
+</table>
+<p>
+Note that if the utilization percentage approaches 100 the system is saturated, or I/O bound. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> iotop</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+Another very useful utility is <b>iotop</b>, which must be run as root. It displays a table of current I/O usage and updates periodically like <b>top</b>. With no options:
+</p>
+
+<p>
+$ sudo iotop
+</p>
+
+
+<p>
+Total DISK READ : 132.32 M/s | Total DISK WRITE : 132.79 M/s
+Actual DISK READ: 132.32 M/s | Actual DISK WRITE: 0.00 B/s
+ TID PRIO USER    DISK READ   DISK WRITE   SWAPIN      IO&gt; COMMAND
+9791 be/4 root   132.32 M/s   132.79 M/s   0.00 %  72.48 % cp /usr/s~.sqfs /tmp
+   1 be/4 root     0.00 B/s     0.00 B/s   0.00 %   0.00 % systemd -~rialize 22
+   2 be/4 root     0.00 B/s     0.00 B/s   0.00 %   0.00 % [kthreadd]
+   3 be/4 root     0.00 B/s     0.00 B/s   0.00 %   0.00 % [ksoftirqd/0]
+   5 be/0 root     0.00 B/s     0.00 B/s   0.00 %   0.00 % [kworker/0:0H]
+2054 be/4 coop     0.00 B/s     0.00 B/s   0.00 %   0.00 % gsd-printer
+   7 be/4 root     0.00 B/s     0.00 B/s   0.00 %   0.00 % [rcu<sub>preempt]</sub>
+   8 be/4 root     0.00 B/s     0.00 B/s   0.00 %   0.00 % [rcu<sub>sched]</sub>
+   9 be/4 root     0.00 B/s     0.00 B/s   0.00 %   0.00 % [rcu<sub>bh]</sub>
+  10 rt/4 root     0.00 B/s     0.00 B/s   0.00 %   0.00 % [migration/0]
+&#x2026;..
+Note the <b>be</b> and <b>rt</b> entries in the <b>PRIO</b> are explained in the <b>ionice</b> section, and stand for <b>best effort</b> and <b>real time</b>. 
+Available options can be shown by: 
+$ sudo iotop &#x2013;help
+</p>
+
+
+<p>
+Usage: /usr/sbin/iotop [OPTIONS]
+</p>
+
+
+<p>
+DISK READ and DISK WRITE are the block I/O bandwidth used during the sampling
+period. SWAPIN and IO are the percentages of time the thread spent respectively
+while swapping in and waiting on I/O more generally. PRIO is the I/O priority at
+</p>
+
+<p>
+which the thread is running (set using the ionice command).
+</p>
+
+
+<p>
+Controls: left and right arrows to change the sorting column, r to invert the
+sorting order, o to toggle the &#x2013;only option, p to toggle the &#x2013;processes
+option, a to toggle the &#x2013;accumulated option, i to change I/O priority, q to
+quit, any other key to force a refresh.
+</p>
+
+
+<p>
+Options:
+&#x2013;version            show program's version number and exit
+-h, &#x2013;help           show this help message and exit
+-o, &#x2013;only           only show processes or threads actually doing I/O
+-b, &#x2013;batch          non-interactive mode
+-n NUM, &#x2013;iter=NUM   number of iterations before ending [infinite]
+-d SEC, &#x2013;delay=SEC  delay between iterations [1 second]
+-p PID, &#x2013;pid=PID    processes/threads to monitor [all]
+-u USER, &#x2013;user=USER users to monitor [all]
+-P, &#x2013;processes      only show processes, not all threads
+-a, &#x2013;accumulated    show accumulated I/O instead of bandwidth
+-k, &#x2013;kilobytes      use kilobytes instead of a human friendly unit
+-t, &#x2013;time           add a timestamp on each line (implies &#x2013;batch)
+-q, &#x2013;quiet          suppress some lines of header (implies &#x2013;batch)
+Using the <b>-o</b> option can be useful to avoid clutter. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Using ionice to set I/O priorities</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+The <b>ionice</b> utility lets you set both the I/O <b>scheduling class</b> and <b>priority</b> for a given process. It takes the form: 
+$ ionice [-c class] [-n priority] [-p pid ] [COMMAND [ARGS] ]
+If a <b>pid</b> is given with the <b>-p</b> argument results apply to the requested process, otherwise it is the process that will be started by <b>COMMAND</b> with possible arguments. If no arguments are given, <b>ionice</b> returns the scheduling class and priority of the current shell process, as in: 
+$ ionice 
+idle: prio 7 
+The <b>-c</b> parameter specifies the I/O scheduling class, which can have the following 3 values: 
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">I/O Scheduling Class</th>
+<th scope="col" class="right">-c value</th>
+<th scope="col" class="left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Idle</td>
+<td class="right">1</td>
+<td class="left">No access to disk I/O unless no other proram as asked for it for a defined period</td>
+</tr>
+
+<tr>
+<td class="left">Best effort</td>
+<td class="right">2</td>
+<td class="left">All programs serviced in round-robin fashion, according to priority settings. The Default.</td>
+</tr>
+
+<tr>
+<td class="left">Real Time</td>
+<td class="right">3</td>
+<td class="left">Get first access to the disk, can starve other processes. The priority defines how big a time slice each process gets.</td>
+</tr>
+</tbody>
+</table>
+<p>
+The <b>Best Effort</b> and <b>Real Time</b> classes take the <b>-n</b> argument which gives <b>priority</b>, which can range from 0 to 7 with 0 being the highest priority. An example:
+$ ionice -c 2 -n 3 -p 30078
+<b>Note</b>: <b>ionice</b> works only when using the <b>CFQ</b> I/O Scheduler talked about in the next section. 
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2015-05-28 Thu 16:18</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

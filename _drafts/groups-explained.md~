@@ -1,0 +1,13 @@
+---
+layout: posts
+title: Linux group explained
+---
+Users on a linux system belong to at least one group. Groups allow a systems administrator to create parts of the filesystem where a group of users can share files. They also allow a group of users to access particular commands or resources on the system, that other users might not be able to access.
+
+Groups are defined in the **/etc/group** file, which is only root writeable.
+
+To create a group, the **groupadd** command is used.
+
+    $ groupadd test
+
+will add a group called test. This will automatically set gid (a numerical value for the group's ID). 
