@@ -1,9 +1,0 @@
----
-categories:
-- sysadmin
-date: 2017-09-20T00:00:00Z
-title: AWS - How to Create A VPC
-url: /2017/09/20/how-to-create-a-vpc/
----
-
-AWS allows you to create your own virtual private cloud (or [VPC](https://en.wikipedia.org/wiki/Virtual_private_cloud)). This is a network within which your machines will communicate. You can control the level of access across your VPC. 
