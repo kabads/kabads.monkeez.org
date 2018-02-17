@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Education on Kabads - musings, mutterings and murmerings</title>
-    <link>http://kabads.monkeez.org/categories/education/</link>
+    <link>https://kabads.monkeez.org/categories/education/</link>
     <description>Recent content in Education on Kabads - musings, mutterings and murmerings</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 02 Apr 2012 10:37:32 +0000</lastBuildDate>
     
-	<atom:link href="http://kabads.monkeez.org/categories/education/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://kabads.monkeez.org/categories/education/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>A radical manifesto for teaching computing</title>
-      <link>http://kabads.monkeez.org/2012/04/02/a-radical-manifesto-for-teaching-computing/</link>
+      <link>https://kabads.monkeez.org/2012/04/02/a-radical-manifesto-for-teaching-computing/</link>
       <pubDate>Mon, 02 Apr 2012 10:37:32 +0000</pubDate>
       
-      <guid>http://kabads.monkeez.org/2012/04/02/a-radical-manifesto-for-teaching-computing/</guid>
+      <guid>https://kabads.monkeez.org/2012/04/02/a-radical-manifesto-for-teaching-computing/</guid>
       <description>Starting in primary school, children from all backgrounds and every part of the UK should have the opportunity to: learn some of the key ideas of computer science; understand computational thinking; learn to program; and have the opportunity to progress to the next level of excellence in these activities.
 via A radical manifesto for teaching computing | Education | The Observer.</description>
     </item>

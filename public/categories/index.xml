@@ -2,74 +2,74 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Kabads - musings, mutterings and murmerings</title>
-    <link>http://kabads.monkeez.org/categories/</link>
+    <link>https://kabads.monkeez.org/categories/</link>
     <description>Recent content in Categories on Kabads - musings, mutterings and murmerings</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="http://kabads.monkeez.org/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://kabads.monkeez.org/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Cycling</title>
-      <link>http://kabads.monkeez.org/categories/cycling/</link>
-      <pubDate>Sun, 03 Jul 2016 00:00:00 +0000</pubDate>
+      <link>https://kabads.monkeez.org/categories/cycling/</link>
+      <pubDate>Sun, 11 Feb 2018 19:20:30 +0000</pubDate>
       
-      <guid>http://kabads.monkeez.org/categories/cycling/</guid>
+      <guid>https://kabads.monkeez.org/categories/cycling/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Education</title>
-      <link>http://kabads.monkeez.org/categories/education/</link>
+      <link>https://kabads.monkeez.org/categories/education/</link>
       <pubDate>Mon, 02 Apr 2012 10:37:32 +0000</pubDate>
       
-      <guid>http://kabads.monkeez.org/categories/education/</guid>
+      <guid>https://kabads.monkeez.org/categories/education/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Exercise</title>
-      <link>http://kabads.monkeez.org/categories/exercise/</link>
+      <link>https://kabads.monkeez.org/categories/exercise/</link>
       <pubDate>Sun, 02 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://kabads.monkeez.org/categories/exercise/</guid>
+      <guid>https://kabads.monkeez.org/categories/exercise/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Leisure</title>
-      <link>http://kabads.monkeez.org/categories/leisure/</link>
+      <link>https://kabads.monkeez.org/categories/leisure/</link>
       <pubDate>Fri, 12 Aug 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://kabads.monkeez.org/categories/leisure/</guid>
+      <guid>https://kabads.monkeez.org/categories/leisure/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Reading</title>
-      <link>http://kabads.monkeez.org/categories/reading/</link>
+      <link>https://kabads.monkeez.org/categories/reading/</link>
       <pubDate>Thu, 25 Aug 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://kabads.monkeez.org/categories/reading/</guid>
+      <guid>https://kabads.monkeez.org/categories/reading/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Sysadmin</title>
-      <link>http://kabads.monkeez.org/categories/sysadmin/</link>
+      <link>https://kabads.monkeez.org/categories/sysadmin/</link>
       <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://kabads.monkeez.org/categories/sysadmin/</guid>
+      <guid>https://kabads.monkeez.org/categories/sysadmin/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tech</title>
-      <link>http://kabads.monkeez.org/categories/tech/</link>
+      <link>https://kabads.monkeez.org/categories/tech/</link>
       <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://kabads.monkeez.org/categories/tech/</guid>
+      <guid>https://kabads.monkeez.org/categories/tech/</guid>
       <description></description>
     </item>
     
