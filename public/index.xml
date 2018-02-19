@@ -6,10 +6,19 @@
     <description>Recent content on Kabads - musings, mutterings and murmerings</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 03 Oct 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 06 Feb 2018 08:36:51 +0000</lastBuildDate>
     
 	<atom:link href="http://kabads.monkeez.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>About</title>
+      <link>http://kabads.monkeez.org/about/</link>
+      <pubDate>Tue, 06 Feb 2018 08:36:51 +0000</pubDate>
+      
+      <guid>http://kabads.monkeez.org/about/</guid>
+      <description>If you want to contact me, please dm me on twitter @kabads</description>
+    </item>
     
     <item>
       <title>How to create an instance that pulls your website content automatically</title>
