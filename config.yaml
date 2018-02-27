@@ -1,4 +1,5 @@
-baseURL: http://kabads.monkeez.org
+baseURL: https://kabads.monkeez.org
 disablePathToLower: true
 languageCode: en-us
-title: Kabads - musings, mutterings and murmerings. 
+title: Kabads -` musings, mutterings and murmerings. 
+theme: whiteplain
