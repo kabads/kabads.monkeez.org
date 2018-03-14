@@ -2,7 +2,11 @@ baseURL = "https://kabads.monkeez.org/"
 languageCode = "en-us"
 title = "Kabads - musings, mutterings and murmerings"
 <<<<<<< HEAD
+<<<<<<< HEAD
 theme = "hugo-theme-bootstrap4-blog"
+=======
+theme = "hugo_theme_beg"
+>>>>>>> a3996417b85c77c543fc4ff18756a6b4e1930f05
 =======
 theme = "whiteplain"
 [[menu.main]]
