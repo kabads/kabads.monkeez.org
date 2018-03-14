@@ -3,7 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+<<<<<<< HEAD
     <loc>https://kabads.monkeez.org/post/2018-02-11-cycle-jaunt-around-bath/</loc>
+=======
+    <loc>https://kabads.monkeez.org/2018-02-11-cycle-jaunt-around-bath/</loc>
+>>>>>>> b16940f998a8a6ccef3e3c31b8d5ce8b6bc92f8f
     <lastmod>2018-02-11T19:20:30+00:00</lastmod>
   </url>
   
@@ -615,7 +619,11 @@
   
   <url>
     <loc>https://kabads.monkeez.org/post/</loc>
+<<<<<<< HEAD
     <lastmod>2018-02-11T19:20:30+00:00</lastmod>
+=======
+    <lastmod>2017-10-03T00:00:00+00:00</lastmod>
+>>>>>>> b16940f998a8a6ccef3e3c31b8d5ce8b6bc92f8f
     <priority>0</priority>
   </url>
   

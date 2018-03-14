@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
   <head>
@@ -365,9 +366,332 @@ Modern firewalls are based on Application Layer Firewalls and are aware of the k
 </aside>
 
 
+=======
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>Sysadmin - Kabads - musings, mutterings and murmerings</title>
+  <meta property="og:title" content="Sysadmin - Kabads - musings, mutterings and murmerings" />
+  <meta name="twitter:title" content="Sysadmin - Kabads - musings, mutterings and murmerings" />
+  <meta name="author" content=""/>
+  <meta property="og:site_name" content="Kabads - musings, mutterings and murmerings" />
+  <meta property="og:url" content="/categories/sysadmin/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="generator" content="Hugo 0.36" />
+  <link href="/categories/sysadmin/index.xml" rel="alternate" type="application/rss+xml" title="Kabads - musings, mutterings and murmerings" />
+  <link href="/categories/sysadmin/index.xml" rel="feed" type="application/rss+xml" title="Kabads - musings, mutterings and murmerings" />
+  <link rel="stylesheet" href="/css/style.css" media="all" />
+  <link rel="stylesheet" href="/css/syntax.css" media="all" />
+  <link rel="stylesheet" href="/css/custom.css" media="all" />
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="site-navi">
+    <h1 class="site-title"><a href="/">Kabads - musings, mutterings and murmerings</a></h1>
+    <ul class="site-navi-items">
+      <li class="site-navi-item-categories"><a href="/categories/" title="Categories">Categories</a></li>
+      <li class="site-navi-item-about"><a href="/about/" title="About">About</a></li>
+    </ul>
+  </nav>
+</header>
+<hr class="site-header-bottom">
+
+  <div class="breadcrumb">
+    <a href="/categories/">Categories</a> / Sysadmin
+  </div>
+  <div class="main" role="main">
+    <section class="list taxonomy-list">
+      <article class="article">
+        <a href="/2017/10/03/aws-how-to-automatically-launch-apache-with-your-site-content/" class="article-titles">
+          <h2 class="article-title">How to create an instance that pulls your website content automatically</h2>
+          
+        </a>
+        <ul class="article-meta">
+          <li class="article-meta-date"><time>October 3, 2017</time></li>
+          <li class="article-meta-categories">
+            <a href="/categories/sysadmin/">
+              <svg class="icon"><use xlink:href="/images/fa-solid.svg#folder"></use></svg>
+              sysadmin
+            </a>&nbsp;
+          </li>
+        </ul>
+        <div class="article-content">
+          Amazon Web Services allows you to spin up instances very quickly. This how to will show you how to upload your content to a S3 bucket and then launch an instance that pulls that content in and starts Apache to serve that content.
+Initially, you will need to create a role under IAM. This will have to be able to access S3, so create the role, choose which service you would like to associate it with.
+        </div>
+        <div class="article-readmore"><a href="/2017/10/03/aws-how-to-automatically-launch-apache-with-your-site-content/">Read more...</a></div>
+        <div class="article-floatclear"></div>
+      </article>
+      <article class="article">
+        <a href="/2017/09/20/how-to-create-a-vpc/" class="article-titles">
+          <h2 class="article-title">AWS - How to Create A VPC</h2>
+          
+        </a>
+        <ul class="article-meta">
+          <li class="article-meta-date"><time>September 20, 2017</time></li>
+          <li class="article-meta-categories">
+            <a href="/categories/sysadmin/">
+              <svg class="icon"><use xlink:href="/images/fa-solid.svg#folder"></use></svg>
+              sysadmin
+            </a>&nbsp;
+          </li>
+        </ul>
+        <div class="article-content">
+          AWS allows you to create your own virtual private cloud (or VPC). This is a network within which your machines will communicate. You can control the level of access across your VPC through subnets, Network Access Control Lists and Security Groups.
+Network Access Control lists allow particular traffic in and outbound, but are stateless; that is, if you allow traffic in, it doesn&rsquo;t necessarily mean that traffic will leave the network.
+        </div>
+        <div class="article-readmore"><a href="/2017/09/20/how-to-create-a-vpc/">Read more...</a></div>
+        <div class="article-floatclear"></div>
+      </article>
+      <article class="article">
+        <a href="/2017/09/20/aws-how-to-serve-traffic-from-load-balancer/" class="article-titles">
+          <h2 class="article-title">AWS - How to Serve Traffic from a Load Balancer</h2>
+          
+        </a>
+        <ul class="article-meta">
+          <li class="article-meta-date"><time>September 20, 2017</time></li>
+          <li class="article-meta-categories">
+            <a href="/categories/sysadmin/">
+              <svg class="icon"><use xlink:href="/images/fa-solid.svg#folder"></use></svg>
+              sysadmin
+            </a>&nbsp;
+          </li>
+        </ul>
+        <div class="article-content">
+          Amazon Web Services (AWS) allows you to serve private network traffic from behind a public load balancer. This offers extra security benefits as it detects DDOS traffic and other exploits and offers a layer of protection.
+There are some things you should know before you start this tutorial. You should know:
+ How to create a VPC How to configure subnets How to create an EC2 instance How to ensure an EC2 instance is within an particular subnet How to ssh to an EC2 instance  You will create a new VPC.
+        </div>
+        <div class="article-readmore"><a href="/2017/09/20/aws-how-to-serve-traffic-from-load-balancer/">Read more...</a></div>
+        <div class="article-floatclear"></div>
+      </article>
+      <article class="article">
+        <a href="/2017/05/06/a-cartoon-about-file-permissions/" class="article-titles">
+          <h2 class="article-title">A Cartoon About File Permissions</h2>
+          
+        </a>
+        <ul class="article-meta">
+          <li class="article-meta-date"><time>May 6, 2017</time></li>
+          <li class="article-meta-categories">
+            <a href="/categories/sysadmin/">
+              <svg class="icon"><use xlink:href="/images/fa-solid.svg#folder"></use></svg>
+              sysadmin
+            </a>&nbsp;
+          </li>
+        </ul>
+        <div class="article-content">
+          <p><img src="http://hit-comic.com/wp-content/uploads/2017/05/Strip-266-LowRes.jpg" alt="You're kidding me - I am root" /></p>
+
+        </div>
+        <div class="article-readmore"><a href="/2017/05/06/a-cartoon-about-file-permissions/">Read more...</a></div>
+        <div class="article-floatclear"></div>
+      </article>
+      <article class="article">
+        <a href="/2017/01/29/setting-up-lets-encrypt-with-certauto/" class="article-titles">
+          <h2 class="article-title">Setting up SSL Certificates with Lets Encrypt and certbot</h2>
+          
+        </a>
+        <ul class="article-meta">
+          <li class="article-meta-date"><time>January 29, 2017</time></li>
+          <li class="article-meta-categories">
+            <a href="/categories/sysadmin/">
+              <svg class="icon"><use xlink:href="/images/fa-solid.svg#folder"></use></svg>
+              sysadmin
+            </a>&nbsp;
+          </li>
+        </ul>
+        <div class="article-content">
+          
+        </div>
+        <div class="article-readmore"><a href="/2017/01/29/setting-up-lets-encrypt-with-certauto/">Read more...</a></div>
+        <div class="article-floatclear"></div>
+      </article>
+      <article class="article">
+        <a href="/2016/12/10/running-ec2-instance/" class="article-titles">
+          <h2 class="article-title">Running EC2 Instance</h2>
+          
+        </a>
+        <ul class="article-meta">
+          <li class="article-meta-date"><time>December 10, 2016</time></li>
+          <li class="article-meta-categories">
+            <a href="/categories/sysadmin/">
+              <svg class="icon"><use xlink:href="/images/fa-solid.svg#folder"></use></svg>
+              sysadmin
+            </a>&nbsp;
+          </li>
+        </ul>
+        <div class="article-content">
+          Amazon have provided a pretty neat infrastructure with Amazon Web Services (AWS). By using this as a platform, you can quickly scale up and down provisioned resources. At times, you may experience peak demand, and AWS will allow you to respond with this. At other times, you can scale your resources down.
+The first step in learning about this platform, is running an EC2 instance. This is the &lsquo;machine&rsquo; behind your service.
+        </div>
+        <div class="article-readmore"><a href="/2016/12/10/running-ec2-instance/">Read more...</a></div>
+        <div class="article-floatclear"></div>
+      </article>
+      <article class="article">
+        <a href="/2016/11/20/finding-large-files-in-a-directory/" class="article-titles">
+          <h2 class="article-title">Finding large files in a directory</h2>
+          
+        </a>
+        <ul class="article-meta">
+          <li class="article-meta-date"><time>November 20, 2016</time></li>
+          <li class="article-meta-categories">
+            <a href="/categories/sysadmin/">
+              <svg class="icon"><use xlink:href="/images/fa-solid.svg#folder"></use></svg>
+              sysadmin
+            </a>&nbsp;
+          </li>
+        </ul>
+        <div class="article-content">
+          I have directories that agedu shows as having large files. However, agedu doesn&rsquo;t tell me what the names of the files are.
+A quick find will sort that
+find . -maxdepth 1 -type f -exec \/usr\/bin\/ls -al {} \; | awk '{print $5,$9}' | sort -nr &gt; bigfiles.txt 
+Run this, and you will have a file called bigfiles.txt that has the size in bytes and the filename. This does not work recursively, with the flag -maxdepth 1 preventing that.
+        </div>
+        <div class="article-readmore"><a href="/2016/11/20/finding-large-files-in-a-directory/">Read more...</a></div>
+        <div class="article-floatclear"></div>
+      </article>
+      <article class="article">
+        <a href="/2016/02/20/using-sed/" class="article-titles">
+          <h2 class="article-title">Using sed</h2>
+          
+        </a>
+        <ul class="article-meta">
+          <li class="article-meta-date"><time>February 20, 2016</time></li>
+          <li class="article-meta-categories">
+            <a href="/categories/sysadmin/">
+              <svg class="icon"><use xlink:href="/images/fa-solid.svg#folder"></use></svg>
+              sysadmin
+            </a>&nbsp;
+          </li>
+        </ul>
+        <div class="article-content">
+          sed is a quick command line utility to change text within a file, or input stream. Typically, it is used within a pipe situation (i.e. using the character | on the command line). If you are not familiar with that command, you will need to research that before continuing.
+A simple use of sed is to replace characters in a stream or file. This is done using regular expressions. This will help you search for a set of characters and then replace them with the alternative.
+        </div>
+        <div class="article-readmore"><a href="/2016/02/20/using-sed/">Read more...</a></div>
+        <div class="article-floatclear"></div>
+      </article>
+      <article class="article">
+        <a href="/2016/01/24/bash-find-command/" class="article-titles">
+          <h2 class="article-title">Bash find command</h2>
+          
+        </a>
+        <ul class="article-meta">
+          <li class="article-meta-date"><time>January 24, 2016</time></li>
+          <li class="article-meta-categories">
+            <a href="/categories/sysadmin/">
+              <svg class="icon"><use xlink:href="/images/fa-solid.svg#folder"></use></svg>
+              sysadmin
+            </a>&nbsp;
+          </li>
+        </ul>
+        <div class="article-content">
+          Find command I&rsquo;ve been using the find command simply since I can remember, but I&rsquo;ve never really got to see the true power of this command. Combined with the -exec flag this command can throw up a lot of different uses. -exec allows you to work with other bash commands and operate on them.
+A basic use would look like this:
+$ find . -name &quot;*&quot; -type f -size +10M -exec rm {} \;  Let&rsquo;s break this down.
+        </div>
+        <div class="article-readmore"><a href="/2016/01/24/bash-find-command/">Read more...</a></div>
+        <div class="article-floatclear"></div>
+      </article>
+      <article class="article">
+        <a href="/2015/12/24/setting-up-firewall/" class="article-titles">
+          <h2 class="article-title">Setting up a firewall on Linux Ubuntu 14.04</h2>
+          
+        </a>
+        <ul class="article-meta">
+          <li class="article-meta-date"><time>December 24, 2015</time></li>
+          <li class="article-meta-categories">
+            <a href="/categories/sysadmin/">
+              <svg class="icon"><use xlink:href="/images/fa-solid.svg#folder"></use></svg>
+              sysadmin
+            </a>&nbsp;
+          </li>
+        </ul>
+        <div class="article-content">
+          Uses Firewalls allow only particular access to particular network ports and paths. You can remove access to a port or a specific IP address or a range of IP addresses.
+Admins can apply rules according to what access they would like - these rules include both outgoing and incoming network traffic. This allows admins to build barriers of trust across machines.
+Modern firewalls are based on Application Layer Firewalls and are aware of the kinds of applications and protocols that the connection is using.
+        </div>
+        <div class="article-readmore"><a href="/2015/12/24/setting-up-firewall/">Read more...</a></div>
+        <div class="article-floatclear"></div>
+      </article>
+    </section>
+    
+
+<ul class="pagination">
+    
+    <li>
+        <a href="/categories/sysadmin/" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    </li>
+    
+    <li
+    class="disabled">
+    <a href="" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    </li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li
+    class="active"><a href="/categories/sysadmin/">1</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li
+    ><a href="/categories/sysadmin/page/2/">2</a></li>
+    
+    
+    <li
+    >
+    <a href="/categories/sysadmin/page/2/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    </li>
+    
+    <li>
+        <a href="/categories/sysadmin/page/2/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    </li>
+    
+</ul>
+
+  </div>
+
+
+
+<div class="site-footer">
+  <div class="copyright"></div>
+  <ul class="site-footer-items">
+    <li class="site-footer-item-rsslink">
+      <a href="/categories/sysadmin/index.xml" type="application/rss+xml" target="_blank" title="RSS">
+        <svg class="icon"><use xlink:href="/images/fa-solid.svg#rss"></use></svg>
+      </a>
+    </li>
+  </ul>
+  <div class="powerdby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>
+>>>>>>> b16940f998a8a6ccef3e3c31b8d5ce8b6bc92f8f
   </div>
 </div>
+<script src="/js/script.js"></script>
+<script src="/js/custom.js"></script>
 
+<<<<<<< HEAD
       </div>
     </main>
 
@@ -388,3 +712,8 @@ Modern firewalls are based on Application Layer Firewalls and are aware of the k
   </body>
 </html>
 
+=======
+
+</body>
+</html>
+>>>>>>> b16940f998a8a6ccef3e3c31b8d5ce8b6bc92f8f

@@ -10,6 +10,7 @@ I have directories that [agedu](http://www.chiark.greenend.org.uk/~sgtatham/aged
 
 A quick find will sort that
 
-    find . -maxdepth 1 -type f -exec \/usr\/bin\/ls -al {} \; | awk '{print $5,$9}' | sort -nr >  bigfiles.txt
+```    find . -maxdepth 1 -type f -exec \/usr\/bin\/ls -al {} \; | awk '{print $5,$9}' | sort -nr >  bigfiles.txt
+```
 
-Run this, and you will have a file called bigfiles.txt that has the size in bytes and the filename. This does not work recursively, with the flag -maxdepth 1 preventing that. `
+Run this, and you will have a file called bigfiles.txt that has the size in bytes and the filename. This does not work recursively, with the flag -maxdepth 1 preventing that. 

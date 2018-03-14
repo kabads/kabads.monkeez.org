@@ -78,7 +78,8 @@ The first step in learning about this platform, is running an EC2 instance. This
       <guid>https://kabads.monkeez.org/2016/11/20/finding-large-files-in-a-directory/</guid>
       <description>I have directories that agedu shows as having large files. However, agedu doesn&amp;rsquo;t tell me what the names of the files are.
 A quick find will sort that
-find . -maxdepth 1 -type f -exec \/usr\/bin\/ls -al {} \; | awk &#39;{print $5,$9}&#39; | sort -nr &amp;gt; bigfiles.txt  Run this, and you will have a file called bigfiles.txt that has the size in bytes and the filename. This does not work recursively, with the flag -maxdepth 1 preventing that.</description>
+find . -maxdepth 1 -type f -exec \/usr\/bin\/ls -al {} \; | awk &#39;{print $5,$9}&#39; | sort -nr &amp;gt; bigfiles.txt 
+Run this, and you will have a file called bigfiles.txt that has the size in bytes and the filename. This does not work recursively, with the flag -maxdepth 1 preventing that.</description>
     </item>
     
     <item>
