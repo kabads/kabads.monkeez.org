@@ -1,7 +1,7 @@
 ---
 title: "Sync Google Calendar With Org Agenda"
 date: 2018-03-18T13:02:55Z
-draft: true
+draft: false
 categories:
 - sysadmin
 - emacs
