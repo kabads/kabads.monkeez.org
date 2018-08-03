@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>signals</title>
+<!-- 2015-04-14 Tue 20:11 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">signals</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Signals</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Objectives</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. Explain what signals are and how they are used</a></li>
+<li><a href="#sec-1-1-2">1.1.2. Know the different signals and types of signals available in linux</a></li>
+<li><a href="#sec-1-1-3">1.1.3. Use <b>kill</b>, <b>killall</b> and <b>pkill</b> to send signals from the command line</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. What are Signals?</a>
+<ul>
+<li><a href="#sec-1-2-1">1.2.1. Not expect the event to occur</a></li>
+<li><a href="#sec-1-2-2">1.2.2. Expect the event, but not know when it is most likely to occur</a></li>
+<li><a href="#sec-1-2-3">1.2.3. For example, if a user decides to terminate a running program it could send a signal to the process through the kernel to interrupt and kill the process.</a></li>
+<li><a href="#sec-1-2-4">1.2.4. From the kernel to a user process as a result of an exception or programming error</a></li>
+<li><a href="#sec-1-2-5">1.2.5. From a user process (using a system call) to the kernel which will then send it to a user process. The process sending the signal can actually be the same as the one receiving it</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-3">1.3. Types of Signal</a></li>
+<li><a href="#sec-1-4">1.4. <b>kill</b></a></li>
+<li><a href="#sec-1-5">1.5. <b>killall</b> and <b>pkill</b></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Signals</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<b>Signals are used to emit notifications for processes to take action in response to ofetn unpredictable events. These may be caused from within a process itself, or from external events such as other processes. Many signals are fatal and result in process termination. However, death sometimes can be averted if program designers decide to handle (subvert) certain termination signals. Furthermore, many signals are more benign and are just informative or request other kinds of actions. It is possible to send signals (including those that induce termination) from the command line using *kill</b>, <b>killall</b> and <b>pkill</b>. 
+</p>
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Objectives</h3>
+<div class="outline-text-3" id="text-1-1">
+</div><div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Explain what signals are and how they are used</h4>
+</div>
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Know the different signals and types of signals available in linux</h4>
+</div>
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Use <b>kill</b>, <b>killall</b> and <b>pkill</b> to send signals from the command line</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> What are Signals?</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Signals are one of the oldest methods of <b>Inter-Process Communication</b> (<b>IPC</b>) and are used to notify processes about * asynchronous* events (or exceptions). 
+By asynchronous we mean the signal-receiving process may: 
+</p>
+</div>
+<div id="outline-container-sec-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> Not expect the event to occur</h4>
+</div>
+<div id="outline-container-sec-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> Expect the event, but not know when it is most likely to occur</h4>
+</div>
+<div id="outline-container-sec-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3"><span class="section-number-4">1.2.3</span> For example, if a user decides to terminate a running program it could send a signal to the process through the kernel to interrupt and kill the process.</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+There are two paths by which signals are sent to a process:
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-2-4" class="outline-4">
+<h4 id="sec-1-2-4"><span class="section-number-4">1.2.4</span> From the kernel to a user process as a result of an exception or programming error</h4>
+</div>
+<div id="outline-container-sec-1-2-5" class="outline-4">
+<h4 id="sec-1-2-5"><span class="section-number-4">1.2.5</span> From a user process (using a system call) to the kernel which will then send it to a user process. The process sending the signal can actually be the same as the one receiving it</h4>
+<div class="outline-text-4" id="text-1-2-5">
+<p>
+Signals can only be sent between processes owned by the same user or from a process owned by the superuser to any process. 
+When a process receives a signal, what it does will depend on the way the program is written. It can take specific actions, coded in to the program, to <b>handle</b> the signal or it can just respond according to system defaults. Two signals (<b>SIGKILL</b> or <b>SIGSTOP</b> to be mentioned next) can not be handled and will always terminate the program. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Types of Signal</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+There are a number of different types of signals, and the particular signal which is dispatched indicates what type of event (or exception) occurred. Generally, signals are used to handle two things: 
+</p>
+<ol class="org-ol">
+<li>Exceptions detected by hardware (such as an illegal memory reference)
+</li>
+<li>Exceptions generated by the environment (such as the premature death of a process from the user's terminal)
+</li>
+</ol>
+<p>
+To see a list of the signals in linux, alng with their numbers do:
+$ kill -l
+The signals from <b>SGIRTMIN</b> on are termed <b>real-time signals</b> and are a relatively recent addition. They have no predefined purpose, and differ in some important ways from normal signals; they can be queued up and are handled in <b>FIFO</b> (First in First Out) order. 
+The meaning attached to the signal type indicates what event caused the signal to be sent. While users can explicitly send any type to one of their processes, the meaning attached may no longer be implied by the signal number or type, and can be used in any way that he process desires. 
+Typing <b>man 7 signal</b> will give further documentation. 
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Signal</th>
+<th scope="col" class="right">value</th>
+<th scope="col" class="left">Default Action</th>
+<th scope="col" class="left">POSIX?</th>
+<th scope="col" class="left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">SIGHUP</td>
+<td class="right">1</td>
+<td class="left">Terminate</td>
+<td class="left">Yes</td>
+<td class="left">Hangup detected on controlling terminal or death of controlling process.</td>
+</tr>
+
+<tr>
+<td class="left">SIGINT</td>
+<td class="right">2</td>
+<td class="left">Terminate</td>
+<td class="left">Yes</td>
+<td class="left">Interrupt from keyboard.</td>
+</tr>
+
+<tr>
+<td class="left">SIGQUIT</td>
+<td class="right">3</td>
+<td class="left">Core dump</td>
+<td class="left">Yes</td>
+<td class="left">Quit from keyboard.</td>
+</tr>
+
+<tr>
+<td class="left">SIGILL</td>
+<td class="right">4</td>
+<td class="left">Core dump</td>
+<td class="left">Yes</td>
+<td class="left">Illegal Instruction.</td>
+</tr>
+
+<tr>
+<td class="left">SIGTRAP</td>
+<td class="right">5</td>
+<td class="left">Core dump</td>
+<td class="left">No</td>
+<td class="left">Trace/breakpoint trap for debugging.</td>
+</tr>
+
+<tr>
+<td class="left">SIGABRT SIGIOT</td>
+<td class="right">6</td>
+<td class="left">Core dump</td>
+<td class="left">Yes</td>
+<td class="left">Abnormal termination.</td>
+</tr>
+
+<tr>
+<td class="left">SIGBUS</td>
+<td class="right">7</td>
+<td class="left">Core dump</td>
+<td class="left">Yes</td>
+<td class="left">Bus error.</td>
+</tr>
+
+<tr>
+<td class="left">SIGFPE</td>
+<td class="right">8</td>
+<td class="left">Core dump</td>
+<td class="left">Yes</td>
+<td class="left">Floating point exception.</td>
+</tr>
+
+<tr>
+<td class="left">SIGKILL</td>
+<td class="right">9</td>
+<td class="left">Terminate</td>
+<td class="left">Yes</td>
+<td class="left">Kill signal (can not be caught or ignored).</td>
+</tr>
+
+<tr>
+<td class="left">SIGUSR1</td>
+<td class="right">10</td>
+<td class="left">Terminate</td>
+<td class="left">Yes</td>
+<td class="left">User-defined signal 1.</td>
+</tr>
+
+<tr>
+<td class="left">SIGSEGV</td>
+<td class="right">11</td>
+<td class="left">Core dump</td>
+<td class="left">Yes</td>
+<td class="left">Invalid memory reference.</td>
+</tr>
+
+<tr>
+<td class="left">SIGUSR2</td>
+<td class="right">12</td>
+<td class="left">Terminate</td>
+<td class="left">Yes</td>
+<td class="left">User-defined signal 2.</td>
+</tr>
+
+<tr>
+<td class="left">SIGPIPE</td>
+<td class="right">13</td>
+<td class="left">Terminate</td>
+<td class="left">Yes</td>
+<td class="left">Broken pipe: write to pipe with no readers.</td>
+</tr>
+
+<tr>
+<td class="left">SIGALRM</td>
+<td class="right">14</td>
+<td class="left">Terminate</td>
+<td class="left">Yes</td>
+<td class="left">Timer signal from alarm.</td>
+</tr>
+
+<tr>
+<td class="left">SIGTERM</td>
+<td class="right">15</td>
+<td class="left">Terminate</td>
+<td class="left">Yes</td>
+<td class="left">Process termination.</td>
+</tr>
+
+<tr>
+<td class="left">SIGSTKFLT</td>
+<td class="right">16</td>
+<td class="left">Terminate</td>
+<td class="left">No</td>
+<td class="left">Stack fault on math co-processor.</td>
+</tr>
+
+<tr>
+<td class="left">SIGCHLD</td>
+<td class="right">17</td>
+<td class="left">Ignore</td>
+<td class="left">Yes</td>
+<td class="left">Child stopped or terminated.</td>
+</tr>
+
+<tr>
+<td class="left">SIGCONT</td>
+<td class="right">18</td>
+<td class="left">Continue</td>
+<td class="left">Yes</td>
+<td class="left">Continue if stopped.</td>
+</tr>
+
+<tr>
+<td class="left">SIGSTOP</td>
+<td class="right">19</td>
+<td class="left">Stop</td>
+<td class="left">Yes</td>
+<td class="left">Stop process (can not be caught or ignored).</td>
+</tr>
+
+<tr>
+<td class="left">SIGTSTP</td>
+<td class="right">20</td>
+<td class="left">Stop</td>
+<td class="left">Yes</td>
+<td class="left">Stop types at tty.</td>
+</tr>
+
+<tr>
+<td class="left">SIGTTIN</td>
+<td class="right">21</td>
+<td class="left">Stop</td>
+<td class="left">Yes</td>
+<td class="left">Background process requires tty input.</td>
+</tr>
+
+<tr>
+<td class="left">SIGTTOU</td>
+<td class="right">22</td>
+<td class="left">Stop</td>
+<td class="left">Yes</td>
+<td class="left">Background process requires tty output.</td>
+</tr>
+
+<tr>
+<td class="left">SIGURG</td>
+<td class="right">23</td>
+<td class="left">Ignore</td>
+<td class="left">No</td>
+<td class="left">Urgent condition on socket (4.2 BSD).</td>
+</tr>
+
+<tr>
+<td class="left">SIGXCPU</td>
+<td class="right">24</td>
+<td class="left">Core dump</td>
+<td class="left">Yes</td>
+<td class="left">CPU time limit exceeded (4.2 BSD).</td>
+</tr>
+
+<tr>
+<td class="left">SIGXFSZ</td>
+<td class="right">25</td>
+<td class="left">Core dump</td>
+<td class="left">Yes</td>
+<td class="left">File size limit exceeded (4.2 BSD).</td>
+</tr>
+
+<tr>
+<td class="left">SIGVTALRM</td>
+<td class="right">26</td>
+<td class="left">Terminate</td>
+<td class="left">No</td>
+<td class="left">Virtual alarm clock (4.2 BSD).</td>
+</tr>
+
+<tr>
+<td class="left">SIGPROF</td>
+<td class="right">27</td>
+<td class="left">Terminate</td>
+<td class="left">No</td>
+<td class="left">Profile alarm clock (4.2 BSD).</td>
+</tr>
+
+<tr>
+<td class="left">SIGWINCH</td>
+<td class="right">28</td>
+<td class="left">Ignore</td>
+<td class="left">No</td>
+<td class="left">Window resize signal (4.3 BSD, Sun).</td>
+</tr>
+
+<tr>
+<td class="left">SIGIO SIGPOLL</td>
+<td class="right">29</td>
+<td class="left">Terminate</td>
+<td class="left">No</td>
+<td class="left">I/O now possible (4.2 BSD) (System V).</td>
+</tr>
+
+<tr>
+<td class="left">SIGPWR</td>
+<td class="right">30</td>
+<td class="left">Terminate</td>
+<td class="left">No</td>
+<td class="left">Power Failure (System V).</td>
+</tr>
+
+<tr>
+<td class="left">SIGSYS SIGUNUSED</td>
+<td class="right">31</td>
+<td class="left">Terminate</td>
+<td class="left">No</td>
+<td class="left">Bad System Called. Unused signal.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> <b>kill</b></h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+A process cannot send a signal directly to another process; t must ask the kernl to send the signal by executing a <b>system call</b>. Users (including the super user) can send signals to other processes from the command line or scripts by using <b>kill</b> as in:
+$ kill 1991
+$ kill -9 1991
+$ kill -SIGKILL 1991
+where we are sending a signal to the process with <b>PID=1991</b>. If a signal number is not given (as in the first example) the default is to send <b>SIGTERM(15)</b>, a terminate signal that can be handled; the program can take elsuve action or clean up after itself rather than just die immediately. If this signal is ignored, the user can usually send a <b>SIGKILL(9)</b>, which cannot be ignored, to terminate with extreme prejudice.
+The name <b>kill</b> is really a bad name, a misnomer that survives for historical reasons. Although it is often used to kill (terminate) processes, the command's real function is to send any and all signals to processes, even totally benign informative ones.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> <b>killall</b> and <b>pkill</b></h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+<b>killall</b> kills all processes with a given name, assuming the user has sufficient privelege. It uses a command name rather than a process ID, and can be done as in:
+$ killall bash
+$ killall -9 bash
+$ killall -SIGKILL bash
+<b>pkill</b> sends a signal to a process using selection criteria: 
+$ pkill [-signal] [options] [pattern]
+For example, 
+$ pkill -u libby foobar
+will kill all of <b>libby's</b> processes wth a name <b>foobar</b>. 
+Another example:
+$ pkill -HUP rsyslogd
+makes rsyslog reread its configuration file.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2015-04-14 Tue 20:11</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

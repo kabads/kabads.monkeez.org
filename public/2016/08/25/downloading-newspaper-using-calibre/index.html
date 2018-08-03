@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>How to download newspapers with Calibre and deliver to your Kindle - Kabads - musings, mutterings and murmerings</title>
+  <meta property="og:title" content="How to download newspapers with Calibre and deliver to your Kindle - Kabads - musings, mutterings and murmerings" />
+  <meta name="twitter:title" content="How to download newspapers with Calibre and deliver to your Kindle - …" />
+  <meta name="description" content="So, I have read a few pages which outline how to do this, but none seem to sum all of it. I&rsquo;ve set up my Raspberry to download a newspaper and then deliver it daily to my Kindle. I paid for a subscription (in fact, I pay for more than one subscription) so I feel entitled to do this, as I&rsquo;m supporting the journalists financially.
+Firstly, you will need to install Calibre.">
+  <meta property="og:description" content="So, I have read a few pages which outline how to do this, but none seem to sum all of it. I&rsquo;ve set up my Raspberry to download a newspaper and then deliver it daily to my Kindle. I paid for a subscription (in fact, I pay for more than one subscription) so I feel entitled to do this, as I&rsquo;m supporting the journalists financially.
+Firstly, you will need to install Calibre.">
+  <meta name="twitter:description" content="So, I have read a few pages which outline how to do this, but none seem to sum all of it. I&rsquo;ve set up my Raspberry to download a newspaper and then deliver it daily to my Kindle. I paid for a …">
+  <meta name="author" content=""/>
+  <meta property="og:site_name" content="Kabads - musings, mutterings and murmerings" />
+  <meta property="og:url" content="/2016/08/25/downloading-newspaper-using-calibre/" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="generator" content="Hugo 0.42.2" />
+  <link rel="stylesheet" href="/css/style.css" media="all" />
+  <link rel="stylesheet" href="/css/syntax.css" media="all" />
+  <link rel="stylesheet" href="/css/custom.css" media="all" />
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="site-navi">
+    <h1 class="site-title"><a href="/">Kabads - musings, mutterings and murmerings</a></h1>
+    <ul class="site-navi-items">
+      <li class="site-navi-item-categories"><a href="/categories/" title="Categories">Categories</a></li>
+      <li class="site-navi-item-about"><a href="/about/" title="About">About</a></li>
+    </ul>
+  </nav>
+</header>
+<hr class="site-header-bottom">
+
+  <div class="main" role="main">
+    <article class="article">
+      
+      
+      <h1 class="article-title">How to download newspapers with Calibre and deliver to your Kindle</h1>
+      
+      <hr class="article-title-bottom">
+      <ul class="article-meta">
+        <li class="article-meta-date"><time>August 25, 2016</time></li>
+        <li class="article-meta-categories">
+          <a href="/categories/reading/">
+            <svg class="icon"><use xlink:href="/images/fa-solid.svg#folder"></use></svg>
+            reading
+          </a>&nbsp;
+        </li>
+      </ul>
+      
+      <p>So, I have read a few pages which outline how to do this, but none seem to sum all of it. I&rsquo;ve set up my Raspberry to download a newspaper and then deliver it daily to my Kindle. I paid for a subscription (in fact, I pay for more than one subscription) so I feel entitled to do this, as I&rsquo;m supporting the journalists financially.</p>
+
+<p>Firstly, you will need to install <a href="https://calibre-ebook.com">Calibre</a>. My RaspberryPi doesn&rsquo;t have an X server running and this made it trickier, as I don&rsquo;t want a lot of bloat on this machine (it&rsquo;s not hugely powerful). Calibre does pull in a load of libraries, but they will only use up space, not resources. Then you will need the newspaper .recipe file. This was the trickiest part. I didn&rsquo;t know how other people were getting these recipes on their machine and they didn&rsquo;t seem to mention. I know that when you run Calibre through the gui you can easily choose one of the recipes. However, I didn&rsquo;t have that luxury. To get around this, I visited the <a href="https://github.com/kovidgoyal/calibre/tree/master/recipes">github repository for Calibre</a> and found the .recipe file I was looking for and posted that on to the RaspberryPi.</p>
+
+<p>Then I ran the command:</p>
+
+<pre><code>ebook-convert ./PATH-TO-CALIBRE-RECIPES/newspaper.recipe newspaper.epub --output-profile=kindle
+</code></pre>
+
+<p>You can change the filenames so that it suits your particular situation. Once this is run, it will look at the recipe script and start downloading the files, and constructing the .epub file. If you want to read this on your Kindle, you will need to convert it to a .mobi file.</p>
+
+<p>Calibre will also allow you to email the file to your Kindle (this is one of the good features that Amazon have built in to the Kindle). If you have a Kobo or other e-reader, you can connect a cable and put it on your device. If you have a different way of uploading this file on to your device, please let me know in the comments below. It is possible to run Calibre as a web service, so you could browse this server from your e-reader (if it has a browser) and then download it that way.</p>
+
+<pre><code>/usr/bin/calibre-stmp from@email.com to@email.com &quot;Sent from&quot; -r smtp.gmail.com -u user@gmail.com -a newspaper.epub -p password -e TLS --port 587 
+</code></pre>
+
+<p>This command can be put in to a script file and then called from cron.</p>
+
+    </article>
+
+    
+<ul class="article-share">
+  <li>
+    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </li>
+  <li>
+    <div class="fb-share-button" data-href="https://kabads.monkeez.org/2016/08/25/downloading-newspaper-using-calibre/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.10";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+  </li>
+  <li>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <g:plus action="share"></g:plus>
+  </li>
+  <li>
+    <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="en" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  </li>
+  <li>
+    <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    <script>!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+  </li>
+</ul>
+
+    <ul class="pager article-pager">
+      <li class="pager-newer">
+          <a href="/2016/11/20/finding-large-files-in-a-directory/" data-toggle="tooltip" data-placement="top" title="Finding large files in a directory">&lt; Newer</a>
+      </li>
+      <li class="pager-older">
+        <a href="/2016/08/12/cuba/" data-toggle="tooltip" data-placement="top" title="Cuba">Older &gt;</a>
+      </li>
+    </ul>
+  </div>
+
+
+<div class="site-footer">
+  <div class="copyright"></div>
+  <ul class="site-footer-items">
+  </ul>
+  <div class="powerdby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>
+  </div>
+</div>
+<script src="/js/script.js"></script>
+<script src="/js/custom.js"></script>
+
+
+</body>
+</html>

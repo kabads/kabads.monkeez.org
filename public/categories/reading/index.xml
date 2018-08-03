@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Reading on Kabads - musings, mutterings and murmerings</title>
+    <link>https://kabads.monkeez.org/categories/reading/</link>
+    <description>Recent content in Reading on Kabads - musings, mutterings and murmerings</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 25 Aug 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://kabads.monkeez.org/categories/reading/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How to download newspapers with Calibre and deliver to your Kindle</title>
+      <link>https://kabads.monkeez.org/2016/08/25/downloading-newspaper-using-calibre/</link>
+      <pubDate>Thu, 25 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2016/08/25/downloading-newspaper-using-calibre/</guid>
+      <description>So, I have read a few pages which outline how to do this, but none seem to sum all of it. I&amp;rsquo;ve set up my Raspberry to download a newspaper and then deliver it daily to my Kindle. I paid for a subscription (in fact, I pay for more than one subscription) so I feel entitled to do this, as I&amp;rsquo;m supporting the journalists financially.
+Firstly, you will need to install Calibre.</description>
+    </item>
+    
+  </channel>
+</rss>

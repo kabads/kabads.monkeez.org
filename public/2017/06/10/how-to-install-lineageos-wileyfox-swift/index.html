@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>How to install LineageOS on Wileyfox Swift - Kabads - musings, mutterings and murmerings</title>
+  <meta property="og:title" content="How to install LineageOS on Wileyfox Swift - Kabads - musings, mutterings and murmerings" />
+  <meta name="twitter:title" content="How to install LineageOS on Wileyfox Swift - Kabads - musings, …" />
+  <meta name="description" content="With the demise of Cyanogenmod and CyanogenOS people who like to keep a cheaper phone up to date will have to familiarise themselves with LineageOS. This is the fork of the latest version where CyanogenMod left off. As the company shutdown, users are left with no updates. LineageOS will resolve this for you.
+It had been a while (8 months) since installing a new custom ROM, so I wasn&rsquo;t so familiar with the TWRP recovery boot process.">
+  <meta property="og:description" content="With the demise of Cyanogenmod and CyanogenOS people who like to keep a cheaper phone up to date will have to familiarise themselves with LineageOS. This is the fork of the latest version where CyanogenMod left off. As the company shutdown, users are left with no updates. LineageOS will resolve this for you.
+It had been a while (8 months) since installing a new custom ROM, so I wasn&rsquo;t so familiar with the TWRP recovery boot process.">
+  <meta name="twitter:description" content="With the demise of Cyanogenmod and CyanogenOS people who like to keep a cheaper phone up to date will have to familiarise themselves with LineageOS. This is the fork of the latest version where …">
+  <meta name="author" content=""/>
+  <meta property="og:site_name" content="Kabads - musings, mutterings and murmerings" />
+  <meta property="og:url" content="/2017/06/10/how-to-install-lineageos-wileyfox-swift/" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="generator" content="Hugo 0.42.2" />
+  <link rel="stylesheet" href="/css/style.css" media="all" />
+  <link rel="stylesheet" href="/css/syntax.css" media="all" />
+  <link rel="stylesheet" href="/css/custom.css" media="all" />
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="site-navi">
+    <h1 class="site-title"><a href="/">Kabads - musings, mutterings and murmerings</a></h1>
+    <ul class="site-navi-items">
+      <li class="site-navi-item-categories"><a href="/categories/" title="Categories">Categories</a></li>
+      <li class="site-navi-item-about"><a href="/about/" title="About">About</a></li>
+    </ul>
+  </nav>
+</header>
+<hr class="site-header-bottom">
+
+  <div class="main" role="main">
+    <article class="article">
+      
+      
+      <h1 class="article-title">How to install LineageOS on Wileyfox Swift</h1>
+      
+      <hr class="article-title-bottom">
+      <ul class="article-meta">
+        <li class="article-meta-date"><time>June 10, 2017</time></li>
+        <li class="article-meta-categories">
+          <a href="/categories/tech/">
+            <svg class="icon"><use xlink:href="/images/fa-solid.svg#folder"></use></svg>
+            tech
+          </a>&nbsp;
+        </li>
+      </ul>
+      
+      <p>With the demise of Cyanogenmod and CyanogenOS people who like to keep a cheaper phone up to date will have to familiarise themselves with <a href="http://lineageos.org">LineageOS</a>. This is the fork of the latest version where CyanogenMod left off. As the company shutdown, users are left with no updates. LineageOS will resolve this for you.</p>
+
+<p>It had been a while (8 months) since installing a new custom ROM, so I wasn&rsquo;t so familiar with the TWRP recovery boot process. I had a couple of problems installing this - it seems that the latest image doesn&rsquo;t work and neither does 3.0.1 - so had to go for 3.0.0. Download that to your computer, then make sure you have a working copy of <a href="https://developer.android.com/studio/command-line/adb.html">adb</a>. Then in the command line with your phone plugged in via USB with USB debugging switched on, type:</p>
+
+<pre><code>adb flash recovery twrp-3.0.0.img 
+</code></pre>
+
+<p>This booted and allowed me to update the files. From there it was very simple.</p>
+
+<pre><code>adb push lineageos.zip /sdcard/
+</code></pre>
+
+<p>If you want to install Google Apps (go for open_gapps), push that zip file to in the same way:</p>
+
+<pre><code>adb push open_gapps.zip /sdcard/ 
+</code></pre>
+
+<p>If root is required push the <a href="https://download.lineageos.org/extra">addonsu zip file</a>:</p>
+
+<pre><code>adb push addonsu.zip /sdcard/
+</code></pre>
+
+<p>and then run power off and reboot in to recovery mode. Once in recovery mode, you need to wipe the system and data partitions. Then, install the .zip files that you pushed earlier - firstly with the lineageos.zip, then gapps.zip and then as an optional the root zip.</p>
+
+<p>Once you reboot, you will have a new lineageos install and have to feed in any particular personal details or Google Accounts.</p>
+
+    </article>
+
+    
+<ul class="article-share">
+  <li>
+    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </li>
+  <li>
+    <div class="fb-share-button" data-href="https://kabads.monkeez.org/2017/06/10/how-to-install-lineageos-wileyfox-swift/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.10";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+  </li>
+  <li>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <g:plus action="share"></g:plus>
+  </li>
+  <li>
+    <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="en" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  </li>
+  <li>
+    <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    <script>!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+  </li>
+</ul>
+
+    <ul class="pager article-pager">
+      <li class="pager-newer">
+          <a href="/2017/07/02/swindon-to-goring-walk/" data-toggle="tooltip" data-placement="top" title="TADS walk Swindon to Goring">&lt; Newer</a>
+      </li>
+      <li class="pager-older">
+        <a href="/2017/05/06/a-cartoon-about-file-permissions/" data-toggle="tooltip" data-placement="top" title="A Cartoon About File Permissions">Older &gt;</a>
+      </li>
+    </ul>
+  </div>
+
+
+<div class="site-footer">
+  <div class="copyright"></div>
+  <ul class="site-footer-items">
+  </ul>
+  <div class="powerdby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>
+  </div>
+</div>
+<script src="/js/script.js"></script>
+<script src="/js/custom.js"></script>
+
+
+</body>
+</html>
