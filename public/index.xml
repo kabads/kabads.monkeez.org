@@ -1,0 +1,1132 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kabads - musings, mutterings and murmerings</title>
+    <link>https://kabads.monkeez.org/</link>
+    <description>Recent content on Kabads - musings, mutterings and murmerings</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 18 Mar 2018 13:02:55 +0000</lastBuildDate>
+    
+	<atom:link href="https://kabads.monkeez.org/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Sync Google Calendar With Org Agenda</title>
+      <link>https://kabads.monkeez.org/sync-google-calendar-with-org-agenda/</link>
+      <pubDate>Sun, 18 Mar 2018 13:02:55 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/sync-google-calendar-with-org-agenda/</guid>
+      <description>I use org-mode an awful lot - it helps me manage my tasks and code all in one place. However, the organisation that I work for have just migrated over to Google Suite and manage meetings extensively using Google Calendar. I really wanted my Google Calendar to sync with my org-agenda. Org-agenda is a tool that pulls in any scheduled activities from all your files in to one dynamic view.</description>
+    </item>
+    
+    <item>
+      <title>Cycle Jaunt Around Bath</title>
+      <link>https://kabads.monkeez.org/2018-02-11-cycle-jaunt-around-bath/</link>
+      <pubDate>Sun, 11 Feb 2018 19:20:30 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2018-02-11-cycle-jaunt-around-bath/</guid>
+      <description>Sunday involved a train ride to bath with a Brompton in fold, and then cycling around the Two Tunnels circular route. A quick stop at The Hope and Anchor pub to avoid the sleet and get a quick half-way coffee, is highly recommended.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://kabads.monkeez.org/about/</link>
+      <pubDate>Tue, 06 Feb 2018 08:36:51 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/about/</guid>
+      <description>If you want to contact me, please dm me on twitter @kabads</description>
+    </item>
+    
+    <item>
+      <title>How to create an instance that pulls your website content automatically</title>
+      <link>https://kabads.monkeez.org/2017/10/03/aws-how-to-automatically-launch-apache-with-your-site-content/</link>
+      <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2017/10/03/aws-how-to-automatically-launch-apache-with-your-site-content/</guid>
+      <description>Amazon Web Services allows you to spin up instances very quickly. This how to will show you how to upload your content to a S3 bucket and then launch an instance that pulls that content in and starts Apache to serve that content.
+Initially, you will need to create a role under IAM. This will have to be able to access S3, so create the role, choose which service you would like to associate it with.</description>
+    </item>
+    
+    <item>
+      <title>AWS - How to Create A VPC</title>
+      <link>https://kabads.monkeez.org/2017/09/20/how-to-create-a-vpc/</link>
+      <pubDate>Wed, 20 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2017/09/20/how-to-create-a-vpc/</guid>
+      <description>AWS allows you to create your own virtual private cloud (or VPC). This is a network within which your machines will communicate. You can control the level of access across your VPC through subnets, Network Access Control Lists and Security Groups.
+Network Access Control lists allow particular traffic in and outbound, but are stateless; that is, if you allow traffic in, it doesn&amp;rsquo;t necessarily mean that traffic will leave the network.</description>
+    </item>
+    
+    <item>
+      <title>AWS - How to Serve Traffic from a Load Balancer</title>
+      <link>https://kabads.monkeez.org/2017/09/20/aws-how-to-serve-traffic-from-load-balancer/</link>
+      <pubDate>Wed, 20 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2017/09/20/aws-how-to-serve-traffic-from-load-balancer/</guid>
+      <description>Amazon Web Services (AWS) allows you to serve private network traffic from behind a public load balancer. This offers extra security benefits as it detects DDOS traffic and other exploits and offers a layer of protection.
+There are some things you should know before you start this tutorial. You should know:
+ How to create a VPC How to configure subnets How to create an EC2 instance How to ensure an EC2 instance is within an particular subnet How to ssh to an EC2 instance  You will create a new VPC.</description>
+    </item>
+    
+    <item>
+      <title>TADS walk Swindon to Goring</title>
+      <link>https://kabads.monkeez.org/2017/07/02/swindon-to-goring-walk/</link>
+      <pubDate>Sun, 02 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2017/07/02/swindon-to-goring-walk/</guid>
+      <description>TADS - Teresa, Adam, Dave and Shep walking. We have been walking for about 2 years now, all around the South East. This was our longest walk by far in two days. Swindon to Goring.
+The walk started out with us meeting at Swindon having lunch. There seemed to be quite a lot going on in the town with Canadian flags and guys at the train station with Ice Hockey sticks.</description>
+    </item>
+    
+    <item>
+      <title>How to install LineageOS on Wileyfox Swift</title>
+      <link>https://kabads.monkeez.org/2017/06/10/how-to-install-lineageos-wileyfox-swift/</link>
+      <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2017/06/10/how-to-install-lineageos-wileyfox-swift/</guid>
+      <description>With the demise of Cyanogenmod and CyanogenOS people who like to keep a cheaper phone up to date will have to familiarise themselves with LineageOS. This is the fork of the latest version where CyanogenMod left off. As the company shutdown, users are left with no updates. LineageOS will resolve this for you.
+It had been a while (8 months) since installing a new custom ROM, so I wasn&amp;rsquo;t so familiar with the TWRP recovery boot process.</description>
+    </item>
+    
+    <item>
+      <title>A Cartoon About File Permissions</title>
+      <link>https://kabads.monkeez.org/2017/05/06/a-cartoon-about-file-permissions/</link>
+      <pubDate>Sat, 06 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2017/05/06/a-cartoon-about-file-permissions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Setting up SSL Certificates with Lets Encrypt and certbot</title>
+      <link>https://kabads.monkeez.org/2017/01/29/setting-up-lets-encrypt-with-certauto/</link>
+      <pubDate>Sun, 29 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2017/01/29/setting-up-lets-encrypt-with-certauto/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Running EC2 Instance</title>
+      <link>https://kabads.monkeez.org/2016/12/10/running-ec2-instance/</link>
+      <pubDate>Sat, 10 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2016/12/10/running-ec2-instance/</guid>
+      <description>Amazon have provided a pretty neat infrastructure with Amazon Web Services (AWS). By using this as a platform, you can quickly scale up and down provisioned resources. At times, you may experience peak demand, and AWS will allow you to respond with this. At other times, you can scale your resources down.
+The first step in learning about this platform, is running an EC2 instance. This is the &amp;lsquo;machine&amp;rsquo; behind your service.</description>
+    </item>
+    
+    <item>
+      <title>Finding large files in a directory</title>
+      <link>https://kabads.monkeez.org/2016/11/20/finding-large-files-in-a-directory/</link>
+      <pubDate>Sun, 20 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2016/11/20/finding-large-files-in-a-directory/</guid>
+      <description>I have directories that agedu shows as having large files. However, agedu doesn&amp;rsquo;t tell me what the names of the files are.
+A quick find will sort that
+ Run this, and you will have a file called bigfiles.txt that has the size in bytes and the filename. This does not work recursively, with the flag -maxdepth 1 preventing that.</description>
+    </item>
+    
+    <item>
+      <title>How to download newspapers with Calibre and deliver to your Kindle</title>
+      <link>https://kabads.monkeez.org/2016/08/25/downloading-newspaper-using-calibre/</link>
+      <pubDate>Thu, 25 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2016/08/25/downloading-newspaper-using-calibre/</guid>
+      <description>So, I have read a few pages which outline how to do this, but none seem to sum all of it. I&amp;rsquo;ve set up my Raspberry to download a newspaper and then deliver it daily to my Kindle. I paid for a subscription (in fact, I pay for more than one subscription) so I feel entitled to do this, as I&amp;rsquo;m supporting the journalists financially.
+Firstly, you will need to install Calibre.</description>
+    </item>
+    
+    <item>
+      <title>Cuba</title>
+      <link>https://kabads.monkeez.org/2016/08/12/cuba/</link>
+      <pubDate>Fri, 12 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2016/08/12/cuba/</guid>
+      <description>Trip to Cuba Having gone to one of the best destinations I&amp;rsquo;ve probably ever been to, I felt the need to document it in a more formal way. I was inspired by the Cuban culture and vibrant life to record some of the sights I&amp;rsquo;d seen.
+I like the achitecture of buildings. Once they were part of the finery of Havana, but since then, people don&amp;rsquo;t have the money to upkeep this kind of large building, hence its appearance.</description>
+    </item>
+    
+    <item>
+      <title>Trying a climb</title>
+      <link>https://kabads.monkeez.org/2016/07/03/cycling-trying-a-climb/</link>
+      <pubDate>Sun, 03 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2016/07/03/cycling-trying-a-climb/</guid>
+      <description>This afternoon, I met up with a few friends at a local pub. It was great catching up with everyone, but what also great was that afterwards, I planned to cycle some 15km to one of the largest hills around. I wanted to see what it was like to climb roughly 150m up a hill. And find out, I did. I didn&amp;rsquo;t quite make it all the way to the top without stopping, but I got to the top with one break just near the top.</description>
+    </item>
+    
+    <item>
+      <title>Using sed</title>
+      <link>https://kabads.monkeez.org/2016/02/20/using-sed/</link>
+      <pubDate>Sat, 20 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2016/02/20/using-sed/</guid>
+      <description>sed is a quick command line utility to change text within a file, or input stream. Typically, it is used within a pipe situation (i.e. using the character | on the command line). If you are not familiar with that command, you will need to research that before continuing.
+A simple use of sed is to replace characters in a stream or file. This is done using regular expressions. This will help you search for a set of characters and then replace them with the alternative.</description>
+    </item>
+    
+    <item>
+      <title>Bash find command</title>
+      <link>https://kabads.monkeez.org/2016/01/24/bash-find-command/</link>
+      <pubDate>Sun, 24 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2016/01/24/bash-find-command/</guid>
+      <description>Find command I&amp;rsquo;ve been using the find command simply since I can remember, but I&amp;rsquo;ve never really got to see the true power of this command. Combined with the -exec flag this command can throw up a lot of different uses. -exec allows you to work with other bash commands and operate on them.
+A basic use would look like this:
+$ find . -name &amp;quot;*&amp;quot; -type f -size +10M -exec rm {} \;  Let&amp;rsquo;s break this down.</description>
+    </item>
+    
+    <item>
+      <title>Setting up a firewall on Linux Ubuntu 14.04</title>
+      <link>https://kabads.monkeez.org/2015/12/24/setting-up-firewall/</link>
+      <pubDate>Thu, 24 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/12/24/setting-up-firewall/</guid>
+      <description>Uses Firewalls allow only particular access to particular network ports and paths. You can remove access to a port or a specific IP address or a range of IP addresses.
+Admins can apply rules according to what access they would like - these rules include both outgoing and incoming network traffic. This allows admins to build barriers of trust across machines.
+Modern firewalls are based on Application Layer Firewalls and are aware of the kinds of applications and protocols that the connection is using.</description>
+    </item>
+    
+    <item>
+      <title>How to enable disk quotas for users</title>
+      <link>https://kabads.monkeez.org/2015/12/22/how-to-enable-disk-quotas-linux/</link>
+      <pubDate>Tue, 22 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/12/22/how-to-enable-disk-quotas-linux/</guid>
+      <description>Uses Linux allows setting quotas on a filesystem. This will prevent users from using more diskspace than they are allowed. This can also be used to manage group allowances to enforce the allowance for a collection of users. Stopping users from filling up a diskspace can be an important on a shared system as filling up a physical disk drive can bring a system down, or make it unstable.</description>
+    </item>
+    
+    <item>
+      <title>Encrypt a partition on Linux</title>
+      <link>https://kabads.monkeez.org/2015/12/05/encrypt-a-partition/</link>
+      <pubDate>Sat, 05 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/12/05/encrypt-a-partition/</guid>
+      <description>Introduction An encrypted partition can add a layer of security to your system. When initialized, it will ask for the passphrase which, if unavailable, will not allow proper mounting. This renders the information on the drive as unreadable.
+Most systems use the Linux Unified Key Setup (LUKS for short) format for encryption and this can be a standard install for most distribution.
+Steps for setting up LUKS Setting up the drive Firstly you should have a partition drive that is unmounted and unformatted (no filesystem).</description>
+    </item>
+    
+    <item>
+      <title>How and why you should be using 2 factor authentication</title>
+      <link>https://kabads.monkeez.org/2015/10/31/how-and-why-2-factor-authentication/</link>
+      <pubDate>Sat, 31 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/10/31/how-and-why-2-factor-authentication/</guid>
+      <description>Two factor authentication provides another layer of security to any sign in for services you use. By enabling 2 factor authentication, you are using another layer of security when signing in. However, this extra layer of security is a physical one, not necessarily digital. The 2 factor authentication requires a particular object which cannot be replicated. This can be the form of a USB key or a mobile phone. Banks have used this before with card readers which produce a particular code.</description>
+    </item>
+    
+    <item>
+      <title>Linux group explained</title>
+      <link>https://kabads.monkeez.org/2015/10/18/groups-explained/</link>
+      <pubDate>Sun, 18 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/10/18/groups-explained/</guid>
+      <description>Users on a linux system belong to at least one group. Groups allow a systems administrator to create parts of the filesystem where a group of users can share files. They also allow a group of users to access particular commands or resources on the system, that other users might not be able to access.
+Groups are defined in the /etc/group file, which is only root writeable.
+To create a group, the groupadd command is used.</description>
+    </item>
+    
+    <item>
+      <title>Using Git as a content manager system</title>
+      <link>https://kabads.monkeez.org/2015/09/10/using-git-as-content-manager/</link>
+      <pubDate>Thu, 10 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/09/10/using-git-as-content-manager/</guid>
+      <description>Not familiar with git? Start with an online book or Version Control with Git.
+Git is an open sourced source control software system. It allows coders to manage large projects remotely and on their own machine. Each contributor will hold their own version of the code on their machine and can manipulate that however they wish. Eventually, they can push back their contributions to a remote repository.
+This workflow design can also be great for managing content, although that content does have to be in text format - git will allow binary files to be uploaded and managed, but doesn&amp;rsquo;t allow for differences between files to be shown - this can only be done with plain text files.</description>
+    </item>
+    
+    <item>
+      <title>How to set-up RAID on Linux</title>
+      <link>https://kabads.monkeez.org/2015/08/27/how-to-set-up-raid-drives-linux/</link>
+      <pubDate>Thu, 27 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/08/27/how-to-set-up-raid-drives-linux/</guid>
+      <description>RAID disks offer particular advantages over ordinary single disk set up. Data redundancy is improved (consider it to be a continuous backup) and also significant performance can be seen with the correct configuration.
+There are different types of RAID levels and each level will need to be chosen on a use-case:
+ RAID 0: Uses only striping - this makes two disks appear like one larger disk. Provides a performance boost when accessing disks.</description>
+    </item>
+    
+    <item>
+      <title>How to set-up LVM on Linux</title>
+      <link>https://kabads.monkeez.org/2015/08/21/how-to-set-up-lvm-linux/</link>
+      <pubDate>Fri, 21 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/08/21/how-to-set-up-lvm-linux/</guid>
+      <description>What are the advantages of Logical Volume Management (LVM)?
+LVM treats your physical harddrives as &amp;lsquo;elastic&amp;rsquo; storage - that is extents can be across disks allowing filesystems to be across many disks and/or partitions. This allows a lot of flexibility and can allow filesystems to shrink or grow easily.
+There is a small disadvantage when using LVM - there is an overhead when reading and writing to disk - which doesn&amp;rsquo;t normally happen when writing to a normal block disk.</description>
+    </item>
+    
+    <item>
+      <title>Bring your own device or RaspberryPi hardware in education</title>
+      <link>https://kabads.monkeez.org/2015/08/14/bring-your-own-device/</link>
+      <pubDate>Fri, 14 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/08/14/bring-your-own-device/</guid>
+      <description>The problem? School&amp;rsquo;s are facing dwindling education budgets and yet increasing expectations for children&amp;rsquo;s attainment in their knowledge. They are expected to deliver a better educational experience for less money (per head). How could they possibly do this, knowing that even now they are challenged with their budgets?
+When people pick up new technology they usually have to learn how to use the device - this is included in new operating systems that are released.</description>
+    </item>
+    
+    <item>
+      <title>TTIP - Nothing to hide, nothing to fear</title>
+      <link>https://kabads.monkeez.org/2015/08/08/nothing-hide-nothing-to-fear/</link>
+      <pubDate>Sat, 08 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/08/08/nothing-hide-nothing-to-fear/</guid>
+      <description>So, not many people have heard about the Transatlantic Trade Investment Partnership agreement -aka TTIP - and it isn&amp;rsquo;t receiving much coverage from the BBC or other news outlets.
+However, this cartoon shows pretty much what is going on.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://kabads.monkeez.org/2015/07/30/balcony-view/</link>
+      <pubDate>Thu, 30 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/07/30/balcony-view/</guid>
+      <description>Our balcony view.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://kabads.monkeez.org/2015/07/29/amazon-prime-music-review/</link>
+      <pubDate>Wed, 29 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/07/29/amazon-prime-music-review/</guid>
+      <description>Amazon yesterday released the prime music service in the UK. This came at a particularly useful time for me as I&amp;rsquo;m currently not working and so have quite a bit of time to play with it. I have used spotify in the past, but not regularly as I don&amp;rsquo;t get as much time to listen to music as I would like.
+The web interface immediately pushed me to their playlists, which this service seems to rely on heavily.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://kabads.monkeez.org/2015/07/28/bread/</link>
+      <pubDate>Tue, 28 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/07/28/bread/</guid>
+      <description>I&amp;rsquo;ve been baking bread for over 6 months now and have experimented with what works well. This is today&amp;rsquo;s effort.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://kabads.monkeez.org/2015/07/28/jekyll/</link>
+      <pubDate>Tue, 28 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/07/28/jekyll/</guid>
+      <description>I&amp;rsquo;ve made the switch from Wordpress, which has been a great open source project, to Jekyll. I switched host and found that my old wordpress system was just too slow. I wanted something fast. I wanted something geeky. My host charges me for the amount of processing power and I found that my prepaid amount was going down fast (and I am pretty much the only person who uses this site).</description>
+    </item>
+    
+    <item>
+      <title>Ban encryption?</title>
+      <link>https://kabads.monkeez.org/2015/07/25/ban-encryption/</link>
+      <pubDate>Sat, 25 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/07/25/ban-encryption/</guid>
+      <description>David Cameron wants to ban encryption. He thinks that the government needs to have a copy of all our communications to ensure safety. It&amp;rsquo;s a strange concept. Most day-to-day transactions rely on some form of encryption. So, those transactions might become jeopardized, or even illegal.
+I am interested in how secure this keeps our country. What evidence exists to show that these interventions by government can prevent terrorism. I&amp;rsquo;m sure there are individuals who will use some forms of electronic devices to arrange illegal activities (and even sometimes lethal activities).</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://kabads.monkeez.org/2015/07/23/ran-over-600-km/</link>
+      <pubDate>Thu, 23 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/07/23/ran-over-600-km/</guid>
+      <description>So, I&amp;rsquo;ve set myself a target of running 1000km this year. I realised a couple of months ago that I&amp;rsquo;ve run quite a lot this year. I got to June and had run more than any other year before. So, the idea is to keep running and get to 1000km (621 miles) by December.</description>
+    </item>
+    
+    <item>
+      <title>Nuclear subsidy</title>
+      <link>https://kabads.monkeez.org/2015/07/23/nuclear-subsidy/</link>
+      <pubDate>Thu, 23 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/07/23/nuclear-subsidy/</guid>
+      <description>I&amp;rsquo;m not sure why the government is so set on stopping the solar subsidy, when they are increasing the nuclear one.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://kabads.monkeez.org/2015/06/30/tads-walk-around-bramley/</link>
+      <pubDate>Tue, 30 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/06/30/tads-walk-around-bramley/</guid>
+      <description>Went for a walk with Teresa, Adam, Dave and Shep (TADS) around the village of Bramley, and Silchester. Saw some deer on the way.</description>
+    </item>
+    
+    <item>
+      <title>Never punt again</title>
+      <link>https://kabads.monkeez.org/2015/04/16/never-punt-again/</link>
+      <pubDate>Thu, 16 Apr 2015 09:26:29 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2015/04/16/never-punt-again/</guid>
+      <description>
+The only person who didn&#39;t punt during this trip was Trugnug. </description>
+    </item>
+    
+    <item>
+      <title>Kayaking - Joe</title>
+      <link>https://kabads.monkeez.org/2014/07/15/p1030835/</link>
+      <pubDate>Tue, 15 Jul 2014 19:25:33 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2014/07/15/p1030835/</guid>
+      <description> See it here: http://flic.kr/p/okHqnk
+  </description>
+    </item>
+    
+    <item>
+      <title>Kayaking - Isaac and Trugnug</title>
+      <link>https://kabads.monkeez.org/2014/07/15/p1030839/</link>
+      <pubDate>Tue, 15 Jul 2014 19:25:11 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2014/07/15/p1030839/</guid>
+      <description> See it here: http://flic.kr/p/o4dzkD
+  </description>
+    </item>
+    
+    <item>
+      <title>Wasps nest in garden</title>
+      <link>https://kabads.monkeez.org/2014/07/06/img_3782/</link>
+      <pubDate>Sun, 06 Jul 2014 09:57:23 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2014/07/06/img_3782/</guid>
+      <description>   </description>
+    </item>
+    
+    <item>
+      <title>Arduino blinking light</title>
+      <link>https://kabads.monkeez.org/2013/12/30/arduino-blinking-light/</link>
+      <pubDate>Mon, 30 Dec 2013 10:55:36 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/12/30/arduino-blinking-light/</guid>
+      <description>My first arduino project.
+Basically, when you turn the potentiometer one way, the led blinks slower, and when you turn it the other way, it blinks faster.
+It needs a video to explain.</description>
+    </item>
+    
+    <item>
+      <title>Cologne</title>
+      <link>https://kabads.monkeez.org/2013/11/02/cologne/</link>
+      <pubDate>Sat, 02 Nov 2013 14:28:20 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/11/02/cologne/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mmm. Apfelstrudel</title>
+      <link>https://kabads.monkeez.org/2013/10/29/mmm-apfelstrudel/</link>
+      <pubDate>Tue, 29 Oct 2013 14:58:53 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/10/29/mmm-apfelstrudel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>My privacy conscious nan</title>
+      <link>https://kabads.monkeez.org/2013/08/21/my-privacy-conscious-nan/</link>
+      <pubDate>Wed, 21 Aug 2013 12:45:39 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/08/21/my-privacy-conscious-nan/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Isaac&#39;s favourite ouya game so far</title>
+      <link>https://kabads.monkeez.org/2013/06/27/isaacs-favourite-ouya-game-so-far/</link>
+      <pubDate>Thu, 27 Jun 2013 20:41:22 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/06/27/isaacs-favourite-ouya-game-so-far/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Privacy - why the Govt. wants privacy for themselves when it matters and why you should care.</title>
+      <link>https://kabads.monkeez.org/2013/06/17/privacy-why-the-govt-wants-privacy-for-themselves-when-it-matters-and-why-you-should-care/</link>
+      <pubDate>Mon, 17 Jun 2013 13:53:02 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/06/17/privacy-why-the-govt-wants-privacy-for-themselves-when-it-matters-and-why-you-should-care/</guid>
+      <description>William Hague claims if you haven&#39;t done anything wrong, you shouldn&#39;t care about your privacy. So why does the Govt. claim to need to present evidence in a secret court with evidence related to illegal kidnapping?
+Cory Doctorow has written a good piece about why you should be worried about privacy. Basically, it covers:
+ being wrongly accused of something and then being labelled as being a threat even though you are still innocent privacy is a right (e.</description>
+    </item>
+    
+    <item>
+      <title>Caught in a privacy recursion loop with dwarves</title>
+      <link>https://kabads.monkeez.org/2013/06/10/caught-in-a-privacy-recursion-loop-with-dwarves/</link>
+      <pubDate>Mon, 10 Jun 2013 06:48:31 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/06/10/caught-in-a-privacy-recursion-loop-with-dwarves/</guid>
+      <description>  </description>
+    </item>
+    
+    <item>
+      <title>Bath and Longleat</title>
+      <link>https://kabads.monkeez.org/2013/06/02/bath-and-longleat/</link>
+      <pubDate>Sun, 02 Jun 2013 13:36:40 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/06/02/bath-and-longleat/</guid>
+      <description>  </description>
+    </item>
+    
+    <item>
+      <title>Happy birthday Pewter Reilly</title>
+      <link>https://kabads.monkeez.org/2013/05/12/happy-birthday-pewter-reilly/</link>
+      <pubDate>Sun, 12 May 2013 19:06:03 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/05/12/happy-birthday-pewter-reilly/</guid>
+      <description>  </description>
+    </item>
+    
+    <item>
+      <title>@ O2 arena for British Music Experience</title>
+      <link>https://kabads.monkeez.org/2013/05/05/o2-arena-for-british-music-experience-3/</link>
+      <pubDate>Sun, 05 May 2013 13:08:48 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/05/05/o2-arena-for-british-music-experience-3/</guid>
+      <description>  </description>
+    </item>
+    
+    <item>
+      <title>The boys are asking for Bitcoins for pocket money. What do you think they are up to?</title>
+      <link>https://kabads.monkeez.org/2013/05/03/the-boys-are-asking-for-bitcoins-for-pocket-money-what-do-you-think-they-are-up-to/</link>
+      <pubDate>Fri, 03 May 2013 18:35:11 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/05/03/the-boys-are-asking-for-bitcoins-for-pocket-money-what-do-you-think-they-are-up-to/</guid>
+      <description>  </description>
+    </item>
+    
+    <item>
+      <title>Full on day - doctors, worked through lunch for paper work, meet, eat, drove to Rugby club, worked, watched Mad Men, voted, looked at Jupiter in the night sky.</title>
+      <link>https://kabads.monkeez.org/2013/05/02/full-on-day-doctors-worked-through-lunch-for-paper-work-meet-eat-drove-to-rugby-club-worked-watched-mad-men-voted-looked-at-jupiter-in-the-night-sky/</link>
+      <pubDate>Thu, 02 May 2013 21:40:59 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/05/02/full-on-day-doctors-worked-through-lunch-for-paper-work-meet-eat-drove-to-rugby-club-worked-watched-mad-men-voted-looked-at-jupiter-in-the-night-sky/</guid>
+      <description>  </description>
+    </item>
+    
+    <item>
+      <title>Six thirty in the morning is always the best time for haloumi</title>
+      <link>https://kabads.monkeez.org/2013/05/02/six-thirty-in-the-morning-is-always-the-best-time-for-haloumi/</link>
+      <pubDate>Thu, 02 May 2013 06:33:44 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/05/02/six-thirty-in-the-morning-is-always-the-best-time-for-haloumi/</guid>
+      <description>  </description>
+    </item>
+    
+    <item>
+      <title>Paul welcomes me home</title>
+      <link>https://kabads.monkeez.org/2013/04/24/paul-welcomes-me-home/</link>
+      <pubDate>Wed, 24 Apr 2013 18:00:15 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/04/24/paul-welcomes-me-home/</guid>
+      <description>I gave him some banana as a reward.</description>
+    </item>
+    
+    <item>
+      <title>This guy is noisy when he wakes up.</title>
+      <link>https://kabads.monkeez.org/2013/04/21/this-guy-is-noisy-when-he-wakes-up/</link>
+      <pubDate>Sun, 21 Apr 2013 07:50:50 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/04/21/this-guy-is-noisy-when-he-wakes-up/</guid>
+      <description>  </description>
+    </item>
+    
+    <item>
+      <title>Happy birthday Anne</title>
+      <link>https://kabads.monkeez.org/2013/04/13/happy-birthday-anne/</link>
+      <pubDate>Sat, 13 Apr 2013 14:12:02 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/04/13/happy-birthday-anne/</guid>
+      <description>  </description>
+    </item>
+    
+    <item>
+      <title>This peacock keeps hanging around our house</title>
+      <link>https://kabads.monkeez.org/2013/04/13/this-peacock-keeps-hanging-around-our-house/</link>
+      <pubDate>Sat, 13 Apr 2013 11:49:36 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/04/13/this-peacock-keeps-hanging-around-our-house/</guid>
+      <description>People show up in cars and take photos of it.</description>
+    </item>
+    
+    <item>
+      <title>The castle</title>
+      <link>https://kabads.monkeez.org/2013/04/09/the-castle/</link>
+      <pubDate>Tue, 09 Apr 2013 11:45:09 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/04/09/the-castle/</guid>
+      <description>  </description>
+    </item>
+    
+    <item>
+      <title>This time with the photo</title>
+      <link>https://kabads.monkeez.org/2013/04/09/this-time-with-the-photo/</link>
+      <pubDate>Tue, 09 Apr 2013 11:30:03 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/04/09/this-time-with-the-photo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Run</title>
+      <link>https://kabads.monkeez.org/2013/04/09/run/</link>
+      <pubDate>Tue, 09 Apr 2013 08:59:12 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/04/09/run/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Princess Leia or Abba?</title>
+      <link>https://kabads.monkeez.org/2013/04/07/princess-leia-or-abba/</link>
+      <pubDate>Sun, 07 Apr 2013 00:02:15 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/04/07/princess-leia-or-abba/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Party rockin&#39;</title>
+      <link>https://kabads.monkeez.org/2013/04/06/party-rockin/</link>
+      <pubDate>Sat, 06 Apr 2013 22:50:46 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/04/06/party-rockin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Isaac&#39;s breakfast</title>
+      <link>https://kabads.monkeez.org/2013/04/04/isaacs-breakfast/</link>
+      <pubDate>Thu, 04 Apr 2013 08:52:29 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/04/04/isaacs-breakfast/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>For Lily</title>
+      <link>https://kabads.monkeez.org/2013/04/04/for-lily/</link>
+      <pubDate>Thu, 04 Apr 2013 08:47:58 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/04/04/for-lily/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ghost walk.</title>
+      <link>https://kabads.monkeez.org/2013/04/03/ghost-walk-2/</link>
+      <pubDate>Wed, 03 Apr 2013 20:25:43 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/04/03/ghost-walk-2/</guid>
+      <description>Best story of Ghost Walk was a small boy fainting when the guy had an illusion where he cut his hand off.</description>
+    </item>
+    
+    <item>
+      <title>York Minster</title>
+      <link>https://kabads.monkeez.org/2013/04/03/york-minster-2/</link>
+      <pubDate>Wed, 03 Apr 2013 14:42:06 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/04/03/york-minster-2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Joe&#39;s breakfast</title>
+      <link>https://kabads.monkeez.org/2013/04/03/joes-breakfast/</link>
+      <pubDate>Wed, 03 Apr 2013 09:01:47 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/04/03/joes-breakfast/</guid>
+      <description>Plus guy who keeps calling out the time and pointing at his toe telling it off.</description>
+    </item>
+    
+    <item>
+      <title>Ask restaurant</title>
+      <link>https://kabads.monkeez.org/2013/04/02/ask-restaurant/</link>
+      <pubDate>Tue, 02 Apr 2013 17:41:12 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/04/02/ask-restaurant/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>York Minster</title>
+      <link>https://kabads.monkeez.org/2013/04/02/york-minster/</link>
+      <pubDate>Tue, 02 Apr 2013 16:18:15 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/04/02/york-minster/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Gate</title>
+      <link>https://kabads.monkeez.org/2013/04/02/928/</link>
+      <pubDate>Tue, 02 Apr 2013 15:56:10 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/04/02/928/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Watford gap services</title>
+      <link>https://kabads.monkeez.org/2013/04/02/watford-gap-services/</link>
+      <pubDate>Tue, 02 Apr 2013 13:18:23 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2013/04/02/watford-gap-services/</guid>
+      <description>  </description>
+    </item>
+    
+    <item>
+      <title>Happy New Year Dave - you&#39;ve got what your class wants</title>
+      <link>https://kabads.monkeez.org/2012/12/30/happy-new-year-dave/</link>
+      <pubDate>Sun, 30 Dec 2012 12:11:06 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/12/30/happy-new-year-dave/</guid>
+      <description>Dave&#39;s latest message, http://cur.lv/e3wr which is frighteningly reassuring, gives us the message that &#39;we&#39;re doing the right thing&#39; - this is a global race, that we must keep up with.
+However, you need to delve behind what he&#39;s saying. Basically, this is a global race and we need to keep up with other countries. These countries being China and India. However, our economies are completely different from these manufacturing countries. China&#39;s economy has been fueled by becoming the world&#39;s manufacturing centre - we gave this industry up some 20 years ago instead favouring an information driven economy.</description>
+    </item>
+    
+    <item>
+      <title>Running with bats tonight</title>
+      <link>https://kabads.monkeez.org/2012/11/08/running-with-bats-tonight/</link>
+      <pubDate>Thu, 08 Nov 2012 17:51:21 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/11/08/running-with-bats-tonight/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Another 5km record - 25m 30s</title>
+      <link>https://kabads.monkeez.org/2012/10/06/another-5km-record/</link>
+      <pubDate>Sat, 06 Oct 2012 09:01:02 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/10/06/another-5km-record/</guid>
+      <description>Not much taken off, but at least I&#39;m getting faster.</description>
+    </item>
+    
+    <item>
+      <title>Getting faster</title>
+      <link>https://kabads.monkeez.org/2012/09/30/getting-faster/</link>
+      <pubDate>Sun, 30 Sep 2012 09:31:02 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/09/30/getting-faster/</guid>
+      <description>fitness, a photo by kabads on Flickr. My average 5km over the last 4 weeks.</description>
+    </item>
+    
+    <item>
+      <title>Solar electricity</title>
+      <link>https://kabads.monkeez.org/2012/09/27/solar-electricity/</link>
+      <pubDate>Thu, 27 Sep 2012 20:51:33 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/09/27/solar-electricity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Happy Birthday to Dad</title>
+      <link>https://kabads.monkeez.org/2012/08/16/happy-birthday-to-dad/</link>
+      <pubDate>Thu, 16 Aug 2012 08:18:37 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/08/16/happy-birthday-to-dad/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Endomondo Running Workout</title>
+      <link>https://kabads.monkeez.org/2012/08/07/endomondo-running-workout/</link>
+      <pubDate>Tue, 07 Aug 2012 11:30:43 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/08/07/endomondo-running-workout/</guid>
+      <description>was out running 4.71 km in 27m:24s using Endomondo.
+via Endomondo Running Workout.</description>
+    </item>
+    
+    <item>
+      <title>Busy first few days of the holiday</title>
+      <link>https://kabads.monkeez.org/2012/07/25/busy-first-few-days/</link>
+      <pubDate>Wed, 25 Jul 2012 17:36:44 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/07/25/busy-first-few-days/</guid>
+      <description>Ordered a camera and started using it (or trying to use it).
+Got a top box on the car (with roof bars).
+Put the tent up and fixed it.
+Took stuff to the dump.
+Sorted out some duff bank accounts.
+Sorted out a credit card.
+Walked in the forest (and got muddy jumping over a stream).
+Switched broadband provider.
+Lots and lots of gardening (mostly weeding).
+Met up with mum and had her birthday lunch.</description>
+    </item>
+    
+    <item>
+      <title>Cassetteboy strikes again...</title>
+      <link>https://kabads.monkeez.org/2012/07/24/cassetteboy-strikes-again/</link>
+      <pubDate>Tue, 24 Jul 2012 15:15:14 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/07/24/cassetteboy-strikes-again/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>VPS enlightenment</title>
+      <link>https://kabads.monkeez.org/2012/07/18/vps-enlightenment/</link>
+      <pubDate>Wed, 18 Jul 2012 09:42:01 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/07/18/vps-enlightenment/</guid>
+      <description>I&#39;ve just got the VPS bug. A VPS is a virtual private server, which means you get root access to a server of your choice at a very low cost (as opposed to a dedicated server).
+I&#39;ve managed to get some pretty cheap deals which manage services that I used to run in my house (using computers up and valuable space).
+One of the servers now runs my media and another (my favourite) runs minecraft (www.</description>
+    </item>
+    
+    <item>
+      <title>Damien Hirst Exhibition</title>
+      <link>https://kabads.monkeez.org/2012/06/20/damien-hirst-exhibition/</link>
+      <pubDate>Wed, 20 Jun 2012 10:57:04 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/06/20/damien-hirst-exhibition/</guid>
+      <description>[AFG_gallery id=&#39;3&#39;]</description>
+    </item>
+    
+    <item>
+      <title>@bristol science museum</title>
+      <link>https://kabads.monkeez.org/2012/06/10/bristol-science-museum/</link>
+      <pubDate>Sun, 10 Jun 2012 16:15:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/06/10/bristol-science-museum/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Endomondo Cycling Workout</title>
+      <link>https://kabads.monkeez.org/2012/06/10/endomondo-cycling-workout/</link>
+      <pubDate>Sun, 10 Jun 2012 10:30:09 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/06/10/endomondo-cycling-workout/</guid>
+      <description>was out cycling 13.35 miles in 1h:15m:50s using Endomondo.
+via Endomondo Cycling Workout.</description>
+    </item>
+    
+    <item>
+      <title>Birdbox project</title>
+      <link>https://kabads.monkeez.org/2012/05/19/271/</link>
+      <pubDate>Sat, 19 May 2012 16:20:02 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/05/19/271/</guid>
+      <description>One of my projects at work: a birdbox live feed http://bit.ly/KjDEQd</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://kabads.monkeez.org/2012/05/19/266/</link>
+      <pubDate>Sat, 19 May 2012 09:43:28 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/05/19/266/</guid>
+      <description>Having fun with Dwarf Fortress.
+
+&amp;nbsp;</description>
+    </item>
+    
+    <item>
+      <title>Looking at a fox out there</title>
+      <link>https://kabads.monkeez.org/2012/05/06/looking-at-a-fox-out-there/</link>
+      <pubDate>Sun, 06 May 2012 15:43:20 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/05/06/looking-at-a-fox-out-there/</guid>
+      <description>[AFG_gallery id=&#39;1&#39;]
+The pub dog &#39;Otto&#39;.</description>
+    </item>
+    
+    <item>
+      <title>Fairwell ceefax</title>
+      <link>https://kabads.monkeez.org/2012/04/19/fairwell-ceefax/</link>
+      <pubDate>Thu, 19 Apr 2012 07:19:15 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/04/19/fairwell-ceefax/</guid>
+      <description>This homage to ceefax is funny and befits the technology at the time. Make sure you read the text.</description>
+    </item>
+    
+    <item>
+      <title>The coalition&#39;s surveillance state problem - monki.biz/2k</title>
+      <link>https://kabads.monkeez.org/2012/04/03/the-coalitions-surveillance-state-problem-monki-biz2k/</link>
+      <pubDate>Tue, 03 Apr 2012 12:12:25 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/04/03/the-coalitions-surveillance-state-problem-monki-biz2k/</guid>
+      <description>Over at the New Statesman, they&#39;ve identified the problem that the current government faces.
+Two years ago, whilst in opposition, they were very wary of Labour&#39;s surveillance plans to monitor the public&#39;s behaviour online. However, now they are in government, they want to do the same. http://monki.biz/2k
+Why the change? What is it about pledges that are made before an election is held and then once power is assumed? Why do politicians think we don&#39;t remember these pledges and easily break them just a few months into their term in government?</description>
+    </item>
+    
+    <item>
+      <title>A radical manifesto for teaching computing</title>
+      <link>https://kabads.monkeez.org/2012/04/02/a-radical-manifesto-for-teaching-computing/</link>
+      <pubDate>Mon, 02 Apr 2012 10:37:32 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/04/02/a-radical-manifesto-for-teaching-computing/</guid>
+      <description>Starting in primary school, children from all backgrounds and every part of the UK should have the opportunity to: learn some of the key ideas of computer science; understand computational thinking; learn to program; and have the opportunity to progress to the next level of excellence in these activities.
+via A radical manifesto for teaching computing | Education | The Observer.</description>
+    </item>
+    
+    <item>
+      <title>Racist behaviour is illegal and should be stopped regardless of what state the victim is in.</title>
+      <link>https://kabads.monkeez.org/2012/03/31/racist-behaviour-is-illegal-and-should-be-stopped-regardless-of-what-state-the-victim-is-in/</link>
+      <pubDate>Sat, 31 Mar 2012 20:48:29 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/31/racist-behaviour-is-illegal-and-should-be-stopped-regardless-of-what-state-the-victim-is-in/</guid>
+      <description>When Fabrice Muamba collapsed during a recent match one jerk, named Liam Stacey, started tweeting racist abuse. Muamba wasn&amp;#39;t aware of this, as he was unconscious and being resuscitated. However, the judicial system rightly saw this racist behaviour as worthy for the perpetrator to serve time in prison. However, when a young black person was stopped by the police and racially abused, and recorded that abuse, the Crown Prosecution Service deemed it unnecessary to bring any charges against the police officer because the victim didn&amp;#39;t suffer any distress from the racist behaviour.</description>
+    </item>
+    
+    <item>
+      <title>Solidarity for those on strike today</title>
+      <link>https://kabads.monkeez.org/2012/03/28/solidarity-for-those-on-strike-today/</link>
+      <pubDate>Wed, 28 Mar 2012 19:41:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/28/solidarity-for-those-on-strike-today/</guid>
+      <description>Not many people would know it today, as the media has not really picked up on it (apart from the Guardian) - but teachers in London were on strike today. They are asking for their pensions to be protected as they are well funded and the current coalition government has refused to carry out a review of how well the pensions are funded, which should happen every 4 years.  Whilst parents will be annoyed that their children have had to have a day off, would they support a reduction in their own working practices, or would they fight for what they agreed to when they started the job?</description>
+    </item>
+    
+    <item>
+      <title>After work refreshments</title>
+      <link>https://kabads.monkeez.org/2012/03/28/after-work-refreshments/</link>
+      <pubDate>Wed, 28 Mar 2012 16:58:51 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/28/after-work-refreshments/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>Christine Blower - &#34;teachers are being taxed&#34;</title>
+      <link>https://kabads.monkeez.org/2012/03/28/206/</link>
+      <pubDate>Wed, 28 Mar 2012 07:27:59 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/28/206/</guid>
+      <description>Teachers will have to contribute 50% more to their pensions over the next three years at a time when top earners can look forward to a cut in the 50p top rate of tax, said Blower.
+ http://www.guardian.co.uk/politics/2012/mar/28/education-system-privatised-2015-union?newsfeed=true</description>
+    </item>
+    
+    <item>
+      <title>Cameron and the &#34;massive redistribution of power&#34;. Yeah, right.</title>
+      <link>https://kabads.monkeez.org/2012/03/26/cameron-and-the-massive-redistribution-of-power-yeah-right/</link>
+      <pubDate>Mon, 26 Mar 2012 07:29:47 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/26/cameron-and-the-massive-redistribution-of-power-yeah-right/</guid>
+      <description>Back in 2009 Cameron vowed to open government to the masses (&#34;We will begin a massive redistribution of power in our country, from the powerful to the powerless, from the political elite to the man and the woman in the street.&#34; - http://news.bbc.co.uk/1/hi/uk_politics/8067505.stm) and yet he refuses to disclose which big donors have been for dinner - (http://www.bbc.co.uk/news/uk-politics-17508271).
+Is this really the &#34;massive redistribution of power&#34; that we were expecting? Do we really now feel this redistribution of power?</description>
+    </item>
+    
+    <item>
+      <title>Rugby Havant tournament</title>
+      <link>https://kabads.monkeez.org/2012/03/25/rugby-hamlet-tournament/</link>
+      <pubDate>Sun, 25 Mar 2012 16:34:24 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/25/rugby-hamlet-tournament/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>Tried Edmodo - like it</title>
+      <link>https://kabads.monkeez.org/2012/03/21/tried-edmodo-like-it/</link>
+      <pubDate>Wed, 21 Mar 2012 18:50:34 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/21/tried-edmodo-like-it/</guid>
+      <description>I introduced Edmodo to my ICT club this afternoon and they enjoyed it. Basically, it&#39;s an online learning environment that is private to you and your groups. You give your children a code when they sign up which enrols them on your course automatically. The children found it difficult to find a username that hadn&#39;t already been chosen, but after some perseverance they all got on, children from year 3 to year 6.</description>
+    </item>
+    
+    <item>
+      <title>YHA here we come</title>
+      <link>https://kabads.monkeez.org/2012/03/16/yha-here-we-come/</link>
+      <pubDate>Fri, 16 Mar 2012 14:25:15 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/yha-here-we-come/</guid>
+      <description>We&amp;#39;ve joined the Youth Hostel Association and are planning some trips over the Easter Holiday. We&amp;#39;re off to a Bristol and then off to the Brecons to see some mountains. Pretty cheap accommodation and nice locations - feeling quite excited about it already.  </description>
+    </item>
+    
+    <item>
+      <title>Happy birthday paula</title>
+      <link>https://kabads.monkeez.org/2012/03/16/happy-birthday-paula/</link>
+      <pubDate>Fri, 16 Mar 2012 14:24:49 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/happy-birthday-paula/</guid>
+      <description>   </description>
+    </item>
+    
+    <item>
+      <title>Happy birthday Joy</title>
+      <link>https://kabads.monkeez.org/2012/03/16/happy-birthday-joy/</link>
+      <pubDate>Fri, 16 Mar 2012 14:23:23 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/happy-birthday-joy/</guid>
+      <description>   </description>
+    </item>
+    
+    <item>
+      <title>Visit to Historic Dockyards</title>
+      <link>https://kabads.monkeez.org/2012/03/16/visit-to-historic-dockyards/</link>
+      <pubDate>Fri, 16 Mar 2012 14:20:47 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/visit-to-historic-dockyards/</guid>
+      <description>We visited HMS Warrior (first Ironclad ship in Navy), Action Stations and enjoyed a nice boat ride around the harbour.
+  </description>
+    </item>
+    
+    <item>
+      <title>A walk in the icy forest</title>
+      <link>https://kabads.monkeez.org/2012/03/16/a-walk-in-the-icy-forest/</link>
+      <pubDate>Fri, 16 Mar 2012 14:19:41 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/a-walk-in-the-icy-forest/</guid>
+      <description>It was really cold this afternoon walking around the forest - the boys really enjoyed skating around on thin ice.  
+     See the full gallery on Posterous   </description>
+    </item>
+    
+    <item>
+      <title>Another buyer</title>
+      <link>https://kabads.monkeez.org/2012/03/16/another-buyer/</link>
+      <pubDate>Fri, 16 Mar 2012 14:17:40 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/another-buyer/</guid>
+      <description>Report easy has another buyer - who purchased it yesterday. I was surprised when I got my first buy, but have been surprised that other people have joined in. It&#39;s early days and I&#39;ve still made a loss on the whole venture, but the fact that people think my software has real value that they are prepared to pay for, is even more surprising.&amp;nbsp;
+I put up a video on youtube of the video to show people what it looks like when they are using it, which I think is the selling point.</description>
+    </item>
+    
+    <item>
+      <title>Headspace</title>
+      <link>https://kabads.monkeez.org/2012/03/16/headspace/</link>
+      <pubDate>Fri, 16 Mar 2012 14:17:15 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/headspace/</guid>
+      <description>I&#39;m on day 3 of the Take10 series </description>
+    </item>
+    
+    <item>
+      <title>Then this fellow pops up...</title>
+      <link>https://kabads.monkeez.org/2012/03/16/then-this-fellow-pops-up/</link>
+      <pubDate>Fri, 16 Mar 2012 14:15:22 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/then-this-fellow-pops-up/</guid>
+      <description>and Joe went outside and took a couple.      See the full gallery on Posterous   </description>
+    </item>
+    
+    <item>
+      <title>This is more like it...</title>
+      <link>https://kabads.monkeez.org/2012/03/16/this-is-more-like-it/</link>
+      <pubDate>Fri, 16 Mar 2012 14:14:41 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/this-is-more-like-it/</guid>
+      <description>Taken a bit later, with a fully recharged battery and from where I am sitting!   See the full gallery on Posterous   </description>
+    </item>
+    
+    <item>
+      <title>A good article on why e-books are being locked down just to keep the paper industry in business. monki.biz/1r</title>
+      <link>https://kabads.monkeez.org/2012/03/16/a-good-article-on-why-e-books-are-being-locked-down-just-to-keep-the-paper-industry-in-business-monki-biz1r/</link>
+      <pubDate>Fri, 16 Mar 2012 14:14:04 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/a-good-article-on-why-e-books-are-being-locked-down-just-to-keep-the-paper-industry-in-business-monki-biz1r/</guid>
+      <description>http://monki.biz/1r Publishing is a tough industry to be in, no doubt about it. Things are rapidly changing and market forces are being swayed beyond the traditional publisher&#39;s influence. Things are now so easy to share and distribute, that these old gate-keepers can no longer steer what people are looking at.
+However, e-books are being subjected to this, so that instead of paper being pushed around and controlled, &amp;nbsp;instead digital files are being controlled and again, authors are being expected to go through the publisher, instead of dealing directly with their audience.</description>
+    </item>
+    
+    <item>
+      <title>Visitors in our garden</title>
+      <link>https://kabads.monkeez.org/2012/03/16/visitors-in-our-garden/</link>
+      <pubDate>Fri, 16 Mar 2012 14:13:45 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/visitors-in-our-garden/</guid>
+      <description>Took a couple of shots this frosty morning and then the battery ran out. I&amp;#39;ll have to take some more once it&amp;#39;s recharged. The birdfeeders are a lot more active now, so I should get some more active shots.   See the full gallery on Posterous   </description>
+    </item>
+    
+    <item>
+      <title>Facebook == human harvesting.</title>
+      <link>https://kabads.monkeez.org/2012/03/16/facebook-human-harvesting/</link>
+      <pubDate>Fri, 16 Mar 2012 13:47:46 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/facebook-human-harvesting/</guid>
+      <description>The film soylent green is about people being harvested for food. That&amp;#39;s how I see Facebook. Your details are being harvested for business and advertising. Sure, it can be beneficial to stay in touch with each other, but there&amp;#39;s a bigger price to pay. I&amp;#39;ve come to the decision that the amount of information I&amp;#39;m getting from other people isn&amp;#39;t worth the price I&amp;#39;m paying for that lack of privacy and having my details flogged to advertisers.</description>
+    </item>
+    
+    <item>
+      <title>I love scenery like this</title>
+      <link>https://kabads.monkeez.org/2012/03/16/i-love-scenery-like-this/</link>
+      <pubDate>Fri, 16 Mar 2012 13:47:03 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/i-love-scenery-like-this/</guid>
+      <description>  stopped on my way home to take this shot
+I wish I&#39;d taken longer to take it, but it was on a narrow road. It captures the sense of what I wanted. I&#39;ll see if I can get a more please shot another day.&amp;nbsp;
+ </description>
+    </item>
+    
+    <item>
+      <title>Drinking a toast to dad.</title>
+      <link>https://kabads.monkeez.org/2012/03/16/drinking-a-toast-to-dad/</link>
+      <pubDate>Fri, 16 Mar 2012 13:45:05 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/drinking-a-toast-to-dad/</guid>
+      <description>and this beer tastes mighty fine.&amp;nbsp;
+ </description>
+    </item>
+    
+    <item>
+      <title>Happy birthday Bill</title>
+      <link>https://kabads.monkeez.org/2012/03/16/happy-birthday-bill/</link>
+      <pubDate>Fri, 16 Mar 2012 13:18:56 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/happy-birthday-bill/</guid>
+      <description>   Round the Reilly Ranch.
+ </description>
+    </item>
+    
+    <item>
+      <title>Report Easy</title>
+      <link>https://kabads.monkeez.org/2012/03/16/report-easy/</link>
+      <pubDate>Fri, 16 Mar 2012 13:16:50 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/report-easy/</guid>
+      <description>I&#39;ve been working on a little side project to learn programming (this is the year of coding apparently).&amp;nbsp;
+http://www.reporteasy.co.uk
+This is a little application that assists with writing pupil reports for teachers - it automates a lot of the text entry that often takes a long time.&amp;nbsp;
+
+ </description>
+    </item>
+    
+    <item>
+      <title>Posterous</title>
+      <link>https://kabads.monkeez.org/2012/03/16/posterous/</link>
+      <pubDate>Fri, 16 Mar 2012 13:11:37 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/posterous/</guid>
+      <description>Peeps! Who should I be following on posterous? </description>
+    </item>
+    
+    <item>
+      <title>Enjoying google music</title>
+      <link>https://kabads.monkeez.org/2012/03/16/enjoying-google-music-2/</link>
+      <pubDate>Fri, 16 Mar 2012 13:10:57 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/enjoying-google-music-2/</guid>
+      <description>I&#39;ve signed up to google music - not sure if I like the way spotify is going. I don&#39;t like having to have a facebook account (not that I had one when I initially signed up) and I don&#39;t like the way spotify are going about publishing details about my music preferences even though I haven&#39;t signed up for it.&amp;nbsp;
+So, for a while - goodbye spotify and hello google music.</description>
+    </item>
+    
+    <item>
+      <title>Enjoying google music</title>
+      <link>https://kabads.monkeez.org/2012/03/16/enjoying-google-music/</link>
+      <pubDate>Fri, 16 Mar 2012 13:10:02 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/16/enjoying-google-music/</guid>
+      <description>I&#39;ve signed up to google music - not sure if I like the way spotify is going. I don&#39;t like having to have a facebook account (not that I had one when I initially signed up) and I don&#39;t like the way spotify are going about publishing details about my music preferences even though I haven&#39;t signed up for it.&amp;nbsp;
+So, for a while - goodbye spotify and hello google music.</description>
+    </item>
+    
+    <item>
+      <title>Hello world!</title>
+      <link>https://kabads.monkeez.org/2012/03/15/hello-world/</link>
+      <pubDate>Thu, 15 Mar 2012 22:01:23 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2012/03/15/hello-world/</guid>
+      <description>Welcome to WordPress. This is your first post. Edit or delete it, then start blogging!</description>
+    </item>
+    
+  </channel>
+</rss>

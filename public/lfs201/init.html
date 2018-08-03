@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>init</title>
+<!-- 2015-02-17 Tue 23:03 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">init</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. /sbin/init</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Coordinates stages of boot process</a></li>
+<li><a href="#sec-1-2">1.2. configures all aspects of the environment</a></li>
+<li><a href="#sec-1-3">1.3. starts the processes needed for logging in</a></li>
+<li><a href="#sec-1-4">1.4. legacy</a>
+<ul>
+<li><a href="#sec-1-4-1">1.4.1. did not take advantages of the parallel processes</a></li>
+<li><a href="#sec-1-4-2">1.4.2. shutdown and startup were seen as unimportant as they didn't happen often due to be server environments</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-5">1.5. alternatives</a>
+<ul>
+<li><a href="#sec-1-5-1">1.5.1. upstart</a></li>
+<li><a href="#sec-1-5-2">1.5.2. systemd</a></li>
+<li><a href="#sec-1-5-3">1.5.3. SysVinit</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-6">1.6. change with sudo /sbin/telinit 5</a></li>
+<li><a href="#sec-1-7">1.7. init</a>
+<ul>
+<li><a href="#sec-1-7-1">1.7.1. reads /etc/inittab</a></li>
+<li><a href="#sec-1-7-2">1.7.2. id:runlevel(s):action:process</a></li>
+<li><a href="#sec-1-7-3">1.7.3. sequence</a></li>
+<li><a href="#sec-1-7-4">1.7.4. Chkconfig some<sub>service</sub></a></li>
+<li><a href="#sec-1-7-5">1.7.5. Can write own startup scripts - place a script in /etc/init.d/which has some lines at the top and then use chkconfig &#x2013;add to enable it or chkconfig &#x2013;del to disable it</a></li>
+<li><a href="#sec-1-7-6">1.7.6. Services running</a></li>
+<li><a href="#sec-1-7-7">1.7.7. Debian derivatives have to have sysvinit-utils chkconfig installed</a></li>
+<li><a href="#sec-1-7-8">1.7.8. upstart is event driven instead of being a set of serial procedures</a></li>
+<li><a href="#sec-1-7-9">1.7.9. systemd</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> /sbin/init</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Coordinates stages of boot process</h3>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> configures all aspects of the environment</h3>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> starts the processes needed for logging in</h3>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> legacy</h3>
+<div class="outline-text-3" id="text-1-4">
+</div><div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> did not take advantages of the parallel processes</h4>
+</div>
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> shutdown and startup were seen as unimportant as they didn't happen often due to be server environments</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> alternatives</h3>
+<div class="outline-text-3" id="text-1-5">
+</div><div id="outline-container-sec-1-5-1" class="outline-4">
+<h4 id="sec-1-5-1"><span class="section-number-4">1.5.1</span> upstart</h4>
+<div class="outline-text-4" id="text-1-5-1">
+</div><ol class="org-ol"><li><a id="sec-1-5-1-1" name="sec-1-5-1-1"></a>ubuntu<br  /></li>
+<li><a id="sec-1-5-1-2" name="sec-1-5-1-2"></a>being phased out<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-5-2" class="outline-4">
+<h4 id="sec-1-5-2"><span class="section-number-4">1.5.2</span> systemd</h4>
+<div class="outline-text-4" id="text-1-5-2">
+</div><ol class="org-ol"><li><a id="sec-1-5-2-1" name="sec-1-5-2-1"></a>fedora<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-5-3" class="outline-4">
+<h4 id="sec-1-5-3"><span class="section-number-4">1.5.3</span> SysVinit</h4>
+<div class="outline-text-4" id="text-1-5-3">
+</div><ol class="org-ol"><li><a id="sec-1-5-3-1" name="sec-1-5-3-1"></a>runlevel 0 - system halt<br  /></li>
+<li><a id="sec-1-5-3-2" name="sec-1-5-3-2"></a>runlevel 1 - single user mode<br  /></li>
+<li><a id="sec-1-5-3-3" name="sec-1-5-3-3"></a>runlevel 2 - no networking or graphic environment<br  /></li>
+<li><a id="sec-1-5-3-4" name="sec-1-5-3-4"></a>runlevel 3 - networking<br  /></li>
+<li><a id="sec-1-5-3-5" name="sec-1-5-3-5"></a>runlevel 5 - networking and graphical environment<br  /></li>
+<li><a id="sec-1-5-3-6" name="sec-1-5-3-6"></a>runlevel 6 - restart<br  /></li></ol>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> change with sudo /sbin/telinit 5</h3>
+</div>
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> init</h3>
+<div class="outline-text-3" id="text-1-7">
+</div><div id="outline-container-sec-1-7-1" class="outline-4">
+<h4 id="sec-1-7-1"><span class="section-number-4">1.7.1</span> reads /etc/inittab</h4>
+</div>
+<div id="outline-container-sec-1-7-2" class="outline-4">
+<h4 id="sec-1-7-2"><span class="section-number-4">1.7.2</span> id:runlevel(s):action:process</h4>
+</div>
+<div id="outline-container-sec-1-7-3" class="outline-4">
+<h4 id="sec-1-7-3"><span class="section-number-4">1.7.3</span> sequence</h4>
+<div class="outline-text-4" id="text-1-7-3">
+</div><ol class="org-ol"><li><a id="sec-1-7-3-1" name="sec-1-7-3-1"></a>first run rc.sysinit script - mounts filesystems and starts LVM<br  /></li>
+<li><a id="sec-1-7-3-2" name="sec-1-7-3-2"></a>then run rc script - rc/drc[0-9].d directories<br  /></li>
+<li><a id="sec-1-7-3-3" name="sec-1-7-3-3"></a>run scripts in those directories<br  /></li>
+<li><a id="sec-1-7-3-4" name="sec-1-7-3-4"></a>Then run rc.local for system specific applications that need to run<br  /></li>
+<li><a id="sec-1-7-3-5" name="sec-1-7-3-5"></a>start scripts start with an S<br  /></li>
+<li><a id="sec-1-7-3-6" name="sec-1-7-3-6"></a>kill scripts end start with K<br  /></li>
+<li><a id="sec-1-7-3-7" name="sec-1-7-3-7"></a>The number following S or K determines the order in which the scripts are invoked.<br  /></li>
+<li><a id="sec-1-7-3-8" name="sec-1-7-3-8"></a>The script name is the name of the service<br  /></li>
+<li><a id="sec-1-7-3-9" name="sec-1-7-3-9"></a>Controlling which scripts are run according to each run level involves managing symbolic links<br  /></li>
+<li><a id="sec-1-7-3-10" name="sec-1-7-3-10"></a>Can manage symlinks manually but also chkconfig will do this consistenyl and easily<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-7-4" class="outline-4">
+<h4 id="sec-1-7-4"><span class="section-number-4">1.7.4</span> Chkconfig some<sub>service</sub></h4>
+<div class="outline-text-4" id="text-1-7-4">
+</div><ol class="org-ol"><li><a id="sec-1-7-4-1" name="sec-1-7-4-1"></a>chkconfig &#x2013;list<br  /></li>
+<li><a id="sec-1-7-4-2" name="sec-1-7-4-2"></a>sudo chkconfig some<sub>service</sub> on<br  /></li>
+<li><a id="sec-1-7-4-3" name="sec-1-7-4-3"></a>sudo chkconfig some<sub>service</sub> off<br  /></li>
+<li><a id="sec-1-7-4-4" name="sec-1-7-4-4"></a>sudo service some<sub>service</sub> [stop|start] does not change current start state<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-7-5" class="outline-4">
+<h4 id="sec-1-7-5"><span class="section-number-4">1.7.5</span> Can write own startup scripts - place a script in /etc/init.d/which has some lines at the top and then use chkconfig &#x2013;add to enable it or chkconfig &#x2013;del to disable it</h4>
+<div class="outline-text-4" id="text-1-7-5">
+</div><ol class="org-ol"><li><a id="sec-1-7-5-1" name="sec-1-7-5-1"></a>You need to have a chkconfig 2345 10 90 line at the top to let chkconfig know which runlevel it needs to run at and which order it should run in<br  /><ol class="org-ol"><li><a id="sec-1-7-5-1-1" name="sec-1-7-5-1-1"></a>The 10 and 90 stand for S10 and K90 respectively<br  /></li></ol>
+</li></ol>
+</div>
+<div id="outline-container-sec-1-7-6" class="outline-4">
+<h4 id="sec-1-7-6"><span class="section-number-4">1.7.6</span> Services running</h4>
+<div class="outline-text-4" id="text-1-7-6">
+</div><ol class="org-ol"><li><a id="sec-1-7-6-1" name="sec-1-7-6-1"></a>how to find which ones are running sudo service network status<br  /></li>
+<li><a id="sec-1-7-6-2" name="sec-1-7-6-2"></a>sudo service vsftpd status<br  /></li>
+<li><a id="sec-1-7-6-3" name="sec-1-7-6-3"></a>Find out service options - sudo service network<br  /></li>
+<li><a id="sec-1-7-6-4" name="sec-1-7-6-4"></a>All service does is go to the /etc/init.d and run the appropriate script in that directory<br  /></li>
+<li><a id="sec-1-7-6-5" name="sec-1-7-6-5"></a>sudo service &#x2013;status-all<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-7-7" class="outline-4">
+<h4 id="sec-1-7-7"><span class="section-number-4">1.7.7</span> Debian derivatives have to have sysvinit-utils chkconfig installed</h4>
+<div class="outline-text-4" id="text-1-7-7">
+</div><ol class="org-ol"><li><a id="sec-1-7-7-1" name="sec-1-7-7-1"></a>recent ubuntu versions don't have chkconfig and user update-rc.d utility instead.<br  /><ol class="org-ol"><li><a id="sec-1-7-7-1-1" name="sec-1-7-7-1-1"></a>sudo invoke-rc.d [status | start | stop] cups<br  /></li>
+<li><a id="sec-1-7-7-1-2" name="sec-1-7-7-1-2"></a>sudo status cups<br  /></li></ol>
+</li>
+<li><a id="sec-1-7-7-2" name="sec-1-7-7-2"></a>equivalent of chkconfig would be<br  /><ol class="org-ol"><li><a id="sec-1-7-7-2-1" name="sec-1-7-7-2-1"></a>sudo update-rc.d cups [defaults | purge]<br  /></li>
+<li><a id="sec-1-7-7-2-2" name="sec-1-7-7-2-2"></a>sudo sysv-rc-conf cups [on|off]<br  /></li></ol>
+</li></ol>
+</div>
+<div id="outline-container-sec-1-7-8" class="outline-4">
+<h4 id="sec-1-7-8"><span class="section-number-4">1.7.8</span> upstart is event driven instead of being a set of serial procedures</h4>
+<div class="outline-text-4" id="text-1-7-8">
+</div><ol class="org-ol"><li><a id="sec-1-7-8-1" name="sec-1-7-8-1"></a>event notifications are sent to the init process to tell it to execute certain commands at the time after pre-requisites<br  /></li>
+<li><a id="sec-1-7-8-2" name="sec-1-7-8-2"></a>being superceded by systemd<br  /></li>
+<li><a id="sec-1-7-8-3" name="sec-1-7-8-3"></a>config files for upstart are:<br  /><ol class="org-ol"><li><a id="sec-1-7-8-3-1" name="sec-1-7-8-3-1"></a>/etc/init/rcS.conf<br  /></li>
+<li><a id="sec-1-7-8-3-2" name="sec-1-7-8-3-2"></a>/etc/rc.sysinit<br  /></li>
+<li><a id="sec-1-7-8-3-3" name="sec-1-7-8-3-3"></a>/etc/inittab<br  /></li>
+<li><a id="sec-1-7-8-3-4" name="sec-1-7-8-3-4"></a>/etc/init/rc.conf<br  /></li>
+<li><a id="sec-1-7-8-3-5" name="sec-1-7-8-3-5"></a>/etc/rc[0-5].dz<br  /></li>
+<li><a id="sec-1-7-8-3-6" name="sec-1-7-8-3-6"></a>/etc/init/start-ttys.conf<br  /></li></ol>
+</li>
+<li><a id="sec-1-7-8-4" name="sec-1-7-8-4"></a>init runs rcS.conf first which then starts rc.sysinit<br  /></li>
+<li><a id="sec-1-7-8-5" name="sec-1-7-8-5"></a>rc.sysinit will start LVM filesystems mounting etc and then execute all runlevels in order specified in /etc/inittab<br  /></li>
+<li><a id="sec-1-7-8-6" name="sec-1-7-8-6"></a>This is accomplished by running rc.conf and passing it the runlevel.<br  /></li>
+<li><a id="sec-1-7-8-7" name="sec-1-7-8-7"></a>Finally, start-ttys.conf and prefdm.conf (for runlevel 5 only) is run.<br  /></li>
+<li><a id="sec-1-7-8-8" name="sec-1-7-8-8"></a>initctl options command<br  /><ol class="org-ol"><li><a id="sec-1-7-8-8-1" name="sec-1-7-8-8-1"></a>start - stop - restart - reload - status - list - emit<br  /></li></ol>
+</li></ol>
+</div>
+<div id="outline-container-sec-1-7-9" class="outline-4">
+<h4 id="sec-1-7-9"><span class="section-number-4">1.7.9</span> systemd</h4>
+<div class="outline-text-4" id="text-1-7-9">
+</div><ol class="org-ol"><li><a id="sec-1-7-9-1" name="sec-1-7-9-1"></a>backwards compatible with SysVinit - runlevels targets<br  /></li>
+<li><a id="sec-1-7-9-2" name="sec-1-7-9-2"></a>telinit program is emulated to work with runlevels<br  /></li>
+<li><a id="sec-1-7-9-3" name="sec-1-7-9-3"></a>boots faster than other systems<br  /></li>
+<li><a id="sec-1-7-9-4" name="sec-1-7-9-4"></a>proves aggressive parallelization capabilities<br  /></li>
+<li><a id="sec-1-7-9-5" name="sec-1-7-9-5"></a>uses socket and d-bus activation for starting services<br  /></li>
+<li><a id="sec-1-7-9-6" name="sec-1-7-9-6"></a>replaces shell scripts with programs<br  /></li>
+<li><a id="sec-1-7-9-7" name="sec-1-7-9-7"></a>offers on-demand starting of daemons<br  /></li>
+<li><a id="sec-1-7-9-8" name="sec-1-7-9-8"></a>keeps tracks of processes using cgroups<br  /></li>
+<li><a id="sec-1-7-9-9" name="sec-1-7-9-9"></a>supports creating snapshots and restoring of the system state<br  /></li>
+<li><a id="sec-1-7-9-10" name="sec-1-7-9-10"></a>maintains mount and automount points<br  /></li>
+<li><a id="sec-1-7-9-11" name="sec-1-7-9-11"></a>implements an elaborate transactional dependency based service control logic<br  /></li>
+<li><a id="sec-1-7-9-12" name="sec-1-7-9-12"></a>can work as a drop-in replacement for SysVinit<br  /></li>
+<li><a id="sec-1-7-9-13" name="sec-1-7-9-13"></a>no scripts but instead uses .service files.<br  /></li>
+<li><a id="sec-1-7-9-14" name="sec-1-7-9-14"></a>Systemd sorts all daemons into their own control groups (cgroups)<br  /></li>
+<li><a id="sec-1-7-9-15" name="sec-1-7-9-15"></a>uses distro specific config files<br  /><ol class="org-ol"><li><a id="sec-1-7-9-15-1" name="sec-1-7-9-15-1"></a>e.g. /etc/hostname replaces /etc/HOSTNAME in suse and /etc/sysconfig/network in Red Hat<br  /></li>
+<li><a id="sec-1-7-9-15-2" name="sec-1-7-9-15-2"></a>/etc/vconsole.conf - default keyboard mapping and console font<br  /></li>
+<li><a id="sec-1-7-9-15-3" name="sec-1-7-9-15-3"></a>/etc/sysctl.d/*.conf - drop in directory for kernel sysctl parameters<br  /></li>
+<li><a id="sec-1-7-9-15-4" name="sec-1-7-9-15-4"></a>/etc/os-release - distro id file.<br  /></li></ol>
+</li>
+<li><a id="sec-1-7-9-16" name="sec-1-7-9-16"></a>systemctl is the main utility- systemctl [options] command [name]<br  /><ol class="org-ol"><li><a id="sec-1-7-9-16-1" name="sec-1-7-9-16-1"></a>systemctl list-units -t service &#x2013;all<br  /></li>
+<li><a id="sec-1-7-9-16-2" name="sec-1-7-9-16-2"></a>systemctl list-units -t service<br  /></li>
+<li><a id="sec-1-7-9-16-3" name="sec-1-7-9-16-3"></a>sudo systemctl start foo<br  /></li>
+<li><a id="sec-1-7-9-16-4" name="sec-1-7-9-16-4"></a>sudo systemctl start foo.service<br  /></li>
+<li><a id="sec-1-7-9-16-5" name="sec-1-7-9-16-5"></a>sudo systemctl start /path/to/foo.service<br  /></li>
+<li><a id="sec-1-7-9-16-6" name="sec-1-7-9-16-6"></a>sudo systemctl stop foo.service<br  /></li>
+<li><a id="sec-1-7-9-16-7" name="sec-1-7-9-16-7"></a>sudo systemctl enable sshd.service<br  /></li>
+<li><a id="sec-1-7-9-16-8" name="sec-1-7-9-16-8"></a>sudo systemctl disable sshd.service<br  /></li>
+<li><a id="sec-1-7-9-16-9" name="sec-1-7-9-16-9"></a><br  /><div class="outline-text-6" id="text-1-7-9-16-9">
+<p>
+<i>* Create init script</i>
+</p>
+</div>
+</li></ol>
+</li></ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2015-02-17 Tue 23:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

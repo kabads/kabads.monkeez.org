@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>raid</title>
+<!-- 2015-04-09 Thu 19:45 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">raid</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Raid</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Objectives</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. Explain the concept of RAID</a></li>
+<li><a href="#sec-1-1-2">1.1.2. Summarize RAID levels</a></li>
+<li><a href="#sec-1-1-3">1.1.3. Configure a RAID device using the essential steps provided</a></li>
+<li><a href="#sec-1-1-4">1.1.4. Monitor RAID devices in multiple ways</a></li>
+<li><a href="#sec-1-1-5">1.1.5. Use hot spares</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. RAID</a>
+<ul>
+<li><a href="#sec-1-2-1">1.2.1. <b>mirroring</b>: writing the same data to more than one disk</a></li>
+<li><a href="#sec-1-2-2">1.2.2. <b>striping</b>: splitting of data to more than one disk</a></li>
+<li><a href="#sec-1-2-3">1.2.3. <b>parity</b>: extra data is stored to allow problem detection and repair, yielding fault tolerance.</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-3">1.3. RAID levels</a>
+<ul>
+<li><a href="#sec-1-3-1">1.3.1. RAID 0: uses only striping. Data is spread across multiple disks. However, in spite of the name, there is no redundancy and there is no stability or recovery capabilities. In fact, if any disk fails data will be lost. But performance can be improved significantly because of parallelization of I/O tasks.</a></li>
+<li><a href="#sec-1-3-2">1.3.2. RAID 1: uses only mirroring; each disk has a duplicate. This is good for recovery. At least two disks are required.</a></li>
+<li><a href="#sec-1-3-3">1.3.3. RAID 5: uses a rotating parity stripe; a single drive failure will cause no loss of data, only a performance drop. There must be at least 3 disks.</a></li>
+<li><a href="#sec-1-3-4">1.3.4. RAID 6: has striped disks with dual parity; it can handle loss of two disks, and requires at least 4 disks. Because RAID 5 can impose significant stress on disks, which can lead to failures during recovery procedures, RAID 6 has become more important.</a></li>
+<li><a href="#sec-1-3-5">1.3.5. RAID 10: is a mirrored and striped data set. At least 4 drives are needed.</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-4">1.4. Software RAID configuration</a>
+<ul>
+<li><a href="#sec-1-4-1">1.4.1. Create partitions on each disks (type fd in fdisk)</a></li>
+<li><a href="#sec-1-4-2">1.4.2. Create RAID device with <b>mdadm</b></a></li>
+<li><a href="#sec-1-4-3">1.4.3. Format RAID device</a></li>
+<li><a href="#sec-1-4-4">1.4.4. Add device to /etc/fstab</a></li>
+<li><a href="#sec-1-4-5">1.4.5. Mount RAID device</a></li>
+<li><a href="#sec-1-4-6">1.4.6. Capture RAID device details to ensure persistence.</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-5">1.5. Monitoring RAIDs</a></li>
+<li><a href="#sec-1-6">1.6. RAID Hot Spares</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Raid</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+The use of RAID spreads I/O activity over multiple physical disks, rather than just one. Its purpose is to enhance data integrity and recoverability in case of failure, as well as boost performance when used with modern storage devices. There are a numnber of different RAID levels which vary in their relative strengths in safety, performance, complexity and cost. 
+</p>
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Objectives</h3>
+<div class="outline-text-3" id="text-1-1">
+</div><div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Explain the concept of RAID</h4>
+</div>
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Summarize RAID levels</h4>
+</div>
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Configure a RAID device using the essential steps provided</h4>
+</div>
+<div id="outline-container-sec-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> Monitor RAID devices in multiple ways</h4>
+</div>
+<div id="outline-container-sec-1-1-5" class="outline-4">
+<h4 id="sec-1-1-5"><span class="section-number-4">1.1.5</span> Use hot spares</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> RAID</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+RAID (Redundant Array of Independent Disks) spreads I/O over multiple disks. This can really increase performance in modern disk controller interfaces such as SCSI, which can perform the work in parallel efficiently. 
+RAID can be implemented either in software (it is a mature part of the linux kernel) or in hardware. If your hardware RAID is known to be of good quality it should be more efficient than using software RAID. With the hardware implementation the operating system is actually not directly aware of using RAID; it is transparent. For example, three 512GB hard drives (two for data, one for parity) configured with RAID-5 will just look like a single 1 TB disk. 
+However, one disadvantage of using hardware RAID is that if the disk controller fails, it must be replaced by a compatible controller which may not be easy to obtain. When using software RAID, the same disks can be attached to and work with any disk controller. Such considerations are more likely to be relevant for low and mid-range hardware. 
+Three essential features of RAID are:
+</p>
+</div>
+<div id="outline-container-sec-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> <b>mirroring</b>: writing the same data to more than one disk</h4>
+</div>
+<div id="outline-container-sec-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> <b>striping</b>: splitting of data to more than one disk</h4>
+</div>
+<div id="outline-container-sec-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3"><span class="section-number-4">1.2.3</span> <b>parity</b>: extra data is stored to allow problem detection and repair, yielding fault tolerance.</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+Thus use of RAID can improve both performance and reliability. 
+One of the main purposes of a RAID is to create a filesystem which spans more than one disk. This allows us to create filesystems which are larger than any one drive. RAID devices are typically created by combining partitions from several disks together. 
+Another advantage of RAID devices is the ability to provide better performance, redundancy or both. Striping involves better performance by spreading the information over multiple devices so simultaneous writes are possible. Mirroring writes the same information to multiple drives giving better redundancy. 
+<b>mdadm</b> is used to create and manage RAID devices. 
+Once create, the array name, /dev/mdX can be used just like any other device, such as /dev/sda1. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> RAID levels</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+There are a number of RAID specifications of increasing complexity and use. The most commonly used are levels 0, 1 and 5. 
+</p>
+</div>
+<div id="outline-container-sec-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> RAID 0: uses only striping. Data is spread across multiple disks. However, in spite of the name, there is no redundancy and there is no stability or recovery capabilities. In fact, if any disk fails data will be lost. But performance can be improved significantly because of parallelization of I/O tasks.</h4>
+</div>
+<div id="outline-container-sec-1-3-2" class="outline-4">
+<h4 id="sec-1-3-2"><span class="section-number-4">1.3.2</span> RAID 1: uses only mirroring; each disk has a duplicate. This is good for recovery. At least two disks are required.</h4>
+</div>
+<div id="outline-container-sec-1-3-3" class="outline-4">
+<h4 id="sec-1-3-3"><span class="section-number-4">1.3.3</span> RAID 5: uses a rotating parity stripe; a single drive failure will cause no loss of data, only a performance drop. There must be at least 3 disks.</h4>
+</div>
+<div id="outline-container-sec-1-3-4" class="outline-4">
+<h4 id="sec-1-3-4"><span class="section-number-4">1.3.4</span> RAID 6: has striped disks with dual parity; it can handle loss of two disks, and requires at least 4 disks. Because RAID 5 can impose significant stress on disks, which can lead to failures during recovery procedures, RAID 6 has become more important.</h4>
+</div>
+<div id="outline-container-sec-1-3-5" class="outline-4">
+<h4 id="sec-1-3-5"><span class="section-number-4">1.3.5</span> RAID 10: is a mirrored and striped data set. At least 4 drives are needed.</h4>
+<div class="outline-text-4" id="text-1-3-5">
+<p>
+As a general rule adding more disks improves performance. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Software RAID configuration</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+The essential steps in configuring a software RAID device are to: 
+</p>
+</div>
+<div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> Create partitions on each disks (type fd in fdisk)</h4>
+</div>
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> Create RAID device with <b>mdadm</b></h4>
+</div>
+<div id="outline-container-sec-1-4-3" class="outline-4">
+<h4 id="sec-1-4-3"><span class="section-number-4">1.4.3</span> Format RAID device</h4>
+</div>
+<div id="outline-container-sec-1-4-4" class="outline-4">
+<h4 id="sec-1-4-4"><span class="section-number-4">1.4.4</span> Add device to /etc/fstab</h4>
+</div>
+<div id="outline-container-sec-1-4-5" class="outline-4">
+<h4 id="sec-1-4-5"><span class="section-number-4">1.4.5</span> Mount RAID device</h4>
+</div>
+<div id="outline-container-sec-1-4-6" class="outline-4">
+<h4 id="sec-1-4-6"><span class="section-number-4">1.4.6</span> Capture RAID device details to ensure persistence.</h4>
+<div class="outline-text-4" id="text-1-4-6">
+<p>
+The command
+$ sudo mdadm -S 
+can be used to stop RAID. 
+For example, 
+First create two partitions of fd on disks sdb and sdc (say /dev/sdbX and /dev/sdcX) by running fdisk on each: 
+$ sudo fdisk /dev/sdb
+$ sudo fdisk /dev/sdc
+Then set up the array, format it, add to the configuration and mount it: 
+$ sudo mdadm &#x2013;create /dev/md0 &#x2013;level=1 &#x2013;raid-disks=2 /dev/sdbX /dev/sdcX
+$ sudo mkfs.ext4 /dev/md0
+$ sudo bash -c "mdadm &#x2013;detail &#x2013;scan &gt;&gt; /etc/mdadm.conf"
+$ sudo mkdir /myraid
+$ sudo mount /dev/md0 /myraid 
+Be sure to add a line in /etc/fstab for the mount point
+/dev/md0 /myraid ext4 defaults 0 0 
+You can examine /proc/mdstat to see the RAID status as in: 
+$ cat /proc/mdstat
+You can use: 
+$ sudo mdadm -S /dev/md0 
+to stop the RAID device. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Monitoring RAIDs</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+You can monitor RAID devices multiple ways as in: 
+$ sudo mdadm &#x2013;detail /dev/md0
+$ cat /proc/mdstat
+One can also use <b>mdmonitor</b> which requires configuring /etc/mdadm.conf. The command:
+$ sudo mdadm &#x2013;detail /dev/mdX 
+will show the current status of the RAID device /dev/mdX. Another way to do this is to examine the /proc filesystem:
+$ cat /proc/mdstat
+will show the status of all RAID devices for the system. 
+You can also use the <b>mdmonitor</b> service by editing /etc/mdadm.conf and adding a line like: 
+MAILADDR eddie@haskell.com
+so that it notifies you with email sent to eddie@haskell.com when a problem occurs with a RAID device, such as when any of the arrays fail to start or fall in to a degraded state. You turn it on with: 
+$ sudo service mdmonitor start
+and make sure it starts at boot with: 
+$ sudo chkconfig mdmonitor on 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> RAID Hot Spares</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+One of the important things that RAID provides is redundancy. To help ensure any reduction in that redundancy is fixed as quick as possible, a <b>hot spare</b> can be used. 
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2015-04-09 Thu 19:45</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

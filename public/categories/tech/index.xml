@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tech on Kabads - musings, mutterings and murmerings</title>
+    <link>https://kabads.monkeez.org/categories/tech/</link>
+    <description>Recent content in Tech on Kabads - musings, mutterings and murmerings</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 10 Jun 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://kabads.monkeez.org/categories/tech/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How to install LineageOS on Wileyfox Swift</title>
+      <link>https://kabads.monkeez.org/2017/06/10/how-to-install-lineageos-wileyfox-swift/</link>
+      <pubDate>Sat, 10 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://kabads.monkeez.org/2017/06/10/how-to-install-lineageos-wileyfox-swift/</guid>
+      <description>With the demise of Cyanogenmod and CyanogenOS people who like to keep a cheaper phone up to date will have to familiarise themselves with LineageOS. This is the fork of the latest version where CyanogenMod left off. As the company shutdown, users are left with no updates. LineageOS will resolve this for you.
+It had been a while (8 months) since installing a new custom ROM, so I wasn&amp;rsquo;t so familiar with the TWRP recovery boot process.</description>
+    </item>
+    
+  </channel>
+</rss>

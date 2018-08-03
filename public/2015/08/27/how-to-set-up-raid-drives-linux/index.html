@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>How to set-up RAID on Linux - Kabads - musings, mutterings and murmerings</title>
+  <meta property="og:title" content="How to set-up RAID on Linux - Kabads - musings, mutterings and murmerings" />
+  <meta name="twitter:title" content="How to set-up RAID on Linux - Kabads - musings, mutterings and …" />
+  <meta name="description" content="RAID disks offer particular advantages over ordinary single disk set up. Data redundancy is improved (consider it to be a continuous backup) and also significant performance can be seen with the correct configuration.
+There are different types of RAID levels and each level will need to be chosen on a use-case:
+ RAID 0: Uses only striping - this makes two disks appear like one larger disk. Provides a performance boost when accessing disks.">
+  <meta property="og:description" content="RAID disks offer particular advantages over ordinary single disk set up. Data redundancy is improved (consider it to be a continuous backup) and also significant performance can be seen with the correct configuration.
+There are different types of RAID levels and each level will need to be chosen on a use-case:
+ RAID 0: Uses only striping - this makes two disks appear like one larger disk. Provides a performance boost when accessing disks.">
+  <meta name="twitter:description" content="RAID disks offer particular advantages over ordinary single disk set up. Data redundancy is improved (consider it to be a continuous backup) and also significant performance can be seen with the …">
+  <meta name="author" content=""/>
+  <meta property="og:site_name" content="Kabads - musings, mutterings and murmerings" />
+  <meta property="og:url" content="/2015/08/27/how-to-set-up-raid-drives-linux/" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="generator" content="Hugo 0.42.2" />
+  <link rel="stylesheet" href="/css/style.css" media="all" />
+  <link rel="stylesheet" href="/css/syntax.css" media="all" />
+  <link rel="stylesheet" href="/css/custom.css" media="all" />
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="site-navi">
+    <h1 class="site-title"><a href="/">Kabads - musings, mutterings and murmerings</a></h1>
+    <ul class="site-navi-items">
+      <li class="site-navi-item-categories"><a href="/categories/" title="Categories">Categories</a></li>
+      <li class="site-navi-item-about"><a href="/about/" title="About">About</a></li>
+    </ul>
+  </nav>
+</header>
+<hr class="site-header-bottom">
+
+  <div class="main" role="main">
+    <article class="article">
+      
+      
+      <h1 class="article-title">How to set-up RAID on Linux</h1>
+      
+      <hr class="article-title-bottom">
+      <ul class="article-meta">
+        <li class="article-meta-date"><time>August 27, 2015</time></li>
+        <li class="article-meta-categories">
+          <a href="/categories/sysadmin/">
+            <svg class="icon"><use xlink:href="/images/fa-solid.svg#folder"></use></svg>
+            sysadmin
+          </a>&nbsp;
+        </li>
+      </ul>
+      
+      <p><a href="https://en.wikipedia.org/wiki/RAID">RAID</a> disks offer particular advantages over ordinary single disk set up. Data redundancy is improved (consider it to be a continuous backup) and also significant performance can be seen with the correct configuration.</p>
+
+<p>There are different types of <a href="https://en.wikipedia.org/wiki/Standard_RAID_levels">RAID levels</a> and each level will need to be chosen on a use-case:</p>
+
+<ul>
+<li><p>RAID 0: Uses only striping - this makes two disks appear like one larger disk. Provides a performance boost when accessing disks.</p></li>
+
+<li><p>RAID 1: uses only mirroring - each disk has a duplicate. Ideal for data recovery. At least two disks are required.</p></li>
+
+<li><p>RAID 5: uses rotating parity strip; a single drive failure will cause no loss of data, only a performance drop. Three disks are required.</p></li>
+
+<li><p>RAID 6: has striped disks with dual parity; it can handle loss of two disks, and requires at least four disks.</p></li>
+
+<li><p>RAID 10: is a mirrored and striped data set - requires at least 4 drives.</p></li>
+</ul>
+
+<p>Firstly, you should have at least two partitions that have been set to the file type &lsquo;fd&rsquo;, using fdisk.</p>
+
+<p>The command that helps us manage RAID drives is <strong><em>mdadm</em></strong> - ensure that it is intalled - the following command will do this on Ubuntu.</p>
+
+<pre><code>$ sudo apt-get install mdadm
+</code></pre>
+
+<p>Then, set-up the array with the following command:</p>
+
+<pre><code>$ sudo mdadm --create /dev/md0 --level=1 --raid-disks=2 /dev/sdbX /dev/sdcX
+</code></pre>
+
+<p>You will need to change the level according to the RAID level that you chose from above, and the number of disks, if this is different from 2.
+Now is the time to create the filesystem:</p>
+
+<pre><code>$ sudo mkfs.ext3 /dev/md0
+</code></pre>
+
+<p>Obviously, you can choose the filesystem according to your taste.</p>
+
+<p>Next, /etc/mdadm.conf needs changing, which can be done with the following command:</p>
+
+<pre><code>$ sudo bash -c &quot;mdadm --detail --scan &gt;&gt; /etc/mdadm.conf&quot;
+</code></pre>
+
+<p>Create a mount point:</p>
+
+<pre><code>$ sudo mkdir /myraid
+</code></pre>
+
+<p>Then mount the drive to the point:</p>
+
+<pre><code>$ sudo mount /dev/md0 /myraid
+</code></pre>
+
+<p>That will provide a drive with root permissions, which will need change if you require other users to use this drive.</p>
+
+    </article>
+
+    
+<ul class="article-share">
+  <li>
+    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </li>
+  <li>
+    <div class="fb-share-button" data-href="https://kabads.monkeez.org/2015/08/27/how-to-set-up-raid-drives-linux/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.10";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+  </li>
+  <li>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <g:plus action="share"></g:plus>
+  </li>
+  <li>
+    <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="en" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  </li>
+  <li>
+    <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    <script>!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+  </li>
+</ul>
+
+    <ul class="pager article-pager">
+      <li class="pager-newer">
+          <a href="/2015/09/10/using-git-as-content-manager/" data-toggle="tooltip" data-placement="top" title="Using Git as a content manager system">&lt; Newer</a>
+      </li>
+      <li class="pager-older">
+        <a href="/2015/08/21/how-to-set-up-lvm-linux/" data-toggle="tooltip" data-placement="top" title="How to set-up LVM on Linux">Older &gt;</a>
+      </li>
+    </ul>
+  </div>
+
+
+<div class="site-footer">
+  <div class="copyright"></div>
+  <ul class="site-footer-items">
+  </ul>
+  <div class="powerdby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>
+  </div>
+</div>
+<script src="/js/script.js"></script>
+<script src="/js/custom.js"></script>
+
+
+</body>
+</html>

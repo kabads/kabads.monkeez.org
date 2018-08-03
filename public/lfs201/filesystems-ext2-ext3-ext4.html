@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>filesystems-ext2-ext3-ext4</title>
+<!-- 2015-04-05 Sun 09:34 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">filesystems-ext2-ext3-ext4</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Filesystems ext2, ext3, ext4</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Objectives</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. Describe the main features of the ext4 filesystem and how it is laid out on disk</a></li>
+<li><a href="#sec-1-1-2">1.1.2. Explain the concepts of block groups, superblock, data blocks and inodes.</a></li>
+<li><a href="#sec-1-1-3">1.1.3. Use the dumpe2fs and tune2fs utilities</a></li>
+<li><a href="#sec-1-1-4">1.1.4. List the ext4 filesystem enhancements</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. Ext4 History and basics</a></li>
+<li><a href="#sec-1-3">1.3. Ext4 features</a></li>
+<li><a href="#sec-1-4">1.4. Ext4 layout</a>
+<ul>
+<li><a href="#sec-1-4-1">1.4.1. clean: filesystem cleanly unmounted previously</a></li>
+<li><a href="#sec-1-4-2">1.4.2. dirty: usually means mounted</a></li>
+<li><a href="#sec-1-4-3">1.4.3. unknown: not cleanly unmounted, such as when there is a system crash</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-5">1.5. Block groups</a></li>
+<li><a href="#sec-1-6">1.6. dumpe2fs</a></li>
+<li><a href="#sec-1-7">1.7. tune2fs</a></li>
+<li><a href="#sec-1-8">1.8. Superblock information</a>
+<ul>
+<li><a href="#sec-1-8-1">1.8.1. Mount count and maximum mount count. (The mount count is incremented every time the disk is successfully mounted and its value is the number of times this has been done since the last fsck.) One can also force a filesystem check after 180 days by default, or another time that can be changed by the tune2fs utility.</a></li>
+<li><a href="#sec-1-8-2">1.8.2. Block size (can not be greater than a page of memory, set by mkfs)</a></li>
+<li><a href="#sec-1-8-3">1.8.3. Blocks per group</a></li>
+<li><a href="#sec-1-8-4">1.8.4. Free block count</a></li>
+<li><a href="#sec-1-8-5">1.8.5. Free inode count</a></li>
+<li><a href="#sec-1-8-6">1.8.6. Operating system ID</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-9">1.9. Data blocks and Inodes</a>
+<ul>
+<li><a href="#sec-1-9-1">1.9.1. The first 12 elements in this array simply point to the first 12 data blocks in the file.</a></li>
+<li><a href="#sec-1-9-2">1.9.2. The 13th element points to a block that represents a second-order array of block numbers; the 14th to a third-order array, and the 15th to a fourth-order array.</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-10">1.10. Ext4 Filesystem Enhancements</a>
+<ul>
+<li><a href="#sec-1-10-1">1.10.1. Is backwards compatible with ext2 and ext3</a></li>
+<li><a href="#sec-1-10-2">1.10.2. Increases the maximum filesystem to 1EB (from 16TB), and the maximum file to 16TB (from 2TB). These limits arise from the 48-bit addressing that is used; full 64-bit addressing may be in the future but really needed at this point.</a></li>
+<li><a href="#sec-1-10-3">1.10.3. Increases without limit the maximum number of subdirectories, which was limited to 32K in ext3.</a></li>
+<li><a href="#sec-1-10-4">1.10.4. Splits large files into the largest possible extents instead of using indirect block mapping. This can improve large file performance and reduce fragmentation.</a></li>
+<li><a href="#sec-1-10-5">1.10.5. Uses multiblock allocation which can allocate space all at once instead of one block at a time. In addition, delayed allocation can also increase performance.</a></li>
+<li><a href="#sec-1-10-6">1.10.6. Can pre-allocate disk space for a file. The allocated space is usually both guaranteed and contiguous.</a></li>
+<li><a href="#sec-1-10-7">1.10.7. Uses allocate-on-flush, a performance technique which delays block allocation until data is written to disk.</a></li>
+<li><a href="#sec-1-10-8">1.10.8. Uses fast fsck which can make the speed of a filesystem check go up by an order of magnitude or more.</a></li>
+<li><a href="#sec-1-10-9">1.10.9. Uses checksums for the journal which improves reliability. This can also safely avoid a disk I/O wait during journalling, resulting in a slight performance boost.</a></li>
+<li><a href="#sec-1-10-10">1.10.10. Uses improved timestamps measured in nanoseconds</a></li>
+<li><a href="#sec-1-10-11">1.10.11. Includes snapshot support.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Filesystems ext2, ext3, ext4</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+The ext family of filesystems have been native to Linux since its earliest days, and have been the most widely used of the choices available. Until very recently, ext4 was the most frequent default choice of linux distributions, due to its excellent combination of performance, integrity and stability. 
+</p>
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Objectives</h3>
+<div class="outline-text-3" id="text-1-1">
+</div><div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Describe the main features of the ext4 filesystem and how it is laid out on disk</h4>
+</div>
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Explain the concepts of block groups, superblock, data blocks and inodes.</h4>
+</div>
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Use the dumpe2fs and tune2fs utilities</h4>
+</div>
+<div id="outline-container-sec-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> List the ext4 filesystem enhancements</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Ext4 History and basics</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+The ext2 filesystem was Linux's original native variety and is available on all linux systems, but is rarely used today. 
+The ext3 filesystem was the first journalling extension of ext2. It had the same on-disk layout as ext2 except for the presence of a journal file. 
+The ext4 filesystem first appeared in kernel version 2.6.19 and its experimental designation was removed in version 2.6.28. It included significant enhancements such as the use of extents for large files, instead of list of file blocks. 
+An extent is simply a group of contiguous blocks. Using them can improve large file performance and reduce fragmentation. 
+ext4 is the default filesystem on most enterprise linux distributions, although RHEL 7 has recently adopted XFS as the default. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Ext4 features</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+There is a close correspondence of features between VFS and ext2/3/4 filesystems as each has been designed with the other in mind. 
+Block size is selected when the filesystem is built - it can be
+512, 1024, 2048 or 4096 bytes. By default, 4096 is usually used for hard disk systems unless the partition is very small. Unless there are very many small files, larger block sizes can be more efficient in terms of minimizing hard disk access. 
+The linux kernel memory management system requires only an integral number of blocks must fit into a page of memory; thus you can not have 8KB blocks on an x86 platform where pages of memory are 4KB in size. 
+The number of inodes on the filesystem can also be tuned, which may save disk space. 
+A feature called an inode reservation consists of reserving several inodes when a directory is created, expecting them to be used in the future. This improves performance, because when new files are created the directory already has inodes allocated. 
+If the pathname of a symbolic link is less than 60 characters, a so-called fast symbolic link is created, which is stored directly in the inode, obviating the need to read a data block. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Ext4 layout</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+All fields are written to disk in little-endian order, except the journal. 
+Disk blocks are partitioned in to block groups, each of which contains inode and data blocks stored adjacently, thereby lowering access time. 
+The layout of a standard block group is simple. For block group 0, the first 1024 bytes are unused (to allow for boot sectors, etc). The superblock will start at the first block, except for group 0. This is followed by the group descriptors and a number of GDT (Global Descriptor Table) blocks. These are followed by the data block bitmap, the inode bitmap, the inode table, and the data blocks. 
+Data blocks are pre-allocated to files before they are actually used. Thus when a file's size is increased, adjacent space has already been reserved and file fragmentation is reduced. 
+The filesystem superblock contains bit-fields which are used to ascertain whether or not the filesystem requires checking when it is first mounted during system initialization. The status can be: 
+</p>
+</div>
+<div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> clean: filesystem cleanly unmounted previously</h4>
+</div>
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> dirty: usually means mounted</h4>
+</div>
+<div id="outline-container-sec-1-4-3" class="outline-4">
+<h4 id="sec-1-4-3"><span class="section-number-4">1.4.3</span> unknown: not cleanly unmounted, such as when there is a system crash</h4>
+<div class="outline-text-4" id="text-1-4-3">
+<p>
+In the latter two cases fsck will be run to check the filesystem and fix any problems before it is mounted. 
+Other fields in the superblock contain information about when the filesystem was last checked, both in date and number of mounts, and automatic checking is triggered when tuneable limits are exceeded for these quantaties. 
+The first block on the filesystem is the so-called boot block, and is reserved for the partition boot sector. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Block groups</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+After the boot block there is a series of block groups, each of which is the same size. The layout of each block group is given in the following figure: 
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left">Super block</td>
+<td class="left">Group descriptors</td>
+<td class="left">Data block bitmap</td>
+<td class="left">Inode bitmap</td>
+<td class="left">Inode table (n blocks)</td>
+<td class="left">Data blocks (n groups)</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+The first and second blocks are the same in every block group, and compromise the Superblock and the Group Descriptors. Under normal circumstances only those in the first block group are used by the kernel; the duplicate copies are only referenced when the filesystem is being checked. If everything is OK, the kernel merely copies them over from the first block group. If there is a problem with the master copies, it goes to the next and so on until a healthy one is found and the filesystem structure is rebuilt. This redundancy makes it very difficult to thoroughly fry an ext2/3/4 filesystem, as long as the filesystem checks are run periodically. 
+In early incarnations of the ext filesystem family, each block group contained the group descriptors for every block group, as well as a copy of the super block. As an optimization, however, today not all block groups have a copy of the superblock and group descriptors. To see what you have you could try: 
+$ sudo dumpe2fs /dev/sda1 |grep superblock
+(putting in appropriate device node) to see precise locations. This happens when the filesystem is created with the sparse<sub>super</sub> option, which is the default. 
+The number of block groups is constrained by the fact that the block bitmap, which identifies used and free blocks within the group, has to fit in a single block. Thus, if a block is 4096 bytes in size, a block group can contain no more than 32 K blocks, or 128 MB. If we take the largest possible block group size, a 10 GB patition would thus have to have at least 80 block groups. 
+The block allocator tries to keep each file's blocks within the same block group to reduce seek times. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> dumpe2fs</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+As we have just demonstrated, one can use the utility dumpe2fs to scan the filesystem information, doing so on a partition reveals: 
+$ sudo dumpe2fs /dev/sda1 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> tune2fs</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+tune2fs can be used to change filesystem parameters. 
+To change the maximum number of mounts between filesystem checks (max-mount-count): 
+$ sudo tune2fs -c 25 /dev/sda1 
+To change the time interval between checks (interval-between-checks):
+$ sudo tune2fs -i 10 /dev/sda1 
+To list the contents of the superblock including the current values of parameters which can be changed:
+$ sudo tune2fs -l /dev/sda1 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8"><span class="section-number-3">1.8</span> Superblock information</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+The superblock contains global information about the filesystem including: 
+</p>
+</div>
+<div id="outline-container-sec-1-8-1" class="outline-4">
+<h4 id="sec-1-8-1"><span class="section-number-4">1.8.1</span> Mount count and maximum mount count. (The mount count is incremented every time the disk is successfully mounted and its value is the number of times this has been done since the last fsck.) One can also force a filesystem check after 180 days by default, or another time that can be changed by the tune2fs utility.</h4>
+</div>
+<div id="outline-container-sec-1-8-2" class="outline-4">
+<h4 id="sec-1-8-2"><span class="section-number-4">1.8.2</span> Block size (can not be greater than a page of memory, set by mkfs)</h4>
+</div>
+<div id="outline-container-sec-1-8-3" class="outline-4">
+<h4 id="sec-1-8-3"><span class="section-number-4">1.8.3</span> Blocks per group</h4>
+</div>
+<div id="outline-container-sec-1-8-4" class="outline-4">
+<h4 id="sec-1-8-4"><span class="section-number-4">1.8.4</span> Free block count</h4>
+</div>
+<div id="outline-container-sec-1-8-5" class="outline-4">
+<h4 id="sec-1-8-5"><span class="section-number-4">1.8.5</span> Free inode count</h4>
+</div>
+<div id="outline-container-sec-1-8-6" class="outline-4">
+<h4 id="sec-1-8-6"><span class="section-number-4">1.8.6</span> Operating system ID</h4>
+<div class="outline-text-4" id="text-1-8-6">
+<p>
+As we discussed earlier, the superblock is redundantly stored in several block groups. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-9" class="outline-3">
+<h3 id="sec-1-9"><span class="section-number-3">1.9</span> Data blocks and Inodes</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+The data block and inode bitmaps are blocks whose bits contain 0 for each free block or inode and 1 for each used one. There is only one of each of these bitmaps per block group. 
+The inode table contains as many consecutive blocks as are necessary to cover the number of inodes in the block group. Each inode requires 128 bytes; thus a 4kb block can contain 32 inodes. The ext2<sub>inode</sub> data structure is also given in include/linux/ext2 fs.h. 
+Note that there is space reserved for some operating system dependent information; different OSs could possibly mount an ext2/3 filesystem, much as linux can mount many different kinds of non-native filesystems. 
+Note that the inode number itself is not stored on the disk in this structure, but rather its value can be quickly calculated from the block number and offset within the inode table. 
+The ext2 and ext3 filesystems did not yet incorporate the use of extents to organize larger files. Instead, the i<sub>block[]</sub> array of pointers to data blocks, of length EXT2<sub>N</sub><sub>BLOCKS</sub>=15, is described by the inode. The way this is handled is somewhat complex:
+</p>
+</div>
+<div id="outline-container-sec-1-9-1" class="outline-4">
+<h4 id="sec-1-9-1"><span class="section-number-4">1.9.1</span> The first 12 elements in this array simply point to the first 12 data blocks in the file.</h4>
+</div>
+<div id="outline-container-sec-1-9-2" class="outline-4">
+<h4 id="sec-1-9-2"><span class="section-number-4">1.9.2</span> The 13th element points to a block that represents a second-order array of block numbers; the 14th to a third-order array, and the 15th to a fourth-order array.</h4>
+<div class="outline-text-4" id="text-1-9-2">
+<p>
+This algorithm makes addressing small files go fastest, as it should. For instance, with a 4KB block size, a 48KB file can be directly addressed, a 2MB file requires a second-order process, a 1GB a third-order, a 4GB file a fourth-order. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-10" class="outline-3">
+<h3 id="sec-1-10"><span class="section-number-3">1.10</span> Ext4 Filesystem Enhancements</h3>
+<div class="outline-text-3" id="text-1-10">
+</div><div id="outline-container-sec-1-10-1" class="outline-4">
+<h4 id="sec-1-10-1"><span class="section-number-4">1.10.1</span> Is backwards compatible with ext2 and ext3</h4>
+</div>
+<div id="outline-container-sec-1-10-2" class="outline-4">
+<h4 id="sec-1-10-2"><span class="section-number-4">1.10.2</span> Increases the maximum filesystem to 1EB (from 16TB), and the maximum file to 16TB (from 2TB). These limits arise from the 48-bit addressing that is used; full 64-bit addressing may be in the future but really needed at this point.</h4>
+</div>
+<div id="outline-container-sec-1-10-3" class="outline-4">
+<h4 id="sec-1-10-3"><span class="section-number-4">1.10.3</span> Increases without limit the maximum number of subdirectories, which was limited to 32K in ext3.</h4>
+</div>
+<div id="outline-container-sec-1-10-4" class="outline-4">
+<h4 id="sec-1-10-4"><span class="section-number-4">1.10.4</span> Splits large files into the largest possible extents instead of using indirect block mapping. This can improve large file performance and reduce fragmentation.</h4>
+</div>
+<div id="outline-container-sec-1-10-5" class="outline-4">
+<h4 id="sec-1-10-5"><span class="section-number-4">1.10.5</span> Uses multiblock allocation which can allocate space all at once instead of one block at a time. In addition, delayed allocation can also increase performance.</h4>
+</div>
+<div id="outline-container-sec-1-10-6" class="outline-4">
+<h4 id="sec-1-10-6"><span class="section-number-4">1.10.6</span> Can pre-allocate disk space for a file. The allocated space is usually both guaranteed and contiguous.</h4>
+</div>
+<div id="outline-container-sec-1-10-7" class="outline-4">
+<h4 id="sec-1-10-7"><span class="section-number-4">1.10.7</span> Uses allocate-on-flush, a performance technique which delays block allocation until data is written to disk.</h4>
+</div>
+<div id="outline-container-sec-1-10-8" class="outline-4">
+<h4 id="sec-1-10-8"><span class="section-number-4">1.10.8</span> Uses fast fsck which can make the speed of a filesystem check go up by an order of magnitude or more.</h4>
+</div>
+<div id="outline-container-sec-1-10-9" class="outline-4">
+<h4 id="sec-1-10-9"><span class="section-number-4">1.10.9</span> Uses checksums for the journal which improves reliability. This can also safely avoid a disk I/O wait during journalling, resulting in a slight performance boost.</h4>
+</div>
+<div id="outline-container-sec-1-10-10" class="outline-4">
+<h4 id="sec-1-10-10"><span class="section-number-4">1.10.10</span> Uses improved timestamps measured in nanoseconds</h4>
+</div>
+<div id="outline-container-sec-1-10-11" class="outline-4">
+<h4 id="sec-1-10-11"><span class="section-number-4">1.10.11</span> Includes snapshot support.</h4>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2015-04-05 Sun 09:34</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

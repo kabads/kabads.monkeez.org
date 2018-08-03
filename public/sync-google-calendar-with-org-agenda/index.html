@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>Sync Google Calendar With Org Agenda - Kabads - musings, mutterings and murmerings</title>
+  <meta property="og:title" content="Sync Google Calendar With Org Agenda - Kabads - musings, mutterings and murmerings" />
+  <meta name="twitter:title" content="Sync Google Calendar With Org Agenda - Kabads - musings, mutterings …" />
+  <meta name="description" content="I use org-mode an awful lot - it helps me manage my tasks and code all in one place. However, the organisation that I work for have just migrated over to Google Suite and manage meetings extensively using Google Calendar. I really wanted my Google Calendar to sync with my org-agenda. Org-agenda is a tool that pulls in any scheduled activities from all your files in to one dynamic view.">
+  <meta property="og:description" content="I use org-mode an awful lot - it helps me manage my tasks and code all in one place. However, the organisation that I work for have just migrated over to Google Suite and manage meetings extensively using Google Calendar. I really wanted my Google Calendar to sync with my org-agenda. Org-agenda is a tool that pulls in any scheduled activities from all your files in to one dynamic view.">
+  <meta name="twitter:description" content="I use org-mode an awful lot - it helps me manage my tasks and code all in one place. However, the organisation that I work for have just migrated over to Google Suite and manage meetings extensively …">
+  <meta name="author" content=""/>
+  <meta property="og:site_name" content="Kabads - musings, mutterings and murmerings" />
+  <meta property="og:url" content="/sync-google-calendar-with-org-agenda/" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="generator" content="Hugo 0.42.2" />
+  <link rel="stylesheet" href="/css/style.css" media="all" />
+  <link rel="stylesheet" href="/css/syntax.css" media="all" />
+  <link rel="stylesheet" href="/css/custom.css" media="all" />
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="site-navi">
+    <h1 class="site-title"><a href="/">Kabads - musings, mutterings and murmerings</a></h1>
+    <ul class="site-navi-items">
+      <li class="site-navi-item-categories"><a href="/categories/" title="Categories">Categories</a></li>
+      <li class="site-navi-item-about"><a href="/about/" title="About">About</a></li>
+    </ul>
+  </nav>
+</header>
+<hr class="site-header-bottom">
+
+  <div class="main" role="main">
+    <article class="article">
+      
+      
+      <h1 class="article-title">Sync Google Calendar With Org Agenda</h1>
+      
+      <hr class="article-title-bottom">
+      <ul class="article-meta">
+        <li class="article-meta-date"><time>March 18, 2018</time></li>
+        <li class="article-meta-categories">
+          <a href="/categories/sysadmin/">
+            <svg class="icon"><use xlink:href="/images/fa-solid.svg#folder"></use></svg>
+            sysadmin
+          </a>&nbsp;
+        </li>
+        <li class="article-meta-categories">
+          <a href="/categories/emacs/">
+            <svg class="icon"><use xlink:href="/images/fa-solid.svg#folder"></use></svg>
+            emacs
+          </a>&nbsp;
+        </li>
+      </ul>
+      
+      
+
+<p><a data-flickr-embed="true"  href="https://www.flickr.com/photos/kabads/40931410022/in/datetaken/" title="screen"><img src="https://farm1.staticflickr.com/790/40931410022_e1823676da.jpg" width="500" height="316" alt="screen"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<p>I use <a href="https://orgmode.org">org-mode</a> an awful lot - it helps me manage my tasks and code all in one place. However, the organisation that I work for have just migrated over to Google Suite and manage meetings extensively using Google Calendar. I really wanted my Google Calendar to sync with my <a href="https://orgmode.org/manual/Agenda-commands.html">org-agenda</a>. Org-agenda is a tool that pulls in any scheduled activities from all your files in to one dynamic view. It&rsquo;s pretty much what drives my working day. Having meetings arranged with colleagues in my org-agenda will help me schedule my day.</p>
+
+<p>The package <a href="https://github.com/myuhe/org-gcal.el">org-gcal</a> provides two way syncing with Google Calendar (and has other documentation).</p>
+
+<p>This is how I did it.</p>
+
+<h2 id="install-org-cal">Install org-cal</h2>
+
+<p>Using elpa, I installed the package:</p>
+
+<pre><code>M-x package-list
+</code></pre>
+
+<p>Highlight the <code>org-gcal</code> package and install.</p>
+
+<h2 id="create-api-credentials">Create Api Credentials</h2>
+
+<p>Then, go to google and get credentials to access your calendar. You will need to go to the <a href="https://console.developers.google.com/cloud-resource-manager">google developers portal</a> where you may need to enable the developers&rsquo; api. You will need to find Api &amp; Services and then click on credentials. You will create some OAuth 2.0 client IDs credentials - one being the API key and the other being a secret. Make a note of these, or download the JSON file that Google provides.</p>
+
+<p><a data-flickr-embed="true"  href="https://www.flickr.com/photos/kabads/26101808357/in/datetaken/" title="Screenshot-2018-3-23 Credentials - org-gcal"><img src="https://farm1.staticflickr.com/799/26101808357_5446e2c69d.jpg" width="500" height="229" alt="Screenshot-2018-3-23 Credentials - org-gcal"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<p>Enable these credentials for Google Calendar.</p>
+
+<p><a data-flickr-embed="true"  href="https://www.flickr.com/photos/kabads/40931425052/in/datetaken/" title="Screenshot-2018-3-23 APIs Services - org-gcal"><img src="https://farm1.staticflickr.com/818/40931425052_9051ec90df.jpg" width="500" height="241" alt="Screenshot-2018-3-23 APIs Services - org-gcal"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<h2 id="identify-calendar">Identify Calendar</h2>
+
+<p>Then, the README for org-cal tells you to find the link for your calendar. This didn&rsquo;t work for me. Instead, I found the link in the url in the address bar of my browser (click on the image to see more detail):</p>
+
+<p><a data-flickr-embed="true"  href="https://www.flickr.com/photos/kabads/40263945734" title="url"><img src="https://farm1.staticflickr.com/805/40263945734_3272338f4e_c.jpg" width="800" height="105" alt="url"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<h2 id="create-settings">Create settings</h2>
+
+<p>(require &lsquo;org-gcal)
+   (setq org-gcal-client-id &ldquo;your-id-foo.apps.googleusercontent.com&rdquo;
+      org-gcal-client-secret &ldquo;your-secret&rdquo;
+      org-gcal-file-alist &lsquo;((&ldquo;your-mail@gmail.com&rdquo; .  &ldquo;~/schedule.org&rdquo;)
+                            (&ldquo;another-mail@gmail.com&rdquo; .  &ldquo;~/task.org&rdquo;)))</p>
+
+<p>Copy that string in to your <code>~.emacs</code> file, substituting the proper parts (your org-gcal-client-id and secret and the files that you wish to create when you sync).</p>
+
+<p>Save the file and then execute <code>M-x load-file &lt;RET&gt;.emacs</code> to reload this file.</p>
+
+<h2 id="sync-and-org-agenda-file-to-front">Sync and org-agenda-file-to-front</h2>
+
+<p>Now you need to sync your calendar, which will create a new org file (as you specified in the settings.</p>
+
+<pre><code>M-x org-gcal-sync
+</code></pre>
+
+<p>Once that file is created open it <code>C-x C-f</code> </path/to/file> <RET><code>and then</code>M-x org-agenda-file-to-front`. This command will include the new file.</p>
+
+<p>You can also create a hook to run <code>org-gcal-sync</code> when you open your agenda by placing this snippet in your <code>.emacs</code> file:</p>
+
+<pre><code>(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+</code></pre>
+
+    </article>
+
+    
+<ul class="article-share">
+  <li>
+    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </li>
+  <li>
+    <div class="fb-share-button" data-href="https://kabads.monkeez.org/sync-google-calendar-with-org-agenda/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.10";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+  </li>
+  <li>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <g:plus action="share"></g:plus>
+  </li>
+  <li>
+    <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="en" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  </li>
+  <li>
+    <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    <script>!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+  </li>
+</ul>
+
+    <ul class="pager article-pager">
+      <li class="pager-newer pager-noitem">&lt; Newer</li>
+      <li class="pager-older pager-noitem">Older &gt;</li>
+    </ul>
+  </div>
+
+
+<div class="site-footer">
+  <div class="copyright"></div>
+  <ul class="site-footer-items">
+  </ul>
+  <div class="powerdby">
+    Powered by <a href="https://gohugo.io/">Hugo</a>
+  </div>
+</div>
+<script src="/js/script.js"></script>
+<script src="/js/custom.js"></script>
+
+
+</body>
+</html>

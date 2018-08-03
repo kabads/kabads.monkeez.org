@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>logical-volume-management</title>
+<!-- 2015-04-08 Wed 17:17 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">logical-volume-management</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Logical volume management</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Objectives</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. Explain the concepts behind LVM</a></li>
+<li><a href="#sec-1-1-2">1.1.2. Create logical volumes</a></li>
+<li><a href="#sec-1-1-3">1.1.3. Display logical volumes</a></li>
+<li><a href="#sec-1-1-4">1.1.4. Resize logical volumes</a></li>
+<li><a href="#sec-1-1-5">1.1.5. Use LVM snapshots</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. LVM</a></li>
+<li><a href="#sec-1-3">1.3. LVM and RAID</a></li>
+<li><a href="#sec-1-4">1.4. Volumes and Volume Groups</a>
+<ul>
+<li><a href="#sec-1-4-1">1.4.1. vgcreate: creates volume groups</a></li>
+<li><a href="#sec-1-4-2">1.4.2. vgextend: adds to volume groups</a></li>
+<li><a href="#sec-1-4-3">1.4.3. vgreduce: shrinks volume groups</a></li>
+<li><a href="#sec-1-4-4">1.4.4. pvcreate: converts a partition to a physical volume</a></li>
+<li><a href="#sec-1-4-5">1.4.5. pvdisplay: shows the physical volumes being used</a></li>
+<li><a href="#sec-1-4-6">1.4.6. pvmove: moves the data from one physical volume within the volume group to others; this might be required if a disk or partition is being removed for some reason. It would be followed by:</a></li>
+<li><a href="#sec-1-4-7">1.4.7. pvremove: remove a partition from a physical volume.</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-5">1.5. Logical volume Utilities</a></li>
+<li><a href="#sec-1-6">1.6. Creating logical volumes</a></li>
+<li><a href="#sec-1-7">1.7. Displaying Logical Volumes</a>
+<ul>
+<li><a href="#sec-1-7-1">1.7.1. pvdisplay shows physical volumes as in</a></li>
+<li><a href="#sec-1-7-2">1.7.2. vgdisplay shows volume groups as in</a></li>
+<li><a href="#sec-1-7-3">1.7.3. lvdisplay shows logical volumes as in</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-8">1.8. Resizing logical volumes</a>
+<ul>
+<li><a href="#sec-1-8-1">1.8.1. When expanding a logical filesystem with a filesystem, one must first expand the volume and then expand the filesystem</a></li>
+<li><a href="#sec-1-8-2">1.8.2. When shrinking a logical volume with a filesystem, one must first shrink the filesystem and then shrink the volume.</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-9">1.9. Example of resizing</a></li>
+<li><a href="#sec-1-10">1.10. LVM Snapshots</a>
+<ul>
+<li><a href="#sec-1-10-1">1.10.1. When the original logical volume changes, original data blocks are copied to the snapshot.</a></li>
+<li><a href="#sec-1-10-2">1.10.2. If data is added to the snapshot, it is stored only there.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Logical volume management</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+LVM permits having one logical filesystem span multiple physical volumes and partitions while appearing as a simple partition for normal usage. When using LVM it is very easy to perform operations such as shrinking and expanding filesystems as needed; such operations are difficult on fixed physical partitions. 
+</p>
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Objectives</h3>
+<div class="outline-text-3" id="text-1-1">
+</div><div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Explain the concepts behind LVM</h4>
+</div>
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Create logical volumes</h4>
+</div>
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Display logical volumes</h4>
+</div>
+<div id="outline-container-sec-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> Resize logical volumes</h4>
+</div>
+<div id="outline-container-sec-1-1-5" class="outline-4">
+<h4 id="sec-1-1-5"><span class="section-number-4">1.1.5</span> Use LVM snapshots</h4>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> LVM</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+LVM breaks up one virtual partition in to multiple chunks, each of which can be on different partitions and/or disks. 
+There are many advantages to using LVM; in particular it becomes really easy to change the size of the logical partitions and filesystems, to add more storage space, rearrange things etc. 
+One or more physical volumes (disk partitions) are grouped together in to a volume group. Then the volume group is subdivided in to logical volumes (which mimic to the system normal physical disk partitions and can be formatted to contain mountable filesystems. 
+There are a variety of command line utilities tasked to create, delete, resize etc. physical and logical volumes. For a graphical tool most Linux distributions use system-config-lvm. However, RHEL 7 no longer supports this tool and there is currently no graphical tool that works reliably with the most recent variations in filesystem types etc. Fortunately, the command line utilities are not hard to use and are more flexible anyway. 
+LVM does impact performance. There is a definite additional cost that comes from the overhead of the LVM layer. However, even on non-RAID systems, if you are striping (splitting of data to more than one disk) you can achieve some parallelization improvements. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> LVM and RAID</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Like RAID (which will be discussed later), the use of logical volumes is a mechanism for creating filesystems which can span more than one physical disk. 
+Logical volumes are created by putting all the devices into a large pool of disk space (the volume group) and then allocating space from the pool to create a logical volume. 
+Logical volumes have features similar to RAID devices. They can actually be built on top of a RAID device. This would give the logical volume the redundancy of a RAID device with the scalability of LVM. 
+LVM has better scalability than RAID: logical volumes can easily be resized; i.e. enlarged and shrunk, as needs require. If more space is needed, additional devices can be added to the logical volume at any time. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Volumes and Volume Groups</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Partitions are converted to physical volumes and multiple physical volumes are grouped into volume groups; there can be more than one volume group on the system. 
+Space in the volume group is divided in to extents; these are 4MB in size by default, but the size can easily be changed when being allocated. 
+There are a number of command line utilities used to create and manipulate volume groups, whose name always start with vg including:
+</p>
+</div>
+<div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> vgcreate: creates volume groups</h4>
+</div>
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> vgextend: adds to volume groups</h4>
+</div>
+<div id="outline-container-sec-1-4-3" class="outline-4">
+<h4 id="sec-1-4-3"><span class="section-number-4">1.4.3</span> vgreduce: shrinks volume groups</h4>
+<div class="outline-text-4" id="text-1-4-3">
+<p>
+Utilities that manipulate what physical partitions enter or leave volume groups start with pv and include:
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-4-4" class="outline-4">
+<h4 id="sec-1-4-4"><span class="section-number-4">1.4.4</span> pvcreate: converts a partition to a physical volume</h4>
+</div>
+<div id="outline-container-sec-1-4-5" class="outline-4">
+<h4 id="sec-1-4-5"><span class="section-number-4">1.4.5</span> pvdisplay: shows the physical volumes being used</h4>
+</div>
+<div id="outline-container-sec-1-4-6" class="outline-4">
+<h4 id="sec-1-4-6"><span class="section-number-4">1.4.6</span> pvmove: moves the data from one physical volume within the volume group to others; this might be required if a disk or partition is being removed for some reason. It would be followed by:</h4>
+</div>
+<div id="outline-container-sec-1-4-7" class="outline-4">
+<h4 id="sec-1-4-7"><span class="section-number-4">1.4.7</span> pvremove: remove a partition from a physical volume.</h4>
+<div class="outline-text-4" id="text-1-4-7">
+<p>
+Typing man lvm will give a full list of LVM utilities. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Logical volume Utilities</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+There are a number of utilities that manipulate logical volumes. Unsurprisingly they all begin with lv. We will discsuss the most commonly used ones, but a short list can be obtained by: 
+$ sudo ls -lF <i>sbin/lv* 
+Note: these utilities are in /sbin</i> not /usr/sbin as they may be needed either for boot or repair and recovery. 
+Most of them are symbolically linked to lvm, a swiss army knife program that does all the work but figures out what is being asked to do based on the name it is invoked with. This is also true for most of the pv* and vg* utilities as you can verify easily enou
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Creating logical volumes</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+lvcreate allocates logical volume from within volume groups. The size can be specified either in bytes or number of extents (remember they are 4MB by default). Names can be anything desired. 
+lvdisplay reports an available logical volumes. 
+Filesystems are placed in logical volumes and are formatted with mkfs as usual.
+Starting with possibly creating a new volume group, the steps involved in setting up and using a new logical volume are:
+</p>
+<ol class="org-ol">
+<li>Create partitions on disk drives (type 8e in fdisk)
+</li>
+<li>Create physical volumes from the partitions
+</li>
+<li>Creat the volume group
+</li>
+<li>Allocate logical volumes from the volume group
+</li>
+<li>Format the logical volumes
+</li>
+<li>Mount the logical volumes (and also update /etc/fstab as needed)
+</li>
+</ol>
+<p>
+For example, assuming one has already created partitions /dev/sdb1 and /dev/sdc1 and given them type 8e:
+$ sudo pvcreate /dev/sdb1
+$ sudo pvcreate /dev/sdc1
+$ sudo vgcreate -s 16M vg /dev/sdb1
+$ sudo vgextend vg /dev/sdc1
+$ sudo lvcreate -L 50G -n mylvm vg
+$ sudo mkfs -t ext4 /dev/vg/mylvm
+$ mkdir /mylvm
+$ sudo mount /dev/vg/mylvm /mylvm
+Be sure to add the line
+dev/vg/mylvm /mylvm ext4 defaults 0 0
+to /etc/fstab to make this a persistent mount.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Displaying Logical Volumes</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+In order to display information about LVM the following command line programs are available:
+</p>
+</div>
+<div id="outline-container-sec-1-7-1" class="outline-4">
+<h4 id="sec-1-7-1"><span class="section-number-4">1.7.1</span> pvdisplay shows physical volumes as in</h4>
+<div class="outline-text-4" id="text-1-7-1">
+</div><ol class="org-ol"><li><a id="sec-1-7-1-1" name="sec-1-7-1-1"></a>sudo pvdisplay<br  /></li>
+<li><a id="sec-1-7-1-2" name="sec-1-7-1-2"></a>sudo pvdisplay /dev/sda5<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-7-2" class="outline-4">
+<h4 id="sec-1-7-2"><span class="section-number-4">1.7.2</span> vgdisplay shows volume groups as in</h4>
+<div class="outline-text-4" id="text-1-7-2">
+</div><ol class="org-ol"><li><a id="sec-1-7-2-1" name="sec-1-7-2-1"></a>sudo vgdisplay<br  /></li>
+<li><a id="sec-1-7-2-2" name="sec-1-7-2-2"></a>sudo vgdisplay /dev/vg0<br  /></li></ol>
+</div>
+<div id="outline-container-sec-1-7-3" class="outline-4">
+<h4 id="sec-1-7-3"><span class="section-number-4">1.7.3</span> lvdisplay shows logical volumes as in</h4>
+<div class="outline-text-4" id="text-1-7-3">
+</div><ol class="org-ol"><li><a id="sec-1-7-3-1" name="sec-1-7-3-1"></a>sudo lvdisplay<br  /></li>
+<li><a id="sec-1-7-3-2" name="sec-1-7-3-2"></a>sudo lvdisplay /dev/vg0/lvm1<br  /><div class="outline-text-5" id="text-1-7-3-2">
+<p>
+Without arguments these utilities will display all physical volumes, volume groups or logical volumes. 
+</p>
+</div>
+</li></ol>
+</div>
+</div>
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8"><span class="section-number-3">1.8</span> Resizing logical volumes</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+One great advantage of using LVM is that it is easy and quick to change the size of a logical volume, especially when compared with trying to do this with a physical partition that already contains a filesystem. 
+When doing this extents can be added or subtracted from the logical volume, and they can come from anywhere in the volume group; they need not be from physically contiguous sections of the disk. 
+If the volume contains a filesystem, expanding or shrinking it is an entirely different operation than changing the size of the volume:
+</p>
+</div>
+<div id="outline-container-sec-1-8-1" class="outline-4">
+<h4 id="sec-1-8-1"><span class="section-number-4">1.8.1</span> When expanding a logical filesystem with a filesystem, one must first expand the volume and then expand the filesystem</h4>
+</div>
+<div id="outline-container-sec-1-8-2" class="outline-4">
+<h4 id="sec-1-8-2"><span class="section-number-4">1.8.2</span> When shrinking a logical volume with a filesystem, one must first shrink the filesystem and then shrink the volume.</h4>
+<div class="outline-text-4" id="text-1-8-2">
+<p>
+The filesystem can not be mounted when being shrunk. However, some filesystems permit expansion while they are mounted. 
+The utilities which change the filesystem size are obviously filesystem dependent; for ext4 the program is resize2fs. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-9" class="outline-3">
+<h3 id="sec-1-9"><span class="section-number-3">1.9</span> Example of resizing</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+To grow a logical volume with an ext4 filesystem:
+$ sudo umount /mylvm
+$ sudo lvextend -L +500M /dev/vg/mylvm
+$ sudo resize2fs /dev/vg/mylvm
+$ sudo mount /dev/vg/mylvm
+where the plus sign indicates adding space. 
+To shrink the filesystem
+$ sudo umount /mylvm
+$ sudo fsck -f /dev/vg/mylvm
+$ sudo resize2fs /dev/vg/mylvm 200M
+$ sudo lvreduce -L 200M /dev/vg/mylvm
+$ sudo mount /dev/vg/mylvm 
+It turns out if you have a recent version of the lvm utilities you can do these operations in one step instead of two, using the -r option as in: 
+$ sudo 
+$ sudo lvextend -r -L +100M /dev/vg/mylvm
+$ sudo lvreduce -r -L -100M /dev/vg/mylvm
+where the quantities use plus and minus signs to indicate the change required. This uses the underlying <b>fsadm</b> utilty which can resize any type of filesystem or which you have support. It would be a good idea to read the man page for <b>fsadm</b>. 
+You can also reduce a volume group as in: 
+$ sudo pvmove /dev/sdc1 
+$ sudo vgreduce vg /dev/sdc1 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-10" class="outline-3">
+<h3 id="sec-1-10"><span class="section-number-3">1.10</span> LVM Snapshots</h3>
+<div class="outline-text-3" id="text-1-10">
+<p>
+LVM Snapshots create an exact copy of an existing logical volume. 
+They are useful for backups, application testing, and deploying VMs (Virtual Machines). The original state of the snapshot is kept as the block map.
+Snapshots only use the space for storing deltas:
+</p>
+</div>
+<div id="outline-container-sec-1-10-1" class="outline-4">
+<h4 id="sec-1-10-1"><span class="section-number-4">1.10.1</span> When the original logical volume changes, original data blocks are copied to the snapshot.</h4>
+</div>
+<div id="outline-container-sec-1-10-2" class="outline-4">
+<h4 id="sec-1-10-2"><span class="section-number-4">1.10.2</span> If data is added to the snapshot, it is stored only there.</h4>
+<div class="outline-text-4" id="text-1-10-2">
+<p>
+To create a snapshot of an existing logical volume:
+$ sudo lvcreate -l 128 -s -n mysnap /dev/vg/mylvm
+To then make a mount point and mount the snapshot: 
+$ mkdir /mysnap
+$ mount -o ro /dev/vg/mysnap /mysnap
+To use the snapshot and to remove the snapshot: 
+$ sudo umount /mysnap
+$ sudo lvremove /dev/vg/mysnap
+Always be sure to remove the snapshot when you are through with it. If you do not remove the snapshot and it fills up because of changes, it will be automatically disabled. A snapshot with the size of the original will never overflow.  
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2015-04-08 Wed 17:17</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
