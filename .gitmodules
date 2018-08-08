@@ -1,4 +1,5 @@
 [submodule "public"]
 	path = public
 	url = git@github.com:kabads/kabads.github.io
+	url = git@github.com:kabads/kabads.github.io.git
 	branch = master
