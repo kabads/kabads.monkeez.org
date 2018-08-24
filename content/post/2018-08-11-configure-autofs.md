@@ -1,9 +1,7 @@
 ---
-title: "Configure Autofs"
-date: 2018-03-23T09:09:48Z
-draft: true
-categories:
-- sysadmin
+title: "Configure Autofs on Arch Linux"
+date: 2018-08-11T10:07:00Z
+categories: ["sysadmin"]
 ---
 
 # What is Autofs?
@@ -13,7 +11,9 @@ It mounts a filesystem that is not always connected (e.g. network or device). On
 
     pacman -S autofs
 
-# Configure the master autofs `/etc/autofs/auto.master`
+# Configure the master autofs
+
+In the file `/etc/autofs/auto.master` add:
 
     /var/autofs		/etc/autofs/auto.misc
 
