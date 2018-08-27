@@ -7,22 +7,30 @@ date:  2018-08-24T10:20:30Z
 ---
 ### Introduction
 
-MySQL servers can be a single point of failure if you have not set up a good back-up infrastructure. It is difficult to get a good back-up infrastructure in place, without some time spent out of service. However, a MySQL replication server offers just that.
+MySQL servers can be a single point of failure if you have not set up a good back-up infrastructure. It is difficult to get a good back-up infrastructure in place, without some time spent out of service. However, a MySQL replication server avoids this downtime.
 
 One server will act as the master, and the other will act as slave. The slave will be paused and then backed up.
 
+
+### Benefits of running a replicated MySQL server:
+
+- Remove single point of failure adding high availability
+- Improved performance if applications can use the read-only server (think data querying)
+
+
 ![Master/Slave Server diagram](https://s3.eu-west-2.amazonaws.com/kabads.monkeez.org/images/mysql_replication.png)
+
 
 ### Conifgure the Master MySQL server
 The master is the live database that is serving your users. To back this up on it's own, you will have to stop transactions on the server and then carry out the backup. In a lot of high availability environments, this is not an option. However, you can prepare your master MySQL server to send those transactions to a different server.
 
 In ```/etc/my.conf``` add the following lines:
 
-
-    log-bin       = master-bin
-    log-bin-index = master-bin.index
-    server-id      = 1
-
+```
+log-bin       = master-bin
+log-bin-index = master-bin.index
+server-id      = 1
+```
 
 The ```log-bin``` directive tells mysql to store a binary log. This binary log is what makes replication easy and quick. We also have a ```log-index```. The binary log tells the other server the events that are happening on the master server. 
 
@@ -72,4 +80,13 @@ If the database is relatively small (i.e. less than 50MB), then the ```mysqldump
 If the dataset is large, then it will be better to create an archive of the files and then transfer that over to the slave machine and restart the server there. Firstly, you should shutdown the mysql server. 
 
 Then, on the slave server, copy the files in the database directory (usually ```/var/lib/mysql```). You can then tar that and then copy to the slave server and extract there. If there are large differences between the configuration files between the servers, then this might not work.
+
+### Carry out the backup
+Now that we have a slave, we can take point in time back-ups by stopping the slove and pausing transactions (although transactions are still ongoing on the master server).
+
+1. Shut down the server ```sudo service mysql-server stop```
+
+1. Copy the data files to a secure off-site location (in this case, Amazon S3) ```sudo aws s3 sync --delete /var/lib/mysql s3://bucket-name/```
+
+1. Restart the server ```sudo service mysql-service start```
 
