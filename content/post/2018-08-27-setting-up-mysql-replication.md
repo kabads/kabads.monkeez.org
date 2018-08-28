@@ -2,8 +2,7 @@
 title: "Setting Up MySQL Replication as a back-up solution"
 categories:
 - sysadmin
-draft: true
-date:  2018-08-24T10:20:30Z
+date:  2018-08-27T12:32:30Z
 ---
 ### Introduction
 
