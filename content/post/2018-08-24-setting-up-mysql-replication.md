@@ -82,7 +82,7 @@ If the dataset is large, then it will be better to create an archive of the file
 Then, on the slave server, copy the files in the database directory (usually ```/var/lib/mysql```). You can then tar that and then copy to the slave server and extract there. If there are large differences between the configuration files between the servers, then this might not work.
 
 ### Carry out the backup
-Now that we have a slave, we can take point in time back-ups by stopping the slove and pausing transactions (although transactions are still ongoing on the master server).
+Now that we have a slave, we can take point in time back-ups by stopping the slave and pausing transactions (although transactions are still ongoing on the master server).
 
 1. Shut down the server ```sudo service mysql-server stop```
 
