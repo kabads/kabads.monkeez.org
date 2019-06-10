@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>How to create an instance that pulls your website content automatically | Kabads. Musings, mutterings and murmerings.</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="How to create an instance that pulls your website content automatically" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Amazon Web Services allows you to spin up instances very quickly. This how to will show you how to upload your content to a S3 bucket and then launch an instance that pulls that content in and starts Apache to serve that content." />
+<meta property="og:description" content="Amazon Web Services allows you to spin up instances very quickly. This how to will show you how to upload your content to a S3 bucket and then launch an instance that pulls that content in and starts Apache to serve that content." />
+<link rel="canonical" href="http://localhost:4000/sysadmin/2017/10/03/AWS-how-to-automatically-launch-apache-with-your-site-content.html" />
+<meta property="og:url" content="http://localhost:4000/sysadmin/2017/10/03/AWS-how-to-automatically-launch-apache-with-your-site-content.html" />
+<meta property="og:site_name" content="Kabads. Musings, mutterings and murmerings." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-10-03T01:00:00+01:00" />
+<script type="application/ld+json">
+{"description":"Amazon Web Services allows you to spin up instances very quickly. This how to will show you how to upload your content to a S3 bucket and then launch an instance that pulls that content in and starts Apache to serve that content.","@type":"BlogPosting","headline":"How to create an instance that pulls your website content automatically","dateModified":"2017-10-03T01:00:00+01:00","datePublished":"2017-10-03T01:00:00+01:00","url":"http://localhost:4000/sysadmin/2017/10/03/AWS-how-to-automatically-launch-apache-with-your-site-content.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/sysadmin/2017/10/03/AWS-how-to-automatically-launch-apache-with-your-site-content.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Kabads. Musings, mutterings and murmerings." /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Kabads. Musings, mutterings and murmerings.</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">How to create an instance that pulls your website content automatically</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-10-03T01:00:00+01:00" itemprop="datePublished">Oct 3, 2017
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Amazon Web Services allows you to spin up instances very quickly. This how to will show you how to upload your content to a S3 bucket and then launch an instance that pulls that content in and starts Apache to serve that content.</p>
+
+<p>Initially, you will need to create a role under IAM. This will have to be able to access S3, so create the role, choose which service you would like to associate it with.</p>
+
+<p>Then create an S3 bucket and upload all the files that your website requires.</p>
+
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/lB2uu"><a href="//imgur.com/lB2uu"></a></blockquote>
+<script async="" src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
+<p>Provide permissions for your role. Searching for S3 will limit the amount of permissions you can see - you can permit read only or Full Access depending on what your EC2 instance will be doing. Review by giving the role a name and a description.</p>
+
+<p>Then, launch an EC2 instance with this role.</p>
+
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/35ebr"><a href="//imgur.com/35ebr">Allocate the IAM role to the EC2 instance</a></blockquote>
+<script async="" src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
+<p>On the same page as the role selection, you will see advanced details at the bottom. You need to type in the script in the user data. This is a script that will run on launch:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+yum update <span class="nt">-y</span>
+yum <span class="nb">install </span>httpd <span class="nt">-y</span>
+service httpd start
+chkconfig httpd on
+aws s3 <span class="nb">cp </span>s3://your-bucket-name/ /var/www/html <span class="nt">--recursive</span>
+</code></pre></div></div>
+
+<p>This will run once it has started the EC2 instance. It will update the machine to ensure that all packages are at the latest release, then install Apache, then start Apache, then ensure that apache starts by default if this instance is restarted for some reason, and then the files are pulled down from the S3 bucket and put in to <code class="highlighter-rouge">/var/www/html</code>. You will need to have created a bucket and put the files in there that you require.</p>
+
+
+  </div><a class="u-url" href="/sysadmin/2017/10/03/AWS-how-to-automatically-launch-apache-with-your-site-content.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Kabads. Musings, mutterings and murmerings.</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Kabads. Musings, mutterings and murmerings.</li><li><a class="u-email" href="mailto:adam@monkeez.org">adam@monkeez.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>I worked in education for 20 years and always had a hand in Technology.  For the last couple of years, I&#39;ve been working in Cloud Automation.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

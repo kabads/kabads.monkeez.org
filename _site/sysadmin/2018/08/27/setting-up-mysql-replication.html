@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Setting Up MySQL Replication as a back-up solution | Kabads. Musings, mutterings and murmerings.</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Setting Up MySQL Replication as a back-up solution" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="MySQL replication is a good thing to have. It provides greater resilience and removes a single point of failure. By following these steps, you will create a replica of a master server, acting as a permanent backup in the case of a DR scenario." />
+<meta property="og:description" content="MySQL replication is a good thing to have. It provides greater resilience and removes a single point of failure. By following these steps, you will create a replica of a master server, acting as a permanent backup in the case of a DR scenario." />
+<link rel="canonical" href="http://localhost:4000/sysadmin/2018/08/27/setting-up-mysql-replication.html" />
+<meta property="og:url" content="http://localhost:4000/sysadmin/2018/08/27/setting-up-mysql-replication.html" />
+<meta property="og:site_name" content="Kabads. Musings, mutterings and murmerings." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-08-27T13:32:30+01:00" />
+<script type="application/ld+json">
+{"description":"MySQL replication is a good thing to have. It provides greater resilience and removes a single point of failure. By following these steps, you will create a replica of a master server, acting as a permanent backup in the case of a DR scenario.","@type":"BlogPosting","headline":"Setting Up MySQL Replication as a back-up solution","dateModified":"2018-08-27T13:32:30+01:00","datePublished":"2018-08-27T13:32:30+01:00","url":"http://localhost:4000/sysadmin/2018/08/27/setting-up-mysql-replication.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/sysadmin/2018/08/27/setting-up-mysql-replication.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Kabads. Musings, mutterings and murmerings." /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Kabads. Musings, mutterings and murmerings.</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Setting Up MySQL Replication as a back-up solution</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-08-27T13:32:30+01:00" itemprop="datePublished">Aug 27, 2018
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>MySQL replication is a good thing to have. It provides greater resilience and removes a single point of failure. By following these steps, you will create a replica of a master server, acting as a permanent backup in the case of a DR scenario.</p>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>MySQL servers can be a single point of failure if you have not set up a good back-up infrastructure. It is difficult to get a good back-up infrastructure in place, without some time spent out of service. However, a MySQL replication server avoids this downtime.</p>
+
+<p>One server will act as the master, and the other will act as slave. The slave will be paused and then backed up.</p>
+
+<h3 id="benefits-of-running-a-replicated-mysql-server">Benefits of running a replicated MySQL server:</h3>
+
+<ul>
+  <li>Remove single point of failure adding high availability</li>
+  <li>Improved performance if applications can use the read-only server (think data querying)</li>
+</ul>
+
+<p><img src="https://s3.eu-west-2.amazonaws.com/kabads.monkeez.org/images/mysql_replication.png" alt="Master/Slave Server diagram" /></p>
+
+<h3 id="conifgure-the-master-mysql-server">Conifgure the Master MySQL server</h3>
+<p>The master is the live database that is serving your users. To back this up on it’s own, you will have to stop transactions on the server and then carry out the backup. In a lot of high availability environments, this is not an option. However, you can prepare your master MySQL server to send those transactions to a different server.</p>
+
+<p>In <code class="highlighter-rouge">/etc/my.conf</code> add the following lines:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>log-bin       = master-bin
+log-bin-index = master-bin.index
+server-id      = 1
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">log-bin</code> directive tells mysql to store a binary log. This binary log is what makes replication easy and quick. We also have a <code class="highlighter-rouge">log-index</code>. The binary log tells the other server the events that are happening on the master server.</p>
+
+<p>You can watch the binary log file with the mysql prompt with <code class="highlighter-rouge">SHOW BINLOG EVENTS\G;</code>. However, to find out which binlog file is currently being written to you should enter <code class="highlighter-rouge">SHOW MASTER STATUS;</code> and then <code class="highlighter-rouge">SHOW BINLOG EVENTS IN 'master-bin.000002'\G;</code> (or whatever file was returned from the master status command.</p>
+
+<p>If you added the replication config lines above after creating the server, as opposed to when you first set the server up, you will need to restart the mysql server:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service mysql-server restart
+</code></pre></div></div>
+
+<p>Then you will need to login to the MySQL command prompt:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql -u root
+</code></pre></div></div>
+
+<p>Next, it is good practise to create a user for replication that only has access rights for the IP range for the subnet where the slave server is.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE USER repl_user; 
+GRANT REPLICATION SLAVE ON *.*
+TO repl_user IDENTIFIED BY 'password';
+</code></pre></div></div>
+
+<p>This user will have access to retrieve the binary log from the master server.</p>
+
+<h3 id="configuring-the-mysql-slave-server">Configuring the MySQL slave Server</h3>
+
+<p>Again, we need a user that has certain privileges on the slave server.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GRANT REPLICATION, SLAVE, RELOAD, CREATE USER, SUPER ON *.* TO user@'1.2.3.%' WITH GRANT OPTION;
+</code></pre></div></div>
+
+<p>Next, you will have to log in to the slave mysql server and issue the following command:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CHANGE MASTER TO MASTER_HOST = '1.2.3.4', MASTER_PORT = 3306, MASTER_USER = 'repl_user', MASTER_PASSWORD = 'password';
+START SLAVE;
+</code></pre></div></div>
+
+<p>Any changes for new databases on the master server will now be replicated on the slave server.</p>
+
+<h3 id="enabling-replication-on-an-existing-database">Enabling replication on an existing database</h3>
+
+<p>If you already have a database on the master server, that you also want to replicate, you will need to copy it over to the slave database.</p>
+
+<p>If the database is relatively small (i.e. less than 50MB), then the <code class="highlighter-rouge">mysqldump</code> command will work. Shutdown the database first to ensure data integrity.</p>
+
+<p><code class="highlighter-rouge">mysqldump -u root -p databasename &gt; file.sql</code></p>
+
+<p>If the dataset is large, then it will be better to create an archive of the files and then transfer that over to the slave machine and restart the server there. Firstly, you should shutdown the mysql server.</p>
+
+<p>Then, on the slave server, copy the files in the database directory (usually <code class="highlighter-rouge">/var/lib/mysql</code>). You can then tar that and then copy to the slave server and extract there. If there are large differences between the configuration files between the servers, then this might not work.</p>
+
+<h3 id="carry-out-the-backup">Carry out the backup</h3>
+<p>Now that we have a slave, we can take point in time back-ups by stopping the slave and pausing transactions (although transactions are still ongoing on the master server).</p>
+
+<ol>
+  <li>
+    <p>Shut down the server <code class="highlighter-rouge">sudo service mysql-server stop</code></p>
+  </li>
+  <li>
+    <p>Copy the data files to a secure off-site location (in this case, Amazon S3) <code class="highlighter-rouge">sudo aws s3 sync --delete /var/lib/mysql s3://bucket-name/</code></p>
+  </li>
+  <li>
+    <p>Restart the server <code class="highlighter-rouge">sudo service mysql-service start</code></p>
+  </li>
+</ol>
+
+
+  </div><a class="u-url" href="/sysadmin/2018/08/27/setting-up-mysql-replication.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Kabads. Musings, mutterings and murmerings.</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Kabads. Musings, mutterings and murmerings.</li><li><a class="u-email" href="mailto:adam@monkeez.org">adam@monkeez.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>I worked in education for 20 years and always had a hand in Technology.  For the last couple of years, I&#39;ve been working in Cloud Automation.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

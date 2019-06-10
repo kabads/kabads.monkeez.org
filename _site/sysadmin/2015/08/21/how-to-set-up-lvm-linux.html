@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>How to set-up LVM on Linux | Kabads. Musings, mutterings and murmerings.</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="How to set-up LVM on Linux" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I worked in education for 20 years and always had a hand in Technology. For the last couple of years, I’ve been working in Cloud Automation." />
+<meta property="og:description" content="I worked in education for 20 years and always had a hand in Technology. For the last couple of years, I’ve been working in Cloud Automation." />
+<link rel="canonical" href="http://localhost:4000/sysadmin/2015/08/21/how-to-set-up-lvm-linux.html" />
+<meta property="og:url" content="http://localhost:4000/sysadmin/2015/08/21/how-to-set-up-lvm-linux.html" />
+<meta property="og:site_name" content="Kabads. Musings, mutterings and murmerings." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-08-21T01:00:00+01:00" />
+<script type="application/ld+json">
+{"description":"I worked in education for 20 years and always had a hand in Technology. For the last couple of years, I’ve been working in Cloud Automation.","@type":"BlogPosting","headline":"How to set-up LVM on Linux","dateModified":"2015-08-21T01:00:00+01:00","datePublished":"2015-08-21T01:00:00+01:00","url":"http://localhost:4000/sysadmin/2015/08/21/how-to-set-up-lvm-linux.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/sysadmin/2015/08/21/how-to-set-up-lvm-linux.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Kabads. Musings, mutterings and murmerings." /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Kabads. Musings, mutterings and murmerings.</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">How to set-up LVM on Linux</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2015-08-21T01:00:00+01:00" itemprop="datePublished">Aug 21, 2015
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><img src="https://farm1.staticflickr.com/606/20580819929_7109d8f28b_m.jpg" /></p>
+
+<p><strong>What are the advantages of <a href="https://en.wikipedia.org/wiki/Logical_volume_management">Logical Volume Management (LVM)</a>?</strong></p>
+
+<p>LVM treats your physical harddrives as ‘elastic’ storage - that is extents can be across disks allowing filesystems to be across many disks and/or partitions. This allows a lot of flexibility and can allow filesystems to shrink or grow easily.</p>
+
+<p>There is a small disadvantage when using LVM - there is an overhead when reading and writing to disk - which doesn’t normally happen when writing to a normal block disk.</p>
+
+<p>So, how do you set up LVM? I suggest you learn using a <a href="https://www.virtualbox.org/">virtual machine</a> - this post  will cover <a href="http://www.ubuntu.com/download/server">Ubuntu 14.04 server edition</a>.</p>
+
+<p>The server will need the package lvm2 installed</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo apt-get install lvm2
+</code></pre></div></div>
+
+<p>Firstly, set up your partitions with type 8e - this will be done with fdisk - type ‘t’ and then choose the partition number and then type 8e - this is an LVM type partition. This needs to happen for all the partitions that will be included in the LVM device.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo fdisk /dev/sda
+</code></pre></div></div>
+
+<p>After creating the new partitions you will need to do one of a couple of things so that the kernel can see them - reboot or run partprobe. Without this, the kernel won’t see the newly created partitions and you will not be able to work on them further. It’s at this point that one usually creates a filesystem on these partitions. When setting up LVM, this is not yet the case.</p>
+
+<p>Then run these commands to create physical volumes:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo pvcreate /dev/sda3
+Physical volume "/dev/sda3" successfully created
+
+$ sudo pvcreate /dev/sda4
+Physical volume "/dev/sda3" successfully created
+
+$ sudo pvdisplay will show you all the physical volumes that are available to LVM.
+</code></pre></div></div>
+
+<p>This command  will create a virtual group.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo vgcreate mylvm /dev/sda3 /dev/sda4
+Volume group "mylvm" successfully created
+
+
+$ sudo vgdisplay
+</code></pre></div></div>
+
+<p>will show you the newly created volume group.</p>
+
+<p>Now, for the final key part - creating the logical volume:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo lvcreate --name myfilesystem --size 1G mylvm
+Logical volume "myfilesystem" created
+
+$ sudo lvdisplay
+</code></pre></div></div>
+
+<p>will show you the logical volume filesystem that has been created (although it doesn’t yet have a filesystem on it). The next step will do that.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo mkfs.ext3 /dev/mylvm/myfilesystem
+</code></pre></div></div>
+
+<p>Now this filesystem can be mounted like any other filesystem and written to:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo mkdir /mnt/lvmdrive
+$ sudo mount /dev/mylvm/myfilesystem /mnt/lvmdrive
+</code></pre></div></div>
+
+<p>Once you have sorted out permissions for this drive you will be able to write to it.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ chmod -R 777 /mnt/lvmdrive
+</code></pre></div></div>
+
+
+  </div><a class="u-url" href="/sysadmin/2015/08/21/how-to-set-up-lvm-linux.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Kabads. Musings, mutterings and murmerings.</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Kabads. Musings, mutterings and murmerings.</li><li><a class="u-email" href="mailto:adam@monkeez.org">adam@monkeez.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>I worked in education for 20 years and always had a hand in Technology.  For the last couple of years, I&#39;ve been working in Cloud Automation.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

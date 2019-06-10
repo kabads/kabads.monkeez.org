@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-06-10T19:13:34+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Kabads. Musings, mutterings and murmerings.</title><subtitle>I worked in education for 20 years and always had a hand in Technology.  For the last couple of years, I've been working in Cloud Automation.</subtitle><entry><title type="html">Setting Up Fujitsu Snapscan S1300i on Arch Linux</title><link href="http://localhost:4000/sysadmin/2019/03/10/using-fujitsu-snapscan-s1300i-on-arch.html" rel="alternate" type="text/html" title="Setting Up Fujitsu Snapscan S1300i on Arch Linux" /><published>2019-03-10T18:15:30+00:00</published><updated>2019-03-10T18:15:30+00:00</updated><id>http://localhost:4000/sysadmin/2019/03/10/using-fujitsu-snapscan-s1300i-on-arch</id><content type="html" xml:base="http://localhost:4000/sysadmin/2019/03/10/using-fujitsu-snapscan-s1300i-on-arch.html">&lt;p&gt;I have bought a Fujitsu Snapscan S1301i scanner - mainly because it is duplex - it saves a lot of time and will scan directly to Evernote. So far, I’m pleased with it, but the initial thought when I got it home was, ‘how am I going to get it working with Arch Linux?’ &lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;Fujitsu Scansnap 1300i is supported by Sane, but does require a little bit of tinkering. You need the file 1300i_0D12.nal - which is only available from installing the file on a windows machine. If you wish to download it, you can from here https://drive.google.com/open?id=1X7fUpu6cM4ow_D9QqAKVvHIGVWOmhvK7 - put that file in the directory /usr/share/sane/epjitsu (on Arch Linux).&lt;/p&gt;
+
+&lt;p&gt;Now, edit the /etc/sane.d/epjitsu.conf file - you need to include the settings found at http://www.sane-project.org/cgi-bin/driver.pl?manu=fujitsu&amp;amp;model=scansnap&amp;amp;bus=any&amp;amp;v=&amp;amp;p= 0x04c5/0x128d -&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Fujitsu S1300i
+firmware /usr/share/sane/epjitsu/1300i_0D12.nal
+usb 0x04c5 0x128d
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Once you’ve done this, you may need to test the config with superuser rights (sudo gscan2pdf).&lt;/p&gt;
+
+&lt;p&gt;Running gscan2pdf will present you with a choice of scanners - for some reason gscan2pdf picks up my in built camera, which I change to the Fujitsu. To scan duplex you will need to change the settings to standard_tab &amp;gt; scan source_dropdown= ADF- Duplex.&lt;/p&gt;</content><author><name></name></author><summary type="html">I have bought a Fujitsu Snapscan S1301i scanner - mainly because it is duplex - it saves a lot of time and will scan directly to Evernote. So far, I’m pleased with it, but the initial thought when I got it home was, ‘how am I going to get it working with Arch Linux?’</summary></entry><entry><title type="html">Setting Up MySQL Replication as a back-up solution</title><link href="http://localhost:4000/sysadmin/2018/08/27/setting-up-mysql-replication.html" rel="alternate" type="text/html" title="Setting Up MySQL Replication as a back-up solution" /><published>2018-08-27T13:32:30+01:00</published><updated>2018-08-27T13:32:30+01:00</updated><id>http://localhost:4000/sysadmin/2018/08/27/setting-up-mysql-replication</id><content type="html" xml:base="http://localhost:4000/sysadmin/2018/08/27/setting-up-mysql-replication.html">&lt;p&gt;MySQL replication is a good thing to have. It provides greater resilience and removes a single point of failure. By following these steps, you will create a replica of a master server, acting as a permanent backup in the case of a DR scenario.&lt;/p&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;MySQL servers can be a single point of failure if you have not set up a good back-up infrastructure. It is difficult to get a good back-up infrastructure in place, without some time spent out of service. However, a MySQL replication server avoids this downtime.&lt;/p&gt;
+
+&lt;p&gt;One server will act as the master, and the other will act as slave. The slave will be paused and then backed up.&lt;/p&gt;
+
+&lt;h3 id=&quot;benefits-of-running-a-replicated-mysql-server&quot;&gt;Benefits of running a replicated MySQL server:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Remove single point of failure adding high availability&lt;/li&gt;
+  &lt;li&gt;Improved performance if applications can use the read-only server (think data querying)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://s3.eu-west-2.amazonaws.com/kabads.monkeez.org/images/mysql_replication.png&quot; alt=&quot;Master/Slave Server diagram&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;conifgure-the-master-mysql-server&quot;&gt;Conifgure the Master MySQL server&lt;/h3&gt;
+&lt;p&gt;The master is the live database that is serving your users. To back this up on it’s own, you will have to stop transactions on the server and then carry out the backup. In a lot of high availability environments, this is not an option. However, you can prepare your master MySQL server to send those transactions to a different server.&lt;/p&gt;
+
+&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/my.conf&lt;/code&gt; add the following lines:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;log-bin       = master-bin
+log-bin-index = master-bin.index
+server-id      = 1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;log-bin&lt;/code&gt; directive tells mysql to store a binary log. This binary log is what makes replication easy and quick. We also have a &lt;code class=&quot;highlighter-rouge&quot;&gt;log-index&lt;/code&gt;. The binary log tells the other server the events that are happening on the master server.&lt;/p&gt;
+
+&lt;p&gt;You can watch the binary log file with the mysql prompt with &lt;code class=&quot;highlighter-rouge&quot;&gt;SHOW BINLOG EVENTS\G;&lt;/code&gt;. However, to find out which binlog file is currently being written to you should enter &lt;code class=&quot;highlighter-rouge&quot;&gt;SHOW MASTER STATUS;&lt;/code&gt; and then &lt;code class=&quot;highlighter-rouge&quot;&gt;SHOW BINLOG EVENTS IN 'master-bin.000002'\G;&lt;/code&gt; (or whatever file was returned from the master status command.&lt;/p&gt;
+
+&lt;p&gt;If you added the replication config lines above after creating the server, as opposed to when you first set the server up, you will need to restart the mysql server:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;service mysql-server restart
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then you will need to login to the MySQL command prompt:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mysql -u root
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Next, it is good practise to create a user for replication that only has access rights for the IP range for the subnet where the slave server is.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CREATE USER repl_user; 
+GRANT REPLICATION SLAVE ON *.*
+TO repl_user IDENTIFIED BY 'password';
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This user will have access to retrieve the binary log from the master server.&lt;/p&gt;
+
+&lt;h3 id=&quot;configuring-the-mysql-slave-server&quot;&gt;Configuring the MySQL slave Server&lt;/h3&gt;
+
+&lt;p&gt;Again, we need a user that has certain privileges on the slave server.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;GRANT REPLICATION, SLAVE, RELOAD, CREATE USER, SUPER ON *.* TO user@'1.2.3.%' WITH GRANT OPTION;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Next, you will have to log in to the slave mysql server and issue the following command:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CHANGE MASTER TO MASTER_HOST = '1.2.3.4', MASTER_PORT = 3306, MASTER_USER = 'repl_user', MASTER_PASSWORD = 'password';
+START SLAVE;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Any changes for new databases on the master server will now be replicated on the slave server.&lt;/p&gt;
+
+&lt;h3 id=&quot;enabling-replication-on-an-existing-database&quot;&gt;Enabling replication on an existing database&lt;/h3&gt;
+
+&lt;p&gt;If you already have a database on the master server, that you also want to replicate, you will need to copy it over to the slave database.&lt;/p&gt;
+
+&lt;p&gt;If the database is relatively small (i.e. less than 50MB), then the &lt;code class=&quot;highlighter-rouge&quot;&gt;mysqldump&lt;/code&gt; command will work. Shutdown the database first to ensure data integrity.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mysqldump -u root -p databasename &amp;gt; file.sql&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;If the dataset is large, then it will be better to create an archive of the files and then transfer that over to the slave machine and restart the server there. Firstly, you should shutdown the mysql server.&lt;/p&gt;
+
+&lt;p&gt;Then, on the slave server, copy the files in the database directory (usually &lt;code class=&quot;highlighter-rouge&quot;&gt;/var/lib/mysql&lt;/code&gt;). You can then tar that and then copy to the slave server and extract there. If there are large differences between the configuration files between the servers, then this might not work.&lt;/p&gt;
+
+&lt;h3 id=&quot;carry-out-the-backup&quot;&gt;Carry out the backup&lt;/h3&gt;
+&lt;p&gt;Now that we have a slave, we can take point in time back-ups by stopping the slave and pausing transactions (although transactions are still ongoing on the master server).&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Shut down the server &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo service mysql-server stop&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Copy the data files to a secure off-site location (in this case, Amazon S3) &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo aws s3 sync --delete /var/lib/mysql s3://bucket-name/&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Restart the server &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo service mysql-service start&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name></name></author><summary type="html">MySQL replication is a good thing to have. It provides greater resilience and removes a single point of failure. By following these steps, you will create a replica of a master server, acting as a permanent backup in the case of a DR scenario.</summary></entry><entry><title type="html">Configure Autofs on Arch Linux</title><link href="http://localhost:4000/sysadmin/2018/08/11/configure-autofs.html" rel="alternate" type="text/html" title="Configure Autofs on Arch Linux" /><published>2018-08-11T11:07:00+01:00</published><updated>2018-08-11T11:07:00+01:00</updated><id>http://localhost:4000/sysadmin/2018/08/11/configure-autofs</id><content type="html" xml:base="http://localhost:4000/sysadmin/2018/08/11/configure-autofs.html">&lt;p&gt;Autofs is a way of auto-mounting devices to a running system. Theses steps will walk through enabling it on an Archlinux system.&lt;/p&gt;
+
+&lt;h1 id=&quot;what-is-autofs&quot;&gt;What is Autofs?&lt;/h1&gt;
+&lt;p&gt;It mounts a filesystem that is not always connected (e.g. network or device). Once a connection is made to that device, then autofs will handle the mounting of that device. It can also handle unmounting of a device, if it becomes unavailable. &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/fstab&lt;/code&gt; automatically tries to mount during boot - however, it won’t try to mount once a device is connected after boot. You may boot whilst you have no network access - this means that you won’t be able to mount that device. However, autofs will look after that, once you connect to the network (after boot).&lt;/p&gt;
+
+&lt;h1 id=&quot;install-the-package&quot;&gt;Install the package&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pacman -S autofs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;configure-the-master-autofs&quot;&gt;Configure the master autofs&lt;/h1&gt;
+
+&lt;p&gt;In the file &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/autofs/auto.master&lt;/code&gt; add:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/var/autofs		/etc/autofs/auto.misc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Each line in the file has three fields - the first two being mandatory, and the last being optional. The first is the mount-point - where will it get mounted. The second is the map-file that is a template. The last one is a time field.&lt;/p&gt;
+
+&lt;p&gt;You can also pass the &lt;code class=&quot;highlighter-rouge&quot;&gt;--timeout=30&lt;/code&gt; at the end of the file which means it will be unmounted after that time of not being used.&lt;/p&gt;
+
+&lt;h1 id=&quot;configure-the-automisc-file&quot;&gt;Configure the &lt;code class=&quot;highlighter-rouge&quot;&gt;auto.misc&lt;/code&gt; file&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;usb     	-fstype=ntfs            :/dev/sdc2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Start the service to test:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo systemctl start autofs.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And then enable so that it will run at boot:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo systemctl enable autofs. service 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You will need to attempt to use the filesystem for it to mount&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd /mnt/usb
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;and the disc should mount.&lt;/p&gt;</content><author><name></name></author><summary type="html">Autofs is a way of auto-mounting devices to a running system. Theses steps will walk through enabling it on an Archlinux system.</summary></entry><entry><title type="html">Working with Terraform</title><link href="http://localhost:4000/sysadmin/2018/08/04/working-with-terraform.html" rel="alternate" type="text/html" title="Working with Terraform" /><published>2018-08-04T00:00:00+01:00</published><updated>2018-08-04T00:00:00+01:00</updated><id>http://localhost:4000/sysadmin/2018/08/04/working-with-terraform</id><content type="html" xml:base="http://localhost:4000/sysadmin/2018/08/04/working-with-terraform.html">&lt;p&gt;Terraform is a cloud orchestration scripting language. This allows the capturing of cloud infrastructure. Instead of relying on your network and resources to be sat whilst you work on other projects, by using terraform, you can tear-down your infrastructure and then create it again from where you left of (saving money on the infrastructure that would be incurring a cost).&lt;/p&gt;
+
+&lt;p&gt;Another advantage is that what you are creating is a resource for the project that is reproducible. You can show the team the work that you’ve completed and even also create documentation alongside, or within the resorce.&lt;/p&gt;</content><author><name></name></author><category term="sysadmin" /><summary type="html">Terraform is a cloud orchestration scripting language. This allows the capturing of cloud infrastructure. Instead of relying on your network and resources to be sat whilst you work on other projects, by using terraform, you can tear-down your infrastructure and then create it again from where you left of (saving money on the infrastructure that would be incurring a cost).</summary></entry><entry><title type="html">Sync Google Calendar With Org Agenda</title><link href="http://localhost:4000/sysadmin/emacs/2018/03/18/sync-google-calendar-with-org-agenda.html" rel="alternate" type="text/html" title="Sync Google Calendar With Org Agenda" /><published>2018-03-18T13:02:55+00:00</published><updated>2018-03-18T13:02:55+00:00</updated><id>http://localhost:4000/sysadmin/emacs/2018/03/18/sync-google-calendar-with-org-agenda</id><content type="html" xml:base="http://localhost:4000/sysadmin/emacs/2018/03/18/sync-google-calendar-with-org-agenda.html">&lt;p&gt;&lt;a data-flickr-embed=&quot;true&quot; href=&quot;https://www.flickr.com/photos/kabads/40931410022/in/datetaken/&quot; title=&quot;screen&quot;&gt;&lt;img src=&quot;https://farm1.staticflickr.com/790/40931410022_e1823676da.jpg&quot; width=&quot;500&quot; height=&quot;316&quot; alt=&quot;screen&quot; /&gt;&lt;/a&gt;&lt;script async=&quot;&quot; src=&quot;//embedr.flickr.com/assets/client-code.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;I use &lt;a href=&quot;https://orgmode.org&quot;&gt;org-mode&lt;/a&gt; an awful lot - it helps me manage my tasks and code all in one place. However, the organisation that I work for have just migrated over to Google Suite and manage meetings extensively using Google Calendar. I really wanted my Google Calendar to sync with my &lt;a href=&quot;https://orgmode.org/manual/Agenda-commands.html&quot;&gt;org-agenda&lt;/a&gt;. Org-agenda is a tool that pulls in any scheduled activities from all your files in to one dynamic view. It’s pretty much what drives my working day. Having meetings arranged with colleagues in my org-agenda will help me schedule my day.&lt;/p&gt;
+
+&lt;p&gt;The package &lt;a href=&quot;https://github.com/myuhe/org-gcal.el&quot;&gt;org-gcal&lt;/a&gt; provides two way syncing with Google Calendar (and has other documentation).&lt;/p&gt;
+
+&lt;p&gt;This is how I did it.&lt;/p&gt;
+
+&lt;h2 id=&quot;install-org-cal&quot;&gt;Install org-cal&lt;/h2&gt;
+
+&lt;p&gt;Using elpa, I installed the package:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;M-x package-list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Highlight the &lt;code class=&quot;highlighter-rouge&quot;&gt;org-gcal&lt;/code&gt; package and install.&lt;/p&gt;
+
+&lt;h2 id=&quot;create-api-credentials&quot;&gt;Create Api Credentials&lt;/h2&gt;
+
+&lt;p&gt;Then, go to google and get credentials to access your calendar. You will need to go to the &lt;a href=&quot;https://console.developers.google.com/cloud-resource-manager&quot;&gt;google developers portal&lt;/a&gt; where you may need to enable the developers’ api. You will need to find Api &amp;amp; Services and then click on credentials. You will create some OAuth 2.0 client IDs credentials - one being the API key and the other being a secret. Make a note of these, or download the JSON file that Google provides.&lt;/p&gt;
+
+&lt;p&gt;&lt;a data-flickr-embed=&quot;true&quot; href=&quot;https://www.flickr.com/photos/kabads/26101808357/in/datetaken/&quot; title=&quot;Screenshot-2018-3-23 Credentials - org-gcal&quot;&gt;&lt;img src=&quot;https://farm1.staticflickr.com/799/26101808357_5446e2c69d.jpg&quot; width=&quot;500&quot; height=&quot;229&quot; alt=&quot;Screenshot-2018-3-23 Credentials - org-gcal&quot; /&gt;&lt;/a&gt;&lt;script async=&quot;&quot; src=&quot;//embedr.flickr.com/assets/client-code.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;Enable these credentials for Google Calendar.&lt;/p&gt;
+
+&lt;p&gt;&lt;a data-flickr-embed=&quot;true&quot; href=&quot;https://www.flickr.com/photos/kabads/40931425052/in/datetaken/&quot; title=&quot;Screenshot-2018-3-23 APIs Services - org-gcal&quot;&gt;&lt;img src=&quot;https://farm1.staticflickr.com/818/40931425052_9051ec90df.jpg&quot; width=&quot;500&quot; height=&quot;241&quot; alt=&quot;Screenshot-2018-3-23 APIs Services - org-gcal&quot; /&gt;&lt;/a&gt;&lt;script async=&quot;&quot; src=&quot;//embedr.flickr.com/assets/client-code.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;identify-calendar&quot;&gt;Identify Calendar&lt;/h2&gt;
+
+&lt;p&gt;Then, the README for org-cal tells you to find the link for your calendar. This didn’t work for me. Instead, I found the link in the url in the address bar of my browser (click on the image to see more detail):&lt;/p&gt;
+
+&lt;p&gt;&lt;a data-flickr-embed=&quot;true&quot; href=&quot;https://www.flickr.com/photos/kabads/40263945734&quot; title=&quot;url&quot;&gt;&lt;img src=&quot;https://farm1.staticflickr.com/805/40263945734_3272338f4e_c.jpg&quot; width=&quot;800&quot; height=&quot;105&quot; alt=&quot;url&quot; /&gt;&lt;/a&gt;&lt;script async=&quot;&quot; src=&quot;//embedr.flickr.com/assets/client-code.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;create-settings&quot;&gt;Create settings&lt;/h2&gt;
+
+&lt;p&gt;(require ‘org-gcal)
+   (setq org-gcal-client-id “your-id-foo.apps.googleusercontent.com”
+      org-gcal-client-secret “your-secret”
+      org-gcal-file-alist ‘((“your-mail@gmail.com” .  “~/schedule.org”)
+                            (“another-mail@gmail.com” .  “~/task.org”)))&lt;/p&gt;
+
+&lt;p&gt;Copy that string in to your &lt;code class=&quot;highlighter-rouge&quot;&gt;~.emacs&lt;/code&gt; file, substituting the proper parts (your org-gcal-client-id and secret and the files that you wish to create when you sync).&lt;/p&gt;
+
+&lt;p&gt;Save the file and then execute &lt;code class=&quot;highlighter-rouge&quot;&gt;M-x load-file &amp;lt;RET&amp;gt;.emacs&lt;/code&gt; to reload this file.&lt;/p&gt;
+
+&lt;h2 id=&quot;sync-and-org-agenda-file-to-front&quot;&gt;Sync and org-agenda-file-to-front&lt;/h2&gt;
+
+&lt;p&gt;Now you need to sync your calendar, which will create a new org file (as you specified in the settings.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;M-x org-gcal-sync
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Once that file is created open it &lt;code class=&quot;highlighter-rouge&quot;&gt;C-x C-f&lt;/code&gt; &amp;lt;/path/to/file&amp;gt; &lt;RET&gt;` and then `M-x org-agenda-file-to-front`. This command will include the new file.&lt;/RET&gt;&lt;/p&gt;
+
+&lt;p&gt;You can also create a hook to run &lt;code class=&quot;highlighter-rouge&quot;&gt;org-gcal-sync&lt;/code&gt; when you open your agenda by placing this snippet in your &lt;code class=&quot;highlighter-rouge&quot;&gt;.emacs&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Cycle Jaunt Around Bath</title><link href="http://localhost:4000/cycling/2018/02/11/cycle-jaunt-around-bath.html" rel="alternate" type="text/html" title="Cycle Jaunt Around Bath" /><published>2018-02-11T19:20:30+00:00</published><updated>2018-02-11T19:20:30+00:00</updated><id>http://localhost:4000/cycling/2018/02/11/cycle-jaunt-around-bath</id><content type="html" xml:base="http://localhost:4000/cycling/2018/02/11/cycle-jaunt-around-bath.html">&lt;p&gt;Sunday involved a train ride to bath with a Brompton in fold, and then cycling around the Two Tunnels circular route. A quick stop at &lt;a href=&quot;http://hopeandanchormidford.co.uk&quot;&gt;The Hope and Anchor&lt;/a&gt; pub to avoid the sleet and get a quick half-way coffee, is highly recommended.&lt;/p&gt;
+
+&lt;p&gt;&lt;a data-flickr-embed=&quot;true&quot; href=&quot;https://secure.flickr.com/photos/kabads/albums/72157669458021059&quot; title=&quot;Cycle Jaunt around Bath&quot;&gt;&lt;img src=&quot;https://farm5.staticflickr.com/4626/28426294529_b92230306f_z.jpg&quot; width=&quot;640&quot; height=&quot;640&quot; alt=&quot;Cycle Jaunt around Bath&quot; /&gt;&lt;/a&gt;&lt;script async=&quot;&quot; src=&quot;//embedr.flickr.com/assets/client-code.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Sunday involved a train ride to bath with a Brompton in fold, and then cycling around the Two Tunnels circular route. A quick stop at The Hope and Anchor pub to avoid the sleet and get a quick half-way coffee, is highly recommended.</summary></entry><entry><title type="html">How to create an instance that pulls your website content automatically</title><link href="http://localhost:4000/sysadmin/2017/10/03/AWS-how-to-automatically-launch-apache-with-your-site-content.html" rel="alternate" type="text/html" title="How to create an instance that pulls your website content automatically" /><published>2017-10-03T01:00:00+01:00</published><updated>2017-10-03T01:00:00+01:00</updated><id>http://localhost:4000/sysadmin/2017/10/03/AWS-how-to-automatically-launch-apache-with-your-site-content</id><content type="html" xml:base="http://localhost:4000/sysadmin/2017/10/03/AWS-how-to-automatically-launch-apache-with-your-site-content.html">&lt;p&gt;Amazon Web Services allows you to spin up instances very quickly. This how to will show you how to upload your content to a S3 bucket and then launch an instance that pulls that content in and starts Apache to serve that content.&lt;/p&gt;
+
+&lt;p&gt;Initially, you will need to create a role under IAM. This will have to be able to access S3, so create the role, choose which service you would like to associate it with.&lt;/p&gt;
+
+&lt;p&gt;Then create an S3 bucket and upload all the files that your website requires.&lt;/p&gt;
+
+&lt;blockquote class=&quot;imgur-embed-pub&quot; lang=&quot;en&quot; data-id=&quot;a/lB2uu&quot;&gt;&lt;a href=&quot;//imgur.com/lB2uu&quot;&gt;&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;//s.imgur.com/min/embed.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Provide permissions for your role. Searching for S3 will limit the amount of permissions you can see - you can permit read only or Full Access depending on what your EC2 instance will be doing. Review by giving the role a name and a description.&lt;/p&gt;
+
+&lt;p&gt;Then, launch an EC2 instance with this role.&lt;/p&gt;
+
+&lt;blockquote class=&quot;imgur-embed-pub&quot; lang=&quot;en&quot; data-id=&quot;a/35ebr&quot;&gt;&lt;a href=&quot;//imgur.com/35ebr&quot;&gt;Allocate the IAM role to the EC2 instance&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;//s.imgur.com/min/embed.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;On the same page as the role selection, you will see advanced details at the bottom. You need to type in the script in the user data. This is a script that will run on launch:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+yum update &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+yum &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;httpd &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+service httpd start
+chkconfig httpd on
+aws s3 &lt;span class=&quot;nb&quot;&gt;cp &lt;/span&gt;s3://your-bucket-name/ /var/www/html &lt;span class=&quot;nt&quot;&gt;--recursive&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This will run once it has started the EC2 instance. It will update the machine to ensure that all packages are at the latest release, then install Apache, then start Apache, then ensure that apache starts by default if this instance is restarted for some reason, and then the files are pulled down from the S3 bucket and put in to &lt;code class=&quot;highlighter-rouge&quot;&gt;/var/www/html&lt;/code&gt;. You will need to have created a bucket and put the files in there that you require.&lt;/p&gt;</content><author><name></name></author><summary type="html">Amazon Web Services allows you to spin up instances very quickly. This how to will show you how to upload your content to a S3 bucket and then launch an instance that pulls that content in and starts Apache to serve that content.</summary></entry><entry><title type="html">AWS - How to Serve Traffic from a Load Balancer</title><link href="http://localhost:4000/sysadmin/2017/09/20/AWS-how-to-serve-traffic-from-load-balancer.html" rel="alternate" type="text/html" title="AWS - How to Serve Traffic from a Load Balancer" /><published>2017-09-20T01:00:00+01:00</published><updated>2017-09-20T01:00:00+01:00</updated><id>http://localhost:4000/sysadmin/2017/09/20/AWS-how-to-serve-traffic-from-load-balancer</id><content type="html" xml:base="http://localhost:4000/sysadmin/2017/09/20/AWS-how-to-serve-traffic-from-load-balancer.html">&lt;p&gt;&lt;a href=&quot;http://aws.amazon.com&quot;&gt;Amazon Web Services&lt;/a&gt; (AWS) allows you to serve private network traffic from behind a public load balancer. This offers extra security benefits as it detects DDOS traffic and other exploits and offers a layer of protection.&lt;/p&gt;
+
+&lt;p&gt;There are some things you should know before you start this tutorial. You should know:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;How to create a &lt;a href=&quot;https://en.wikipedia.org/wiki/Virtual_private_cloud&quot;&gt;VPC&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;How to configure &lt;a href=&quot;https://en.wikipedia.org/wiki/Subnetwork&quot;&gt;subnets&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;How to create an EC2 instance&lt;/li&gt;
+  &lt;li&gt;How to ensure an EC2 instance is within an particular subnet&lt;/li&gt;
+  &lt;li&gt;How to ssh to an EC2 instance&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You will create a new VPC. You can use your default VPC, but this isn’t recommended. Default VPCs are for legacy ec2-classic instances. You should identify a CIDR block range for your VPC (e.g. 10.0.0.0/16).&lt;/p&gt;
+
+&lt;p&gt;Then, create two new subnets under the new VPC. One will be private and one will be public. The load balancer will use the public subnet and the EC2 instance will use the private subnet. Each subnet will have a different route table, one allowing traffic in and the other not. The first subnet should have a CIDR block range of 10.0.1.0/24. Next create your private subnet with a CIDR of 10.0.2.0/24 - this can be in the same availibility zone as the first subnet.&lt;/p&gt;
+
+&lt;p&gt;For high availability, it is a good idea to place your next elastic load balancer in a different availability zone. When you configure your load balancer you will need to choose two subnets. Therefore we have to create another public subnet that has a different availability zone. This has a CIDR range of 10.0.3.0/24 and is belongs in a different availability zone.&lt;/p&gt;
+
+&lt;p&gt;You should have three subnets as this image shows.&lt;/p&gt;
+
+&lt;blockquote class=&quot;imgur-embed-pub&quot; lang=&quot;en&quot; data-id=&quot;a/KFrjH&quot;&gt;&lt;a href=&quot;//imgur.com/KFrjH&quot;&gt;&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;//s.imgur.com/min/embed.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Next you need to create an Internet Gateway and attach it to the public subnet. This is what makes the load balancer  world accessible. Click on Internet Gateway, then create an internet gateway, with a name tag. Then, attach it to the VPC that you have created (only one Internet Gateway can be attached to a VPC). Click the Attach to VPC button and then choose the new VPC that you created earlier. This means you will be able to access the EC2 instance for the time being.&lt;/p&gt;
+
+&lt;p&gt;Next add a route table. Create a Route Table and add a route of 0.0.0.0/0 and choose the target of your new Internet Gateway. This means you can now access your EC2 instance.&lt;/p&gt;
+
+&lt;p&gt;This route table is associated with all of the subnets, which means they are all now public. We will later make the private subnet private.&lt;/p&gt;
+
+&lt;p&gt;Now, create your EC2 instance. Launch it in the private subnet (even though it is still public at the moment).&lt;/p&gt;
+
+&lt;p&gt;When you create your EC2 instance create a rule that allows port 80 for HTTP.&lt;/p&gt;
+
+&lt;p&gt;Now create a load balancer. This will be a classic type of load balancer. Do not create an internal load balancer, as that will only be accessible from within the VPC. We want traffic from anywhere. Listen on port 80. Now we select the two public subnets that we created earlier. One of them has to be in the same availability zone as the EC2 instance (which it is). The other one can be in a different availibility zone. Assign the security group that was created when you created the VPC.&lt;/p&gt;
+
+&lt;p&gt;With load balancers you have to configure the health check. This is best done over TCP protocol on port 22. Then you add an EC2 instance to the load balancer. Use the one that we created earlier. Add tags, review and launch.&lt;/p&gt;
+
+&lt;p&gt;Now we need to SSH in to the instance and install a httpd server. ssh in using your key, ssh -i pem-key.pem ec2-user@34.3.124.41 - do not forget that your pem key file must have permissions of 400 or less.&lt;/p&gt;
+
+&lt;p&gt;Start the httpd service - sudo service start httpd&lt;/p&gt;
+
+&lt;p&gt;Check using the public ip address of the EC2 instance. You’ll notice that this works as the EC2 instance is still in a public route table.&lt;/p&gt;
+
+&lt;p&gt;Let’s fix that by creating a new route table. The new route table must only have a route that allows the local traffic (i.e. no 0.0.0.0/0). Then go to the private subnet and then change the route for the subnet to the new route table that doesn’t have a public route.&lt;/p&gt;
+
+&lt;blockquote class=&quot;imgur-embed-pub&quot; lang=&quot;en&quot; data-id=&quot;a/CzkdB&quot;&gt;&lt;a href=&quot;//imgur.com/CzkdB&quot;&gt;&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;//s.imgur.com/min/embed.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;You can test if your load balancer is still forwarding the traffic by clicking on load balancer link, selecting the active load balancer and then using the DNS information&lt;/p&gt;
+
+&lt;blockquote class=&quot;imgur-embed-pub&quot; lang=&quot;en&quot; data-id=&quot;a/mPIkP&quot;&gt;&lt;a href=&quot;//imgur.com/mPIkP&quot;&gt;&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;//s.imgur.com/min/embed.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Copy and paste that link into your browser. You should be forwarded to the HTTP welcome page that the private EC2 instance is server.&lt;/p&gt;
+
+&lt;p&gt;If you have any comments, please post them in the disqus below.&lt;/p&gt;</content><author><name></name></author><summary type="html">Amazon Web Services (AWS) allows you to serve private network traffic from behind a public load balancer. This offers extra security benefits as it detects DDOS traffic and other exploits and offers a layer of protection.</summary></entry><entry><title type="html">AWS - How to Create A VPC</title><link href="http://localhost:4000/sysadmin/2017/09/20/how-to-create-a-vpc.html" rel="alternate" type="text/html" title="AWS - How to Create A VPC" /><published>2017-09-20T01:00:00+01:00</published><updated>2017-09-20T01:00:00+01:00</updated><id>http://localhost:4000/sysadmin/2017/09/20/how-to-create-a-vpc</id><content type="html" xml:base="http://localhost:4000/sysadmin/2017/09/20/how-to-create-a-vpc.html">&lt;p&gt;AWS allows you to create your own virtual private cloud (or &lt;a href=&quot;https://en.wikipedia.org/wiki/Virtual_private_cloud&quot;&gt;VPC&lt;/a&gt;). This is a network within which your machines will communicate. You can control the level of access across your VPC through subnets, Network Access Control Lists and Security Groups.&lt;/p&gt;
+
+&lt;p&gt;Network Access Control lists allow particular traffic in and outbound, but are stateless; that is, if you allow traffic in, it doesn’t necessarily mean that traffic will leave the network. This can cause problems for services that use ephemeral ports (e.g. SSH over port 22 - the incoming port is always port 22, but not always outbound on port 22).&lt;/p&gt;</content><author><name></name></author><summary type="html">AWS allows you to create your own virtual private cloud (or VPC). This is a network within which your machines will communicate. You can control the level of access across your VPC through subnets, Network Access Control Lists and Security Groups.</summary></entry><entry><title type="html">TADS walk Swindon to Goring</title><link href="http://localhost:4000/exercise/2017/07/02/Swindon-to-Goring-Walk.html" rel="alternate" type="text/html" title="TADS walk Swindon to Goring" /><published>2017-07-02T01:00:00+01:00</published><updated>2017-07-02T01:00:00+01:00</updated><id>http://localhost:4000/exercise/2017/07/02/Swindon-to-Goring-Walk</id><content type="html" xml:base="http://localhost:4000/exercise/2017/07/02/Swindon-to-Goring-Walk.html">&lt;p&gt;TADS - Teresa, Adam, Dave and Shep walking. We have been walking for about 2 years now, all around the South East. This was our longest walk by far in two days. Swindon to Goring.&lt;/p&gt;
+
+&lt;p&gt;The walk started out with us meeting at Swindon having lunch. There seemed to be quite a lot going on in the town with Canadian flags and guys at the train station with Ice Hockey sticks.&lt;/p&gt;
+
+&lt;blockquote class=&quot;instagram-media&quot; data-instgrm-captioned=&quot;&quot; data-instgrm-version=&quot;7&quot; style=&quot; background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);&quot;&gt;&lt;div style=&quot;padding:8px;&quot;&gt; &lt;div style=&quot; background:#F8F8F8; line-height:0; margin-top:40px; padding:50.0% 0; text-align:center; width:100%;&quot;&gt; &lt;div style=&quot; background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAMUExURczMzPf399fX1+bm5mzY9AMAAADiSURBVDjLvZXbEsMgCES5/P8/t9FuRVCRmU73JWlzosgSIIZURCjo/ad+EQJJB4Hv8BFt+IDpQoCx1wjOSBFhh2XssxEIYn3ulI/6MNReE07UIWJEv8UEOWDS88LY97kqyTliJKKtuYBbruAyVh5wOHiXmpi5we58Ek028czwyuQdLKPG1Bkb4NnM+VeAnfHqn1k4+GPT6uGQcvu2h2OVuIf/gWUFyy8OWEpdyZSa3aVCqpVoVvzZZ2VTnn2wU8qzVjDDetO90GSy9mVLqtgYSy231MxrY6I2gGqjrTY0L8fxCxfCBbhWrsYYAAAAAElFTkSuQmCC); display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;&quot;&gt;&lt;/div&gt;&lt;/div&gt; &lt;p style=&quot; margin:8px 0 0 0; padding:0 4px;&quot;&gt; &lt;a href=&quot;https://www.instagram.com/p/BWAJxkuAM12/&quot; style=&quot; color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;&quot; target=&quot;_blank&quot;&gt;Starting in Swindon with lunch.&lt;/a&gt;&lt;/p&gt; &lt;p style=&quot; color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;&quot;&gt;A post shared by kabads (@kabads) on &lt;time style=&quot; font-family:Arial,sans-serif; font-size:14px; line-height:17px;&quot; datetime=&quot;2017-07-01T11:32:20+00:00&quot;&gt;Jul 1, 2017 at 4:32am PDT&lt;/time&gt;&lt;/p&gt;&lt;/div&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; defer=&quot;&quot; src=&quot;//platform.instagram.com/en_US/embeds.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;We got a taxi at the start of the Ridgeway and started our walk. It was quite a lot harder than our usual walks. The sun was hot and there were no breaks on the first day. We bumped in to Dr Nige - a guy who is living on the Ridgeway in a lorry who looked like he escaped from Glastonbury in 1998 and never found his way home.&lt;/p&gt;
+
+&lt;p&gt;Further on we encountered good views of the North Wessex Downs. There were plenty of views of the cooling towers at Didcot. They were to be our measure of our progress.&lt;/p&gt;
+
+&lt;blockquote class=&quot;instagram-media&quot; data-instgrm-captioned=&quot;&quot; data-instgrm-version=&quot;7&quot; style=&quot; background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);&quot;&gt;&lt;div style=&quot;padding:8px;&quot;&gt; &lt;div style=&quot; background:#F8F8F8; line-height:0; margin-top:40px; padding:50.0% 0; text-align:center; width:100%;&quot;&gt; &lt;div style=&quot; background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAMUExURczMzPf399fX1+bm5mzY9AMAAADiSURBVDjLvZXbEsMgCES5/P8/t9FuRVCRmU73JWlzosgSIIZURCjo/ad+EQJJB4Hv8BFt+IDpQoCx1wjOSBFhh2XssxEIYn3ulI/6MNReE07UIWJEv8UEOWDS88LY97kqyTliJKKtuYBbruAyVh5wOHiXmpi5we58Ek028czwyuQdLKPG1Bkb4NnM+VeAnfHqn1k4+GPT6uGQcvu2h2OVuIf/gWUFyy8OWEpdyZSa3aVCqpVoVvzZZ2VTnn2wU8qzVjDDetO90GSy9mVLqtgYSy231MxrY6I2gGqjrTY0L8fxCxfCBbhWrsYYAAAAAElFTkSuQmCC); display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;&quot;&gt;&lt;/div&gt;&lt;/div&gt; &lt;p style=&quot; margin:8px 0 0 0; padding:0 4px;&quot;&gt; &lt;a href=&quot;https://www.instagram.com/p/BWAeLOiA5_B/&quot; style=&quot; color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;&quot; target=&quot;_blank&quot;&gt;Atop White Horse hill.&lt;/a&gt;&lt;/p&gt; &lt;p style=&quot; color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;&quot;&gt;A post shared by kabads (@kabads) on &lt;time style=&quot; font-family:Arial,sans-serif; font-size:14px; line-height:17px;&quot; datetime=&quot;2017-07-01T14:30:36+00:00&quot;&gt;Jul 1, 2017 at 7:30am PDT&lt;/time&gt;&lt;/p&gt;&lt;/div&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; defer=&quot;&quot; src=&quot;//platform.instagram.com/en_US/embeds.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Eventually we got to the Court Hill Centre, which is a youth hostel. We booked a taxi from here in to town and had curry and drinks. Our digs for the night was the Shoulder of Mutton - a traditional ale pub that has a very friendly atmosphere and good rooms. Teresa left us in the evening, getting a lift home with friends, while we retired to our rooms.&lt;/p&gt;
+
+&lt;p&gt;In the morning, after a quick breakfast, we started our walk again. Today was even hotter, but with less views or features to see. Eventually we got to East Ilsley and had a well earned drink at the Crown and Horns. Streatley was a welcome sight, meeting other friends there.&lt;/p&gt;
+
+&lt;blockquote class=&quot;instagram-media&quot; data-instgrm-captioned=&quot;&quot; data-instgrm-version=&quot;7&quot; style=&quot; background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);&quot;&gt;&lt;div style=&quot;padding:8px;&quot;&gt; &lt;div style=&quot; background:#F8F8F8; line-height:0; margin-top:40px; padding:50.0% 0; text-align:center; width:100%;&quot;&gt; &lt;div style=&quot; background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAMUExURczMzPf399fX1+bm5mzY9AMAAADiSURBVDjLvZXbEsMgCES5/P8/t9FuRVCRmU73JWlzosgSIIZURCjo/ad+EQJJB4Hv8BFt+IDpQoCx1wjOSBFhh2XssxEIYn3ulI/6MNReE07UIWJEv8UEOWDS88LY97kqyTliJKKtuYBbruAyVh5wOHiXmpi5we58Ek028czwyuQdLKPG1Bkb4NnM+VeAnfHqn1k4+GPT6uGQcvu2h2OVuIf/gWUFyy8OWEpdyZSa3aVCqpVoVvzZZ2VTnn2wU8qzVjDDetO90GSy9mVLqtgYSy231MxrY6I2gGqjrTY0L8fxCxfCBbhWrsYYAAAAAElFTkSuQmCC); display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;&quot;&gt;&lt;/div&gt;&lt;/div&gt; &lt;p style=&quot; margin:8px 0 0 0; padding:0 4px;&quot;&gt; &lt;a href=&quot;https://www.instagram.com/p/BWDa0MugLhW/&quot; style=&quot; color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;&quot; target=&quot;_blank&quot;&gt;Goring!&lt;/a&gt;&lt;/p&gt; &lt;p style=&quot; color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;&quot;&gt;A post shared by kabads (@kabads) on &lt;time style=&quot; font-family:Arial,sans-serif; font-size:14px; line-height:17px;&quot; datetime=&quot;2017-07-02T17:58:57+00:00&quot;&gt;Jul 2, 2017 at 10:58am PDT&lt;/time&gt;&lt;/p&gt;&lt;/div&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; defer=&quot;&quot; src=&quot;//platform.instagram.com/en_US/embeds.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Before popping in to our last port of call (The Catherine Wheel at Goring) we stopped by the house of &lt;a href=&quot;https://en.wikipedia.org/wiki/George_Michael&quot;&gt;George Michael&lt;/a&gt;, and took in all the trinkets and memorials that people had left from all around the world.&lt;/p&gt;
+
+&lt;blockquote class=&quot;instagram-media&quot; data-instgrm-captioned=&quot;&quot; data-instgrm-version=&quot;7&quot; style=&quot; background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);&quot;&gt;&lt;div style=&quot;padding:8px;&quot;&gt; &lt;div style=&quot; background:#F8F8F8; line-height:0; margin-top:40px; padding:50.0% 0; text-align:center; width:100%;&quot;&gt; &lt;div style=&quot; background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAMUExURczMzPf399fX1+bm5mzY9AMAAADiSURBVDjLvZXbEsMgCES5/P8/t9FuRVCRmU73JWlzosgSIIZURCjo/ad+EQJJB4Hv8BFt+IDpQoCx1wjOSBFhh2XssxEIYn3ulI/6MNReE07UIWJEv8UEOWDS88LY97kqyTliJKKtuYBbruAyVh5wOHiXmpi5we58Ek028czwyuQdLKPG1Bkb4NnM+VeAnfHqn1k4+GPT6uGQcvu2h2OVuIf/gWUFyy8OWEpdyZSa3aVCqpVoVvzZZ2VTnn2wU8qzVjDDetO90GSy9mVLqtgYSy231MxrY6I2gGqjrTY0L8fxCxfCBbhWrsYYAAAAAElFTkSuQmCC); display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;&quot;&gt;&lt;/div&gt;&lt;/div&gt; &lt;p style=&quot; margin:8px 0 0 0; padding:0 4px;&quot;&gt; &lt;a href=&quot;https://www.instagram.com/p/BWDbmJgAFln/&quot; style=&quot; color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;&quot; target=&quot;_blank&quot;&gt;Goring memorial&lt;/a&gt;&lt;/p&gt; &lt;p style=&quot; color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;&quot;&gt;A post shared by kabads (@kabads) on &lt;time style=&quot; font-family:Arial,sans-serif; font-size:14px; line-height:17px;&quot; datetime=&quot;2017-07-02T18:05:47+00:00&quot;&gt;Jul 2, 2017 at 11:05am PDT&lt;/time&gt;&lt;/p&gt;&lt;/div&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; defer=&quot;&quot; src=&quot;//platform.instagram.com/en_US/embeds.js&quot;&gt;&lt;/script&gt;
+
+&lt;blockquote class=&quot;imgur-embed-pub&quot; lang=&quot;en&quot; data-id=&quot;a/7qWWo&quot;&gt;&lt;a href=&quot;//imgur.com/7qWWo&quot;&gt;&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;//s.imgur.com/min/embed.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;</content><author><name></name></author><summary type="html">TADS - Teresa, Adam, Dave and Shep walking. We have been walking for about 2 years now, all around the South East. This was our longest walk by far in two days. Swindon to Goring.</summary></entry></feed>

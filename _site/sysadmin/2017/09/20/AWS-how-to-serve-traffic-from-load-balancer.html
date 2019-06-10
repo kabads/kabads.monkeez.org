@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>AWS - How to Serve Traffic from a Load Balancer | Kabads. Musings, mutterings and murmerings.</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="AWS - How to Serve Traffic from a Load Balancer" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Amazon Web Services (AWS) allows you to serve private network traffic from behind a public load balancer. This offers extra security benefits as it detects DDOS traffic and other exploits and offers a layer of protection." />
+<meta property="og:description" content="Amazon Web Services (AWS) allows you to serve private network traffic from behind a public load balancer. This offers extra security benefits as it detects DDOS traffic and other exploits and offers a layer of protection." />
+<link rel="canonical" href="http://localhost:4000/sysadmin/2017/09/20/AWS-how-to-serve-traffic-from-load-balancer.html" />
+<meta property="og:url" content="http://localhost:4000/sysadmin/2017/09/20/AWS-how-to-serve-traffic-from-load-balancer.html" />
+<meta property="og:site_name" content="Kabads. Musings, mutterings and murmerings." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-09-20T01:00:00+01:00" />
+<script type="application/ld+json">
+{"description":"Amazon Web Services (AWS) allows you to serve private network traffic from behind a public load balancer. This offers extra security benefits as it detects DDOS traffic and other exploits and offers a layer of protection.","@type":"BlogPosting","headline":"AWS - How to Serve Traffic from a Load Balancer","dateModified":"2017-09-20T01:00:00+01:00","datePublished":"2017-09-20T01:00:00+01:00","url":"http://localhost:4000/sysadmin/2017/09/20/AWS-how-to-serve-traffic-from-load-balancer.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/sysadmin/2017/09/20/AWS-how-to-serve-traffic-from-load-balancer.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Kabads. Musings, mutterings and murmerings." /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Kabads. Musings, mutterings and murmerings.</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">AWS - How to Serve Traffic from a Load Balancer</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-09-20T01:00:00+01:00" itemprop="datePublished">Sep 20, 2017
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><a href="http://aws.amazon.com">Amazon Web Services</a> (AWS) allows you to serve private network traffic from behind a public load balancer. This offers extra security benefits as it detects DDOS traffic and other exploits and offers a layer of protection.</p>
+
+<p>There are some things you should know before you start this tutorial. You should know:</p>
+
+<ol>
+  <li>How to create a <a href="https://en.wikipedia.org/wiki/Virtual_private_cloud">VPC</a></li>
+  <li>How to configure <a href="https://en.wikipedia.org/wiki/Subnetwork">subnets</a></li>
+  <li>How to create an EC2 instance</li>
+  <li>How to ensure an EC2 instance is within an particular subnet</li>
+  <li>How to ssh to an EC2 instance</li>
+</ol>
+
+<p>You will create a new VPC. You can use your default VPC, but this isn’t recommended. Default VPCs are for legacy ec2-classic instances. You should identify a CIDR block range for your VPC (e.g. 10.0.0.0/16).</p>
+
+<p>Then, create two new subnets under the new VPC. One will be private and one will be public. The load balancer will use the public subnet and the EC2 instance will use the private subnet. Each subnet will have a different route table, one allowing traffic in and the other not. The first subnet should have a CIDR block range of 10.0.1.0/24. Next create your private subnet with a CIDR of 10.0.2.0/24 - this can be in the same availibility zone as the first subnet.</p>
+
+<p>For high availability, it is a good idea to place your next elastic load balancer in a different availability zone. When you configure your load balancer you will need to choose two subnets. Therefore we have to create another public subnet that has a different availability zone. This has a CIDR range of 10.0.3.0/24 and is belongs in a different availability zone.</p>
+
+<p>You should have three subnets as this image shows.</p>
+
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/KFrjH"><a href="//imgur.com/KFrjH"></a></blockquote>
+<script async="" src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
+<p>Next you need to create an Internet Gateway and attach it to the public subnet. This is what makes the load balancer  world accessible. Click on Internet Gateway, then create an internet gateway, with a name tag. Then, attach it to the VPC that you have created (only one Internet Gateway can be attached to a VPC). Click the Attach to VPC button and then choose the new VPC that you created earlier. This means you will be able to access the EC2 instance for the time being.</p>
+
+<p>Next add a route table. Create a Route Table and add a route of 0.0.0.0/0 and choose the target of your new Internet Gateway. This means you can now access your EC2 instance.</p>
+
+<p>This route table is associated with all of the subnets, which means they are all now public. We will later make the private subnet private.</p>
+
+<p>Now, create your EC2 instance. Launch it in the private subnet (even though it is still public at the moment).</p>
+
+<p>When you create your EC2 instance create a rule that allows port 80 for HTTP.</p>
+
+<p>Now create a load balancer. This will be a classic type of load balancer. Do not create an internal load balancer, as that will only be accessible from within the VPC. We want traffic from anywhere. Listen on port 80. Now we select the two public subnets that we created earlier. One of them has to be in the same availability zone as the EC2 instance (which it is). The other one can be in a different availibility zone. Assign the security group that was created when you created the VPC.</p>
+
+<p>With load balancers you have to configure the health check. This is best done over TCP protocol on port 22. Then you add an EC2 instance to the load balancer. Use the one that we created earlier. Add tags, review and launch.</p>
+
+<p>Now we need to SSH in to the instance and install a httpd server. ssh in using your key, ssh -i pem-key.pem ec2-user@34.3.124.41 - do not forget that your pem key file must have permissions of 400 or less.</p>
+
+<p>Start the httpd service - sudo service start httpd</p>
+
+<p>Check using the public ip address of the EC2 instance. You’ll notice that this works as the EC2 instance is still in a public route table.</p>
+
+<p>Let’s fix that by creating a new route table. The new route table must only have a route that allows the local traffic (i.e. no 0.0.0.0/0). Then go to the private subnet and then change the route for the subnet to the new route table that doesn’t have a public route.</p>
+
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/CzkdB"><a href="//imgur.com/CzkdB"></a></blockquote>
+<script async="" src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
+<p>You can test if your load balancer is still forwarding the traffic by clicking on load balancer link, selecting the active load balancer and then using the DNS information</p>
+
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/mPIkP"><a href="//imgur.com/mPIkP"></a></blockquote>
+<script async="" src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
+<p>Copy and paste that link into your browser. You should be forwarded to the HTTP welcome page that the private EC2 instance is server.</p>
+
+<p>If you have any comments, please post them in the disqus below.</p>
+
+  </div><a class="u-url" href="/sysadmin/2017/09/20/AWS-how-to-serve-traffic-from-load-balancer.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Kabads. Musings, mutterings and murmerings.</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Kabads. Musings, mutterings and murmerings.</li><li><a class="u-email" href="mailto:adam@monkeez.org">adam@monkeez.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>I worked in education for 20 years and always had a hand in Technology.  For the last couple of years, I&#39;ve been working in Cloud Automation.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

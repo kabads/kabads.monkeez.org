@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Sync Google Calendar With Org Agenda | Kabads. Musings, mutterings and murmerings.</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Sync Google Calendar With Org Agenda" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I worked in education for 20 years and always had a hand in Technology. For the last couple of years, I’ve been working in Cloud Automation." />
+<meta property="og:description" content="I worked in education for 20 years and always had a hand in Technology. For the last couple of years, I’ve been working in Cloud Automation." />
+<link rel="canonical" href="http://localhost:4000/sysadmin/emacs/2018/03/18/sync-google-calendar-with-org-agenda.html" />
+<meta property="og:url" content="http://localhost:4000/sysadmin/emacs/2018/03/18/sync-google-calendar-with-org-agenda.html" />
+<meta property="og:site_name" content="Kabads. Musings, mutterings and murmerings." />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-03-18T13:02:55+00:00" />
+<script type="application/ld+json">
+{"description":"I worked in education for 20 years and always had a hand in Technology. For the last couple of years, I’ve been working in Cloud Automation.","@type":"BlogPosting","headline":"Sync Google Calendar With Org Agenda","dateModified":"2018-03-18T13:02:55+00:00","datePublished":"2018-03-18T13:02:55+00:00","url":"http://localhost:4000/sysadmin/emacs/2018/03/18/sync-google-calendar-with-org-agenda.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/sysadmin/emacs/2018/03/18/sync-google-calendar-with-org-agenda.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Kabads. Musings, mutterings and murmerings." /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Kabads. Musings, mutterings and murmerings.</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Sync Google Calendar With Org Agenda</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-03-18T13:02:55+00:00" itemprop="datePublished">Mar 18, 2018
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><a data-flickr-embed="true" href="https://www.flickr.com/photos/kabads/40931410022/in/datetaken/" title="screen"><img src="https://farm1.staticflickr.com/790/40931410022_e1823676da.jpg" width="500" height="316" alt="screen" /></a><script async="" src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<p>I use <a href="https://orgmode.org">org-mode</a> an awful lot - it helps me manage my tasks and code all in one place. However, the organisation that I work for have just migrated over to Google Suite and manage meetings extensively using Google Calendar. I really wanted my Google Calendar to sync with my <a href="https://orgmode.org/manual/Agenda-commands.html">org-agenda</a>. Org-agenda is a tool that pulls in any scheduled activities from all your files in to one dynamic view. It’s pretty much what drives my working day. Having meetings arranged with colleagues in my org-agenda will help me schedule my day.</p>
+
+<p>The package <a href="https://github.com/myuhe/org-gcal.el">org-gcal</a> provides two way syncing with Google Calendar (and has other documentation).</p>
+
+<p>This is how I did it.</p>
+
+<h2 id="install-org-cal">Install org-cal</h2>
+
+<p>Using elpa, I installed the package:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>M-x package-list
+</code></pre></div></div>
+
+<p>Highlight the <code class="highlighter-rouge">org-gcal</code> package and install.</p>
+
+<h2 id="create-api-credentials">Create Api Credentials</h2>
+
+<p>Then, go to google and get credentials to access your calendar. You will need to go to the <a href="https://console.developers.google.com/cloud-resource-manager">google developers portal</a> where you may need to enable the developers’ api. You will need to find Api &amp; Services and then click on credentials. You will create some OAuth 2.0 client IDs credentials - one being the API key and the other being a secret. Make a note of these, or download the JSON file that Google provides.</p>
+
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/kabads/26101808357/in/datetaken/" title="Screenshot-2018-3-23 Credentials - org-gcal"><img src="https://farm1.staticflickr.com/799/26101808357_5446e2c69d.jpg" width="500" height="229" alt="Screenshot-2018-3-23 Credentials - org-gcal" /></a><script async="" src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<p>Enable these credentials for Google Calendar.</p>
+
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/kabads/40931425052/in/datetaken/" title="Screenshot-2018-3-23 APIs Services - org-gcal"><img src="https://farm1.staticflickr.com/818/40931425052_9051ec90df.jpg" width="500" height="241" alt="Screenshot-2018-3-23 APIs Services - org-gcal" /></a><script async="" src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<h2 id="identify-calendar">Identify Calendar</h2>
+
+<p>Then, the README for org-cal tells you to find the link for your calendar. This didn’t work for me. Instead, I found the link in the url in the address bar of my browser (click on the image to see more detail):</p>
+
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/kabads/40263945734" title="url"><img src="https://farm1.staticflickr.com/805/40263945734_3272338f4e_c.jpg" width="800" height="105" alt="url" /></a><script async="" src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<h2 id="create-settings">Create settings</h2>
+
+<p>(require ‘org-gcal)
+   (setq org-gcal-client-id “your-id-foo.apps.googleusercontent.com”
+      org-gcal-client-secret “your-secret”
+      org-gcal-file-alist ‘((“your-mail@gmail.com” .  “~/schedule.org”)
+                            (“another-mail@gmail.com” .  “~/task.org”)))</p>
+
+<p>Copy that string in to your <code class="highlighter-rouge">~.emacs</code> file, substituting the proper parts (your org-gcal-client-id and secret and the files that you wish to create when you sync).</p>
+
+<p>Save the file and then execute <code class="highlighter-rouge">M-x load-file &lt;RET&gt;.emacs</code> to reload this file.</p>
+
+<h2 id="sync-and-org-agenda-file-to-front">Sync and org-agenda-file-to-front</h2>
+
+<p>Now you need to sync your calendar, which will create a new org file (as you specified in the settings.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>M-x org-gcal-sync
+</code></pre></div></div>
+
+<p>Once that file is created open it <code class="highlighter-rouge">C-x C-f</code> &lt;/path/to/file&gt; <RET>` and then `M-x org-agenda-file-to-front`. This command will include the new file.</RET></p>
+
+<p>You can also create a hook to run <code class="highlighter-rouge">org-gcal-sync</code> when you open your agenda by placing this snippet in your <code class="highlighter-rouge">.emacs</code> file:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+</code></pre></div></div>
+
+
+  </div><a class="u-url" href="/sysadmin/emacs/2018/03/18/sync-google-calendar-with-org-agenda.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Kabads. Musings, mutterings and murmerings.</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Kabads. Musings, mutterings and murmerings.</li><li><a class="u-email" href="mailto:adam@monkeez.org">adam@monkeez.org</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>I worked in education for 20 years and always had a hand in Technology.  For the last couple of years, I&#39;ve been working in Cloud Automation.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
