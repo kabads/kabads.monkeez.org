@@ -2,7 +2,8 @@
 layout: post
 title: Setting Filesystem ACLs on Linux
 date: 2019-12-30
-categories: sysadmin
+categories: 
+- sysadmin
 ---
 
 ACLs are a method for defining access to files and directories on a system. These can be set at the user level, group level, or via the effective rights mask.
